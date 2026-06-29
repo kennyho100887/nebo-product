@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -409,15 +409,15 @@ textarea{resize:none}
 .patient-line{font-size:12px;color:var(--text-2);margin-top:8px}
 .patient-line .pt-name{color:var(--text);font-weight:500}
 .patient-line .pt-sep{color:var(--text-3);margin:0 7px}
-.svc-block{margin-top:16px;border-top:0.5px solid var(--border);padding-top:14px}
+.svc-block{margin-top:16px;border-top:0.5px solid var(--border);padding-top:14px;margin-bottom:14px}
 .svc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .svc-label{font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3)}
 .svc-summary{font-size:11px;color:var(--text-2);display:flex;align-items:center;gap:10px}
 .svc-summary .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:0}
 .dot-ok{background:var(--ok-fg)}
 .dot-warn{background:var(--warn-fg)}
-.svc-rows{display:flex;flex-direction:column;gap:6px}
-.svc-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;width:100%;text-align:left;border:0.5px solid var(--border);border-radius:var(--r);background:none;padding:9px 12px;cursor:pointer;font-family:inherit}
+.svc-rows{display:flex;flex-direction:column;gap:14px}
+.svc-row{display:flex;align-items:center;gap:7px 12px;flex-wrap:wrap;width:100%;text-align:left;border:0.5px solid var(--border);border-radius:var(--r);background:none;padding:10px 12px;cursor:pointer;font-family:inherit}
 .svc-row:hover{background:var(--surface)}
 .cpt-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:var(--r);flex-shrink:0}
 .cpt-pill .pdot{width:6px;height:6px;border-radius:50%}
@@ -426,7 +426,7 @@ textarea{resize:none}
 .svc-name{flex:1;min-width:120px;font-size:13px;color:var(--text)}
 .svc-det{font-size:11px;font-weight:500;flex-shrink:0}
 .svc-det.det-ok{color:var(--ok-fg)} .svc-det.det-warn{color:var(--warn-fg)}
-.svc-just{display:flex;align-items:center;gap:5px;flex-wrap:wrap;width:100%;padding-left:0;margin-top:2px}
+.svc-just{display:flex;align-items:center;gap:5px;flex-wrap:wrap;width:100%;padding-left:0;margin-top:0}
 .just-label{font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3);margin-right:2px}
 .icd-chip{font-family:var(--mono);font-size:11px;color:var(--text-2);border:0.5px solid var(--border-2);padding:1px 7px;border-radius:var(--r)}
 .detail-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
@@ -613,8 +613,8 @@ textarea{resize:none}
         </div>
       </div>
       <div class="theme-seg" role="group" aria-label="Theme">
-        <button class="seg-btn is-active" onclick="setTheme('auto',this)"><i class="ti ti-device-desktop"></i>Auto</button>
-        <button class="seg-btn" onclick="setTheme('light',this)"><i class="ti ti-sun"></i>Light</button>
+        <button class="seg-btn" onclick="setTheme('auto',this)"><i class="ti ti-device-desktop"></i>Auto</button>
+        <button class="seg-btn is-active" onclick="setTheme('light',this)"><i class="ti ti-sun"></i>Light</button>
         <button class="seg-btn" onclick="setTheme('dark',this)"><i class="ti ti-moon"></i>Dark</button>
       </div>
     </div>
@@ -660,7 +660,7 @@ textarea{resize:none}
               <circle class="donut-track" cx="65" cy="65" r="54" stroke-width="13"></circle>
               <g transform="rotate(-90 65 65)">
                 <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-4)" stroke-dasharray="78 22" stroke-dashoffset="0"></circle>
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--warn-fg)" stroke-dasharray="16 84" stroke-dashoffset="-79"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-1)" stroke-dasharray="16 84" stroke-dashoffset="-79"></circle>
                 <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-3)" stroke-dasharray="3 97" stroke-dashoffset="-96"></circle>
               </g>
               <text class="donut-center-val" x="65" y="62" text-anchor="middle">94.2%</text>
@@ -668,7 +668,7 @@ textarea{resize:none}
             </svg>
             <div class="donut-legend">
               <div class="dleg"><span class="dleg-dot" style="background:var(--data-4)"></span><span class="dleg-name">High&nbsp;&nbsp;≥ 95%</span><span class="dleg-meta"><b>112</b> &nbsp;79%</span></div>
-              <div class="dleg"><span class="dleg-dot" style="background:var(--warn-fg)"></span><span class="dleg-name">Medium&nbsp;&nbsp;85-94%</span><span class="dleg-meta"><b>24</b> &nbsp;17%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-1)"></span><span class="dleg-name">Medium&nbsp;&nbsp;85-94%</span><span class="dleg-meta"><b>24</b> &nbsp;17%</span></div>
               <div class="dleg"><span class="dleg-dot" style="background:var(--data-3)"></span><span class="dleg-name">Low&nbsp;&nbsp;&lt; 85%</span><span class="dleg-meta"><b>6</b> &nbsp;4%</span></div>
             </div>
           </div>
