@@ -54,6 +54,7 @@
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
+  --data-1:#4C8C2A; --data-2:#DD8410; --data-3:#1E7CB8; --data-4:#D9532F; --data-5:#7458C0;
   --r:8px; --r-lg:12px;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -68,6 +69,7 @@
     --ok-bg:#27500A; --ok-fg:#C0DD97;
     --danger-bg:#791F1F; --danger-fg:#F7C1C1; --danger-solid:#B5403F; --danger-solid-fg:#ffffff; --danger-solid:#B5403F; --danger-solid-fg:#ffffff;
     --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+    --data-1:#8FD45A; --data-2:#F2B048; --data-3:#5CB8E8; --data-4:#F08055; --data-5:#A78BEC;
     --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
   }
 }
@@ -80,6 +82,7 @@
   --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --data-1:#4C8C2A; --data-2:#DD8410; --data-3:#1E7CB8; --data-4:#D9532F; --data-5:#7458C0;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
 }
 :root[data-theme="dark"]{
@@ -91,6 +94,7 @@
   --ok-bg:#27500A; --ok-fg:#C0DD97;
   --danger-bg:#791F1F; --danger-fg:#F7C1C1;
   --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+  --data-1:#8FD45A; --data-2:#F2B048; --data-3:#5CB8E8; --data-4:#F08055; --data-5:#A78BEC;
   --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
 }
 
@@ -138,6 +142,39 @@
 .vrow .vid{font-family:var(--mono);font-size:12px;color:var(--text)}
 .vrow .vreason{font-size:11px;color:var(--text-3)}
 .vrow .vconf{margin-left:auto;font-size:12.5px;font-weight:500;color:var(--warn-fg)}
+.dash-greet{margin:2px 0 22px}
+.greet-title{font-size:22px;font-weight:500;letter-spacing:-.01em;margin:0 0 5px}
+.greet-sub{font-size:13px;color:var(--text-2);line-height:1.5;max-width:560px;margin:0}
+.greet-sub b{color:var(--text);font-weight:500}
+.donut-block{display:flex;align-items:center;gap:24px}
+.donut-svg{width:130px;height:130px;flex-shrink:0}
+.donut-track{fill:none;stroke:var(--chip-bg)}
+.donut-seg{fill:none;stroke-linecap:round}
+.donut-center-val{font-size:20px;font-weight:600;fill:var(--text)}
+.donut-center-lbl{font-size:8px;fill:var(--text-3);letter-spacing:.02em}
+.donut-legend{display:flex;flex-direction:column;gap:14px;flex:1;min-width:0}
+.dleg{display:flex;align-items:center;gap:9px;font-size:12px}
+.dleg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.dleg-name{color:var(--text-2)}
+.dleg-meta{margin-left:auto;color:var(--text-3);white-space:nowrap}
+.dleg-meta b{color:var(--text);font-weight:500}
+.hbars{display:flex;flex-direction:column;gap:15px}
+.hbar{display:flex;align-items:center;gap:12px}
+.hbar-label{font-size:12px;color:var(--text-2);width:128px;flex-shrink:0;display:flex;align-items:center;gap:8px}
+.hbar-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.hbar-track{flex:1;height:8px;background:var(--chip-bg);border-radius:99px;overflow:hidden}
+.hbar-fill{display:block;height:100%;border-radius:99px}
+.hbar-val{font-size:12.5px;font-weight:500;color:var(--text);width:32px;text-align:right;flex-shrink:0}
+.ibars{display:flex;flex-direction:column}
+.ibar{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-top:0.5px solid var(--border);transition:opacity .15s}
+.ibar:first-child{border-top:none;padding-top:2px}
+.ibar:hover{opacity:.7}
+.ibar-main{width:152px;flex-shrink:0}
+.ibar-name{font-size:12.5px;color:var(--text);font-weight:500}
+.ibar-field{font-size:11px;color:var(--text-3);margin-top:1px}
+.ibar-track{flex:1;height:8px;background:var(--chip-bg);border-radius:99px;overflow:hidden}
+.ibar-fill{display:block;height:100%;border-radius:99px;background:var(--data-2)}
+.ibar-val{font-size:12.5px;font-weight:500;color:var(--text);width:22px;text-align:right;flex-shrink:0}
 @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}}
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text);-webkit-font-smoothing:antialiased}
@@ -549,8 +586,8 @@ textarea{resize:none}
     <div class="sb-top">
       <div class="brand"><svg class="brand-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg><button class="sb-toggle" onclick="toggleSidebar()" aria-label="Collapse sidebar"><i class="ti ti-layout-sidebar"></i></button></div>
       <div class="search"><i class="ti ti-search"></i><span>Search case</span></div>
-      <button class="nav-item" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
-      <button class="nav-item active" data-screen="queue"><i class="ti ti-inbox"></i><span>My queue</span><span class="count">7</span></button>
+      <button class="nav-item active" data-screen="dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
+      <button class="nav-item" data-screen="queue"><i class="ti ti-inbox"></i><span>My queue</span><span class="count">7</span></button>
       <button class="nav-item" data-screen="cases"><i class="ti ti-folder"></i><span>All cases</span><span class="count">1,284</span></button>
     </div>
     <div class="sb-mid">
@@ -585,9 +622,12 @@ textarea{resize:none}
 
   <main class="main">
 
-    <section class="screen" id="dashboard">
+    <section class="screen active" id="dashboard">
       <div class="page-head"><span class="page-title">Dashboard</span><span class="muted">Data integrity &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
-      <p class="dash-intro">How accurately Nebo is reading and registering case data today. Anything Nebo is unsure about is surfaced here for you to verify.</p>
+      <div class="dash-greet">
+        <h2 class="greet-title">Good morning, A. Rivera</h2>
+        <p class="greet-sub">Here is how Nebo is reading your cases today. <b>6 cases</b> need a quick check - everything else has been verified and is clean.</p>
+      </div>
 
       <div class="kpi-row">
         <div class="kpi">
@@ -615,36 +655,32 @@ textarea{resize:none}
       <div class="dash-2col">
         <div class="dwidget">
           <div class="dwidget-head"><span class="dwidget-title">Extraction confidence</span><span class="dwidget-meta">142 cases today</span></div>
-          <div class="cbar">
-            <span class="cbar-label"><span class="cbar-dot" style="background:var(--ok-fg)"></span>High &nbsp;≥ 95%</span>
-            <span class="cbar-track"><span class="cbar-fill" style="width:79%;background:var(--ok-fg)"></span></span>
-            <span class="cbar-val"><b>112</b> &nbsp;79%</span>
-          </div>
-          <div class="cbar">
-            <span class="cbar-label"><span class="cbar-dot" style="background:var(--warn-fg)"></span>Medium 85-94%</span>
-            <span class="cbar-track"><span class="cbar-fill" style="width:17%;background:var(--warn-fg)"></span></span>
-            <span class="cbar-val"><b>24</b> &nbsp;17%</span>
-          </div>
-          <div class="cbar">
-            <span class="cbar-label"><span class="cbar-dot" style="background:var(--danger-fg)"></span>Low &nbsp;&lt; 85%</span>
-            <span class="cbar-track"><span class="cbar-fill" style="width:4%;background:var(--danger-fg)"></span></span>
-            <span class="cbar-val"><b>6</b> &nbsp;4%</span>
+          <div class="donut-block">
+            <svg class="donut-svg" viewBox="0 0 130 130" role="img" aria-label="Extraction confidence distribution">
+              <circle class="donut-track" cx="65" cy="65" r="54" stroke-width="13"></circle>
+              <g transform="rotate(-90 65 65)">
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--ok-fg)" stroke-dasharray="78 22" stroke-dashoffset="0"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--warn-fg)" stroke-dasharray="16 84" stroke-dashoffset="-79"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--danger-fg)" stroke-dasharray="3 97" stroke-dashoffset="-96"></circle>
+              </g>
+              <text class="donut-center-val" x="65" y="62" text-anchor="middle">94.2%</text>
+              <text class="donut-center-lbl" x="65" y="76" text-anchor="middle">avg confidence</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="dleg"><span class="dleg-dot" style="background:var(--ok-fg)"></span><span class="dleg-name">High&nbsp;&nbsp;≥ 95%</span><span class="dleg-meta"><b>112</b> &nbsp;79%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--warn-fg)"></span><span class="dleg-name">Medium&nbsp;&nbsp;85-94%</span><span class="dleg-meta"><b>24</b> &nbsp;17%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--danger-fg)"></span><span class="dleg-name">Low&nbsp;&nbsp;&lt; 85%</span><span class="dleg-meta"><b>6</b> &nbsp;4%</span></div>
+            </div>
           </div>
         </div>
 
         <div class="dwidget">
           <div class="dwidget-head"><span class="dwidget-title">Processing pipeline</span><span class="dwidget-meta">142 cases</span></div>
-          <div class="pipe">
-            <span class="pipe-seg" style="width:5.6%;background:var(--text-3)"></span>
-            <span class="pipe-seg" style="width:13.4%;background:var(--warn-fg)"></span>
-            <span class="pipe-seg" style="width:2.8%;background:var(--info-fg)"></span>
-            <span class="pipe-seg" style="width:78.2%;background:var(--ok-fg)"></span>
-          </div>
-          <div class="pipe-legend">
-            <div class="pleg"><span class="pleg-dot" style="background:var(--text-3)"></span><span class="pleg-name">Processing</span><span class="pleg-val">8</span></div>
-            <div class="pleg"><span class="pleg-dot" style="background:var(--warn-fg)"></span><span class="pleg-name">Ready for review</span><span class="pleg-val">19</span></div>
-            <div class="pleg"><span class="pleg-dot" style="background:var(--info-fg)"></span><span class="pleg-name">Escalated to physician</span><span class="pleg-val">4</span></div>
-            <div class="pleg"><span class="pleg-dot" style="background:var(--ok-fg)"></span><span class="pleg-name">Signed</span><span class="pleg-val">111</span></div>
+          <div class="hbars">
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-5)"></span>Processing</span><span class="hbar-track"><span class="hbar-fill" style="width:7.2%;background:var(--data-5)"></span></span><span class="hbar-val">8</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-2)"></span>Ready for review</span><span class="hbar-track"><span class="hbar-fill" style="width:17.1%;background:var(--data-2)"></span></span><span class="hbar-val">19</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>Escalated</span><span class="hbar-track"><span class="hbar-fill" style="width:3.6%;background:var(--data-3)"></span></span><span class="hbar-val">4</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-1)"></span>Signed</span><span class="hbar-track"><span class="hbar-fill" style="width:100%;background:var(--data-1)"></span></span><span class="hbar-val">111</span></div>
           </div>
         </div>
       </div>
@@ -652,15 +688,12 @@ textarea{resize:none}
       <div class="dash-2col">
         <div class="dwidget">
           <div class="dwidget-head"><span class="dwidget-title">Recurring extraction issues</span><span class="dwidget-meta">last 7 days</span></div>
-          <table class="dtable">
-            <thead><tr><th>Issue</th><th class="dt-r">Cases</th></tr></thead>
-            <tbody>
-              <tr class="dt-row" onclick="go('cases')"><td><div class="dt-issue">Service date mismatch</div><div class="dt-field">Date of service</div></td><td class="dt-count">8</td></tr>
-              <tr class="dt-row" onclick="go('cases')"><td><div class="dt-issue">Missing CPT modifier</div><div class="dt-field">Procedure code</div></td><td class="dt-count">5</td></tr>
-              <tr class="dt-row" onclick="go('cases')"><td><div class="dt-issue">Provider NPI low confidence</div><div class="dt-field">Provider record</div></td><td class="dt-count">3</td></tr>
-              <tr class="dt-row" onclick="go('cases')"><td><div class="dt-issue">Diagnosis-procedure mismatch</div><div class="dt-field">ICD / CPT</div></td><td class="dt-count">2</td></tr>
-            </tbody>
-          </table>
+          <div class="ibars">
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Service date mismatch</div><div class="ibar-field">Date of service</div></div><span class="ibar-track"><span class="ibar-fill" style="width:100%"></span></span><span class="ibar-val">8</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Missing CPT modifier</div><div class="ibar-field">Procedure code</div></div><span class="ibar-track"><span class="ibar-fill" style="width:62.5%"></span></span><span class="ibar-val">5</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Provider NPI low confidence</div><div class="ibar-field">Provider record</div></div><span class="ibar-track"><span class="ibar-fill" style="width:37.5%"></span></span><span class="ibar-val">3</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Diagnosis-procedure mismatch</div><div class="ibar-field">ICD / CPT</div></div><span class="ibar-track"><span class="ibar-fill" style="width:25%"></span></span><span class="ibar-val">2</span></div>
+          </div>
         </div>
 
         <div class="dwidget">
@@ -673,7 +706,7 @@ textarea{resize:none}
       </div>
     </section>
 
-    <section class="screen active" id="queue">
+    <section class="screen" id="queue">
       <div class="page-head"><span class="page-title">My queue</span><span class="muted">Tuesday, 18 Mar</span></div>
       <div class="stats">
         <span class="stat">Today <b>14</b></span>
