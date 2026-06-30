@@ -996,7 +996,7 @@ textarea{resize:none}
       </div>
       <div class="tabs" id="caseTabs">
         <span class="tab active" onclick="pickStatusTab('',this)">All</span>
-        <span class="tab" onclick="pickStatusTab('ready',this)">Awaiting you</span>
+        <span class="tab" onclick="pickStatusTab('ready',this)">Pending</span>
         <span class="tab" onclick="pickStatusTab('escalated',this)">Escalated</span>
       </div>
       <div class="toolbar">
@@ -1028,7 +1028,6 @@ textarea{resize:none}
         <div class="menu-item" onclick="setFilter('status','')"><span class="mdot" style="background:transparent"></span>Any</div>
         <div class="menu-item" onclick="setFilter('status','processing')"><span class="mdot" style="background:var(--text-3)"></span>Processing</div>
         <div class="menu-item" onclick="setFilter('status','ready')"><span class="mdot" style="background:var(--warn-fg)"></span>Ready for review</div>
-        <div class="menu-item" onclick="setFilter('status','escalated')"><span class="mdot" style="background:var(--info-fg)"></span>Escalated</div>
         <div class="menu-item" onclick="setFilter('status','signed')"><span class="mdot" style="background:var(--ok-fg)"></span>Signed</div>
           </div>
         </div>
@@ -1805,7 +1804,7 @@ function gotoPage(p){ state.page=p; applyFilters(); }
 var FILTER_DEFS=[
   {key:'determination',label:'Determination',opts:[['','Any'],['approved','Approved'],['consider','Consider'],['further','Further review'],['nopa','No PA needed']]},
   {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['high-cost','High cost'],['urgent','Urgent'],['oon','Out of network']]},
-  {key:'status',label:'Status',opts:[['','Any'],['processing','Processing'],['ready','Ready for review'],['escalated','Escalated'],['signed','Signed']]},
+  {key:'status',label:'Status',opts:[['','Any'],['processing','Processing'],['ready','Ready for review'],['signed','Signed']]},
   {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
   {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
 ];
