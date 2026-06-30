@@ -1102,16 +1102,37 @@ textarea{resize:none}
                 <span class="icd-chip">M51.16</span>
               </span>
             </button>
-            <button class="svc-row" onclick="go('details')">
-              <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
-              <span class="svc-name">Neurostimulator electrode, percutaneous</span>
-              <span class="svc-det det-ok">Approved</span>
-              <span class="svc-just">
-                <span class="just-label">Dx</span>
-                <span class="icd-chip">M54.16</span>
-                <span class="icd-chip">M51.16</span>
-              </span>
-            </button>
+            <div class="card acard collapsed" style="margin-bottom:0">
+              <button class="acard-head" onclick="toggleAcard(this)">
+                <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
+                <span class="acard-name">Neurostimulator electrode, percutaneous</span>
+                <span class="acard-approved">Approved</span>
+                <i class="ti ti-chevron-down acard-caret"></i>
+                <span class="acard-dx">DX <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
+              </button>
+              <div class="acard-body">
+                <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
+                <div class="guideline">
+                  <i class="ti ti-bookmark"></i>
+                  <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
+                  <div class="gl-switch">
+                    <button class="switch" onclick="toggleGl(this)">Switch to other guidelines <i class="ti ti-chevron-down"></i></button>
+                    <div class="gl-menu">
+                      <div class="gl-item active" onclick="pickGl(this,'NCD - 160.7 - Electrical Nerve Stimulators')">NCD - 160.7 - Electrical Nerve Stimulators</div>
+                      <div class="gl-item" onclick="pickGl(this,'LCD - L34705 - Spinal Cord Stimulation')">LCD - L34705 - Spinal Cord Stimulation</div>
+                      <div class="gl-item" onclick="pickGl(this,'NCD - 160.27 - TENS for Chronic Low Back Pain')">NCD - 160.27 - TENS for Chronic Low Back Pain</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block-label">Criteria met</div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Documented trial with &#8805; 50% pain relief</div><div class="crit-met-quote">"Temporary trial showed 60% VAS reduction over 7 days" <span class="pageref" onclick="openPageRef(4)">Page 4</span></div></div></div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Conservative therapy failed &#8805; 6 months</div><div class="crit-met-quote">"PT, NSAIDs, and epidural injections over 14 months without relief" <span class="pageref" onclick="openPageRef(5)">Page 5</span></div></div></div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Psychological evaluation completed</div><div class="crit-met-quote">"Behavioral health clearance on file 02/2026" <span class="pageref" onclick="openPageRef(7)">Page 7</span></div></div></div>
+                </div>
+                <div class="assessed-with">Assessed together with 63655</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1157,37 +1178,6 @@ textarea{resize:none}
         </div>
       </div>
 
-      <div class="card acard collapsed">
-        <button class="acard-head" onclick="toggleAcard(this)">
-          <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
-          <span class="acard-name">Neurostimulator electrode, percutaneous</span>
-          <span class="acard-approved">Approved</span>
-          <i class="ti ti-chevron-down acard-caret"></i>
-          <span class="acard-dx">DX <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
-        </button>
-        <div class="acard-body">
-          <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
-          <div class="guideline">
-            <i class="ti ti-bookmark"></i>
-            <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
-            <div class="gl-switch">
-              <button class="switch" onclick="toggleGl(this)">Switch to other guidelines <i class="ti ti-chevron-down"></i></button>
-              <div class="gl-menu">
-                <div class="gl-item active" onclick="pickGl(this,'NCD - 160.7 - Electrical Nerve Stimulators')">NCD - 160.7 - Electrical Nerve Stimulators</div>
-                <div class="gl-item" onclick="pickGl(this,'LCD - L34705 - Spinal Cord Stimulation')">LCD - L34705 - Spinal Cord Stimulation</div>
-                <div class="gl-item" onclick="pickGl(this,'NCD - 160.27 - TENS for Chronic Low Back Pain')">NCD - 160.27 - TENS for Chronic Low Back Pain</div>
-              </div>
-            </div>
-          </div>
-          <div class="block">
-            <div class="block-label">Criteria met</div>
-            <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Documented trial with &#8805; 50% pain relief</div><div class="crit-met-quote">"Temporary trial showed 60% VAS reduction over 7 days" <span class="pageref" onclick="openPageRef(4)">Page 4</span></div></div></div>
-            <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Conservative therapy failed &#8805; 6 months</div><div class="crit-met-quote">"PT, NSAIDs, and epidural injections over 14 months without relief" <span class="pageref" onclick="openPageRef(5)">Page 5</span></div></div></div>
-            <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Psychological evaluation completed</div><div class="crit-met-quote">"Behavioral health clearance on file 02/2026" <span class="pageref" onclick="openPageRef(7)">Page 7</span></div></div></div>
-          </div>
-          <div class="assessed-with">Assessed together with 63655</div>
-        </div>
-      </div>
       </div>
       <div id="stateBody" style="display:none"></div>
 
