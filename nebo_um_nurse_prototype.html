@@ -1747,7 +1747,7 @@ function rowHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
   var det;
   if(c.status==='processing') det='<span class="muted">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-info">Escalated</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td class="mono" style="color:var(--text-2)">'+c.cpt+'</td><td>'+rv+'</td><td>'+det+'</td></tr>';
@@ -1756,7 +1756,7 @@ function cardHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'';
   var det;
   if(c.status==='processing') det='<span class="muted" style="font-size:11px">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-info">Escalated</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv=c.reviewer==='Unassigned'?'<span class="muted" style="font-size:11px">Unassigned</span>':'<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<button class="ccard" onclick="openCase(\''+c.id+'\')"><div class="ccard-head"><span class="ccard-idline">'+dot+'<span class="mono">'+c.id+'</span></span>'+det+'</div><div class="ccard-cpt mono">'+c.cpt+'</div><div class="ccard-foot"><span class="muted">'+c.date+'</span>'+rv+'</div></button>';
@@ -1843,7 +1843,7 @@ var priLabel={standard:'Standard','high-cost':'High cost',urgent:'Urgent',oon:'O
 function caseById(id){ for(var i=0;i<CASES.length;i++){ if(CASES[i].id===id) return CASES[i]; } return null; }
 function detChipHtml(c){
   if(c.status==='processing') return '<span class="chip chip-neutral">Processing</span>';
-  if(c.status==='escalated') return '<span class="chip chip-info">Escalated</span>';
+  if(c.status==='escalated') return '<span class="chip chip-warn">Further review</span>';
   if(c.status==='signed') return '<span class="chip chip-ok">Signed</span>';
   var d=detMap[c.det]; return d? '<span class="chip '+d[1]+'">'+d[0]+'</span>' : '<span class="muted">-</span>';
 }
