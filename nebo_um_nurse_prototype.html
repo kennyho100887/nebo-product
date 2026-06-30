@@ -638,6 +638,29 @@ textarea{resize:none}
 .mtb-btn svg{width:22px;height:22px}
 .mtb-brand{font-family:Georgia,serif;font-size:19px;font-weight:600;color:var(--primary);letter-spacing:-.01em}
 .nav-backdrop{display:none}
+/* --- Mobile filter panel --- */
+.filter-trigger{display:none;position:relative}
+.filter-trigger svg{width:15px;height:15px}
+.filter-badge{display:none;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--primary);color:var(--primary-fg);font-size:10px;font-weight:600;line-height:1}
+.filter-panel-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:205;opacity:0;visibility:hidden;transition:opacity .2s}
+.filter-panel-backdrop.open{opacity:1;visibility:visible}
+.filter-panel{position:fixed;top:0;right:0;height:100vh;width:306px;max-width:88vw;background:var(--bg);z-index:210;transform:translateX(100%);transition:transform .22s ease;display:flex;flex-direction:column;border-left:0.5px solid var(--border);box-shadow:-6px 0 40px rgba(0,0,0,.16)}
+.filter-panel.open{transform:none}
+.fp-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:0.5px solid var(--border);flex-shrink:0}
+.fp-title{font-size:15px;font-weight:600}
+.fp-close{border:none;background:none;color:var(--text-2);cursor:pointer;font-size:18px;display:flex;padding:4px;border-radius:var(--r)}
+.fp-close:hover{background:var(--surface)}
+.fp-body{flex:1;overflow-y:auto;padding:4px 18px 16px}
+.fp-group{padding:13px 0;border-bottom:0.5px solid var(--border)}
+.fp-group:last-child{border-bottom:none}
+.fp-glabel{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:6px}
+.fp-opt{display:flex;align-items:center;gap:9px;width:100%;text-align:left;border:none;background:none;font-family:inherit;font-size:13px;color:var(--text-2);padding:9px 10px;border-radius:var(--r);cursor:pointer}
+.fp-opt:hover{background:var(--surface)}
+.fp-opt.active{color:var(--text);font-weight:500;background:var(--accent-bg)}
+.fp-opt .fp-check{margin-left:auto;color:var(--accent-fg);font-size:15px;display:none}
+.fp-opt.active .fp-check{display:block}
+.fp-foot{display:flex;gap:10px;padding:14px 18px;border-top:0.5px solid var(--border);flex-shrink:0}
+.fp-foot .act-btn{flex:1;justify-content:center}
 /* --- Mobile layout --- */
 @media (max-width:768px){
   .app{display:block;padding:0;gap:0;min-height:100vh}
@@ -655,7 +678,9 @@ textarea{resize:none}
   #caseGrid{display:grid!important;grid-template-columns:1fr}
   .tabs{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .tabs::-webkit-scrollbar{display:none}
-  .search-box{flex:1 0 100%;min-width:0}
+  .search-box{flex:1 1 auto;min-width:0}
+  .toolbar .filter{display:none}
+  .filter-trigger{display:flex;flex-shrink:0}
   .pager{flex-wrap:wrap;gap:10px;justify-content:center}
   .pages{flex-wrap:wrap;justify-content:center}
   .detail-body{flex-direction:column}
@@ -879,6 +904,7 @@ textarea{resize:none}
       </div>
       <div class="toolbar">
         <div class="search-box"><i class="ti ti-search"></i><input id="caseSearch" class="search-input" placeholder="Search by case number" oninput="setSearch(this.value)"></div>
+        <button class="tool filter-trigger" onclick="openFilterPanel()" aria-label="Filters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="filter-badge" id="filterBadge"></span></button>
         <div class="filter">
           <button class="tool" id="btn-determination" onclick="toggleMenu(this)">Determination <i class="ti ti-chevron-down"></i></button>
           <div class="menu">
@@ -931,6 +957,12 @@ textarea{resize:none}
         </div>
       </div>
       <div class="active-filters" id="caseChips"></div>
+      <div class="filter-panel-backdrop" id="filterBackdrop" onclick="closeFilterPanel()"></div>
+      <aside class="filter-panel" id="filterPanel" aria-label="Filters">
+        <div class="fp-head"><span class="fp-title">Filters</span><button class="fp-close" onclick="closeFilterPanel()" aria-label="Close"><i class="ti ti-x"></i></button></div>
+        <div class="fp-body" id="filterPanelBody"></div>
+        <div class="fp-foot"><button class="act-btn" onclick="clearAll();renderFilterPanel()">Clear all</button><button class="act-btn act-primary" onclick="closeFilterPanel()">Show results</button></div>
+      </aside>
       <table id="caseTable">
         <thead><tr>
           <th class="sortable" data-sort="id" style="width:30%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
@@ -1410,6 +1442,7 @@ function go(target){
   document.querySelector('.main').scrollTop=0;
   window.scrollTo(0,0);
   closeNav();
+  closeFilterPanel();
 }
 function toggleNav(){ document.querySelector('.app').classList.toggle('nav-open'); }
 function closeNav(){ var a=document.querySelector('.app'); if(a) a.classList.remove('nav-open'); }
@@ -1644,6 +1677,7 @@ function applyFilters(){
   var box=document.getElementById('caseChips');
   if(chips.length){ box.innerHTML=chips.join('')+'<span class="clear" onclick="clearAll()">Clear all</span>'; box.style.display='flex'; }
   else { box.innerHTML=''; box.style.display='none'; }
+  updateFilterBadge();
   [['determination','btn-determination','Determination'],['priority','btn-priority','Priority'],['status','btn-status','Status'],['reviewer','btn-reviewer','Reviewer'],['date','btn-date','Date']].forEach(function(t){
     var btn=document.getElementById(t[1]), val=state[t[0]];
     btn.innerHTML=(val?labels[t[0]][val]:t[2])+' <i class="ti ti-chevron-down"></i>';
@@ -1671,6 +1705,28 @@ function removeFilter(k){ state[k]=''; state.page=1; applyFilters(); }
 function clearAll(){ state.determination=state.priority=state.status=state.date=state.search=''; var si=document.getElementById('caseSearch'); if(si) si.value=''; state.page=1; applyFilters(); }
 function setSort(k){ if(state.sortKey===k){ state.sortDir=state.sortDir==='asc'?'desc':'asc'; } else { state.sortKey=k; state.sortDir=(k==='day')?'desc':'asc'; } applyFilters(); }
 function gotoPage(p){ state.page=p; applyFilters(); }
+var FILTER_DEFS=[
+  {key:'determination',label:'Determination',opts:[['','Any'],['approved','Approved'],['consider','Consider'],['further','Further review'],['nopa','No PA needed']]},
+  {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['high-cost','High cost'],['urgent','Urgent'],['oon','Out of network']]},
+  {key:'status',label:'Status',opts:[['','Any'],['processing','Processing'],['ready','Ready for review'],['escalated','Escalated'],['signed','Signed']]},
+  {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
+  {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
+];
+function activeFilterCount(){ return ['determination','priority','status','reviewer','date'].filter(function(k){return state[k];}).length; }
+function updateFilterBadge(){ var b=document.getElementById('filterBadge'); if(!b) return; var n=activeFilterCount(); b.textContent=n; b.style.display=n?'inline-flex':'none'; }
+function renderFilterPanel(){
+  var html=FILTER_DEFS.map(function(g){
+    return '<div class="fp-group"><div class="fp-glabel">'+g.label+'</div>'+g.opts.map(function(o){
+      var active=(state[g.key]||'')===o[0];
+      return '<button class="fp-opt'+(active?' active':'')+'" onclick="pickPanelFilter(\''+g.key+'\',\''+o[0]+'\')">'+o[1]+'<i class="ti ti-check fp-check"></i></button>';
+    }).join('')+'</div>';
+  }).join('');
+  document.getElementById('filterPanelBody').innerHTML=html;
+  updateFilterBadge();
+}
+function pickPanelFilter(key,val){ state[key]=val; state.page=1; applyFilters(); renderFilterPanel(); }
+function openFilterPanel(){ renderFilterPanel(); document.getElementById('filterPanel').classList.add('open'); document.getElementById('filterBackdrop').classList.add('open'); }
+function closeFilterPanel(){ var p=document.getElementById('filterPanel'); if(p) p.classList.remove('open'); var b=document.getElementById('filterBackdrop'); if(b) b.classList.remove('open'); }
 var DEEP_ID='EPS-00088552';
 var priLabel={standard:'Standard','high-cost':'High cost',urgent:'Urgent',oon:'Out of network'};
 function caseById(id){ for(var i=0;i<CASES.length;i++){ if(CASES[i].id===id) return CASES[i]; } return null; }
