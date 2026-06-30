@@ -642,13 +642,12 @@ textarea{resize:none}
 .set-select:focus{outline:none;border-color:var(--accent-fg)}
 @media (max-width:600px){.set-grid{grid-template-columns:1fr}}
 /* --- Mobile top bar (hidden on desktop) --- */
-.mtopbar{display:none;position:fixed;top:0;left:0;right:0;height:52px;z-index:140;align-items:center;gap:10px;padding:0 12px;background:var(--bg);border-bottom:0.5px solid var(--border)}
-.mtb-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:none;background:none;color:var(--text);cursor:pointer;border-radius:var(--r)}
-.mtb-btn:hover{background:var(--surface)}
-.mtb-btn svg{width:22px;height:22px}
-.mtb-logo{height:22px;width:auto}
-.mtb-search{margin-left:auto}
-.mtb-search svg{width:20px;height:20px}
+.mtopbar{display:none;position:fixed;top:0;left:0;right:0;height:52px;z-index:140;align-items:center;gap:8px;padding:0 12px;background:var(--bg);border-bottom:0.5px solid var(--border)}
+.mtb-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:var(--accent-bg);color:var(--accent-fg);cursor:pointer;border-radius:var(--r);flex-shrink:0}
+.mtb-btn:hover{filter:brightness(.96)}
+.mtb-btn svg{width:17px;height:17px}
+.mtb-btn i{font-size:17px;color:var(--accent-fg)}
+.mtb-logo{height:22px;width:auto;margin-right:auto}
 .mtb-user{position:relative}
 .mtb-menu-items-top{border-top:0.5px solid var(--border)}
 .msearch-bar{display:none;position:fixed;top:52px;left:0;right:0;z-index:139;align-items:center;gap:8px;padding:9px 14px;background:var(--bg);border-bottom:0.5px solid var(--border)}
@@ -661,7 +660,6 @@ textarea{resize:none}
 .mtb-searchwrap i{color:var(--text-3);font-size:15px;flex-shrink:0}
 .mtb-searchwrap input{flex:1;min-width:0;border:none;background:none;outline:none;font-family:inherit;font-size:13px;color:var(--text)}
 .mtb-searchwrap input::placeholder{color:var(--text-3)}
-.mtb-account i{font-size:21px;color:var(--text)}
 .mtb-menu{position:absolute;top:calc(100% + 8px);right:0;width:248px;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r-lg);box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:220;display:none;overflow:hidden}
 .mtb-menu.open{display:block}
 .mtb-menu-head{display:flex;align-items:center;gap:11px;padding:15px 16px 13px}
@@ -770,7 +768,7 @@ textarea{resize:none}
 
   <div class="mtopbar">
     <svg class="brand-logo mtb-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nebo"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg>
-    <div class="mtb-searchwrap"><i class="ti ti-search"></i><input id="mtbSearch" placeholder="Search cases" oninput="mtbSearchInput(this.value)"></div>
+    <button class="mtb-btn mtb-search" onclick="openMSearch()" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
     <div class="mtb-user">
       <button class="mtb-btn mtb-account" onclick="toggleMUserMenu(event)" aria-label="Account"><i class="ti ti-user"></i></button>
       <div class="mtb-menu" id="mUserMenu">
@@ -788,6 +786,11 @@ textarea{resize:none}
     <button class="mtb-btn mtb-menubtn" onclick="toggleNav()" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </div>
   <div class="nav-backdrop" onclick="closeNav()"></div>
+  <div class="msearch-bar" id="mSearchBar">
+    <i class="ti ti-search"></i>
+    <input id="mSearchInput" placeholder="Search by case number" oninput="mSearchInput(this.value)" onkeydown="if(event.key==='Enter')closeMSearch()">
+    <button class="msearch-close" onclick="closeMSearch()" aria-label="Close search"><i class="ti ti-x"></i></button>
+  </div>
 
   <aside class="sidebar">
     <div class="sb-top">
