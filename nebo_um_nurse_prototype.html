@@ -453,6 +453,16 @@ textarea{resize:none}
 .act-deny{background:none;border-color:var(--danger-fg);color:var(--danger-fg)}
 .act-deny i{color:var(--danger-fg)}
 .act-deny:hover{background:var(--danger-bg)}
+.da-inline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.da-mobile{display:none;position:relative}
+.da-trigger{width:100%;justify-content:space-between}
+.da-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);box-shadow:0 10px 28px rgba(0,0,0,.18);padding:6px;z-index:60;display:none}
+.da-menu.open{display:block}
+.da-mi{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;font-family:inherit;font-size:13px;color:var(--text);padding:11px 10px;border-radius:var(--r);cursor:pointer;text-align:left}
+.da-mi:hover{background:var(--surface)}
+.da-mi i{font-size:16px;color:var(--text-2)}
+.da-mi.da-approve,.da-mi.da-approve i{color:var(--accent-fg)}
+.da-mi.da-deny,.da-mi.da-deny i{color:var(--danger-fg)}
 .letter-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-start;justify-content:center;z-index:120;padding:36px 20px;overflow:auto}
 .letter-overlay.open{display:flex}
 .letter-modal{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r-lg);width:100%;max-width:760px;display:flex;flex-direction:column;max-height:calc(100vh - 72px);overflow:hidden}
@@ -711,8 +721,9 @@ textarea{resize:none}
   .detail-body{flex-direction:column}
   .detail-side{width:100%;position:static}
   .detail-topbar{gap:8px}
-  .detail-actions{flex-wrap:wrap;gap:8px;width:100%}
-  .detail-actions .act-btn{flex:1 1 auto}
+  .detail-actions{width:100%}
+  .da-inline{display:none}
+  .da-mobile{display:block;width:100%}
   .pv-topbar{flex-wrap:wrap}
   .lt-topright{width:100%;justify-content:flex-end}
   .pv-toolbar2{flex-wrap:wrap}
@@ -1490,6 +1501,7 @@ function go(target){
   closeFilterPanel();
   closeMUserMenu();
   closeMSearch();
+  closeActionsMenu();
 }
 function toggleNav(){ document.querySelector('.app').classList.toggle('nav-open'); }
 function closeNav(){ var a=document.querySelector('.app'); if(a) a.classList.remove('nav-open'); }
@@ -1828,12 +1840,27 @@ function renderStateRail(prof){
 function renderActions(state){
   var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>';
   var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Submit feedback</button>';
-  var genA='<button class="act-btn act-approve act-decision" onclick="openLetter(\'approval\')"><i class="ti ti-check"></i>Approve</button>';
-  var genD='<button class="act-btn act-deny act-decision" onclick="openLetter(\'denial\')"><i class="ti ti-x"></i>Deny</button>';
-  var vl='<button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>View letter</button>';
-  var h; if(state==='processing')h=''; else if(state==='escalated')h=dup+fb; else if(state==='signed')h=dup+vl; else h=dup+fb+genA+genD;
-  document.getElementById('detailActions').innerHTML=h;
+  var acts=[];
+  if(state!=='processing'){
+    acts.push({l:'Duplicate case',i:'ti-copy',fn:'openDup()'});
+    if(state==='escalated'){ acts.push({l:'Submit feedback',i:'ti-message-circle',fn:'openFb()'}); }
+    else if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
+    else {
+      acts.push({l:'Submit feedback',i:'ti-message-circle',fn:'openFb()'});
+      acts.push({l:'Approve',i:'ti-check',fn:"openLetter('approval')",cls:'act-approve act-decision',mcls:'da-approve'});
+      acts.push({l:'Deny',i:'ti-x',fn:"openLetter('denial')",cls:'act-deny act-decision',mcls:'da-deny'});
+    }
+  }
+  var box=document.getElementById('detailActions');
+  if(!acts.length){ box.innerHTML=''; return; }
+  var inline=acts.map(function(a){ return '<button class="act-btn '+(a.cls||'')+'" onclick="'+a.fn+'"><i class="ti '+a.i+'"></i>'+a.l+'</button>'; }).join('');
+  var menu=acts.map(function(a){ return '<button class="da-mi '+(a.mcls||'')+'" onclick="closeActionsMenu();'+a.fn+'"><i class="ti '+a.i+'"></i>'+a.l+'</button>'; }).join('');
+  box.innerHTML='<div class="da-inline">'+inline+'</div>'+
+    '<div class="da-mobile"><button class="act-btn da-trigger" onclick="toggleActionsMenu(event)">Actions <i class="ti ti-chevron-down"></i></button><div class="da-menu" id="daMenu">'+menu+'</div></div>';
 }
+function toggleActionsMenu(e){ e.stopPropagation(); var m=document.getElementById('daMenu'); if(m) m.classList.toggle('open'); }
+function closeActionsMenu(){ var m=document.getElementById('daMenu'); if(m) m.classList.remove('open'); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.da-mobile')) closeActionsMenu(); });
 function metaHtml(p,state){
   var parts=['Submitted <b>'+(p.date||'-')+'</b>'];
   if(state==='signed'&&p.signedAt) parts.push('Signed <b>'+p.signedAt+'</b>');
