@@ -584,6 +584,22 @@ textarea{resize:none}
 .pv-sheet .doc-h{font-weight:600;margin:18px 0 6px;color:#111;font-size:13px}
 .pv-sheet p{margin:0 0 10px}
 .pv-pagenum{font-size:10px;color:#bbb;text-align:center;margin-top:26px;letter-spacing:.05em}
+.pv-panel{position:fixed;top:0;right:0;height:100vh;width:var(--pv-w,460px);background:var(--bg);border-left:0.5px solid var(--border);box-shadow:-8px 0 34px rgba(0,0,0,.14);z-index:44;display:none;flex-direction:column}
+.pv-panel.open{display:flex}
+.pv-resize{position:absolute;left:0;top:0;bottom:0;width:7px;cursor:col-resize;z-index:2}
+.pv-resize:hover{background:var(--accent-bg)}
+.pv-phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px 12px 16px;border-bottom:0.5px solid var(--border);flex-shrink:0}
+.pv-ptitle{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;min-width:0}
+.pv-ptitle span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-ptitle i{color:var(--text-3);font-size:14px;flex-shrink:0}
+.pv-pclose{border:none;background:none;color:var(--text-2);cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.pv-pclose:hover{background:var(--surface)}
+.pv-pbar{display:flex;align-items:center;gap:6px;padding:7px 14px 7px 16px;border-bottom:0.5px solid var(--border);background:var(--surface);flex-shrink:0;font-size:12px;color:var(--text-2)}
+.pv-pbar .pv-sp{margin-left:auto}
+.pv-pbody{flex:1;min-height:0;overflow-y:auto;background:var(--surface);padding:16px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.pv-panel .pv-sheet{max-width:100%;padding:30px 28px;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.app.pv-open .main{padding-right:calc(var(--pv-w,460px) + 14px)}
+@media (max-width:768px){.pv-panel{width:100%;max-width:100%;border-left:none}.pv-resize{display:none}.app.pv-open .main{padding-right:0}}
 @media (max-width:760px){.pv-thumbs{display:none}.pv-stage{height:auto;flex-direction:column}.pv-main{height:auto}}
 .block{margin-bottom:16px}
 .block:last-child{margin-bottom:0}
@@ -1235,50 +1251,19 @@ textarea{resize:none}
       </div>
     </section>
 
-    <section class="screen" id="preview">
-      <div class="pv-topbar">
-        <div class="crumb">
-          <span class="crumb-link" onclick="go('cases')">All cases</span>
-          <i class="ti ti-chevron-right sep"></i>
-          <span class="crumb-link" onclick="go('details')">EPS-00088552</span>
-          <i class="ti ti-chevron-right sep"></i>
-          <span class="crumb-current"><i class="ti ti-file-text"></i><span id="pvName">66716 demo clean 30.Sep.24.pdf</span></span>
-        </div>
-        <button class="btn-primary pv-dl"><i class="ti ti-download"></i>Download</button>
+    <div class="pv-panel" id="pvPanel">
+      <div class="pv-resize" id="pvResize"></div>
+      <div class="pv-phead">
+        <span class="pv-ptitle"><i class="ti ti-file-text"></i><span id="pvName">66716 demo clean 30.Sep.24.pdf</span></span>
+        <button class="pv-pclose" onclick="closePreview()" aria-label="Close"><i class="ti ti-x"></i></button>
       </div>
-      <div class="pv-toolbar2">
-        <button class="pv-tbtn" onclick="pvToggleThumbs()" aria-label="Toggle thumbnails"><i class="ti ti-layout-sidebar"></i></button>
-        <div class="pv-tdiv"></div>
-        <div class="pv-tgrp">
-          <span class="pv-lbl">Page</span>
-          <button class="pv-tbtn" onclick="pvPage(-1)" aria-label="Previous page"><i class="ti ti-chevron-left"></i></button>
-          <span class="pv-pagei"><span id="pvCur">1</span> of 2</span>
-          <button class="pv-tbtn" onclick="pvPage(1)" aria-label="Next page"><i class="ti ti-chevron-right"></i></button>
-        </div>
-        <div class="pv-tdiv"></div>
-        <div class="pv-tgrp">
-          <button class="pv-tbtn" onclick="pvZoom(-1)" aria-label="Zoom out"><i class="ti ti-minus"></i></button>
-          <span class="pv-zoom" id="pvZoom">100%</span>
-          <button class="pv-tbtn" onclick="pvZoom(1)" aria-label="Zoom in"><i class="ti ti-plus"></i></button>
-        </div>
-        <div class="pv-tdiv"></div>
-        <button class="pv-tbtn" onclick="pvFit()" aria-label="Fit width"><i class="ti ti-maximize"></i></button>
-        <button class="pv-tbtn" onclick="pvRotate()" aria-label="Rotate"><i class="ti ti-rotate-clockwise"></i></button>
-        <button class="pv-tbtn" onclick="pvSearch()" aria-label="Search"><i class="ti ti-search"></i></button>
-        <div class="pv-search" id="pvSearchBar"><i class="ti ti-search" style="font-size:13px;color:var(--text-3)"></i><input placeholder="Search in document"><span class="pv-sclose" onclick="pvSearch()"><i class="ti ti-x"></i></span></div>
+      <div class="pv-pbar">
+        <button class="pv-tbtn" onclick="pvPage(-1)" aria-label="Previous page"><i class="ti ti-chevron-left"></i></button>
+        <span class="pv-pagei"><span id="pvCur">1</span> of 2</span>
+        <button class="pv-tbtn" onclick="pvPage(1)" aria-label="Next page"><i class="ti ti-chevron-right"></i></button>
+        <button class="pv-tbtn pv-sp" onclick="showToast('Downloading document')" aria-label="Download"><i class="ti ti-download"></i></button>
       </div>
-      <div class="pv-stage">
-        <div class="pv-thumbs" id="pvThumbs">
-          <div class="pv-thumb active" onclick="pvGoto(1)">
-            <div class="pv-thumb-sheet"><div class="pv-tline m"></div><div class="pv-tline s"></div><div class="pv-tline"></div><div class="pv-tline m"></div><div class="pv-tline"></div><div class="pv-tline s"></div><div class="pv-tline m"></div></div>
-            <span>1</span>
-          </div>
-          <div class="pv-thumb" onclick="pvGoto(2)">
-            <div class="pv-thumb-sheet"><div class="pv-tline s"></div><div class="pv-tline"></div><div class="pv-tline m"></div><div class="pv-tline"></div><div class="pv-tline m"></div><div class="pv-tline s"></div></div>
-            <span>2</span>
-          </div>
-        </div>
-        <div class="pv-main" id="pvMain">
+      <div class="pv-pbody" id="pvMain">
           <div class="pv-sheet" id="pvSheet1">
             <h3>Baptist Health Deaconess Madisonville</h3>
             <div class="doc-meta">Outpatient Clinical Record &nbsp;|&nbsp; MRN AGL841399564 &nbsp;|&nbsp; Milton, Jenny &nbsp;|&nbsp; DOB 02/06/1971</div>
@@ -1298,8 +1283,7 @@ textarea{resize:none}
             <div class="pv-pagenum">- Page 2 of 2 -</div>
           </div>
         </div>
-      </div>
-    </section>
+    </div>
 
     <div class="letter-float" id="letterFloat">
       <div class="lf-head">
@@ -1539,6 +1523,7 @@ function go(target){
   closeMSearch();
   closeActionsMenu();
   cancelLetter();
+  closePreview();
 }
 function toggleNav(){ document.querySelector('.app').classList.toggle('nav-open'); }
 function closeNav(){ var a=document.querySelector('.app'); if(a) a.classList.remove('nav-open'); }
@@ -1947,7 +1932,14 @@ function showToast(msg){
   toastTimer=setTimeout(function(){ t.classList.remove('show'); }, 2600);
 }
 var pvState={page:1,zoom:1,rot:0,pages:2};
-function openFile(name){ document.getElementById('pvName').textContent=name; origin='details'; pvState={page:1,zoom:1,rot:0,pages:2}; pvApply(); pvGoto(1,true); document.getElementById('pvSearchBar').classList.remove('open'); document.querySelector('.pv-thumbs').classList.remove('hidden'); go('preview'); }
+function openFile(name){ document.getElementById('pvName').textContent=name; pvState={page:1,zoom:1,rot:0,pages:2}; pvGoto(1,true); document.getElementById('pvPanel').classList.add('open'); document.querySelector('.app').classList.add('pv-open'); }
+function closePreview(){ var p=document.getElementById('pvPanel'); if(p) p.classList.remove('open'); var a=document.querySelector('.app'); if(a) a.classList.remove('pv-open'); }
+(function(){
+  var resizing=false;
+  document.addEventListener('mousedown',function(e){ if(e.target && e.target.id==='pvResize'){ resizing=true; document.body.style.userSelect='none'; e.preventDefault(); } });
+  document.addEventListener('mousemove',function(e){ if(!resizing) return; var w=window.innerWidth-e.clientX; w=Math.max(340,Math.min(880,w)); document.documentElement.style.setProperty('--pv-w', w+'px'); });
+  document.addEventListener('mouseup',function(){ if(resizing){ resizing=false; document.body.style.userSelect=''; } });
+})();
 function openPageRef(p){ openFile('66716 demo clean 30.Sep.24.pdf'); setTimeout(function(){ pvGoto(p); }, 40); }
 function toggleAcard(btn){ var c=btn.closest('.acard'); if(c) c.classList.toggle('collapsed'); }
 function pvGoto(p,noscroll){
