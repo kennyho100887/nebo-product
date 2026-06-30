@@ -486,17 +486,21 @@ textarea{resize:none}
 .letter-sheet{background:#fff;color:#1b1b1b;max-width:580px;margin:0 auto;padding:46px 50px;border-radius:4px;font-size:12.5px;line-height:1.62;box-shadow:0 1px 8px rgba(0,0,0,.18)}
 .letter-sheet[contenteditable=true]{outline:2px solid var(--primary);outline-offset:5px}
 .letter-float{position:fixed;right:20px;bottom:20px;width:430px;max-width:calc(100vw - 32px);height:600px;max-height:calc(100vh - 40px);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r-lg);box-shadow:0 14px 50px rgba(0,0,0,.3);z-index:45;display:none;flex-direction:column;overflow:hidden}
-.lf-resize{position:absolute;right:1px;bottom:1px;width:16px;height:16px;cursor:nwse-resize;z-index:5}
-.lf-resize::after{content:"";position:absolute;right:4px;bottom:4px;width:7px;height:7px;border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);opacity:.6}
+.lf-resize{position:absolute;left:1px;bottom:1px;width:16px;height:16px;cursor:nesw-resize;z-index:5}
+.lf-resize::after{content:"";position:absolute;left:4px;bottom:4px;width:7px;height:7px;border-left:2px solid var(--text-3);border-bottom:2px solid var(--text-3);opacity:.6}
 .letter-float.open{display:flex}
 .lf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--bg);color:var(--text);border-bottom:0.5px solid var(--border);flex-shrink:0;cursor:move;user-select:none}
 .lf-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lf-title i{font-size:14px;flex-shrink:0}
 .lf-iconbtn{border:none;background:none;color:var(--text-2);cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .lf-iconbtn:hover{background:var(--surface);color:var(--text)}
+.lf-head .lf-iconbtn{margin-left:auto}
+.lf-dl{display:inline-flex;align-items:center;gap:5px;border:none;background:none;color:var(--accent-fg);font-family:inherit;font-size:12px;cursor:pointer;padding:4px 7px;border-radius:6px;flex-shrink:0}
+.lf-dl:hover{background:var(--surface)}
+.lf-dl i{font-size:14px}
 .lf-toolbar{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:0.5px solid var(--border);background:var(--surface);flex-shrink:0}
 .lf-body{flex:1;min-height:0;overflow-y:auto;background:var(--surface);padding:16px}
-.lf-foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:11px 14px;border-top:0.5px solid var(--border);flex-shrink:0}
+.lf-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-top:0.5px solid var(--border);flex-shrink:0}
 .letter-float .letter-sheet{max-width:100%;padding:30px 28px;font-size:12px;margin:0}
 .letter-float .ls-logo{height:24px}
 @media (max-width:768px){.letter-float{right:0;left:0;width:auto;max-width:100%;height:88vh;max-height:88vh;border-radius:var(--r-lg) var(--r-lg) 0 0}}
@@ -1291,14 +1295,8 @@ textarea{resize:none}
       <div class="lf-resize"></div>
       <div class="lf-head">
         <span class="lf-title" id="ltCrumb"><i class="ti ti-file-text"></i>Determination letter &middot; Approval</span>
+        <button class="lf-dl" id="ltDownload" onclick="dlLetter()"><i class="ti ti-download"></i>Download</button>
         <button class="lf-iconbtn" onclick="cancelLetter()" aria-label="Close"><i class="ti ti-x"></i></button>
-      </div>
-      <div class="lf-toolbar">
-        <div class="lt-seg" id="ltModeSeg" style="height:30px">
-          <button class="lt-seg-btn active" onclick="letterMode('preview',this)"><i class="ti ti-eye"></i>Preview</button>
-          <button class="lt-seg-btn" onclick="letterMode('edit',this)"><i class="ti ti-edit"></i>Edit</button>
-        </div>
-        <button class="act-btn" id="ltDownload" onclick="dlLetter()" style="margin-left:auto;height:30px"><i class="ti ti-download"></i>Download</button>
       </div>
       <div class="lf-body">
         <div class="letter-sheet" id="letterSheet" contenteditable="false">
@@ -1325,6 +1323,10 @@ textarea{resize:none}
       </div>
       </div>
       <div class="lf-foot">
+        <div class="lt-seg" id="ltModeSeg" style="height:32px">
+          <button class="lt-seg-btn active" onclick="letterMode('preview',this)"><i class="ti ti-eye"></i>Preview</button>
+          <button class="lt-seg-btn" onclick="letterMode('edit',this)"><i class="ti ti-edit"></i>Edit</button>
+        </div>
         <button class="btn-primary" id="ltSendBtn" style="width:auto;margin:0" onclick="sendLetter()"><i class="ti ti-upload"></i>Send approval letter</button>
       </div>
     </div>
@@ -1606,6 +1608,12 @@ function openLetter(type){
   var f=document.getElementById('letterFloat');
   ['left','top','right','bottom','width','height'].forEach(function(p){ f.style[p]=''; });
   f.classList.add('open');
+  if(window.innerWidth>768){
+    var w=430, h=Math.min(600, window.innerHeight-40);
+    f.style.right='auto'; f.style.bottom='auto';
+    f.style.left=Math.round((window.innerWidth-w)/2)+'px';
+    f.style.top=Math.round((window.innerHeight-h)/2)+'px';
+  }
 }
 (function(){
   var mode=null,sx,sy,sl,st,sw,sh;
@@ -1626,7 +1634,10 @@ function openLetter(type){
       b.style.left=Math.max(4,Math.min(window.innerWidth-sw-4, sl+(e.clientX-sx)))+'px';
       b.style.top=Math.max(4,Math.min(window.innerHeight-sh-4, st+(e.clientY-sy)))+'px';
     } else {
-      b.style.width=Math.max(320,Math.min(window.innerWidth-sl-8, sw+(e.clientX-sx)))+'px';
+      var rightEdge=sl+sw;
+      var nl=Math.max(4,Math.min(rightEdge-320, sl+(e.clientX-sx)));
+      b.style.left=nl+'px';
+      b.style.width=(rightEdge-nl)+'px';
       b.style.height=Math.max(360,Math.min(window.innerHeight-st-8, sh+(e.clientY-sy)))+'px';
     }
   });
