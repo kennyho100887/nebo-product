@@ -485,6 +485,19 @@ textarea{resize:none}
 .letter-stage{margin-top:14px;height:calc(100vh - 230px);overflow-y:auto;background:var(--surface);border-radius:var(--r-lg);padding:28px;display:flex;justify-content:center}
 .letter-sheet{background:#fff;color:#1b1b1b;max-width:580px;margin:0 auto;padding:46px 50px;border-radius:4px;font-size:12.5px;line-height:1.62;box-shadow:0 1px 8px rgba(0,0,0,.18)}
 .letter-sheet[contenteditable=true]{outline:2px solid var(--primary);outline-offset:5px}
+.letter-float{position:fixed;right:20px;bottom:0;width:430px;max-width:calc(100vw - 32px);height:600px;max-height:calc(100vh - 36px);background:var(--bg);border:0.5px solid var(--border-2);border-bottom:none;border-radius:var(--r-lg) var(--r-lg) 0 0;box-shadow:0 14px 50px rgba(0,0,0,.3);z-index:45;display:none;flex-direction:column;overflow:hidden}
+.letter-float.open{display:flex}
+.lf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--primary);color:var(--primary-fg);flex-shrink:0}
+.lf-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lf-title i{font-size:14px;flex-shrink:0}
+.lf-iconbtn{border:none;background:none;color:var(--primary-fg);cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;opacity:.9;flex-shrink:0}
+.lf-iconbtn:hover{background:rgba(255,255,255,.16);opacity:1}
+.lf-toolbar{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:0.5px solid var(--border);background:var(--surface);flex-shrink:0}
+.lf-body{flex:1;min-height:0;overflow-y:auto;background:var(--surface);padding:16px}
+.lf-foot{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:0.5px solid var(--border);flex-shrink:0}
+.letter-float .letter-sheet{max-width:100%;padding:30px 28px;font-size:12px;margin:0}
+.letter-float .ls-logo{height:24px}
+@media (max-width:768px){.letter-float{right:0;left:0;width:auto;max-width:100%;height:88vh;max-height:88vh;border-radius:var(--r-lg) var(--r-lg) 0 0}}
 .ls-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:30px;gap:16px}
 .ls-brand{font-size:18px;font-weight:600;color:#1b1b1b;letter-spacing:-.01em}
 .ls-logo{height:30px;width:auto;display:block}
@@ -1289,28 +1302,19 @@ textarea{resize:none}
       </div>
     </section>
 
-    <section class="screen" id="letter">
-      <div class="pv-topbar">
-        <div class="crumb">
-          <span class="crumb-link" onclick="go('cases')">All cases</span>
-          <i class="ti ti-chevron-right sep"></i>
-          <span class="crumb-link" onclick="go('details')">EPS-00088552</span>
-          <i class="ti ti-chevron-right sep"></i>
-          <span class="crumb-current" id="ltCrumb"><i class="ti ti-file-text"></i>Determination letter</span>
-        </div>
-        <div class="lt-topright">
-          <button class="act-btn" onclick="cancelLetter()">Cancel</button>
-          <button class="btn-primary" id="ltSendBtn" style="width:auto;margin:0" onclick="sendLetter()"><i class="ti ti-upload"></i>Send approval letter</button>
-        </div>
+    <div class="letter-float" id="letterFloat">
+      <div class="lf-head">
+        <span class="lf-title" id="ltCrumb"><i class="ti ti-file-text"></i>Determination letter &middot; Approval</span>
+        <button class="lf-iconbtn" onclick="cancelLetter()" aria-label="Close"><i class="ti ti-x"></i></button>
       </div>
-      <div class="pv-toolbar2">
-        <div class="lt-seg" id="ltModeSeg">
+      <div class="lf-toolbar">
+        <div class="lt-seg" id="ltModeSeg" style="height:30px">
           <button class="lt-seg-btn active" onclick="letterMode('preview',this)"><i class="ti ti-eye"></i>Preview</button>
           <button class="lt-seg-btn" onclick="letterMode('edit',this)"><i class="ti ti-edit"></i>Edit</button>
         </div>
-        <button class="act-btn" id="ltDownload" onclick="dlLetter()" style="margin-left:auto"><i class="ti ti-download"></i>Download</button>
+        <button class="act-btn" id="ltDownload" onclick="dlLetter()" style="margin-left:auto;height:30px"><i class="ti ti-download"></i>Download</button>
       </div>
-      <div class="letter-stage">
+      <div class="lf-body">
         <div class="letter-sheet" id="letterSheet" contenteditable="false">
         <div class="ls-head">
           <div><svg class="ls-logo" viewBox="0 0 1920 643.22" xmlns="http://www.w3.org/2000/svg" fill="#5b6e2c" role="img" aria-label="Nebo Health"><path d="M1860.9,244.58c-38.82-42.43-90.5-63.62-154.98-63.62s-117.66,20.92-157.69,62.71c-39.39,41.21-59.15,96.15-59.15,164.83s19.43,125.74,58.24,169.35c39.44,43.6,92.26,65.38,158.59,65.38s116.16-21.51,154.98-64.52c39.39-42.97,59.1-99.72,59.1-170.2s-19.7-122.13-59.1-163.92ZM1795.52,550.06c-19.74,34.65-49.61,51.96-89.6,51.96-81.82,0-122.76-64.52-122.76-193.52s40.94-186.33,122.76-186.33c39.99,0,69.85,16.45,89.6,49.29,20.29,32.85,30.41,78.53,30.41,137.04s-10.12,106.9-30.41,141.56ZM962.21,368.2c0-47.76-16.13-90.77-48.35-129-32.26-38.81-78.84-58.24-139.75-58.24-63.93,0-115.26,22.09-154.12,66.28-38.81,43.6-58.2,97.05-58.2,160.35,0,72.88,19.38,130.53,58.2,172.91,39.44,41.79,89.01,62.71,148.74,62.71,48.98,0,88.38-13.42,118.24-40.3,27.7-24.94,46.36-54.72,56.12-89.42,1.31-4.65-.9-9.62-5.33-11.61-4.02-1.81-8.72-.68-11.52,2.76-34.16,41.75-75.09,78.53-132.43,78.53-38.22,0-70.8-16.45-97.64-49.29-26.88-33.44-40.35-76.45-40.35-129l306.38-.9v-35.83.05ZM658.54,363.72c4.79-41.79,17.03-75.86,36.73-102.11,20.29-26.3,46.58-39.44,78.84-39.44,25.08,0,45.36,8.09,60.91,24.22,16.13,16.09,26.25,34.02,30.45,53.72,4.79,19.11,7.18,40.3,7.18,63.62h-214.12ZM1384.36,244.58c-35.25-42.38-81.83-63.62-139.75-63.62-28.7,0-55.26,6.6-79.75,19.74-23.86,13.1-41.47,30.45-52.82,51.96V0h-124.66l31.4,46.04c8.22,12.02,12.6,26.3,12.6,40.85v530.31c0,5.47,4.43,9.9,9.9,9.9,1.99,0,3.97-.63,5.61-1.76l37.13-25.71c8.14-5.69,19.16-5.33,26.75,1.08,33.76,28.37,75.1,42.52,123.98,42.52,62.13,0,111.38-22.68,147.79-68.09,36.46-46,54.68-103.6,54.68-172.87,0-62.71-17.62-115.26-52.86-157.69ZM1309.13,548.25c-22.73,35.88-54.09,53.77-94.07,53.77s-72.57-16.13-103.02-48.39v-203.32c0-37.05,11.02-67.5,33.12-91.4,22.1-24.49,48.66-36.73,79.75-36.73,39.98,0,69.58,16.45,88.7,49.29,19.7,32.85,29.55,76.45,29.55,130.8,0,60.91-11.34,109.57-34.02,145.99ZM44.32,87.02c0-14.64-4.43-28.96-12.74-41.07L0,0h152.72l288.49,411.21V87.61c0-15-4.65-29.64-13.33-41.88L395.53.05h140.11l-31.54,46c-8.27,12.06-12.7,26.39-12.7,41.03v530.22c0,5.47-4.43,9.9-9.9,9.9h-4.56c-3.25,0-6.33-1.63-8.13-4.29L94.52,76.18l-.14,463.31c0,15,4.65,29.64,13.33,41.88l32.35,45.68H0l31.54-46c8.27-12.06,12.7-26.39,12.7-41.03l.09-453.05v.05Z"/></svg><div class="ls-sub">Payer letterhead</div></div>
@@ -1334,7 +1338,11 @@ textarea{resize:none}
         <p>CC: Dr. Vishal Bansal</p>
       </div>
       </div>
-    </section>
+      <div class="lf-foot">
+        <button class="btn-primary" id="ltSendBtn" style="width:auto;margin:0" onclick="sendLetter()"><i class="ti ti-upload"></i>Send approval letter</button>
+        <button class="act-btn" onclick="cancelLetter()">Cancel</button>
+      </div>
+    </div>
 
     <section class="screen" id="settings">
       <div class="detail-topbar">
@@ -1531,6 +1539,7 @@ function go(target){
   closeMUserMenu();
   closeMSearch();
   closeActionsMenu();
+  cancelLetter();
 }
 function toggleNav(){ document.querySelector('.app').classList.toggle('nav-open'); }
 function closeNav(){ var a=document.querySelector('.app'); if(a) a.classList.remove('nav-open'); }
@@ -1597,7 +1606,6 @@ function finishNewCase(prof){
 function setSegActive(id,idx){ var g=document.getElementById(id); if(!g) return; g.querySelectorAll('.lt-seg-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); }); }
 function letterMode(m,btn){ setSegActive('ltModeSeg', m==='edit'?1:0); var edit=m==='edit'; var s=document.getElementById('letterSheet'); s.setAttribute('contenteditable', edit?'true':'false'); document.getElementById('ltDownload').style.display = edit?'none':''; if(edit) s.focus(); }
 function openLetter(type){
-  var act=document.querySelector('.screen.active'); origin=act?act.id:'details'; if(origin==='letter'||origin==='preview') origin='details';
   var denial=(type==='denial');
   document.getElementById('letterSheet').setAttribute('contenteditable','false');
   document.getElementById('ltDownload').style.display='';
@@ -1608,13 +1616,14 @@ function openLetter(type){
   var sb=document.getElementById('ltSendBtn');
   if(sb) sb.innerHTML='<i class="ti ti-upload"></i>Send '+(denial?'denial':'approval')+' letter';
   setSegActive('ltModeSeg',0);
-  go('letter');
+  closeActionsMenu();
+  document.getElementById('letterFloat').classList.add('open');
 }
-function cancelLetter(){ go(origin||'details'); }
+function cancelLetter(){ var f=document.getElementById('letterFloat'); if(f) f.classList.remove('open'); }
 function editLetter(btn){ var s=document.getElementById('letterSheet'); var on=s.getAttribute('contenteditable')==='true'; s.setAttribute('contenteditable',on?'false':'true'); btn.classList.toggle('active',!on); if(!on){ s.focus(); } }
 function sendLetter(){ document.getElementById('sendOverlay').classList.add('open'); }
 function closeSend(){ document.getElementById('sendOverlay').classList.remove('open'); }
-function confirmSend(){ closeSend(); go('details'); showToast('Letter sent to provider'); }
+function confirmSend(){ closeSend(); cancelLetter(); showToast('Letter sent to provider'); }
 function dlLetter(){ try{ var html=document.getElementById('letterSheet').innerHTML; var blob=new Blob(['<html><head><meta charset="utf-8"><style>body{font-family:system-ui,sans-serif;font-size:13px;line-height:1.6;max-width:600px;margin:40px auto;padding:0 24px;color:#1b1b1b}</style></head><body>'+html+'</body></html>'],{type:'text/html'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='determination-letter.html'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(url);},800);}catch(e){} showToast('Letter downloaded'); }
 document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal(); closeDup(); closeFb(); closeSend(); } });
 function toggleAuto(){
