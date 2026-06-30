@@ -608,7 +608,16 @@ textarea{resize:none}
 .set-card{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:16px}
 .set-card-head{margin-bottom:14px}
 .set-profile{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.set-avatar{width:52px;height:52px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex-shrink:0}
+.set-avatar{position:relative;width:52px;height:52px;border-radius:50%;background:var(--accent-bg);background-size:cover;background-position:center;color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex-shrink:0;border:none;padding:0;font-family:inherit;cursor:pointer}
+.set-avatar.has-img .set-avatar-initials{display:none}
+.set-avatar-edit{position:absolute;right:-1px;bottom:-1px;width:20px;height:20px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.set-avatar-edit svg{width:11px;height:11px}
+.login-divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--text-3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.login-divider::before,.login-divider::after{content:"";flex:1;height:0.5px;background:var(--border)}
+.login-social{display:flex;flex-direction:column;gap:8px}
+.social-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;box-sizing:border-box;border:0.5px solid var(--border-2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;font-weight:500;padding:10px;cursor:pointer}
+.social-btn:hover{background:var(--surface)}
+.social-btn svg{width:18px;height:18px;flex-shrink:0}
 .set-name{font-size:15px;font-weight:600}
 .set-role{font-size:12px;color:var(--text-2);margin-top:2px}
 .set-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -637,6 +646,12 @@ textarea{resize:none}
     <input id="loginPass" type="password" class="login-input" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')signIn()">
     <div id="loginError" class="login-error">Incorrect email or password.</div>
     <button class="login-btn" onclick="signIn()">Sign in</button>
+    <div class="login-divider">or continue with</div>
+    <div class="login-social">
+      <button type="button" class="social-btn"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.52 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.57-5.17 3.57-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.88-3c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.27v3.09A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.27 14.28a7.2 7.2 0 0 1 0-4.56V6.63H1.27a12 12 0 0 0 0 10.74l4-3.09z"/><path fill="#EA4335" d="M12 4.74c1.76 0 3.34.61 4.59 1.8l3.43-3.43A11.97 11.97 0 0 0 12 0 12 12 0 0 0 1.27 6.63l4 3.09C6.22 6.86 8.87 4.74 12 4.74z"/></svg>Continue with Google</button>
+      <button type="button" class="social-btn"><svg viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.96h-1.52c-1.49 0-1.95.93-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12z"/></svg>Continue with Facebook</button>
+      <button type="button" class="social-btn"><svg viewBox="0 0 24 24"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Continue with LinkedIn</button>
+    </div>
   </div>
 </div>
 <div class="app">
@@ -1163,7 +1178,11 @@ textarea{resize:none}
         <div class="set-card">
           <div class="set-card-head"><span class="card-title-sm">Profile</span></div>
           <div class="set-profile">
-            <div class="set-avatar">AR</div>
+            <button type="button" class="set-avatar" id="setAvatar" onclick="document.getElementById('avatarInput').click()" aria-label="Change profile photo">
+              <span class="set-avatar-initials">AR</span>
+              <span class="set-avatar-edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><circle cx="12" cy="13" r="3"/></svg></span>
+            </button>
+            <input type="file" id="avatarInput" accept="image/*" hidden onchange="onAvatarPick(event)">
             <div>
               <div class="set-name">Alex Rivera</div>
               <div class="set-role">UM nurse &middot; Konpo Health</div>
@@ -1445,6 +1464,18 @@ function setTheme(mode, btn){
 function openSettings(){ closeUserMenu(); var act=document.querySelector('.screen.active'); origin=act?act.id:'queue'; if(origin==='settings'||origin==='details'||origin==='preview'||origin==='letter') origin='queue'; go('settings'); }
 function toggleSet(el){ el.classList.toggle('on'); }
 function setDefaultView(btn){ btn.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active'); }
+function onAvatarPick(e){
+  var f=e.target.files && e.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    var av=document.getElementById('setAvatar');
+    av.style.backgroundImage='url('+r.result+')';
+    av.classList.add('has-img');
+    showToast('Profile photo updated');
+  };
+  r.readAsDataURL(f);
+  e.target.value='';
+}
 function saveSettings(btn){ showToast('Profile updated'); }
 function changePassword(){ showToast('Password reset link sent to your email'); }
 var CASES=[
