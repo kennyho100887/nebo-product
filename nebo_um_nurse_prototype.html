@@ -582,6 +582,20 @@ textarea{resize:none}
 .crit-list li{font-size:12px;color:var(--text-2);line-height:1.6;margin-bottom:3px}
 .pageref{color:var(--accent-fg);text-decoration:underline;cursor:pointer;font-size:11px;white-space:nowrap}
 .assessed-with{font-size:12px;color:var(--text-3)}
+.acard{padding:0;overflow:hidden}
+.acard-head{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;width:100%;text-align:left;border:none;background:none;font-family:inherit;cursor:pointer;padding:16px 20px}
+.acard-name{font-size:14px;color:var(--text)}
+.acard-approved{margin-left:auto;color:var(--ok-fg);font-size:13px;font-weight:500}
+.acard-caret{color:var(--text-3);font-size:16px;flex-shrink:0;transition:transform .15s}
+.acard:not(.collapsed) .acard-caret{transform:rotate(180deg)}
+.acard-dx{flex-basis:100%;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-3)}
+.acard-body{padding:14px 20px 18px;border-top:0.5px solid var(--border)}
+.acard.collapsed .acard-body{display:none}
+.crit-met-item{display:flex;gap:9px;margin-bottom:13px}
+.crit-met-item:last-child{margin-bottom:0}
+.crit-met-item > .ti-check{color:var(--ok-fg);font-size:15px;flex-shrink:0;margin-top:1px}
+.crit-met-title{font-size:13px;font-weight:500;color:var(--text)}
+.crit-met-quote{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.5}
 .copy.copied{color:var(--ok-fg)}
 .docs{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
 .doc-chip{display:flex;align-items:center;gap:8px;border:0.5px solid var(--border);border-radius:var(--r);padding:9px 12px;font-size:12px;color:var(--text-2);cursor:pointer}
@@ -1143,25 +1157,36 @@ textarea{resize:none}
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-head">
-          <span class="cpt-title">CPT 63650 · Percutaneous implantation of neurostimulator electrode array, epidural</span>
-          <button class="copy" onclick="copyResult(this)"><i class="ti ti-copy"></i>Copy result</button>
-        </div>
-        <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span></div>
-        <div class="guideline">
-          <i class="ti ti-bookmark"></i>
-          <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
-          <div class="gl-switch">
-            <button class="switch" onclick="toggleGl(this)">Switch to other guidelines <i class="ti ti-chevron-down"></i></button>
-            <div class="gl-menu">
-              <div class="gl-item active" onclick="pickGl(this,'NCD - 160.7 - Electrical Nerve Stimulators')">NCD - 160.7 - Electrical Nerve Stimulators</div>
-              <div class="gl-item" onclick="pickGl(this,'LCD - L34705 - Spinal Cord Stimulation')">LCD - L34705 - Spinal Cord Stimulation</div>
-              <div class="gl-item" onclick="pickGl(this,'NCD - 160.27 - TENS for Chronic Low Back Pain')">NCD - 160.27 - TENS for Chronic Low Back Pain</div>
+      <div class="card acard collapsed">
+        <button class="acard-head" onclick="toggleAcard(this)">
+          <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
+          <span class="acard-name">Neurostimulator electrode, percutaneous</span>
+          <span class="acard-approved">Approved</span>
+          <i class="ti ti-chevron-down acard-caret"></i>
+          <span class="acard-dx">DX <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
+        </button>
+        <div class="acard-body">
+          <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
+          <div class="guideline">
+            <i class="ti ti-bookmark"></i>
+            <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
+            <div class="gl-switch">
+              <button class="switch" onclick="toggleGl(this)">Switch to other guidelines <i class="ti ti-chevron-down"></i></button>
+              <div class="gl-menu">
+                <div class="gl-item active" onclick="pickGl(this,'NCD - 160.7 - Electrical Nerve Stimulators')">NCD - 160.7 - Electrical Nerve Stimulators</div>
+                <div class="gl-item" onclick="pickGl(this,'LCD - L34705 - Spinal Cord Stimulation')">LCD - L34705 - Spinal Cord Stimulation</div>
+                <div class="gl-item" onclick="pickGl(this,'NCD - 160.27 - TENS for Chronic Low Back Pain')">NCD - 160.27 - TENS for Chronic Low Back Pain</div>
+              </div>
             </div>
           </div>
+          <div class="block">
+            <div class="block-label">Criteria met</div>
+            <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Documented trial with &#8805; 50% pain relief</div><div class="crit-met-quote">"Temporary trial showed 60% VAS reduction over 7 days" <span class="pageref" onclick="openPageRef(4)">Page 4</span></div></div></div>
+            <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Conservative therapy failed &#8805; 6 months</div><div class="crit-met-quote">"PT, NSAIDs, and epidural injections over 14 months without relief" <span class="pageref" onclick="openPageRef(5)">Page 5</span></div></div></div>
+            <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Psychological evaluation completed</div><div class="crit-met-quote">"Behavioral health clearance on file 02/2026" <span class="pageref" onclick="openPageRef(7)">Page 7</span></div></div></div>
+          </div>
+          <div class="assessed-with">Assessed together with 63655</div>
         </div>
-        <div class="assessed-with">Assessed together with 63655</div>
       </div>
       </div>
       <div id="stateBody" style="display:none"></div>
@@ -1926,6 +1951,7 @@ function showToast(msg){
 var pvState={page:1,zoom:1,rot:0,pages:2};
 function openFile(name){ document.getElementById('pvName').textContent=name; origin='details'; pvState={page:1,zoom:1,rot:0,pages:2}; pvApply(); pvGoto(1,true); document.getElementById('pvSearchBar').classList.remove('open'); document.querySelector('.pv-thumbs').classList.remove('hidden'); go('preview'); }
 function openPageRef(p){ openFile('66716 demo clean 30.Sep.24.pdf'); setTimeout(function(){ pvGoto(p); }, 40); }
+function toggleAcard(btn){ var c=btn.closest('.acard'); if(c) c.classList.toggle('collapsed'); }
 function pvGoto(p,noscroll){
   pvState.page=p;
   document.querySelectorAll('.pv-thumb').forEach(function(t,i){ t.classList.toggle('active', i===p-1); });
