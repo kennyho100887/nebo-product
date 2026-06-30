@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -826,10 +826,10 @@ textarea{resize:none}
           <button class="tool" id="btn-reviewer" onclick="toggleMenu(this)">Reviewer <i class="ti ti-chevron-down"></i></button>
           <div class="menu">
             <div class="menu-item" onclick="setFilter('reviewer','')">Anyone</div>
-            <div class="menu-item" onclick="setFilter('reviewer','A. Rivera')">A. Rivera (me)</div>
-            <div class="menu-item" onclick="setFilter('reviewer','J. Chen')">J. Chen</div>
-            <div class="menu-item" onclick="setFilter('reviewer','M. Okafor')">M. Okafor</div>
-            <div class="menu-item" onclick="setFilter('reviewer','S. Patel')">S. Patel</div>
+            <div class="menu-item" onclick="setFilter('reviewer','Alex R.')">Alex R. (me)</div>
+            <div class="menu-item" onclick="setFilter('reviewer','Jordan C.')">Jordan C.</div>
+            <div class="menu-item" onclick="setFilter('reviewer','Maya O.')">Maya O.</div>
+            <div class="menu-item" onclick="setFilter('reviewer','Sara P.')">Sara P.</div>
             <div class="menu-item" onclick="setFilter('reviewer','Unassigned')">Unassigned</div>
           </div>
         </div>
@@ -877,7 +877,7 @@ textarea{resize:none}
         <div class="head-top">
           <div style="flex:1;min-width:0">
             <div class="case-id-lg" id="caseIdLg">EPS-00088552 <span class="type-tag">Standard</span></div>
-            <div class="meta" id="detailMeta">Submitted <b>18 Mar 2026</b> &nbsp;·&nbsp; Review by <b>20 Mar 2026</b> &nbsp;·&nbsp; Created by <b>A. Rivera</b></div>
+            <div class="meta" id="detailMeta">Submitted <b>18 Mar 2026</b> &nbsp;·&nbsp; Review by <b>20 Mar 2026</b> &nbsp;·&nbsp; Created by <b>Alex R.</b></div>
           </div>
         </div>
       </div>
@@ -1006,10 +1006,10 @@ textarea{resize:none}
           <div class="side-card">
             <div class="card-head"><span class="card-title-sm">Activity</span></div>
             <div class="tl">
-              <div class="tl-item done"><div class="tl-title">Case submitted</div><div class="tl-meta">A. Rivera &middot; 18 Mar 2026, 09:30 UTC</div></div>
+              <div class="tl-item done"><div class="tl-title">Case submitted</div><div class="tl-meta">Alex R. &middot; 18 Mar 2026, 09:30 UTC</div></div>
               <div class="tl-item done"><div class="tl-title">Documents retrieved</div><div class="tl-meta">Automatic retrieval &middot; 09:31 UTC</div></div>
               <div class="tl-item done"><div class="tl-title">Nebo assessment completed</div><div class="tl-meta">2 services assessed &middot; 09:34 UTC</div></div>
-              <div class="tl-item done"><div class="tl-title">Assigned for review</div><div class="tl-meta">A. Rivera &middot; 10:12 UTC</div></div>
+              <div class="tl-item done"><div class="tl-title">Assigned for review</div><div class="tl-meta">Alex R. &middot; 10:12 UTC</div></div>
               <div class="tl-item current"><div class="tl-title">Awaiting your review</div><div class="tl-meta">Review by 20 Mar 2026</div></div>
             </div>
           </div>
@@ -1215,7 +1215,7 @@ textarea{resize:none}
     <p class="dup-desc">This case has already been uploaded and processed.</p>
     <div class="dup-card">
       <div class="dup-icon"><i class="ti ti-file-text"></i></div>
-      <div class="dup-by"><div class="dup-label">Uploaded by</div><div class="dup-name">A. Rivera</div></div>
+      <div class="dup-by"><div class="dup-label">Uploaded by</div><div class="dup-name">Alex R.</div></div>
       <div class="dup-when"><div class="d">18 Mar 2026</div><div class="t">09:30 UTC</div></div>
     </div>
     <button class="btn-submit dup-btn" onclick="closeDup()">View existing case</button>
@@ -1281,7 +1281,7 @@ function finishNewCase(prof){
   if(document.querySelector('.screen.active').id!=='details') return;
   if(document.getElementById('caseIdLg').textContent.indexOf(prof.id)!==0) return;
   prof.state='review';
-  prof.reviewer='A. Rivera';
+  prof.reviewer='Alex R.';
   document.getElementById('detailMeta').innerHTML=metaHtml(prof,'review');
   renderActions('review');
   document.getElementById('stateBody').style.display='none';
@@ -1328,7 +1328,7 @@ function pickTab(el){
 }
 function setTheme(mode, btn){
   var root=document.documentElement;
-  if(mode==='auto'){ root.setAttribute('data-theme', 'light'); }
+  if(mode==='auto'){ root.removeAttribute('data-theme'); }
   else { root.setAttribute('data-theme', mode); }
   document.querySelectorAll('.seg-btn').forEach(function(b){ b.classList.remove('is-active'); });
   btn.classList.add('is-active');
@@ -1380,11 +1380,11 @@ var CASES=[
   {id:'EPS-00069545',day:18,date:'18 Mar',cpt:'70553',det:'consider',status:'signed',priority:'standard'},
   {id:'EPS-00068789',day:17,date:'17 Mar',cpt:'73721',det:'approved',status:'ready',priority:'standard'}
 ];
-var REVIEWERS=['A. Rivera','A. Rivera','J. Chen','M. Okafor','S. Patel'];
+var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
 var detMap={approved:['Approved','chip-ok'],consider:['Consider','chip-neutral'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
-var labels={determination:{approved:'Approved',consider:'Consider',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'A. Rivera':'A. Rivera','J. Chen':'J. Chen','M. Okafor':'M. Okafor','S. Patel':'S. Patel','Unassigned':'Unassigned'}};
+var labels={determination:{approved:'Approved',consider:'Consider',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',status:'',reviewer:'',date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
 function caseMatch(c){
   if(state.determination && c.det!==state.determination) return false;
@@ -1480,22 +1480,22 @@ function detChipHtml(c){
   var d=detMap[c.det]; return d? '<span class="chip '+d[1]+'">'+d[0]+'</span>' : '<span class="muted">-</span>';
 }
 var PROFILES={
- 'EPS-00086956':{state:'approvable',priority:'oon',date:'17 Mar 2026',reviewBy:'19 Mar 2026',reviewer:'A. Rivera',createdBy:'J. Chen',
+ 'EPS-00086956':{state:'approvable',priority:'oon',date:'17 Mar 2026',reviewBy:'19 Mar 2026',reviewer:'Alex R.',createdBy:'Jordan C.',
    patient:{name:'Marcus Bell',memberId:'AGL773201845',dob:'09/14/1958',provider:'Dr. Karen Liu',providerNpi:'1487263901',facility:'Mercy Orthopedic Center',facilityNpi:'1356802471'},
    cpts:[{code:'73721',det:'approved',desc:'MRI knee, without contrast'},{code:'27447',det:'approved',desc:'Total knee arthroplasty'}],icds:['M17.11','M25.561'],
-   activity:[{t:'Case submitted',m:'J. Chen \u00b7 17 Mar 2026, 08:12 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:13 UTC'},{t:'Nebo assessment completed',m:'2 services assessed \u00b7 08:16 UTC'},{t:'Assigned for review',m:'A. Rivera \u00b7 09:40 UTC'},{t:'Awaiting your review',m:'Review by 19 Mar 2026',cur:true}]},
- 'EPS-00084437':{state:'review',priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',reviewer:'A. Rivera',createdBy:'S. Patel',
+   activity:[{t:'Case submitted',m:'Jordan C. \u00b7 17 Mar 2026, 08:12 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:13 UTC'},{t:'Nebo assessment completed',m:'2 services assessed \u00b7 08:16 UTC'},{t:'Assigned for review',m:'Alex R. \u00b7 09:40 UTC'},{t:'Awaiting your review',m:'Review by 19 Mar 2026',cur:true}]},
+ 'EPS-00084437':{state:'review',priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',reviewer:'Alex R.',createdBy:'Sara P.',
    patient:{name:'Elena Vasquez',memberId:'AGL902145673',dob:'03/22/1979',provider:'Dr. Omar Haddad',providerNpi:'1592048372',facility:'Riverside Imaging',facilityNpi:'1238904756'},
    cpts:[{code:'70553',det:'further',desc:'MRI brain, with and without contrast'}],icds:['R51.9','G43.909'],
-   activity:[{t:'Case submitted',m:'S. Patel \u00b7 18 Mar 2026, 08:40 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:41 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 08:44 UTC'},{t:'Awaiting your review',m:'Review by 20 Mar 2026',cur:true}]},
- 'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'M. Okafor',createdBy:'M. Okafor',escalatedBy:'M. Okafor',escalatedAt:'18 Mar 2026, 14:05 UTC',
+   activity:[{t:'Case submitted',m:'Sara P. \u00b7 18 Mar 2026, 08:40 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:41 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 08:44 UTC'},{t:'Awaiting your review',m:'Review by 20 Mar 2026',cur:true}]},
+ 'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'Maya O.',createdBy:'Maya O.',escalatedBy:'Maya O.',escalatedAt:'18 Mar 2026, 14:05 UTC',
    patient:{name:'David Okonkwo',memberId:'AGL651837209',dob:'11/30/1965',provider:'Dr. Priya Nair',providerNpi:'1748293016',facility:'Summit Cardiology',facilityNpi:'1429385017'},
    cpts:[{code:'75571',det:'further',desc:'CT heart, coronary calcium scoring'}],icds:['I25.10','R07.9'],
-   activity:[{t:'Case submitted',m:'M. Okafor \u00b7 17 Mar 2026, 13:20 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 13:24 UTC'},{t:'Escalated to physician',m:'M. Okafor \u00b7 18 Mar 2026, 14:05 UTC'},{t:'Awaiting physician sign-off',m:'In physician Sign Queue',cur:true}]},
- 'EPS-00084201':{state:'signed',priority:'standard',date:'15 Mar 2026',reviewer:'A. Rivera',createdBy:'A. Rivera',signedBy:'Dr. Helen Park, MD',signedAt:'17 Mar 2026, 11:20 UTC',outcome:'approved',
+   activity:[{t:'Case submitted',m:'Maya O. \u00b7 17 Mar 2026, 13:20 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 13:24 UTC'},{t:'Escalated to physician',m:'Maya O. \u00b7 18 Mar 2026, 14:05 UTC'},{t:'Awaiting physician sign-off',m:'In physician Sign Queue',cur:true}]},
+ 'EPS-00084201':{state:'signed',priority:'standard',date:'15 Mar 2026',reviewer:'Alex R.',createdBy:'Alex R.',signedBy:'Dr. Helen Park, MD',signedAt:'17 Mar 2026, 11:20 UTC',outcome:'approved',
    patient:{name:'Susan Hartley',memberId:'AGL338920164',dob:'06/08/1972',provider:'Dr. Greg Foster',providerNpi:'1903847261',facility:'Lakeside Sleep Institute',facilityNpi:'1562039847'},
    cpts:[{code:'95810',det:'approved',desc:'Polysomnography, sleep staging'}],icds:['G47.33'],
-   activity:[{t:'Case submitted',m:'A. Rivera \u00b7 15 Mar 2026, 10:02 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 10:05 UTC'},{t:'Reviewed by nurse',m:'A. Rivera \u00b7 16 Mar 2026'},{t:'Signed by physician',m:'Dr. Helen Park \u00b7 17 Mar 2026, 11:20 UTC'},{t:'Letter sent to provider',m:'17 Mar 2026, 11:22 UTC',cur:true}]}
+   activity:[{t:'Case submitted',m:'Alex R. \u00b7 15 Mar 2026, 10:02 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 10:05 UTC'},{t:'Reviewed by nurse',m:'Alex R. \u00b7 16 Mar 2026'},{t:'Signed by physician',m:'Dr. Helen Park \u00b7 17 Mar 2026, 11:20 UTC'},{t:'Letter sent to provider',m:'17 Mar 2026, 11:22 UTC',cur:true}]}
 };
 function stateFromStatus(c){ if(c.status==='processing')return 'processing'; if(c.status==='escalated')return 'escalated'; if(c.status==='signed')return 'signed'; if(c.det==='approved'||c.det==='nopa')return 'approvable'; return 'review'; }
 function infoItem(l,v){ return '<div class="info-item"><div class="info-label">'+l+'</div><div class="info-val">'+v+'</div></div>'; }
@@ -1542,7 +1542,7 @@ function openCase(id){
   var act=document.querySelector('.screen.active'); origin=act?act.id:'cases'; if(origin==='details'||origin==='preview'||origin==='letter') origin='cases';
   var isDeep=(id===DEEP_ID||!id);
   var prof, state;
-  if(isDeep){ state='review'; prof={id:DEEP_ID,priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',createdBy:'A. Rivera',reviewer:'A. Rivera'}; }
+  if(isDeep){ state='review'; prof={id:DEEP_ID,priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',createdBy:'Alex R.',reviewer:'Alex R.'}; }
   else if(PROFILES[id]){ prof=PROFILES[id]; prof.id=id; state=prof.state; }
   else { var c=caseById(id)||{id:id,priority:'standard',date:'-',reviewer:'Unassigned',det:'',status:''}; state=stateFromStatus(c); prof={id:c.id,priority:c.priority,date:c.date,reviewer:c.reviewer,det:c.det,status:c.status,state:state,cpt:c.cpt,patient:null,nonAnchor:true}; }
   document.getElementById('caseIdLg').innerHTML=prof.id+' <span class="type-tag">'+(priLabel[prof.priority||'standard']||'Standard')+'</span>';
