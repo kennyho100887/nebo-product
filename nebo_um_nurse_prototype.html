@@ -590,7 +590,7 @@ textarea{resize:none}
 .pv-sheet .doc-h{font-weight:600;margin:18px 0 6px;color:#111;font-size:13px}
 .pv-sheet p{margin:0 0 10px}
 .pv-pagenum{font-size:10px;color:#bbb;text-align:center;margin-top:26px;letter-spacing:.05em}
-.pv-panel{position:fixed;top:0;right:0;height:100vh;width:var(--pv-w,460px);background:var(--bg);border-left:1px solid var(--border);border-radius:0;z-index:44;display:none;flex-direction:column;overflow:hidden}
+.pv-panel{position:fixed;top:10px;right:10px;height:calc(100vh - 20px);width:var(--pv-w,460px);background:var(--bg);border-left:1px solid var(--border);border-radius:0 var(--r) var(--r) 0;z-index:44;display:none;flex-direction:column;overflow:hidden}
 .pv-panel.open{display:flex}
 .pv-resize{position:absolute;left:0;top:0;bottom:0;width:8px;cursor:col-resize;z-index:6}
 .pv-resize:hover{box-shadow:inset 3px 0 0 var(--text-3)}
