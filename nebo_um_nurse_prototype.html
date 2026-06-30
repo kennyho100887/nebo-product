@@ -1828,8 +1828,8 @@ function renderStateRail(prof){
 function renderActions(state){
   var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>';
   var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Submit feedback</button>';
-  var genA='<button class="act-btn act-approve act-decision" onclick="openLetter(\'approval\')"><i class="ti ti-check"></i>Approval</button>';
-  var genD='<button class="act-btn act-deny act-decision" onclick="openLetter(\'denial\')"><i class="ti ti-x"></i>Denial</button>';
+  var genA='<button class="act-btn act-approve act-decision" onclick="openLetter(\'approval\')"><i class="ti ti-check"></i>Approve</button>';
+  var genD='<button class="act-btn act-deny act-decision" onclick="openLetter(\'denial\')"><i class="ti ti-x"></i>Deny</button>';
   var vl='<button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>View letter</button>';
   var h; if(state==='processing')h=''; else if(state==='escalated')h=dup+fb; else if(state==='signed')h=dup+vl; else h=dup+fb+genA+genD;
   document.getElementById('detailActions').innerHTML=h;
