@@ -1087,7 +1087,7 @@ textarea{resize:none}
       <div class="detail-topbar">
         <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
         <div class="detail-actions" id="detailActions">
-          <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>
+          <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy the case</button>
           <button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>
           <button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>Generate letter</button>
         </div>
@@ -1883,11 +1883,11 @@ function renderStateRail(prof){
   document.getElementById('stateRail').innerHTML='<div class="side-card"><div class="card-head"><span class="card-title-sm">Info</span></div><div class="info-stack">'+info+'</div></div>'+railActivity(prof);
 }
 function renderActions(state){
-  var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>';
+  var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy the case</button>';
   var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>';
   var acts=[];
   if(state!=='processing'){
-    acts.push({l:'Duplicate case',i:'ti-copy',fn:'openDup()'});
+    acts.push({l:'Copy the case',i:'ti-copy',fn:'openDup()'});
     if(state==='escalated'){ acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'}); }
     else if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
     else {
