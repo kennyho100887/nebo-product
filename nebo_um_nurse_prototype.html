@@ -642,11 +642,12 @@ textarea{resize:none}
 .set-select:focus{outline:none;border-color:var(--accent-fg)}
 @media (max-width:600px){.set-grid{grid-template-columns:1fr}}
 /* --- Mobile top bar (hidden on desktop) --- */
-.mtopbar{display:none;position:fixed;top:0;left:0;right:0;height:52px;z-index:140;align-items:center;gap:8px;padding:0 12px;background:var(--bg);border-bottom:0.5px solid var(--border)}
-.mtb-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:var(--accent-bg);color:var(--accent-fg);cursor:pointer;border-radius:var(--r);flex-shrink:0}
-.mtb-btn:hover{filter:brightness(.96)}
+.mtopbar{display:none;position:fixed;top:0;left:0;right:0;height:52px;z-index:140;align-items:center;gap:4px;padding:0 12px;background:var(--bg);border-bottom:0.5px solid var(--border)}
+.mtb-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:none;color:var(--accent-fg);cursor:pointer;border-radius:var(--r);flex-shrink:0}
+.mtb-btn:hover{background:var(--surface)}
 .mtb-btn svg{width:17px;height:17px}
 .mtb-btn i{font-size:17px;color:var(--accent-fg)}
+.mtb-menubtn{background:var(--surface);border:0.5px solid var(--border-2)}
 .mtb-logo{height:22px;width:auto;margin-right:auto}
 .mtb-user{position:relative}
 .mtb-menu-items-top{border-top:0.5px solid var(--border)}
