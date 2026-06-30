@@ -452,12 +452,12 @@ textarea{resize:none}
 .act-primary:hover{background:var(--primary);filter:brightness(1.05)}
 .act-primary i{color:var(--primary-fg)}
 .act-decision{min-width:122px;justify-content:center}
-.act-approve{background:none;border-color:var(--accent-fg);color:var(--accent-fg)}
-.act-approve i{color:var(--accent-fg)}
-.act-approve:hover{background:var(--accent-bg)}
-.act-deny{background:none;border-color:var(--danger-fg);color:var(--danger-fg)}
-.act-deny i{color:var(--danger-fg)}
-.act-deny:hover{background:var(--danger-bg)}
+.act-approve{background:var(--primary);border-color:transparent;color:var(--primary-fg)}
+.act-approve i{color:var(--primary-fg)}
+.act-approve:hover{background:var(--primary);filter:brightness(1.05)}
+.act-deny{background:var(--danger-solid);border-color:transparent;color:var(--danger-solid-fg)}
+.act-deny i{color:var(--danger-solid-fg)}
+.act-deny:hover{background:var(--danger-solid);filter:brightness(1.05)}
 .da-inline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .da-mobile{display:none;position:relative}
 .da-ticon{width:16px;height:16px;flex-shrink:0}
