@@ -603,6 +603,25 @@ textarea{resize:none}
 .login-btn{width:100%;margin-top:20px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:11px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer}
 .login-btn:hover{filter:brightness(1.05)}
 .login-hint{margin-top:14px;text-align:center;font-size:11px;color:var(--text-3)}
+.settings-wrap{max-width:680px;margin:0 auto;padding-bottom:48px}
+.settings-intro{font-size:13px;color:var(--text-2);margin:2px 0 20px}
+.set-card{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:16px}
+.set-card-head{margin-bottom:14px}
+.set-profile{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.set-avatar{width:52px;height:52px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex-shrink:0}
+.set-name{font-size:15px;font-weight:600}
+.set-role{font-size:12px;color:var(--text-2);margin-top:2px}
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.set-grid input:disabled{opacity:.55;cursor:not-allowed}
+.set-actions{margin-top:16px;display:flex;justify-content:flex-end}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:0.5px solid var(--border)}
+.set-card-head + .set-row,.set-card-head + .set-toggle-row{border-top:none;padding-top:0}
+.set-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:0.5px solid var(--border)}
+.set-row-title{font-size:13px;font-weight:500}
+.set-row-sub{font-size:12px;color:var(--text-2);margin-top:2px;max-width:380px}
+.set-select{font-family:inherit;font-size:13px;color:var(--text);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);padding:8px 30px 8px 11px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23908E86' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+.set-select:focus{outline:none;border-color:var(--accent-fg)}
+@media (max-width:600px){.set-grid{grid-template-columns:1fr}}
 </style>
 <script src="https://konpo-notes.vercel.app/embed.js" defer></script>
 </head>
@@ -647,8 +666,8 @@ textarea{resize:none}
           <i class="ti ti-settings user-gear"></i>
         </button>
         <div class="user-menu" id="userMenu">
-          <button class="user-mi" onclick="closeUserMenu()"><i class="ti ti-user"></i>Profile</button>
-          <button class="user-mi" onclick="closeUserMenu()"><i class="ti ti-settings"></i>Settings</button>
+          <button class="user-mi" onclick="openSettings()"><i class="ti ti-user"></i>Profile</button>
+          <button class="user-mi" onclick="openSettings()"><i class="ti ti-settings"></i>Settings</button>
           <button class="user-mi" onclick="logOut()"><i class="ti ti-logout"></i>Log out</button>
         </div>
       </div>
@@ -1133,6 +1152,93 @@ textarea{resize:none}
       </div>
     </section>
 
+    <section class="screen" id="settings">
+      <div class="detail-topbar">
+        <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
+      </div>
+      <div class="settings-wrap">
+        <div class="page-head"><div class="page-title">Profile &amp; settings</div></div>
+        <p class="settings-intro">Manage your account, appearance, and review preferences.</p>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Profile</span></div>
+          <div class="set-profile">
+            <div class="set-avatar">AR</div>
+            <div>
+              <div class="set-name">Alex Rivera</div>
+              <div class="set-role">UM nurse &middot; Konpo Health</div>
+            </div>
+          </div>
+          <div class="set-grid">
+            <div><label class="label">Full name</label><input type="text" value="Alex Rivera"></div>
+            <div><label class="label">Email</label><input type="text" value="admin@konpo.studio"></div>
+            <div><label class="label">RN license number</label><input type="text" value="RN-4471892"></div>
+            <div><label class="label">NPI</label><input type="text" value="1639274015"></div>
+            <div><label class="label">Phone</label><input type="text" value="+1 (415) 555-0182"></div>
+            <div><label class="label">Reviewer group</label><input type="text" value="Prior Authorization · Team A" disabled></div>
+          </div>
+          <div class="set-actions"><button class="act-btn act-primary" onclick="saveSettings(this)"><i class="ti ti-check"></i>Save changes</button></div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Appearance</span></div>
+          <div class="set-row">
+            <div><div class="set-row-title">Theme</div><div class="set-row-sub">Auto follows your operating system setting.</div></div>
+            <div class="theme-seg" style="margin:0;min-width:172px">
+              <button class="seg-btn is-active" onclick="setTheme('auto',this)"><i class="ti ti-device-desktop"></i>Auto</button>
+              <button class="seg-btn" onclick="setTheme('light',this)"><i class="ti ti-sun"></i>Light</button>
+              <button class="seg-btn" onclick="setTheme('dark',this)"><i class="ti ti-moon"></i>Dark</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Notifications</span></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Case assigned to me</div><div class="set-row-sub">When a new case lands in your queue.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Nebo finished processing</div><div class="set-row-sub">When extraction and assessment complete on your cases.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Physician signed off</div><div class="set-row-sub">When a case you escalated gets a determination signed.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Case escalated to me</div><div class="set-row-sub">When a colleague routes a case for your review.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Daily queue summary</div><div class="set-row-sub">A morning digest of what needs your attention.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Review preferences</span></div>
+          <div class="set-row">
+            <div><div class="set-row-title">Default case view</div><div class="set-row-sub">How All cases opens.</div></div>
+            <div class="view-seg">
+              <button class="vbtn active" onclick="setDefaultView(this)" aria-label="List view"><i class="ti ti-layout-list"></i></button>
+              <button class="vbtn" onclick="setDefaultView(this)" aria-label="Grid view"><i class="ti ti-layout-grid"></i></button>
+            </div>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Preferred guideline source</div><div class="set-row-sub">Which criteria set Nebo cites first.</div></div>
+            <select class="set-select">
+              <option>CMS (NCD / LCD)</option>
+              <option>MCG</option>
+              <option>InterQual</option>
+            </select>
+          </div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Auto-advance to next case</div><div class="set-row-sub">Open the next queued case after a decision.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Show page references by default</div><div class="set-row-sub">Expand criteria evidence in the assessment view.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Security</span></div>
+          <div class="set-row">
+            <div><div class="set-row-title">Password</div><div class="set-row-sub">Last changed 3 months ago.</div></div>
+            <button class="act-btn" onclick="changePassword()"><i class="ti ti-key"></i>Change password</button>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Last sign-in</div><div class="set-row-sub">Today, 08:02 · San Francisco, CA</div></div>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Sign out</div><div class="set-row-sub">End your session on this device.</div></div>
+            <button class="act-btn act-deny" onclick="logOut()"><i class="ti ti-logout"></i>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -1331,9 +1437,16 @@ function setTheme(mode, btn){
   var root=document.documentElement;
   if(mode==='auto'){ root.removeAttribute('data-theme'); }
   else { root.setAttribute('data-theme', mode); }
-  document.querySelectorAll('.seg-btn').forEach(function(b){ b.classList.remove('is-active'); });
-  btn.classList.add('is-active');
+  var order=['auto','light','dark'];
+  document.querySelectorAll('.theme-seg').forEach(function(seg){
+    seg.querySelectorAll('.seg-btn').forEach(function(b,i){ b.classList.toggle('is-active', i===order.indexOf(mode)); });
+  });
 }
+function openSettings(){ closeUserMenu(); var act=document.querySelector('.screen.active'); origin=act?act.id:'queue'; if(origin==='settings'||origin==='details'||origin==='preview'||origin==='letter') origin='queue'; go('settings'); }
+function toggleSet(el){ el.classList.toggle('on'); }
+function setDefaultView(btn){ btn.parentNode.querySelectorAll('.vbtn').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active'); }
+function saveSettings(btn){ showToast('Profile updated'); }
+function changePassword(){ showToast('Password reset link sent to your email'); }
 var CASES=[
   {id:'EPS-00088552',day:18,date:'18 Mar',cpt:'72148 +1',det:'further',status:'ready',priority:'high-cost'},
   {id:'EPS-00086956',day:18,date:'18 Mar',cpt:'72148',det:'consider',status:'ready',priority:'standard'},
