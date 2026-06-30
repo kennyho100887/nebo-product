@@ -1097,7 +1097,7 @@ textarea{resize:none}
         <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
         <div class="detail-actions" id="detailActions">
           <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>
-          <button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Submit feedback</button>
+          <button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>
           <button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>Generate letter</button>
         </div>
       </div>
@@ -1861,14 +1861,14 @@ function renderStateRail(prof){
 }
 function renderActions(state){
   var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>';
-  var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Submit feedback</button>';
+  var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>';
   var acts=[];
   if(state!=='processing'){
     acts.push({l:'Duplicate case',i:'ti-copy',fn:'openDup()'});
-    if(state==='escalated'){ acts.push({l:'Submit feedback',i:'ti-message-circle',fn:'openFb()'}); }
+    if(state==='escalated'){ acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'}); }
     else if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
     else {
-      acts.push({l:'Submit feedback',i:'ti-message-circle',fn:'openFb()'});
+      acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'});
       acts.push({l:'Approve',i:'ti-check',fn:"openLetter('approval')",cls:'act-approve act-decision',mcls:'da-approve'});
       acts.push({l:'Deny',i:'ti-x',fn:"openLetter('denial')",cls:'act-deny act-decision',mcls:'da-deny'});
     }
