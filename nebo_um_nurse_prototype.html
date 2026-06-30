@@ -1045,15 +1045,6 @@ textarea{resize:none}
           </div>
         </div>
         <div class="filter">
-          <button class="tool" id="btn-status" onclick="toggleMenu(this)">Status <i class="ti ti-chevron-down"></i></button>
-          <div class="menu">
-        <div class="menu-item" onclick="setFilter('status','')"><span class="mdot" style="background:transparent"></span>Any</div>
-        <div class="menu-item" onclick="setFilter('status','processing')"><span class="mdot" style="background:var(--text-3)"></span>Processing</div>
-        <div class="menu-item" onclick="setFilter('status','ready')"><span class="mdot" style="background:var(--warn-fg)"></span>Ready for review</div>
-        <div class="menu-item" onclick="setFilter('status','signed')"><span class="mdot" style="background:var(--ok-fg)"></span>Signed</div>
-          </div>
-        </div>
-        <div class="filter">
           <button class="tool" id="btn-reviewer" onclick="toggleMenu(this)">Reviewer <i class="ti ti-chevron-down"></i></button>
           <div class="menu">
             <div class="menu-item" onclick="setFilter('reviewer','')">Anyone</div>
@@ -1799,7 +1790,7 @@ function applyFilters(){
   if(chips.length){ box.innerHTML=chips.join('')+'<span class="clear" onclick="clearAll()">Clear all</span>'; box.style.display='flex'; }
   else { box.innerHTML=''; box.style.display='none'; }
   updateFilterBadge();
-  [['determination','btn-determination','Determination'],['priority','btn-priority','Priority'],['status','btn-status','Status'],['reviewer','btn-reviewer','Reviewer'],['date','btn-date','Date']].forEach(function(t){
+  [['determination','btn-determination','Determination'],['priority','btn-priority','Priority'],['reviewer','btn-reviewer','Reviewer'],['date','btn-date','Date']].forEach(function(t){
     var btn=document.getElementById(t[1]), val=state[t[0]];
     btn.innerHTML=(val?labels[t[0]][val]:t[2])+' <i class="ti ti-chevron-down"></i>';
     btn.classList.toggle('has-val',!!val);
@@ -1829,7 +1820,6 @@ function gotoPage(p){ state.page=p; applyFilters(); }
 var FILTER_DEFS=[
   {key:'determination',label:'Determination',opts:[['','Any'],['approved','Approved'],['consider','Consider'],['further','Further review'],['nopa','No PA needed']]},
   {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['high-cost','High cost'],['urgent','Urgent'],['oon','Out of network']]},
-  {key:'status',label:'Status',opts:[['','Any'],['processing','Processing'],['ready','Ready for review'],['signed','Signed']]},
   {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
   {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
 ];
