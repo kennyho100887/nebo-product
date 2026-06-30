@@ -978,11 +978,6 @@ textarea{resize:none}
 
     <section class="screen active" id="queue">
       <div class="page-head"><span class="page-title">My queue</span><span class="muted">Tuesday, 18 Mar</span></div>
-      <div class="stats">
-        <span class="stat">Today <b>14</b></span>
-        <span class="stat">In your backlog <b>7</b></span>
-        <span class="stat">Completed today <b>23</b></span>
-      </div>
       <div class="section-label">Needs attention</div>
       <div class="list">
         <div class="row" onclick="openCase('EPS-00088552')">
@@ -1019,7 +1014,6 @@ textarea{resize:none}
       <div class="tabs" id="caseTabs">
         <span class="tab active" onclick="pickStatusTab('',this)">All</span>
         <span class="tab" onclick="pickStatusTab('ready',this)">Pending</span>
-        <span class="tab" onclick="pickStatusTab('escalated',this)">Escalated</span>
       </div>
       <div class="toolbar">
         <div class="search-box"><i class="ti ti-search"></i><input id="caseSearch" class="search-input" placeholder="Search by case number" oninput="setSearch(this.value)"></div>
@@ -1029,7 +1023,7 @@ textarea{resize:none}
           <div class="menu">
         <div class="menu-item" onclick="setFilter('determination','')">Any</div>
         <div class="menu-item" onclick="setFilter('determination','approved')">Approved</div>
-        <div class="menu-item" onclick="setFilter('determination','consider')">Consider</div>
+        <div class="menu-item" onclick="setFilter('determination','consider')">Consider to approve</div>
         <div class="menu-item" onclick="setFilter('determination','further')">Further review</div>
         <div class="menu-item" onclick="setFilter('determination','nopa')">No PA needed</div>
           </div>
@@ -1729,8 +1723,8 @@ var CASES=[
 var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
-var detMap={approved:['Approved','chip-ok'],consider:['Consider','chip-neutral'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
-var labels={determination:{approved:'Approved',consider:'Consider',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
+var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-neutral'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
+var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',status:'',reviewer:'',date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
 function caseMatch(c){
   if(state.determination && c.det!==state.determination) return false;
@@ -1799,7 +1793,6 @@ function applyFilters(){
   tabs.forEach(function(t){t.classList.remove('active');});
   if(state.status==='') tabs[0].classList.add('active');
   else if(state.status==='ready') tabs[1].classList.add('active');
-  else if(state.status==='escalated') tabs[2].classList.add('active');
   document.querySelectorAll('#cases th.sortable').forEach(function(th){
     var sk=th.getAttribute('data-sort');
     th.classList.toggle('sorted',sk===state.sortKey);
@@ -1818,7 +1811,7 @@ function clearAll(){ state.determination=state.priority=state.status=state.date=
 function setSort(k){ if(state.sortKey===k){ state.sortDir=state.sortDir==='asc'?'desc':'asc'; } else { state.sortKey=k; state.sortDir=(k==='day')?'desc':'asc'; } applyFilters(); }
 function gotoPage(p){ state.page=p; applyFilters(); }
 var FILTER_DEFS=[
-  {key:'determination',label:'Determination',opts:[['','Any'],['approved','Approved'],['consider','Consider'],['further','Further review'],['nopa','No PA needed']]},
+  {key:'determination',label:'Determination',opts:[['','Any'],['approved','Approved'],['consider','Consider to approve'],['further','Further review'],['nopa','No PA needed']]},
   {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['high-cost','High cost'],['urgent','Urgent'],['oon','Out of network']]},
   {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
   {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
