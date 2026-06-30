@@ -443,6 +443,9 @@ textarea{resize:none}
 .act-primary{background:var(--primary);color:var(--primary-fg);border-color:transparent}
 .act-primary:hover{background:var(--primary);filter:brightness(1.05)}
 .act-primary i{color:var(--primary-fg)}
+.act-denial{background:var(--danger-solid);color:var(--danger-solid-fg);border-color:transparent}
+.act-denial:hover{background:var(--danger-solid);filter:brightness(1.05)}
+.act-denial i{color:var(--danger-solid-fg)}
 .letter-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-start;justify-content:center;z-index:120;padding:36px 20px;overflow:auto}
 .letter-overlay.open{display:flex}
 .letter-modal{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r-lg);width:100%;max-width:760px;display:flex;flex-direction:column;max-height:calc(100vh - 72px);overflow:hidden}
@@ -454,8 +457,8 @@ textarea{resize:none}
 .lt-seg-btn i{font-size:14px}
 .lt-topright{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .lt-topright .btn-primary{height:36px;box-sizing:border-box}
-.lt-seg-btn.active{background:var(--primary);color:var(--primary-fg);font-weight:500}
-.lt-seg-btn.lt-denial.active{background:var(--danger-solid);color:var(--danger-solid-fg)}
+.lt-seg-btn:hover{color:var(--text-2)}
+.lt-seg-btn.active{background:var(--bg);color:var(--text);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,0.08)}
 .lt-actions{display:flex;align-items:center;gap:8px}
 .letter-stage{margin-top:14px;height:calc(100vh - 230px);overflow-y:auto;background:var(--surface);border-radius:var(--r-lg);padding:28px;display:flex;justify-content:center}
 .letter-sheet{background:#fff;color:#1b1b1b;max-width:580px;margin:0 auto;padding:46px 50px;border-radius:4px;font-size:12.5px;line-height:1.62;box-shadow:0 1px 8px rgba(0,0,0,.18)}
@@ -1083,13 +1086,9 @@ textarea{resize:none}
           <i class="ti ti-chevron-right sep"></i>
           <span class="crumb-link" onclick="go('details')">EPS-00088552</span>
           <i class="ti ti-chevron-right sep"></i>
-          <span class="crumb-current"><i class="ti ti-file-text"></i>Determination letter</span>
+          <span class="crumb-current" id="ltCrumb"><i class="ti ti-file-text"></i>Determination letter</span>
         </div>
         <div class="lt-topright">
-          <div class="lt-seg" id="ltTypeSeg">
-            <button class="lt-seg-btn active" onclick="letterType('approval',this)"><i class="ti ti-check"></i>Approval</button>
-            <button class="lt-seg-btn lt-denial" onclick="letterType('denial',this)"><i class="ti ti-x"></i>Denial</button>
-          </div>
           <button class="btn-primary" style="width:auto;margin:0" onclick="sendLetter()"><i class="ti ti-upload"></i>Send letter</button>
         </div>
       </div>
@@ -1287,17 +1286,18 @@ function finishNewCase(prof){
 }
 function setSegActive(id,idx){ var g=document.getElementById(id); if(!g) return; g.querySelectorAll('.lt-seg-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); }); }
 function letterMode(m,btn){ setSegActive('ltModeSeg', m==='edit'?1:0); var edit=m==='edit'; var s=document.getElementById('letterSheet'); s.setAttribute('contenteditable', edit?'true':'false'); document.getElementById('ltDownload').style.display = edit?'none':''; if(edit) s.focus(); }
-function openLetter(){
+function openLetter(type){
   var act=document.querySelector('.screen.active'); origin=act?act.id:'details'; if(origin==='letter'||origin==='preview') origin='details';
+  var denial=(type==='denial');
   document.getElementById('letterSheet').setAttribute('contenteditable','false');
   document.getElementById('ltDownload').style.display='';
-  document.getElementById('letterApprovalBody').style.display='';
-  document.getElementById('letterDenialBody').style.display='none';
+  document.getElementById('letterApprovalBody').style.display=denial?'none':'';
+  document.getElementById('letterDenialBody').style.display=denial?'':'none';
+  var crumb=document.getElementById('ltCrumb');
+  if(crumb) crumb.innerHTML='<i class="ti ti-file-text"></i>Determination letter &middot; '+(denial?'Denial':'Approval');
   setSegActive('ltModeSeg',0);
-  setSegActive('ltTypeSeg',0);
   go('letter');
 }
-function letterType(t,btn){ btn.parentNode.querySelectorAll('.lt-seg-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); document.getElementById('letterApprovalBody').style.display=t==='approval'?'':'none'; document.getElementById('letterDenialBody').style.display=t==='denial'?'':'none'; }
 function editLetter(btn){ var s=document.getElementById('letterSheet'); var on=s.getAttribute('contenteditable')==='true'; s.setAttribute('contenteditable',on?'false':'true'); btn.classList.toggle('active',!on); if(!on){ s.focus(); } }
 function sendLetter(){ document.getElementById('sendOverlay').classList.add('open'); }
 function closeSend(){ document.getElementById('sendOverlay').classList.remove('open'); }
@@ -1514,9 +1514,10 @@ function renderStateRail(prof){
 function renderActions(state){
   var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Duplicate case</button>';
   var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Submit feedback</button>';
-  var gen='<button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>Generate letter</button>';
+  var genA='<button class="act-btn act-primary" onclick="openLetter(\'approval\')"><i class="ti ti-check"></i>Approval</button>';
+  var genD='<button class="act-btn act-denial" onclick="openLetter(\'denial\')"><i class="ti ti-x"></i>Denial</button>';
   var vl='<button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>View letter</button>';
-  var h; if(state==='processing')h=''; else if(state==='escalated')h=dup+fb; else if(state==='signed')h=dup+vl; else h=dup+fb+gen;
+  var h; if(state==='processing')h=''; else if(state==='escalated')h=dup+fb; else if(state==='signed')h=dup+vl; else h=dup+fb+genA+genD;
   document.getElementById('detailActions').innerHTML=h;
 }
 function metaHtml(p,state){
