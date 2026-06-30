@@ -763,7 +763,6 @@ textarea{resize:none}
       </div>
       <div class="section-label">In progress</div>
       <div class="list">
-        <div class="row" onclick="openCase('EPS-00084437')"><div class="row-line"><span class="cid">EPS-00084437</span><span class="muted">processing 60-90s</span><span class="right">just now</span></div></div>
         <div class="row" onclick="openCase('EPS-20260605')"><div class="row-line"><span class="cid">EPS-20260605</span><span class="chip chip-info">Escalated to physician</span><span class="right">1h</span></div></div>
       </div>
       <div class="section-label">Recently completed</div>
@@ -1483,10 +1482,10 @@ var PROFILES={
    patient:{name:'Marcus Bell',memberId:'AGL773201845',dob:'09/14/1958',provider:'Dr. Karen Liu',providerNpi:'1487263901',facility:'Mercy Orthopedic Center',facilityNpi:'1356802471'},
    cpts:[{code:'73721',det:'approved',desc:'MRI knee, without contrast'},{code:'27447',det:'approved',desc:'Total knee arthroplasty'}],icds:['M17.11','M25.561'],
    activity:[{t:'Case submitted',m:'J. Chen \u00b7 17 Mar 2026, 08:12 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:13 UTC'},{t:'Nebo assessment completed',m:'2 services assessed \u00b7 08:16 UTC'},{t:'Assigned for review',m:'A. Rivera \u00b7 09:40 UTC'},{t:'Awaiting your review',m:'Review by 19 Mar 2026',cur:true}]},
- 'EPS-00084437':{state:'processing',priority:'standard',date:'18 Mar 2026',reviewer:'Unassigned',createdBy:'S. Patel',
+ 'EPS-00084437':{state:'review',priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',reviewer:'A. Rivera',createdBy:'S. Patel',
    patient:{name:'Elena Vasquez',memberId:'AGL902145673',dob:'03/22/1979',provider:'Dr. Omar Haddad',providerNpi:'1592048372',facility:'Riverside Imaging',facilityNpi:'1238904756'},
-   cpts:[],icds:[],
-   activity:[{t:'Case submitted',m:'S. Patel \u00b7 18 Mar 2026, just now'},{t:'Retrieving documents',m:'In progress',cur:true}]},
+   cpts:[{code:'70553',det:'further',desc:'MRI brain, with and without contrast'}],icds:['R51.9','G43.909'],
+   activity:[{t:'Case submitted',m:'S. Patel \u00b7 18 Mar 2026, 08:40 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:41 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 08:44 UTC'},{t:'Awaiting your review',m:'Review by 20 Mar 2026',cur:true}]},
  'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'M. Okafor',createdBy:'M. Okafor',escalatedBy:'M. Okafor',escalatedAt:'18 Mar 2026, 14:05 UTC',
    patient:{name:'David Okonkwo',memberId:'AGL651837209',dob:'11/30/1965',provider:'Dr. Priya Nair',providerNpi:'1748293016',facility:'Summit Cardiology',facilityNpi:'1429385017'},
    cpts:[{code:'75571',det:'further',desc:'CT heart, coronary calcium scoring'}],icds:['I25.10','R07.9'],
