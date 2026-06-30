@@ -1248,9 +1248,14 @@ function finishNewCase(prof){
   if(document.querySelector('.screen.active').id!=='details') return;
   if(document.getElementById('caseIdLg').textContent.indexOf(prof.id)!==0) return;
   prof.state='review';
+  prof.reviewer='A. Rivera';
   document.getElementById('detailMeta').innerHTML=metaHtml(prof,'review');
   renderActions('review');
-  renderStateBody(prof);
+  document.getElementById('stateBody').style.display='none';
+  document.getElementById('stateRail').style.display='none';
+  document.getElementById('deepContent').style.display='';
+  document.getElementById('deepRail').style.display='';
+  document.querySelector('.main').scrollTop=0;
   showToast('Nebo finished processing '+prof.id);
 }
 function setSegActive(id,idx){ var g=document.getElementById(id); if(!g) return; g.querySelectorAll('.lt-seg-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); }); }
