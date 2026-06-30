@@ -339,6 +339,7 @@ th.sorted.asc .caret{transform:rotate(180deg)}
 .state-bar{margin-top:18px;height:4px;background:var(--surface);border-radius:3px;overflow:hidden;max-width:280px}
 .state-bar span{display:block;height:100%;width:40%;background:var(--primary);border-radius:3px;animation:stateload 1.4s ease-in-out infinite}
 @keyframes stateload{0%{margin-left:-40%}100%{margin-left:100%}}
+.state-bar.det span{width:8%;animation:none;transition:width 3.1s cubic-bezier(.35,.12,.2,1)}
 .state-badge{display:inline-block;font-size:12px;font-weight:500;padding:5px 11px;border-radius:var(--r);margin-bottom:12px}
 .state-badge.esc{background:var(--info-bg);color:var(--info-fg)}
 .state-badge.ok{background:var(--ok-bg);color:var(--ok-fg)}
@@ -1121,7 +1122,7 @@ textarea{resize:none}
     </div>
     <div class="dropzone" id="dropzone"><i class="ti ti-upload"></i><div class="dz-text">Drop files or <span style="color:var(--accent-fg)">browse</span></div></div>
     <div class="autoinfo" id="autoinfo"><i class="ti ti-cloud-download" style="font-size:18px"></i><span>Nebo will pull the documents from your system on submit</span></div>
-    <div class="submit-row"><button class="btn-submit" onclick="closeModal()">Submit</button><span class="muted">processing takes 60-90s</span></div>
+    <div class="submit-row"><button class="btn-submit" onclick="submitNewCase()">Submit</button><span class="muted">processing takes 60-90s</span></div>
     <div class="modal-foot"><i class="ti ti-corner-down-right" style="font-size:12px"></i>The case appears in My queue once processing finishes</div>
   </div>
 </div>
@@ -1218,6 +1219,40 @@ function fbValidate(){ document.getElementById('fbSubmit').disabled = document.g
 function submitFb(){ closeFb(); showToast('Feedback sent to Nebo'); document.getElementById('fbDetails').value=''; document.getElementById('fbSubmit').disabled=true; document.querySelectorAll('.fb-chip').forEach(function(b){b.classList.remove('active');}); }
 function closeDup(){ document.getElementById('dupOverlay').classList.remove('open'); }
 function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+var newCaseTimer=null;
+function fmtToday(){ var d=new Date(); var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return d.getDate()+' '+mo[d.getMonth()]+' '+d.getFullYear(); }
+function submitNewCase(){
+  var inp=document.querySelector('#overlay input');
+  var num=(inp&&inp.value.trim())||('EPS-'+(10000000+Math.floor(Math.random()*89999999)));
+  if(/^\d+$/.test(num)) num='EPS-'+num;
+  closeModal();
+  if(inp) inp.value='';
+  if(newCaseTimer){ clearTimeout(newCaseTimer); newCaseTimer=null; }
+  origin='queue';
+  var prof={id:num,priority:'standard',date:fmtToday(),reviewer:'Unassigned',state:'processing',patient:null,nonAnchor:true};
+  document.getElementById('caseIdLg').innerHTML=prof.id+' <span class="type-tag">Standard</span>';
+  document.getElementById('detailMeta').innerHTML=metaHtml(prof,'processing');
+  renderActions('processing');
+  document.getElementById('deepContent').style.display='none';
+  document.getElementById('deepRail').style.display='none';
+  document.getElementById('stateBody').style.display='';
+  document.getElementById('stateRail').style.display='';
+  renderStateRail(prof);
+  document.getElementById('stateBody').innerHTML='<div class="state-panel"><div class="state-title">Nebo is processing this case</div><div class="state-sub">Documents are being retrieved and assessed against the applicable guidelines. This usually takes 60-90 seconds.</div><div class="state-bar det"><span id="procFill"></span></div></div>';
+  go('details');
+  setTimeout(function(){ var f=document.getElementById('procFill'); if(f) f.style.width='100%'; },80);
+  newCaseTimer=setTimeout(function(){ finishNewCase(prof); },3300);
+}
+function finishNewCase(prof){
+  newCaseTimer=null;
+  if(document.querySelector('.screen.active').id!=='details') return;
+  if(document.getElementById('caseIdLg').textContent.indexOf(prof.id)!==0) return;
+  prof.state='review';
+  document.getElementById('detailMeta').innerHTML=metaHtml(prof,'review');
+  renderActions('review');
+  renderStateBody(prof);
+  showToast('Nebo finished processing '+prof.id);
+}
 function setSegActive(id,idx){ var g=document.getElementById(id); if(!g) return; g.querySelectorAll('.lt-seg-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); }); }
 function letterMode(m,btn){ setSegActive('ltModeSeg', m==='edit'?1:0); var edit=m==='edit'; var s=document.getElementById('letterSheet'); s.setAttribute('contenteditable', edit?'true':'false'); document.getElementById('ltDownload').style.display = edit?'none':''; if(edit) s.focus(); }
 function openLetter(){
@@ -1260,9 +1295,9 @@ var CASES=[
   {id:'EPS-00088552',day:18,date:'18 Mar',cpt:'72148 +1',det:'further',status:'ready',priority:'high-cost'},
   {id:'EPS-00086956',day:18,date:'18 Mar',cpt:'72148',det:'consider',status:'ready',priority:'standard'},
   {id:'EPS-00088141',day:17,date:'17 Mar',cpt:'27447',det:'approved',status:'signed',priority:'standard'},
-  {id:'EPS-00087687',day:18,date:'18 Mar',cpt:'45378',det:'',status:'processing',priority:'standard'},
+  {id:'EPS-00087687',day:18,date:'18 Mar',cpt:'45378',det:'approved',status:'ready',priority:'standard'},
   {id:'EPS-00087519',day:12,date:'12 Mar',cpt:'27447',det:'approved',status:'signed',priority:'high-cost'},
-  {id:'EPS-00087379',day:17,date:'17 Mar',cpt:'70553',det:'',status:'processing',priority:'oon'},
+  {id:'EPS-00087379',day:17,date:'17 Mar',cpt:'70553',det:'further',status:'ready',priority:'oon'},
   {id:'EPS-00086703',day:18,date:'18 Mar',cpt:'45378',det:'approved',status:'signed',priority:'standard'},
   {id:'EPS-00086053',day:17,date:'17 Mar',cpt:'72148 +1',det:'further',status:'ready',priority:'oon'},
   {id:'EPS-00085658',day:17,date:'17 Mar',cpt:'45378',det:'consider',status:'ready',priority:'standard'},
@@ -1289,7 +1324,7 @@ var CASES=[
   {id:'EPS-00076051',day:16,date:'16 Mar',cpt:'63650',det:'further',status:'ready',priority:'standard'},
   {id:'EPS-00075623',day:18,date:'18 Mar',cpt:'27447',det:'consider',status:'ready',priority:'standard'},
   {id:'EPS-00075171',day:18,date:'18 Mar',cpt:'64483',det:'further',status:'ready',priority:'standard'},
-  {id:'EPS-00074442',day:15,date:'15 Mar',cpt:'29881 +1',det:'',status:'processing',priority:'standard'},
+  {id:'EPS-00074442',day:15,date:'15 Mar',cpt:'29881 +1',det:'consider',status:'ready',priority:'standard'},
   {id:'EPS-00073877',day:17,date:'17 Mar',cpt:'62323 +1',det:'consider',status:'ready',priority:'high-cost'},
   {id:'EPS-00073302',day:15,date:'15 Mar',cpt:'99213',det:'further',status:'ready',priority:'standard'},
   {id:'EPS-00072732',day:17,date:'17 Mar',cpt:'27447',det:'approved',status:'signed',priority:'standard'},
@@ -1298,10 +1333,10 @@ var CASES=[
   {id:'EPS-00071704',day:14,date:'14 Mar',cpt:'45378',det:'nopa',status:'signed',priority:'standard'},
   {id:'EPS-00071214',day:16,date:'16 Mar',cpt:'73721',det:'consider',status:'ready',priority:'standard'},
   {id:'EPS-00071106',day:15,date:'15 Mar',cpt:'29881 +1',det:'approved',status:'signed',priority:'standard'},
-  {id:'EPS-00070569',day:14,date:'14 Mar',cpt:'99213',det:'',status:'processing',priority:'standard'},
+  {id:'EPS-00070569',day:14,date:'14 Mar',cpt:'99213',det:'nopa',status:'signed',priority:'standard'},
   {id:'EPS-00070264',day:17,date:'17 Mar',cpt:'45378',det:'further',status:'ready',priority:'high-cost'},
   {id:'EPS-00069545',day:18,date:'18 Mar',cpt:'70553',det:'consider',status:'signed',priority:'standard'},
-  {id:'EPS-00068789',day:17,date:'17 Mar',cpt:'73721',det:'',status:'processing',priority:'standard'}
+  {id:'EPS-00068789',day:17,date:'17 Mar',cpt:'73721',det:'approved',status:'ready',priority:'standard'}
 ];
 var REVIEWERS=['A. Rivera','A. Rivera','J. Chen','M. Okafor','S. Patel'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
