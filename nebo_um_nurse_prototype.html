@@ -631,6 +631,52 @@ textarea{resize:none}
 .set-select{font-family:inherit;font-size:13px;color:var(--text);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);padding:8px 30px 8px 11px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23908E86' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
 .set-select:focus{outline:none;border-color:var(--accent-fg)}
 @media (max-width:600px){.set-grid{grid-template-columns:1fr}}
+/* --- Mobile top bar (hidden on desktop) --- */
+.mtopbar{display:none;position:fixed;top:0;left:0;right:0;height:52px;z-index:140;align-items:center;gap:10px;padding:0 12px;background:var(--bg);border-bottom:0.5px solid var(--border)}
+.mtb-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:none;background:none;color:var(--text);cursor:pointer;border-radius:var(--r)}
+.mtb-btn:hover{background:var(--surface)}
+.mtb-btn svg{width:22px;height:22px}
+.mtb-brand{font-family:Georgia,serif;font-size:19px;font-weight:600;color:var(--primary);letter-spacing:-.01em}
+.nav-backdrop{display:none}
+/* --- Mobile layout --- */
+@media (max-width:768px){
+  .app{display:block;padding:0;gap:0;min-height:100vh}
+  .mtopbar{display:flex}
+  .main{border:none;border-radius:0;min-height:100vh;padding:64px 16px 28px}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:272px;max-width:84vw;z-index:200;border-radius:0;border:none;border-right:0.5px solid var(--border);transform:translateX(-100%);transition:transform .22s ease;box-shadow:6px 0 40px rgba(0,0,0,.16)}
+  .app.nav-open .sidebar{transform:none}
+  .nav-backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:150;opacity:0;visibility:hidden;transition:opacity .2s}
+  .app.nav-open .nav-backdrop{opacity:1;visibility:visible}
+  .page-head{flex-wrap:wrap;gap:8px}
+  .head-actions{flex-wrap:wrap}
+  .kpi-row{grid-template-columns:1fr 1fr;gap:10px}
+  #cases .view-seg{display:none}
+  #caseTable{display:none!important}
+  #caseGrid{display:grid!important;grid-template-columns:1fr}
+  .tabs{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .search-box{flex:1 0 100%;min-width:0}
+  .pager{flex-wrap:wrap;gap:10px;justify-content:center}
+  .pages{flex-wrap:wrap;justify-content:center}
+  .detail-body{flex-direction:column}
+  .detail-side{width:100%;position:static}
+  .detail-topbar{gap:8px}
+  .detail-actions{flex-wrap:wrap;gap:8px;width:100%}
+  .detail-actions .act-btn{flex:1 1 auto}
+  .pv-topbar{flex-wrap:wrap}
+  .lt-topright{width:100%;justify-content:flex-end}
+  .pv-toolbar2{flex-wrap:wrap}
+  .pv-thumbs{display:none}
+  .pv-stage{height:auto;flex-direction:column}
+  .pv-main{height:auto}
+  .letter-stage{padding:14px;height:auto}
+  .letter-sheet{padding:30px 22px;max-width:100%}
+  .set-row,.set-toggle-row{flex-wrap:wrap}
+  .set-row > div:first-child{min-width:60%}
+  .overlay{padding:12px}
+  .modal{padding:18px 16px}
+}
+@media (max-width:460px){.kpi-row{grid-template-columns:1fr}}
 </style>
 <script src="https://konpo-notes.vercel.app/embed.js" defer></script>
 </head>
@@ -655,6 +701,12 @@ textarea{resize:none}
   </div>
 </div>
 <div class="app">
+
+  <div class="mtopbar">
+    <button class="mtb-btn" onclick="toggleNav()" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <span class="mtb-brand">Nebo</span>
+  </div>
+  <div class="nav-backdrop" onclick="closeNav()"></div>
 
   <aside class="sidebar">
     <div class="sb-top">
@@ -1356,7 +1408,11 @@ function go(target){
   document.querySelectorAll('.screen').forEach(function(s){ s.classList.toggle('active', s.id===target); });
   document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-screen')===target); });
   document.querySelector('.main').scrollTop=0;
+  window.scrollTo(0,0);
+  closeNav();
 }
+function toggleNav(){ document.querySelector('.app').classList.toggle('nav-open'); }
+function closeNav(){ var a=document.querySelector('.app'); if(a) a.classList.remove('nav-open'); }
 document.querySelectorAll('[data-screen]').forEach(function(el){
   el.addEventListener('click', function(){
     var target=el.getAttribute('data-screen');
