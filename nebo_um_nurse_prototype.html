@@ -973,7 +973,7 @@ textarea{resize:none}
           <div class="hbars">
             <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-5)"></span>Processing</span><span class="hbar-track"><span class="hbar-fill" style="width:7.2%;background:var(--data-5)"></span></span><span class="hbar-val">8</span></div>
             <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-2)"></span>Ready for review</span><span class="hbar-track"><span class="hbar-fill" style="width:17.1%;background:var(--data-2)"></span></span><span class="hbar-val">19</span></div>
-            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>Escalated</span><span class="hbar-track"><span class="hbar-fill" style="width:3.6%;background:var(--data-3)"></span></span><span class="hbar-val">4</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>Further review</span><span class="hbar-track"><span class="hbar-fill" style="width:3.6%;background:var(--data-3)"></span></span><span class="hbar-val">4</span></div>
             <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-1)"></span>Signed</span><span class="hbar-track"><span class="hbar-fill" style="width:100%;background:var(--data-1)"></span></span><span class="hbar-val">111</span></div>
           </div>
         </div>
@@ -1018,7 +1018,7 @@ textarea{resize:none}
       <div class="q-group">
         <div class="q-group-head"><span class="q-dot" style="background:var(--accent-fg)"></span><span class="q-group-title">In progress</span><span class="q-count">1</span></div>
         <div class="list">
-          <div class="row" onclick="openCase('EPS-20260605')"><div class="row-line"><span class="cid">EPS-20260605</span><span class="chip chip-info">Escalated to physician</span><span class="right">1h</span></div></div>
+          <div class="row" onclick="openCase('EPS-20260605')"><div class="row-line"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span><span class="right">1h</span></div></div>
         </div>
       </div>
       <div class="q-group">
@@ -1404,8 +1404,8 @@ textarea{resize:none}
           <div class="set-card-head"><span class="card-title-sm">Notifications</span></div>
           <div class="set-toggle-row"><div><div class="set-row-title">Case assigned to me</div><div class="set-row-sub">When a new case lands in your queue.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
           <div class="set-toggle-row"><div><div class="set-row-title">Nebo finished processing</div><div class="set-row-sub">When extraction and assessment complete on your cases.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
-          <div class="set-toggle-row"><div><div class="set-row-title">Physician signed off</div><div class="set-row-sub">When a case you escalated gets a determination signed.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
-          <div class="set-toggle-row"><div><div class="set-row-title">Case escalated to me</div><div class="set-row-sub">When a colleague routes a case for your review.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Physician signed off</div><div class="set-row-sub">When a case in further review gets a determination signed.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Further review needed</div><div class="set-row-sub">When one of your cases is flagged for physician review.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
           <div class="set-toggle-row"><div><div class="set-row-title">Daily queue summary</div><div class="set-row-sub">A morning digest of what needs your attention.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
         </div>
 
@@ -1805,7 +1805,7 @@ var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
 var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
-var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
+var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Further review',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1};
 function caseMatch(c,skipStatus){
   if(state.determination && c.det!==state.determination) return false;
@@ -1934,10 +1934,10 @@ var PROFILES={
    patient:{name:'Elena Vasquez',memberId:'AGL902145673',dob:'03/22/1979',provider:'Dr. Omar Haddad',providerNpi:'1592048372',facility:'Riverside Imaging',facilityNpi:'1238904756'},
    cpts:[{code:'70553',det:'further',desc:'MRI brain, with and without contrast'}],icds:['R51.9','G43.909'],
    activity:[{t:'Case submitted',m:'Sara P. \u00b7 18 Mar 2026, 08:40 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:41 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 08:44 UTC'},{t:'Awaiting your review',m:'Review by 20 Mar 2026',cur:true}]},
- 'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'Maya O.',createdBy:'Maya O.',escalatedBy:'Maya O.',escalatedAt:'18 Mar 2026, 14:05 UTC',
+ 'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'Maya O.',createdBy:'Maya O.',escalatedAt:'18 Mar 2026, 14:05 UTC',
    patient:{name:'David Okonkwo',memberId:'AGL651837209',dob:'11/30/1965',provider:'Dr. Priya Nair',providerNpi:'1748293016',facility:'Summit Cardiology',facilityNpi:'1429385017'},
    cpts:[{code:'75571',det:'further',desc:'CT heart, coronary calcium scoring'}],icds:['I25.10','R07.9'],
-   activity:[{t:'Case submitted',m:'Maya O. \u00b7 17 Mar 2026, 13:20 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 13:24 UTC'},{t:'Escalated to physician',m:'Maya O. \u00b7 18 Mar 2026, 14:05 UTC'},{t:'Awaiting physician sign-off',m:'In physician Sign Queue',cur:true}]},
+   activity:[{t:'Case submitted',m:'Maya O. \u00b7 17 Mar 2026, 13:20 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 13:24 UTC'},{t:'Flagged for further review',m:'18 Mar 2026, 14:05 UTC'},{t:'Awaiting physician review',m:'Physician reviews the case directly',cur:true}]},
  'EPS-00084201':{state:'signed',priority:'standard',date:'15 Mar 2026',reviewer:'Alex R.',createdBy:'Alex R.',signedBy:'Dr. Helen Park, MD',signedAt:'17 Mar 2026, 11:20 UTC',outcome:'approved',
    patient:{name:'Susan Hartley',memberId:'AGL338920164',dob:'06/08/1972',provider:'Dr. Greg Foster',providerNpi:'1903847261',facility:'Lakeside Sleep Institute',facilityNpi:'1562039847'},
    cpts:[{code:'95810',det:'approved',desc:'Polysomnography, sleep staging'}],icds:['G47.33'],
@@ -1954,7 +1954,7 @@ function svcBlock(prof){
 function renderStateBody(prof){
   var s=prof.state, h='';
   if(s==='processing'){ h='<div class="state-panel"><div class="state-title">Nebo is processing this case</div><div class="state-sub">Documents are being retrieved and assessed against the applicable guidelines. This usually takes 60-90 seconds.</div><div class="state-bar"><span></span></div></div>'; }
-  else if(s==='escalated'){ h='<div class="state-panel"><span class="state-badge esc">Escalated to physician</span><div class="state-sub">This case was escalated for physician review'+(prof.escalatedBy?(' by '+prof.escalatedBy):'')+(prof.escalatedAt?(' on '+prof.escalatedAt):'')+'. A determination letter can be issued only after the physician signs off.</div>'+svcBlock(prof)+'</div>'; }
+  else if(s==='escalated'){ h='<div class="state-panel"><span class="state-badge esc">Further review</span><div class="state-sub">This case is flagged for further review'+(prof.escalatedAt?(' since '+prof.escalatedAt):'')+'. A physician reviews it directly; a determination letter can be issued only after the physician signs off.</div>'+svcBlock(prof)+'</div>'; }
   else if(s==='signed'){ h='<div class="state-panel"><span class="state-badge ok">Determination signed</span><div class="state-sub">Signed by '+(prof.signedBy||'the reviewing physician')+(prof.signedAt?(' on '+prof.signedAt):'')+'. The determination letter has been sent to the requesting provider.</div>'+svcBlock(prof)+'</div>'; }
   else if(s==='approvable'){ h=svcBlock(prof)+'<div class="state-note ok"><i class="ti ti-check"></i>All requested services meet medical-necessity criteria. Ready to generate the approval letter.</div>'+(prof.nonAnchor?'<div class="state-note"><i class="ti ti-info-circle"></i>Full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div>':''); }
   else { h=svcBlock(prof)+'<div class="state-note"><i class="ti ti-info-circle"></i>This case needs your expert review. The full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div><button class="tool" style="margin-top:14px" onclick="openCase(\'EPS-00088552\')">Open EPS-00088552</button>'; }
@@ -1994,7 +1994,7 @@ document.addEventListener('click',function(e){ if(!e.target.closest('.da-mobile'
 function metaHtml(p,state){
   var parts=['Submitted <b>'+(p.date||'-')+'</b>'];
   if(state==='signed'&&p.signedAt) parts.push('Signed <b>'+p.signedAt+'</b>');
-  else if(state==='escalated'&&p.escalatedAt) parts.push('Escalated <b>'+p.escalatedAt+'</b>');
+  else if(state==='escalated'&&p.escalatedAt) parts.push('In further review <b>'+p.escalatedAt+'</b>');
   else if(p.reviewBy) parts.push('Review by <b>'+p.reviewBy+'</b>');
   parts.push((state==='signed'&&p.createdBy)?('Created by <b>'+p.createdBy+'</b>'):('Reviewer <b>'+(p.reviewer||'Unassigned')+'</b>'));
   return parts.join(' &nbsp;\u00b7&nbsp; ');
