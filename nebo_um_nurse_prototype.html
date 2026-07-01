@@ -292,6 +292,7 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .chip-neutral{background:var(--chip-bg);color:var(--chip-fg)}
 .chip-consider{background:color-mix(in srgb, var(--ok-bg) 50%, var(--bg));color:color-mix(in srgb, var(--ok-fg) 78%, var(--text-3))}
 .chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
+#caseTable .chip-warn{background:var(--chip-bg);color:var(--chip-fg)}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
 .mdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:9px;vertical-align:middle;flex-shrink:0}
@@ -1118,7 +1119,8 @@ textarea{resize:none}
       <div class="detail-topbar">
         <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
         <div class="detail-actions" id="detailActions">
-          <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy the case</button>
+          <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy case</button>
+          <button class="act-btn" onclick="uploadDoc()"><i class="ti ti-upload"></i>Upload</button>
           <button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>
           <button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>Generate letter</button>
         </div>
@@ -1505,7 +1507,7 @@ textarea{resize:none}
 <div class="overlay" id="dupOverlay" onclick="if(event.target===this)closeDup()">
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-title">Copy the case</div>
+      <div class="modal-title">Copy case</div>
       <button class="modal-close" onclick="closeDup()" aria-label="Close"><i class="ti ti-x"></i></button>
     </div>
     <p class="dup-desc">Create a new case with the member, provider, and requested services copied from this one. You can review and edit everything before submitting.</p>
@@ -1551,6 +1553,7 @@ document.querySelectorAll('[data-action="open-new"]').forEach(function(el){
 });
 function openModal(){ document.getElementById('overlay').classList.add('open'); }
 function openDup(){ var id=((document.getElementById('caseIdLg')||{}).textContent||'').trim().split(/\s+/)[0]; var src=document.getElementById('dupSrc'); if(src&&id) src.textContent=id; document.getElementById('dupOverlay').classList.add('open'); }
+function uploadDoc(){ var i=document.createElement('input'); i.type='file'; i.onchange=function(){ if(i.files&&i.files.length) showToast('Document uploaded'); }; i.click(); }
 function createCopy(){ closeDup(); showToast('Case copied to a new draft'); }
 function openFb(){ document.getElementById('fbOverlay').classList.add('open'); }
 function closeFb(){ document.getElementById('fbOverlay').classList.remove('open'); }
@@ -1945,11 +1948,12 @@ function renderStateRail(prof){
   document.getElementById('stateRail').innerHTML='<div class="side-card"><div class="card-head"><span class="card-title-sm">Info</span></div><div class="info-stack">'+info+'</div></div>';
 }
 function renderActions(state){
-  var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy the case</button>';
+  var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy case</button>';
   var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>';
   var acts=[];
   if(state!=='processing'){
-    acts.push({l:'Copy the case',i:'ti-copy',fn:'openDup()'});
+    acts.push({l:'Copy case',i:'ti-copy',fn:'openDup()'});
+    acts.push({l:'Upload',i:'ti-upload',fn:'uploadDoc()'});
     if(state==='escalated'){ acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'}); }
     else if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
     else {
