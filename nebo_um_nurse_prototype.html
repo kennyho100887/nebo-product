@@ -38,8 +38,6 @@
 .ti-logout:before{content:"\eba8"}
 .ti-lifebuoy:before{content:"\eadd"}
 .ti-message-circle:before{content:"\eaed"}
-.ti-layout-list:before{content:"\ec14"}
-.ti-layout-grid:before{content:"\edba"}
 .ti-layout-dashboard:before{content:"\f02c"}
 .ti-edit:before{content:"\ea98"}
 .ti-eye:before{content:"\ea9a"}
@@ -340,18 +338,6 @@ th .caret{font-size:11px;opacity:.4;display:inline-block;transition:transform .1
 th.sorted .caret{opacity:1;color:var(--text-2)}
 th.sorted.asc .caret{transform:rotate(180deg)}
 .empty-row td{text-align:center;color:var(--text-3);padding:28px 0}
-.view-seg{display:flex;align-items:center;gap:2px;height:32px;box-sizing:border-box;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:2px}
-.vbtn{border:none;background:none;color:var(--text-3);cursor:pointer;width:30px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.vbtn:hover{color:var(--text-2)}
-.vbtn.active{background:var(--bg);color:var(--text)}
-.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px;margin-top:4px}
-.ccard{text-align:left;border:0.5px solid var(--border);border-radius:var(--r-lg);padding:14px 15px;background:var(--surface);font-family:inherit;cursor:pointer;display:flex;flex-direction:column;gap:9px}
-.ccard:hover{border-color:var(--border-2)}
-.ccard-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.ccard-idline{display:flex;align-items:center;font-size:13px;color:var(--text)}
-.ccard-cpt{font-size:12px;color:var(--text-2)}
-.ccard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:9px;border-top:0.5px solid var(--border)}
-.empty-grid{grid-column:1/-1;text-align:center;color:var(--text-3);padding:28px 0}
 .empty-detail{text-align:center;padding:52px 24px;max-width:430px;margin:0 auto}
 .state-panel{padding:6px 0}
 .state-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px}
@@ -425,7 +411,6 @@ textarea{resize:none}
 .cpt-cell{display:flex;flex-wrap:nowrap;gap:5px;align-items:center}
 .cpt-cell .cc-chip{flex-shrink:0}
 .cpt-cell .cpt-more{color:var(--text-3);font-family:var(--mono);font-size:11px;flex-shrink:0}
-.ccard-cpt.cpt-cell{flex-wrap:wrap}
 .rev-item{display:flex;align-items:center}
 .rev-check{margin-left:auto;color:var(--accent-fg);font-size:14px;display:none;flex-shrink:0}
 .rev-item.active .rev-check{display:block}
@@ -805,9 +790,6 @@ textarea{resize:none}
   .page-head{flex-wrap:wrap;gap:8px}
   .head-actions{flex-wrap:wrap}
   .kpi-row{grid-template-columns:1fr 1fr;gap:10px}
-  #cases .view-seg{display:none}
-  #caseTable{display:none!important}
-  #caseGrid{display:grid!important;grid-template-columns:1fr}
   .tabs{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .tabs::-webkit-scrollbar{display:none}
   .search-box{flex:1 1 auto;min-width:0}
@@ -1052,10 +1034,6 @@ textarea{resize:none}
       <div class="page-head">
         <div class="page-title">All cases<span class="title-count" id="caseTotal">45</span></div>
         <div class="head-actions">
-          <div class="view-seg">
-            <button class="vbtn active" data-l="list" onclick="setLayout('list')" aria-label="List view"><i class="ti ti-layout-list"></i></button>
-            <button class="vbtn" data-l="grid" onclick="setLayout('grid')" aria-label="Grid view"><i class="ti ti-layout-grid"></i></button>
-          </div>
           <button class="tool btn-ghost" data-action="open-new"><i class="ti ti-plus"></i>New case</button>
         </div>
       </div>
@@ -1139,7 +1117,6 @@ textarea{resize:none}
         </tr></thead>
         <tbody id="caseBody"></tbody>
       </table>
-      <div class="case-grid" id="caseGrid" style="display:none"></div>
       <div class="pager">
         <span class="muted">15 per page</span>
         <div class="pages" id="casePages"></div>
@@ -1829,7 +1806,7 @@ CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned'
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
 var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
-var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
+var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1};
 function caseMatch(c,skipStatus){
   if(state.determination && c.det!==state.determination) return false;
   if(state.priority && c.priority!==state.priority) return false;
@@ -1857,22 +1834,7 @@ function rowHtml(c){
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
 }
-function cardHtml(c){
-  var dot=c.priority==='urgent'?'<span class="dot"></span>':'';
-  var det;
-  if(c.status==='processing') det='<span class="muted" style="font-size:11px">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
-  else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
-  var rv=c.reviewer==='Unassigned'?'<span class="muted" style="font-size:11px">Unassigned</span>':'<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
-  return '<button class="ccard" onclick="openCase(\''+c.id+'\')"><div class="ccard-head"><span class="ccard-idline">'+dot+'<span class="mono">'+c.id+'</span></span>'+det+'</div><div class="ccard-cpt cpt-cell">'+cptChips(c.cpt)+'</div><div class="ccard-foot"><span class="muted">'+c.date+'</span>'+rv+'</div></button>';
-}
 function toggleSidebar(){ document.querySelector('.app').classList.toggle('collapsed'); }
-function setLayout(mode){
-  state.layout=mode;
-  document.querySelectorAll('.vbtn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-l')===mode); });
-  document.getElementById('caseTable').style.display = mode==='list'?'':'none';
-  document.getElementById('caseGrid').style.display = mode==='grid'?'grid':'none';
-}
 function applyFilters(){
   var arr=CASES.filter(caseMatch);
   var k=state.sortKey, dir=state.sortDir==='asc'?1:-1;
@@ -1882,7 +1844,6 @@ function applyFilters(){
   var start=(state.page-1)*size, slice=arr.slice(start,start+size);
   var body=document.getElementById('caseBody');
   body.innerHTML = slice.length? slice.map(rowHtml).join('') : '<tr class="empty-row"><td colspan="5">No cases match these filters</td></tr>';
-  document.getElementById('caseGrid').innerHTML = slice.length? slice.map(cardHtml).join('') : '<div class="empty-grid">No cases match these filters</div>';
   document.getElementById('caseTotal').textContent = total.toLocaleString();
   var pg='<span class="pg" onclick="gotoPage('+Math.max(1,state.page-1)+')"><i class="ti ti-chevron-left"></i></span>';
   for(var p=1;p<=pages;p++) pg+='<span class="pg'+(p===state.page?' active':'')+'" onclick="gotoPage('+p+')">'+p+'</span>';
