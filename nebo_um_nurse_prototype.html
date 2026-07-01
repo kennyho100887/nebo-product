@@ -292,6 +292,8 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .tab{font-size:12px;color:var(--text-2);padding:7px 10px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--accent-fg);border-bottom-color:var(--accent-fg);font-weight:500}
+.tab-count{font-size:10px;color:var(--text-3);margin-left:5px;background:var(--surface);padding:1px 6px;border-radius:8px;font-weight:500}
+.tab.active .tab-count{background:var(--accent-bg);color:var(--accent-fg)}
 .toolbar{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .tool{display:flex;align-items:center;gap:6px;border:0.5px solid var(--border);border-radius:var(--r);height:32px;box-sizing:border-box;padding:0 11px;font-size:12px;color:var(--text-2);cursor:pointer;background:none;font-family:inherit}
 .tool:hover{background:var(--surface)}
@@ -1020,9 +1022,9 @@ textarea{resize:none}
         </div>
       </div>
       <div class="tabs" id="caseTabs">
-        <span class="tab active" onclick="pickStatusTab('',this)">All</span>
-        <span class="tab" onclick="pickStatusTab('ready',this)">Unread</span>
-        <span class="tab" onclick="pickStatusTab('signed',this)">Reviewed</span>
+        <span class="tab active" onclick="pickStatusTab('',this)">All<span class="tab-count">0</span></span>
+        <span class="tab" onclick="pickStatusTab('ready',this)">Unread<span class="tab-count">0</span></span>
+        <span class="tab" onclick="pickStatusTab('signed',this)">Reviewed<span class="tab-count">0</span></span>
       </div>
       <div class="toolbar">
         <div class="search-box"><i class="ti ti-search"></i><input id="caseSearch" class="search-input" placeholder="Search by case number" oninput="setSearch(this.value)"></div>
@@ -1749,11 +1751,11 @@ function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join(
 var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-neutral'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
-function caseMatch(c){
+function caseMatch(c,skipStatus){
   if(state.determination && c.det!==state.determination) return false;
   if(state.priority && c.priority!==state.priority) return false;
   if(state.cpt && (c.cpt||'').split(/,\s*/).indexOf(state.cpt)<0) return false;
-  if(state.status && c.status!==state.status) return false;
+  if(!skipStatus && state.status && c.status!==state.status) return false;
   if(state.reviewer.length && state.reviewer.indexOf(c.reviewer)<0) return false;
   if(state.search && c.id.toLowerCase().indexOf(state.search.toLowerCase())<0) return false;
   if(state.date==='today' && c.day!==18) return false;
@@ -1824,6 +1826,10 @@ function applyFilters(){
   rb.innerHTML=(rn===0?'Reviewer':(rn===1?state.reviewer[0]:'Reviewer ('+rn+')'))+' <i class="ti ti-chevron-down"></i>';
   rb.classList.toggle('has-val',rn>0);
   renderReviewerMenu();
+  var base=CASES.filter(function(c){return caseMatch(c,true);});
+  var cReady=0,cSigned=0; base.forEach(function(c){ if(c.status==='ready')cReady++; else if(c.status==='signed')cSigned++; });
+  var tcs=document.querySelectorAll('#caseTabs .tab-count');
+  if(tcs.length>=3){ tcs[0].textContent=base.length; tcs[1].textContent=cReady; tcs[2].textContent=cSigned; }
   var tabs=document.querySelectorAll('#caseTabs .tab');
   tabs.forEach(function(t){t.classList.remove('active');});
   if(state.status==='') tabs[0].classList.add('active');
