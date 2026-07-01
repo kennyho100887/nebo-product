@@ -411,8 +411,13 @@ textarea{resize:none}
 .cc-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .cc-label{font-size:11px;letter-spacing:.02em;color:var(--text-3);min-width:78px}
 .cc-chip{font-family:var(--mono);font-size:11px;background:var(--chip-bg);color:var(--chip-fg);padding:3px 9px;border-radius:var(--r)}
-.cpt-cell{display:flex;flex-wrap:wrap;gap:5px}
-.cpt-cell .cpt-more{color:var(--text-3);font-family:var(--mono);font-size:11px;align-self:center}
+.cpt-cell{display:flex;flex-wrap:nowrap;gap:5px;align-items:center}
+.cpt-cell .cc-chip{flex-shrink:0}
+.cpt-cell .cpt-more{color:var(--text-3);font-family:var(--mono);font-size:11px;flex-shrink:0}
+.ccard-cpt.cpt-cell{flex-wrap:wrap}
+.rev-item{display:flex;align-items:center}
+.rev-check{margin-left:auto;color:var(--accent-fg);font-size:14px;display:none;flex-shrink:0}
+.rev-item.active .rev-check{display:block}
 .info-codes{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .case-id-lg{font-size:22px;font-weight:500;font-family:var(--mono);display:flex;align-items:center;gap:10px}
 .type-tag{font-size:11px;color:var(--text-2);background:var(--chip-bg);padding:2px 8px;border-radius:var(--r);font-family:var(--sans)}
@@ -1016,13 +1021,14 @@ textarea{resize:none}
       </div>
       <div class="tabs" id="caseTabs">
         <span class="tab active" onclick="pickStatusTab('',this)">All</span>
-        <span class="tab" onclick="pickStatusTab('ready',this)">Pending</span>
+        <span class="tab" onclick="pickStatusTab('ready',this)">Unread</span>
+        <span class="tab" onclick="pickStatusTab('signed',this)">Reviewed</span>
       </div>
       <div class="toolbar">
         <div class="search-box"><i class="ti ti-search"></i><input id="caseSearch" class="search-input" placeholder="Search by case number" oninput="setSearch(this.value)"></div>
         <button class="tool filter-trigger" onclick="openFilterPanel()" aria-label="Filters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="filter-badge" id="filterBadge"></span></button>
         <div class="filter">
-          <button class="tool" id="btn-determination" onclick="toggleMenu(this)">Determination <i class="ti ti-chevron-down"></i></button>
+          <button class="tool" id="btn-determination" onclick="toggleMenu(this)">Recommendation <i class="ti ti-chevron-down"></i></button>
           <div class="menu">
         <div class="menu-item" onclick="setFilter('determination','')">Any</div>
         <div class="menu-item" onclick="setFilter('determination','approved')">Approved</div>
@@ -1042,14 +1048,30 @@ textarea{resize:none}
           </div>
         </div>
         <div class="filter">
+          <button class="tool" id="btn-cpt" onclick="toggleMenu(this)">CPT <i class="ti ti-chevron-down"></i></button>
+          <div class="menu">
+            <div class="menu-item" onclick="setFilter('cpt','')">Any</div>
+            <div class="menu-item" onclick="setFilter('cpt','27447')">27447</div>
+            <div class="menu-item" onclick="setFilter('cpt','29881')">29881</div>
+            <div class="menu-item" onclick="setFilter('cpt','44388')">44388</div>
+            <div class="menu-item" onclick="setFilter('cpt','45378')">45378</div>
+            <div class="menu-item" onclick="setFilter('cpt','62323')">62323</div>
+            <div class="menu-item" onclick="setFilter('cpt','63650')">63650</div>
+            <div class="menu-item" onclick="setFilter('cpt','64483')">64483</div>
+            <div class="menu-item" onclick="setFilter('cpt','70553')">70553</div>
+            <div class="menu-item" onclick="setFilter('cpt','72148')">72148</div>
+            <div class="menu-item" onclick="setFilter('cpt','99213')">99213</div>
+          </div>
+        </div>
+        <div class="filter">
           <button class="tool" id="btn-reviewer" onclick="toggleMenu(this)">Reviewer <i class="ti ti-chevron-down"></i></button>
           <div class="menu">
-            <div class="menu-item" onclick="setFilter('reviewer','')">Anyone</div>
-            <div class="menu-item" onclick="setFilter('reviewer','Alex R.')">Alex R. (me)</div>
-            <div class="menu-item" onclick="setFilter('reviewer','Jordan C.')">Jordan C.</div>
-            <div class="menu-item" onclick="setFilter('reviewer','Maya O.')">Maya O.</div>
-            <div class="menu-item" onclick="setFilter('reviewer','Sara P.')">Sara P.</div>
-            <div class="menu-item" onclick="setFilter('reviewer','Unassigned')">Unassigned</div>
+            <div class="menu-item rev-item" data-rev="" onclick="toggleReviewer('')">Anyone<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Alex R." onclick="toggleReviewer('Alex R.')">Alex R. (me)<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Jordan C." onclick="toggleReviewer('Jordan C.')">Jordan C.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Maya O." onclick="toggleReviewer('Maya O.')">Maya O.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Sara P." onclick="toggleReviewer('Sara P.')">Sara P.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Unassigned" onclick="toggleReviewer('Unassigned')">Unassigned<i class="ti ti-check rev-check"></i></div>
           </div>
         </div>
         <div class="filter">
@@ -1071,11 +1093,11 @@ textarea{resize:none}
       </aside>
       <table id="caseTable">
         <thead><tr>
-          <th class="sortable" data-sort="id" style="width:30%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
-          <th class="sortable" data-sort="day" style="width:13%" onclick="setSort('day')">Submitted <i class="ti ti-chevron-down caret"></i></th>
-          <th style="width:15%">CPT</th>
-          <th style="width:20%">Reviewer</th>
-          <th style="width:22%">Determination</th>
+          <th class="sortable" data-sort="id" style="width:21%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
+          <th class="sortable" data-sort="day" style="width:11%" onclick="setSort('day')">Submitted <i class="ti ti-chevron-down caret"></i></th>
+          <th style="width:26%">CPT</th>
+          <th style="width:18%">Reviewer</th>
+          <th style="width:24%">Recommendation</th>
         </tr></thead>
         <tbody id="caseBody"></tbody>
       </table>
@@ -1728,12 +1750,13 @@ CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned'
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
 var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-neutral'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
-var state={determination:'',priority:'',status:'',reviewer:'',date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
+var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
 function caseMatch(c){
   if(state.determination && c.det!==state.determination) return false;
   if(state.priority && c.priority!==state.priority) return false;
+  if(state.cpt && (c.cpt||'').split(/,\s*/).indexOf(state.cpt)<0) return false;
   if(state.status && c.status!==state.status) return false;
-  if(state.reviewer && c.reviewer!==state.reviewer) return false;
+  if(state.reviewer.length && state.reviewer.indexOf(c.reviewer)<0) return false;
   if(state.search && c.id.toLowerCase().indexOf(state.search.toLowerCase())<0) return false;
   if(state.date==='today' && c.day!==18) return false;
   if(state.date==='7d' && c.day<12) return false;
@@ -1787,21 +1810,27 @@ function applyFilters(){
   pg+='<span class="pg" onclick="gotoPage('+Math.min(pages,state.page+1)+')"><i class="ti ti-chevron-right"></i></span>';
   document.getElementById('casePages').innerHTML=pg;
   var chips=[];
-  ['determination','priority','status','reviewer','date'].forEach(function(key){ if(state[key]) chips.push('<span class="fchip" onclick="removeFilter(\''+key+'\')">'+labels[key][state[key]]+' <i class="ti ti-x"></i></span>'); });
+  ['determination','priority','cpt','status','date'].forEach(function(key){ if(state[key]) chips.push('<span class="fchip" onclick="removeFilter(\''+key+'\')">'+((labels[key]&&labels[key][state[key]])||state[key])+' <i class="ti ti-x"></i></span>'); });
+  state.reviewer.forEach(function(name){ chips.push('<span class="fchip" onclick="toggleReviewer(\''+name+'\')">'+name+' <i class="ti ti-x"></i></span>'); });
   if(state.search) chips.push('<span class="fchip" onclick="clearSearch()">Search: '+escHtml(state.search)+' <i class="ti ti-x"></i></span>');
   var box=document.getElementById('caseChips');
   if(chips.length){ box.innerHTML=chips.join('')+'<span class="clear" onclick="clearAll()">Clear all</span>'; box.style.display='flex'; }
   else { box.innerHTML=''; box.style.display='none'; }
   updateFilterBadge();
-  [['determination','btn-determination','Determination'],['priority','btn-priority','Priority'],['reviewer','btn-reviewer','Reviewer'],['date','btn-date','Date']].forEach(function(t){
+  [['determination','btn-determination','Recommendation'],['priority','btn-priority','Priority'],['cpt','btn-cpt','CPT'],['date','btn-date','Date']].forEach(function(t){
     var btn=document.getElementById(t[1]), val=state[t[0]];
-    btn.innerHTML=(val?labels[t[0]][val]:t[2])+' <i class="ti ti-chevron-down"></i>';
+    btn.innerHTML=(val?((labels[t[0]]&&labels[t[0]][val])||val):t[2])+' <i class="ti ti-chevron-down"></i>';
     btn.classList.toggle('has-val',!!val);
   });
+  var rb=document.getElementById('btn-reviewer'), rn=state.reviewer.length;
+  rb.innerHTML=(rn===0?'Reviewer':(rn===1?state.reviewer[0]:'Reviewer ('+rn+')'))+' <i class="ti ti-chevron-down"></i>';
+  rb.classList.toggle('has-val',rn>0);
+  renderReviewerMenu();
   var tabs=document.querySelectorAll('#caseTabs .tab');
   tabs.forEach(function(t){t.classList.remove('active');});
   if(state.status==='') tabs[0].classList.add('active');
   else if(state.status==='ready') tabs[1].classList.add('active');
+  else if(state.status==='signed') tabs[2].classList.add('active');
   document.querySelectorAll('#cases th.sortable').forEach(function(th){
     var sk=th.getAttribute('data-sort');
     th.classList.toggle('sorted',sk===state.sortKey);
@@ -1815,29 +1844,32 @@ function setFilter(k,v){ state[k]=v; state.page=1; closeMenus(); applyFilters();
 function pickStatusTab(v,el){ state.status=v; state.page=1; applyFilters(); }
 function setSearch(v){ state.search=v.trim(); state.page=1; applyFilters(); }
 function clearSearch(){ state.search=''; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
-function removeFilter(k){ state[k]=''; state.page=1; applyFilters(); }
-function clearAll(){ state.determination=state.priority=state.status=state.date=state.search=''; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
+function removeFilter(k){ if(k==='reviewer') state.reviewer=[]; else state[k]=''; state.page=1; applyFilters(); }
+function toggleReviewer(name){ if(name===''){ state.reviewer=[]; } else { var i=state.reviewer.indexOf(name); if(i>-1) state.reviewer.splice(i,1); else state.reviewer.push(name); } state.page=1; applyFilters(); }
+function renderReviewerMenu(){ document.querySelectorAll('#btn-reviewer ~ .menu .rev-item, .rev-item').forEach(function(it){ var v=it.getAttribute('data-rev'); var on = v==='' ? state.reviewer.length===0 : state.reviewer.indexOf(v)>-1; it.classList.toggle('active', on); }); }
+function clearAll(){ state.determination=state.priority=state.cpt=state.status=state.date=state.search=''; state.reviewer=[]; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
 function setSort(k){ if(state.sortKey===k){ state.sortDir=state.sortDir==='asc'?'desc':'asc'; } else { state.sortKey=k; state.sortDir=(k==='day')?'desc':'asc'; } applyFilters(); }
 function gotoPage(p){ state.page=p; applyFilters(); }
 var FILTER_DEFS=[
-  {key:'determination',label:'Determination',opts:[['','Any'],['approved','Approved'],['consider','Consider to approve'],['further','Further review'],['nopa','No PA needed']]},
+  {key:'determination',label:'Recommendation',opts:[['','Any'],['approved','Approved'],['consider','Consider to approve'],['further','Further review'],['nopa','No PA needed']]},
   {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['high-cost','High cost'],['urgent','Urgent'],['oon','Out of network']]},
+  {key:'cpt',label:'CPT',opts:[['','Any'],['27447','27447'],['29881','29881'],['44388','44388'],['45378','45378'],['62323','62323'],['63650','63650'],['64483','64483'],['70553','70553'],['72148','72148'],['99213','99213']]},
   {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
   {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
 ];
-function activeFilterCount(){ return ['determination','priority','status','reviewer','date'].filter(function(k){return state[k];}).length; }
+function activeFilterCount(){ return ['determination','priority','cpt','date'].filter(function(k){return state[k];}).length + (state.reviewer.length?1:0); }
 function updateFilterBadge(){ var b=document.getElementById('filterBadge'); if(!b) return; var n=activeFilterCount(); b.textContent=n; b.style.display=n?'inline-flex':'none'; }
 function renderFilterPanel(){
   var html=FILTER_DEFS.map(function(g){
     return '<div class="fp-group"><div class="fp-glabel">'+g.label+'</div>'+g.opts.map(function(o){
-      var active=(state[g.key]||'')===o[0];
+      var active = g.key==='reviewer' ? (o[0]===''? state.reviewer.length===0 : state.reviewer.indexOf(o[0])>-1) : (state[g.key]||'')===o[0];
       return '<button class="fp-opt'+(active?' active':'')+'" onclick="pickPanelFilter(\''+g.key+'\',\''+o[0]+'\')">'+o[1]+'<i class="ti ti-check fp-check"></i></button>';
     }).join('')+'</div>';
   }).join('');
   document.getElementById('filterPanelBody').innerHTML=html;
   updateFilterBadge();
 }
-function pickPanelFilter(key,val){ state[key]=val; state.page=1; applyFilters(); renderFilterPanel(); }
+function pickPanelFilter(key,val){ if(key==='reviewer'){ if(val===''){ state.reviewer=[]; } else { var i=state.reviewer.indexOf(val); if(i>-1) state.reviewer.splice(i,1); else state.reviewer.push(val); } } else { state[key]=val; } state.page=1; applyFilters(); renderFilterPanel(); }
 function openFilterPanel(){ renderFilterPanel(); document.getElementById('filterPanel').classList.add('open'); document.getElementById('filterBackdrop').classList.add('open'); }
 function closeFilterPanel(){ var p=document.getElementById('filterPanel'); if(p) p.classList.remove('open'); var b=document.getElementById('filterBackdrop'); if(b) b.classList.remove('open'); }
 var DEEP_ID='EPS-00088552';
