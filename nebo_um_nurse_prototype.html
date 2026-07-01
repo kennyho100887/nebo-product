@@ -1724,7 +1724,7 @@ var CASES=[
 var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
-var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
+var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-neutral'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',status:'',reviewer:'',date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
 function caseMatch(c){
@@ -1742,7 +1742,7 @@ function rowHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
   var det;
   if(c.status==='processing') det='<span class="muted">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-neutral">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td class="mono" style="color:var(--text-2)">'+c.cpt+'</td><td>'+rv+'</td><td>'+det+'</td></tr>';
@@ -1751,7 +1751,7 @@ function cardHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'';
   var det;
   if(c.status==='processing') det='<span class="muted" style="font-size:11px">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-neutral">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv=c.reviewer==='Unassigned'?'<span class="muted" style="font-size:11px">Unassigned</span>':'<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<button class="ccard" onclick="openCase(\''+c.id+'\')"><div class="ccard-head"><span class="ccard-idline">'+dot+'<span class="mono">'+c.id+'</span></span>'+det+'</div><div class="ccard-cpt mono">'+c.cpt+'</div><div class="ccard-foot"><span class="muted">'+c.date+'</span>'+rv+'</div></button>';
@@ -1837,7 +1837,7 @@ var priLabel={standard:'Standard','high-cost':'High cost',urgent:'Urgent',oon:'O
 function caseById(id){ for(var i=0;i<CASES.length;i++){ if(CASES[i].id===id) return CASES[i]; } return null; }
 function detChipHtml(c){
   if(c.status==='processing') return '<span class="chip chip-neutral">Processing</span>';
-  if(c.status==='escalated') return '<span class="chip chip-warn">Further review</span>';
+  if(c.status==='escalated') return '<span class="chip chip-neutral">Further review</span>';
   if(c.status==='signed') return '<span class="chip chip-ok">Signed</span>';
   var d=detMap[c.det]; return d? '<span class="chip '+d[1]+'">'+d[0]+'</span>' : '<span class="muted">-</span>';
 }
