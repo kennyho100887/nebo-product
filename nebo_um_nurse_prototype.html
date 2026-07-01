@@ -283,6 +283,7 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .chip-ok{background:var(--ok-bg);color:var(--ok-fg)}
 .chip-info{background:var(--info-bg);color:var(--info-fg)}
 .chip-neutral{background:var(--chip-bg);color:var(--chip-fg)}
+.chip-consider{background:var(--chip-bg);color:var(--chip-fg);border:1px solid var(--ok-fg)}
 .chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
@@ -985,7 +986,7 @@ textarea{resize:none}
           <div class="row-line"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span><span class="right">awaiting you · 2h</span></div>
         </div>
         <div class="row" onclick="openCase('EPS-00086956')">
-          <div class="row-top"><span class="cid">EPS-00086956</span><span class="chip chip-neutral right">Consider to approve</span></div>
+          <div class="row-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider right">Consider to approve</span></div>
           <div class="row-line"><span class="chip chip-neutral">Out of network</span><span class="right">awaiting you · 4h</span></div>
         </div>
       </div>
@@ -1723,7 +1724,7 @@ var CASES=[
 var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
-var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-neutral'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
+var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Escalated',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',status:'',reviewer:'',date:'',search:'',sortKey:'day',sortDir:'desc',page:1,layout:'list'};
 function caseMatch(c){
