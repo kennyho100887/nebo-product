@@ -288,6 +288,8 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start;margin-top:2px}
 .kan-col{background:color-mix(in srgb, var(--border) 24%, var(--bg));border-radius:12px;padding:12px 12px 14px;min-width:0}
 .kan-col .q-group-head{padding:2px 4px 12px}
+.kan-col .q-group-head .ti{font-size:16px;flex-shrink:0}
+.kan-col .q-group-title{font-size:13px;font-weight:600}
 .kan-cards{display:flex;flex-direction:column;gap:10px}
 .kan-empty{font-size:12px;color:var(--text-3);padding:8px 4px}
 .kan-card{text-align:left;border:0.5px solid var(--border);border-radius:10px;background:var(--bg);padding:12px 13px;cursor:pointer;display:flex;flex-direction:column;gap:9px;font-family:inherit;color:var(--text);width:100%}
@@ -1000,7 +1002,7 @@ textarea{resize:none}
       <div class="page-head"><span class="page-title">Recent queue</span><span class="muted">Tuesday, 18 Mar</span></div>
       <div class="kanban">
         <div class="kan-col">
-          <div class="q-group-head"><span class="q-dot" style="background:var(--danger-fg)"></span><span class="q-group-title">Needs attention</span><span class="q-count">2</span></div>
+          <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Needs attention</span><span class="q-count">2</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00088552')">
               <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn">Further review</span></div>
@@ -1015,7 +1017,7 @@ textarea{resize:none}
           </div>
         </div>
         <div class="kan-col">
-          <div class="q-group-head"><span class="q-dot" style="background:var(--accent-fg)"></span><span class="q-group-title">In progress</span><span class="q-count">1</span></div>
+          <div class="q-group-head"><i class="ti ti-rotate-clockwise" style="color:var(--accent-fg)"></i><span class="q-group-title" style="color:var(--accent-fg)">In progress</span><span class="q-count">1</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-20260605')">
               <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
@@ -1024,7 +1026,7 @@ textarea{resize:none}
           </div>
         </div>
         <div class="kan-col">
-          <div class="q-group-head"><span class="q-dot" style="background:var(--ok-fg)"></span><span class="q-group-title">Recently completed</span><span class="q-count">2</span></div>
+          <div class="q-group-head"><i class="ti ti-check" style="color:var(--ok-fg)"></i><span class="q-group-title" style="color:var(--ok-fg)">Recently completed</span><span class="q-count">2</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00084201')">
               <div class="kan-top"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span></div>
