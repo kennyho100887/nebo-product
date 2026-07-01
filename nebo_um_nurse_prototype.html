@@ -411,6 +411,8 @@ textarea{resize:none}
 .cc-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .cc-label{font-size:11px;letter-spacing:.02em;color:var(--text-3);min-width:78px}
 .cc-chip{font-family:var(--mono);font-size:11px;background:var(--chip-bg);color:var(--chip-fg);padding:3px 9px;border-radius:var(--r)}
+.cpt-cell{display:flex;flex-wrap:wrap;gap:5px}
+.cpt-cell .cpt-more{color:var(--text-3)}
 .info-codes{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .case-id-lg{font-size:22px;font-weight:500;font-family:var(--mono);display:flex;align-items:center;gap:10px}
 .type-tag{font-size:11px;color:var(--text-2);background:var(--chip-bg);padding:2px 8px;border-radius:var(--r);font-family:var(--sans)}
@@ -1678,7 +1680,7 @@ var CASES=[
   {id:'EPS-00088552',day:18,date:'18 Mar',cpt:'72148, 63650',det:'further',status:'ready',priority:'high-cost'},
   {id:'EPS-00086956',day:18,date:'18 Mar',cpt:'72148',det:'consider',status:'ready',priority:'standard'},
   {id:'EPS-00088141',day:17,date:'17 Mar',cpt:'27447',det:'approved',status:'signed',priority:'standard'},
-  {id:'EPS-00087687',day:18,date:'18 Mar',cpt:'45378',det:'approved',status:'ready',priority:'standard'},
+  {id:'EPS-00087687',day:18,date:'18 Mar',cpt:'45378, 45380, 45385, 43239',det:'approved',status:'ready',priority:'standard'},
   {id:'EPS-00087519',day:12,date:'12 Mar',cpt:'27447',det:'approved',status:'signed',priority:'high-cost'},
   {id:'EPS-00087379',day:17,date:'17 Mar',cpt:'70553',det:'further',status:'ready',priority:'oon'},
   {id:'EPS-00086703',day:18,date:'18 Mar',cpt:'45378',det:'approved',status:'signed',priority:'standard'},
@@ -1692,7 +1694,7 @@ var CASES=[
   {id:'EPS-00083194',day:12,date:'12 Mar',cpt:'27447',det:'consider',status:'ready',priority:'oon'},
   {id:'EPS-00082306',day:14,date:'14 Mar',cpt:'62323, 64483',det:'approved',status:'signed',priority:'oon'},
   {id:'EPS-00081410',day:11,date:'11 Mar',cpt:'44388, 44389',det:'further',status:'ready',priority:'high-cost'},
-  {id:'EPS-00080617',day:18,date:'18 Mar',cpt:'70553',det:'approved',status:'ready',priority:'oon'},
+  {id:'EPS-00080617',day:18,date:'18 Mar',cpt:'70553, 70551, 72141, 72156, 70552',det:'approved',status:'ready',priority:'oon'},
   {id:'EPS-00079840',day:11,date:'11 Mar',cpt:'70553',det:'consider',status:'ready',priority:'standard'},
   {id:'EPS-00079737',day:11,date:'11 Mar',cpt:'62323, 64483',det:'nopa',status:'signed',priority:'standard'},
   {id:'EPS-00079434',day:15,date:'15 Mar',cpt:'64483',det:'further',status:'ready',priority:'high-cost'},
@@ -1738,6 +1740,12 @@ function caseMatch(c){
   return true;
 }
 function escHtml(s){return s.replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
+function cptChips(cpt){
+  var arr=(cpt||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
+  var html=arr.slice(0,3).map(function(code){return '<span class="cc-chip">'+code+'</span>';}).join('');
+  if(arr.length>3) html+='<span class="cc-chip cpt-more">+'+(arr.length-3)+'</span>';
+  return html;
+}
 function rowHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
   var det;
@@ -1745,7 +1753,7 @@ function rowHtml(c){
   else if(c.status==='escalated') det='<span class="chip chip-neutral">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
-  return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td class="mono" style="color:var(--text-2)">'+c.cpt+'</td><td>'+rv+'</td><td>'+det+'</td></tr>';
+  return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
 }
 function cardHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'';
@@ -1754,7 +1762,7 @@ function cardHtml(c){
   else if(c.status==='escalated') det='<span class="chip chip-neutral">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv=c.reviewer==='Unassigned'?'<span class="muted" style="font-size:11px">Unassigned</span>':'<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
-  return '<button class="ccard" onclick="openCase(\''+c.id+'\')"><div class="ccard-head"><span class="ccard-idline">'+dot+'<span class="mono">'+c.id+'</span></span>'+det+'</div><div class="ccard-cpt mono">'+c.cpt+'</div><div class="ccard-foot"><span class="muted">'+c.date+'</span>'+rv+'</div></button>';
+  return '<button class="ccard" onclick="openCase(\''+c.id+'\')"><div class="ccard-head"><span class="ccard-idline">'+dot+'<span class="mono">'+c.id+'</span></span>'+det+'</div><div class="ccard-cpt cpt-cell">'+cptChips(c.cpt)+'</div><div class="ccard-foot"><span class="muted">'+c.date+'</span>'+rv+'</div></button>';
 }
 function toggleSidebar(){ document.querySelector('.app').classList.toggle('collapsed'); }
 function setLayout(mode){
