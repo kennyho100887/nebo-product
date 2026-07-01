@@ -1042,9 +1042,7 @@ textarea{resize:none}
           <div class="menu">
         <div class="menu-item" onclick="setFilter('priority','')"><span class="mdot" style="background:transparent"></span>Any</div>
         <div class="menu-item" onclick="setFilter('priority','standard')"><span class="mdot" style="background:var(--text-3)"></span>Standard</div>
-        <div class="menu-item" onclick="setFilter('priority','high-cost')"><span class="mdot" style="background:var(--warn-fg)"></span>High cost</div>
         <div class="menu-item" onclick="setFilter('priority','urgent')"><span class="mdot" style="background:var(--danger-fg)"></span>Urgent</div>
-        <div class="menu-item" onclick="setFilter('priority','oon')"><span class="mdot" style="background:var(--info-fg)"></span>Out of network</div>
           </div>
         </div>
         <div class="filter">
@@ -1852,7 +1850,7 @@ function setSort(k){ if(state.sortKey===k){ state.sortDir=state.sortDir==='asc'?
 function gotoPage(p){ state.page=p; applyFilters(); }
 var FILTER_DEFS=[
   {key:'determination',label:'Recommendation',opts:[['','Any'],['approved','Approved'],['consider','Consider to approve'],['further','Further review'],['nopa','No PA needed']]},
-  {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['high-cost','High cost'],['urgent','Urgent'],['oon','Out of network']]},
+  {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['urgent','Urgent']]},
   {key:'cpt',label:'CPT',opts:[['','Any'],['27447','27447'],['29881','29881'],['44388','44388'],['45378','45378'],['62323','62323'],['63650','63650'],['64483','64483'],['70553','70553'],['72148','72148'],['99213','99213']]},
   {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
   {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
