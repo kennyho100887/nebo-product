@@ -575,6 +575,8 @@ textarea{resize:none}
 .upl-donerow{font-size:12px;color:var(--text-2);margin-bottom:12px;line-height:1.4}
 .upl-cta{width:100%;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:9px 12px;font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer}
 .upl-cta:hover{filter:brightness(1.05)}
+.upl-min i{transition:transform .2s}
+.upl.collapsed .upl-min i{transform:rotate(180deg)}
 .upl.collapsed .upl-body{display:none}
 .pv-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:0.5px solid var(--border)}
 .crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3);min-width:0;flex-wrap:wrap}
@@ -1633,7 +1635,7 @@ function uplDone(prof){
     +'<div class="upl-body"><div class="upl-donerow">Nebo finished scanning &amp; assessing this case.</div>'
     +'<button class="upl-cta" onclick="uplOpen()">See case details</button></div>';
 }
-function uplToggle(){ var b=document.getElementById('uplBanner'); b.classList.toggle('collapsed'); var ic=b.querySelector('.upl-min i'); if(ic) ic.className=b.classList.contains('collapsed')?'ti ti-chevron-up':'ti ti-chevron-down'; }
+function uplToggle(){ document.getElementById('uplBanner').classList.toggle('collapsed'); }
 function uplClose(){ var b=document.getElementById('uplBanner'); b.classList.remove('show'); if(uplTimer){ clearInterval(uplTimer); uplTimer=null; } }
 function uplOpen(){
   var prof=uplProf; uplClose(); if(!prof) return;
