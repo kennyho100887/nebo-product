@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-fs="m">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -176,9 +176,13 @@
 .ibar-val{font-size:12.5px;font-weight:500;color:var(--text);width:22px;text-align:right;flex-shrink:0}
 @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}}
 *{box-sizing:border-box}
-body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text);-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:var(--sans);font-size:14px;background:var(--bg-page);color:var(--text);-webkit-font-smoothing:antialiased}
+html[data-fs="s"] .main,html[data-fs="s"] .overlay{zoom:1}
+html[data-fs="m"] .main,html[data-fs="m"] .overlay{zoom:1.06}
+html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .app{display:flex;min-height:100vh;gap:10px;padding:10px}
-.sidebar{width:212px;flex-shrink:0;height:calc(100vh - 20px);position:sticky;top:10px;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column}
+.sidebar{width:212px;flex-shrink:0;height:calc(100vh - 20px);position:sticky;top:10px;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none}
+.sidebar::-webkit-scrollbar{display:none}
 .sb-top{flex-shrink:0}
 .sb-mid{flex:1;min-height:0;overflow-y:auto;margin:6px -4px;padding:0 4px}
 .sb-bottom{flex-shrink:0;padding-top:10px}
@@ -203,9 +207,11 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .sb-case:hover{background:var(--surface)}
 .sb-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .sb-cid{font-family:var(--mono);font-size:11px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.btn-primary{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:10px 12px;font-size:13px;font-weight:500;font-family:inherit;width:100%;cursor:pointer;margin-bottom:12px}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:9px 12px;font-size:13px;font-weight:500;font-family:inherit;width:100%;cursor:pointer;margin-bottom:8px}
 .btn-primary:hover{filter:brightness(1.05)}
 .theme-seg{display:flex;gap:2px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:2px;margin-bottom:2px}
+.fs-seg{display:flex;gap:2px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:2px;margin-top:6px}
+.fs-seg .seg-btn{font-weight:500}
 .seg-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;border:none;background:none;font-family:inherit;font-size:11px;color:var(--text-3);padding:5px 0;border-radius:6px;cursor:pointer;transition:color .12s}
 .seg-btn i{font-size:13px}
 .seg-btn:hover{color:var(--text-2)}
@@ -255,6 +261,8 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .app.collapsed .user-wrap{padding:16px 0;margin-top:6px}
 .app.collapsed .theme-seg{flex-direction:column;align-items:center;gap:3px;width:38px;margin:14px auto 0;padding:3px}
 .app.collapsed .seg-btn{width:100%;justify-content:center;gap:0;font-size:0;padding:8px 0}
+.app.collapsed .fs-seg{flex-direction:column;align-items:center;gap:3px;width:38px;margin:8px auto 0;padding:3px}
+.app.collapsed .fs-seg .seg-btn{font-size:11px}
 .app.collapsed .sidebar [data-tip]{position:relative}
 .app.collapsed .sidebar [data-tip]:hover::after{content:attr(data-tip);position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);background:var(--text);color:var(--bg);font-size:12px;font-weight:500;line-height:1;white-space:nowrap;padding:6px 9px;border-radius:6px;z-index:60;pointer-events:none;box-shadow:0 2px 10px rgba(0,0,0,.2)}
 .screen{display:none}
@@ -913,6 +921,11 @@ textarea{resize:none}
         <button class="seg-btn" onclick="setTheme('light',this)" data-tip="Light"><i class="ti ti-sun"></i>Light</button>
         <button class="seg-btn" onclick="setTheme('dark',this)" data-tip="Dark"><i class="ti ti-moon"></i>Dark</button>
       </div>
+      <div class="fs-seg" role="group" aria-label="Text size">
+        <button class="seg-btn" onclick="setFontSize('s',this)" data-tip="Small text"><span style="font-size:11px">A</span></button>
+        <button class="seg-btn is-active" onclick="setFontSize('m',this)" data-tip="Default text"><span style="font-size:13px">A</span></button>
+        <button class="seg-btn" onclick="setFontSize('l',this)" data-tip="Large text"><span style="font-size:15px">A</span></button>
+      </div>
     </div>
   </aside>
 
@@ -1390,6 +1403,14 @@ textarea{resize:none}
               <button class="seg-btn" onclick="setTheme('dark',this)"><i class="ti ti-moon"></i>Dark</button>
             </div>
           </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Text size</div><div class="set-row-sub">Default font size across the app.</div></div>
+            <div class="fs-seg" style="margin:0;min-width:172px">
+              <button class="seg-btn" onclick="setFontSize('s',this)"><span style="font-size:11px">A</span> Small</button>
+              <button class="seg-btn is-active" onclick="setFontSize('m',this)"><span style="font-size:13px">A</span> Default</button>
+              <button class="seg-btn" onclick="setFontSize('l',this)"><span style="font-size:15px">A</span> Large</button>
+            </div>
+          </div>
         </div>
 
         <div class="set-card">
@@ -1731,6 +1752,13 @@ function setTheme(mode, btn){
     seg.querySelectorAll('.seg-btn').forEach(function(b,i){ b.classList.toggle('is-active', i===order.indexOf(mode)); });
   });
 }
+function setFontSize(size, btn){
+  document.documentElement.setAttribute('data-fs', size);
+  var order=['s','m','l'];
+  document.querySelectorAll('.fs-seg').forEach(function(seg){
+    seg.querySelectorAll('.seg-btn').forEach(function(b,i){ b.classList.toggle('is-active', i===order.indexOf(size)); });
+  });
+}
 function openSettings(){ closeUserMenu(); var act=document.querySelector('.screen.active'); origin=act?act.id:'queue'; if(origin==='settings'||origin==='details'||origin==='preview'||origin==='letter') origin='queue'; go('settings'); }
 function toggleSet(el){ el.classList.toggle('on'); }
 function setDefaultView(btn){ btn.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active'); }
@@ -1984,7 +2012,6 @@ function renderActions(state){
     else {
       acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'});
       acts.push({l:'Approve',i:'ti-check',fn:"openLetter('approval')",cls:'act-approve act-decision',mcls:'da-approve'});
-      acts.push({l:'Deny',i:'ti-x',fn:"openLetter('denial')",cls:'act-deny act-decision',mcls:'da-deny'});
     }
   }
   var box=document.getElementById('detailActions');
