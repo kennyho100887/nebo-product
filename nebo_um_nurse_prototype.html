@@ -1120,11 +1120,12 @@ textarea{resize:none}
       </aside>
       <table id="caseTable">
         <thead><tr>
-          <th class="sortable" data-sort="id" style="width:21%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
-          <th class="sortable" data-sort="day" style="width:11%" onclick="setSort('day')">Submitted <i class="ti ti-chevron-down caret"></i></th>
-          <th style="width:26%">CPT</th>
-          <th style="width:18%">Reviewer</th>
-          <th style="width:24%">Recommendation</th>
+          <th class="sortable" data-sort="id" style="width:17%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
+          <th class="sortable" data-sort="day" style="width:9%" onclick="setSort('day')">Submitted <i class="ti ti-chevron-down caret"></i></th>
+          <th style="width:21%">CPT</th>
+          <th style="width:21%">ICD-10</th>
+          <th style="width:14%">Reviewer</th>
+          <th style="width:18%">Recommendation</th>
         </tr></thead>
         <tbody id="caseBody"></tbody>
       </table>
@@ -1815,6 +1816,22 @@ function cptChips(cpt){
   if(arr.length>3) html+='<span class="cpt-more">+'+(arr.length-3)+'</span>';
   return html;
 }
+var ICD_MAP={
+  '72148':['M48.062','M54.16','M51.16'],'63650':['M54.16','M51.16'],
+  '45378':['K63.5','K57.30'],'45380':['K63.5','D12.6'],'45385':['K57.30','D12.6'],'43239':['K21.9','K29.70'],
+  '27447':['M17.11','M25.561'],'73721':['M17.11','M25.561'],
+  '70553':['R51.9','G43.909'],'70551':['R51.9'],'70552':['G43.909'],'72141':['M50.20','M54.2'],'72156':['M54.5'],
+  '62323':['M54.16','M51.16'],'64483':['M54.16','M51.16'],
+  '99213':['R51.9','Z00.00'],'44388':['K63.5','K57.30'],'44389':['K57.30'],
+  '29881':['M17.11','M23.51'],'29877':['M23.51','M17.11']
+};
+function icdFor(cpt){
+  var out=[];
+  (cpt||'').split(',').map(function(s){return s.trim();}).filter(Boolean).forEach(function(code){
+    (ICD_MAP[code]||[]).forEach(function(icd){ if(out.indexOf(icd)<0) out.push(icd); });
+  });
+  return out.join(', ');
+}
 function rowHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
   var det;
@@ -1822,7 +1839,7 @@ function rowHtml(c){
   else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
-  return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
+  return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td><div class="cpt-cell">'+cptChips(icdFor(c.cpt))+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
 }
 function toggleSidebar(){ document.querySelector('.app').classList.toggle('collapsed'); }
 function applyFilters(){
@@ -1833,7 +1850,7 @@ function applyFilters(){
   if(state.page>pages) state.page=pages;
   var start=(state.page-1)*size, slice=arr.slice(start,start+size);
   var body=document.getElementById('caseBody');
-  body.innerHTML = slice.length? slice.map(rowHtml).join('') : '<tr class="empty-row"><td colspan="5">No cases match these filters</td></tr>';
+  body.innerHTML = slice.length? slice.map(rowHtml).join('') : '<tr class="empty-row"><td colspan="6">No cases match these filters</td></tr>';
   document.getElementById('caseTotal').textContent = total.toLocaleString();
   var pg='<span class="pg" onclick="gotoPage('+Math.max(1,state.page-1)+')"><i class="ti ti-chevron-left"></i></span>';
   for(var p=1;p<=pages;p++) pg+='<span class="pg'+(p===state.page?' active':'')+'" onclick="gotoPage('+p+')">'+p+'</span>';
