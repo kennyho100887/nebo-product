@@ -1527,13 +1527,13 @@ textarea{resize:none}
       <div class="modal-title">Copy the case</div>
       <button class="modal-close" onclick="closeDup()" aria-label="Close"><i class="ti ti-x"></i></button>
     </div>
-    <p class="dup-desc">This case has already been uploaded and processed.</p>
+    <p class="dup-desc">Create a new case with the member, provider, and requested services copied from this one. You can review and edit everything before submitting.</p>
     <div class="dup-card">
-      <div class="dup-icon"><i class="ti ti-file-text"></i></div>
-      <div class="dup-by"><div class="dup-label">Uploaded by</div><div class="dup-name">Alex R.</div></div>
-      <div class="dup-when"><div class="d">18 Mar 2026</div><div class="t">09:30 UTC</div></div>
+      <div class="dup-icon"><i class="ti ti-copy"></i></div>
+      <div class="dup-by"><div class="dup-label">Copying from</div><div class="dup-name" id="dupSrc">EPS-00088552</div></div>
+      <div class="dup-when"><div class="d">Member & services</div><div class="t">will be copied</div></div>
     </div>
-    <button class="btn-submit dup-btn" onclick="closeDup()">View existing case</button>
+    <button class="btn-submit dup-btn" onclick="createCopy()">Create copy</button>
   </div>
 </div>
 
@@ -1569,7 +1569,8 @@ document.querySelectorAll('[data-action="open-new"]').forEach(function(el){
   el.addEventListener('click', openModal);
 });
 function openModal(){ document.getElementById('overlay').classList.add('open'); }
-function openDup(){ document.getElementById('dupOverlay').classList.add('open'); }
+function openDup(){ var id=((document.getElementById('caseIdLg')||{}).textContent||'').trim().split(/\s+/)[0]; var src=document.getElementById('dupSrc'); if(src&&id) src.textContent=id; document.getElementById('dupOverlay').classList.add('open'); }
+function createCopy(){ closeDup(); showToast('Case copied to a new draft'); }
 function openFb(){ document.getElementById('fbOverlay').classList.add('open'); }
 function closeFb(){ document.getElementById('fbOverlay').classList.remove('open'); }
 function fbSeg(btn){ btn.parentNode.querySelectorAll('.fb-seg-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); }
