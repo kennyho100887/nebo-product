@@ -518,15 +518,6 @@ textarea{resize:none}
 .card{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px}
 .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
 .card-title-sm{font-size:14px;font-weight:500}
-.tl{position:relative}
-.tl-item{position:relative;padding-left:20px;padding-bottom:15px}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:"";position:absolute;left:3px;top:3px;width:7px;height:7px;border-radius:50%;background:var(--text-3);z-index:1}
-.tl-item.done::before{background:var(--ok-fg)}
-.tl-item.current::before{background:var(--accent-fg);box-shadow:0 0 0 3px var(--accent-bg)}
-.tl-item:not(:last-child)::after{content:"";position:absolute;left:6px;top:10px;bottom:-2px;width:1px;background:var(--border-2)}
-.tl-title{font-size:12px;color:var(--text);font-weight:500}
-.tl-meta{font-size:11px;color:var(--text-3);margin-top:2px;line-height:1.4}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
 .info-item .info-label{font-size:11px;color:var(--text-3)}
 .info-item .info-val{font-size:13px;margin-top:1px}
@@ -1266,16 +1257,6 @@ textarea{resize:none}
               <div class="doc-row" onclick="openFile('Clinical notes - lumbar.pdf')"><i class="ti ti-file-text"></i><span class="name">Clinical notes - lumbar.pdf</span><i class="ti ti-download dl" onclick="event.stopPropagation()"></i></div>
             </div>
           </div>
-          <div class="side-card">
-            <div class="card-head"><span class="card-title-sm">Activity</span></div>
-            <div class="tl">
-              <div class="tl-item done"><div class="tl-title">Case submitted</div><div class="tl-meta">Alex R. &middot; 18 Mar 2026, 09:30 UTC</div></div>
-              <div class="tl-item done"><div class="tl-title">Documents retrieved</div><div class="tl-meta">Automatic retrieval &middot; 09:31 UTC</div></div>
-              <div class="tl-item done"><div class="tl-title">Nebo assessment completed</div><div class="tl-meta">2 services assessed &middot; 09:34 UTC</div></div>
-              <div class="tl-item done"><div class="tl-title">Assigned for review</div><div class="tl-meta">Alex R. &middot; 10:12 UTC</div></div>
-              <div class="tl-item current"><div class="tl-title">Awaiting your review</div><div class="tl-meta">Review by 20 Mar 2026</div></div>
-            </div>
-          </div>
         </div>
         <div id="stateRail" style="display:none"></div>
         </aside>
@@ -1929,20 +1910,16 @@ function detChipHtml(c){
 var PROFILES={
  'EPS-00086956':{state:'approvable',priority:'oon',date:'17 Mar 2026',reviewBy:'19 Mar 2026',reviewer:'Alex R.',createdBy:'Jordan C.',
    patient:{name:'Marcus Bell',memberId:'AGL773201845',dob:'09/14/1958',provider:'Dr. Karen Liu',providerNpi:'1487263901',facility:'Mercy Orthopedic Center',facilityNpi:'1356802471'},
-   cpts:[{code:'73721',det:'approved',desc:'MRI knee, without contrast'},{code:'27447',det:'approved',desc:'Total knee arthroplasty'}],icds:['M17.11','M25.561'],
-   activity:[{t:'Case submitted',m:'Jordan C. \u00b7 17 Mar 2026, 08:12 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:13 UTC'},{t:'Nebo assessment completed',m:'2 services assessed \u00b7 08:16 UTC'},{t:'Assigned for review',m:'Alex R. \u00b7 09:40 UTC'},{t:'Awaiting your review',m:'Review by 19 Mar 2026',cur:true}]},
+   cpts:[{code:'73721',det:'approved',desc:'MRI knee, without contrast'},{code:'27447',det:'approved',desc:'Total knee arthroplasty'}],icds:['M17.11','M25.561']},
  'EPS-00084437':{state:'review',priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',reviewer:'Alex R.',createdBy:'Sara P.',
    patient:{name:'Elena Vasquez',memberId:'AGL902145673',dob:'03/22/1979',provider:'Dr. Omar Haddad',providerNpi:'1592048372',facility:'Riverside Imaging',facilityNpi:'1238904756'},
-   cpts:[{code:'70553',det:'further',desc:'MRI brain, with and without contrast'}],icds:['R51.9','G43.909'],
-   activity:[{t:'Case submitted',m:'Sara P. \u00b7 18 Mar 2026, 08:40 UTC'},{t:'Documents retrieved',m:'Automatic retrieval \u00b7 08:41 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 08:44 UTC'},{t:'Awaiting your review',m:'Review by 20 Mar 2026',cur:true}]},
+   cpts:[{code:'70553',det:'further',desc:'MRI brain, with and without contrast'}],icds:['R51.9','G43.909']},
  'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'Maya O.',createdBy:'Maya O.',escalatedAt:'18 Mar 2026, 14:05 UTC',
    patient:{name:'David Okonkwo',memberId:'AGL651837209',dob:'11/30/1965',provider:'Dr. Priya Nair',providerNpi:'1748293016',facility:'Summit Cardiology',facilityNpi:'1429385017'},
-   cpts:[{code:'75571',det:'further',desc:'CT heart, coronary calcium scoring'}],icds:['I25.10','R07.9'],
-   activity:[{t:'Case submitted',m:'Maya O. \u00b7 17 Mar 2026, 13:20 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 13:24 UTC'},{t:'Flagged for further review',m:'18 Mar 2026, 14:05 UTC'},{t:'Awaiting physician review',m:'Physician reviews the case directly',cur:true}]},
+   cpts:[{code:'75571',det:'further',desc:'CT heart, coronary calcium scoring'}],icds:['I25.10','R07.9']},
  'EPS-00084201':{state:'signed',priority:'standard',date:'15 Mar 2026',reviewer:'Alex R.',createdBy:'Alex R.',signedBy:'Dr. Helen Park, MD',signedAt:'17 Mar 2026, 11:20 UTC',outcome:'approved',
    patient:{name:'Susan Hartley',memberId:'AGL338920164',dob:'06/08/1972',provider:'Dr. Greg Foster',providerNpi:'1903847261',facility:'Lakeside Sleep Institute',facilityNpi:'1562039847'},
-   cpts:[{code:'95810',det:'approved',desc:'Polysomnography, sleep staging'}],icds:['G47.33'],
-   activity:[{t:'Case submitted',m:'Alex R. \u00b7 15 Mar 2026, 10:02 UTC'},{t:'Nebo assessment completed',m:'1 service assessed \u00b7 10:05 UTC'},{t:'Reviewed by nurse',m:'Alex R. \u00b7 16 Mar 2026'},{t:'Signed by physician',m:'Dr. Helen Park \u00b7 17 Mar 2026, 11:20 UTC'},{t:'Letter sent to provider',m:'17 Mar 2026, 11:22 UTC',cur:true}]}
+   cpts:[{code:'95810',det:'approved',desc:'Polysomnography, sleep staging'}],icds:['G47.33']}
 };
 function stateFromStatus(c){ if(c.status==='processing')return 'processing'; if(c.status==='escalated')return 'escalated'; if(c.status==='signed')return 'signed'; if(c.det==='approved'||c.det==='nopa')return 'approvable'; return 'review'; }
 function infoItem(l,v){ return '<div class="info-item"><div class="info-label">'+l+'</div><div class="info-val">'+v+'</div></div>'; }
@@ -1961,12 +1938,11 @@ function renderStateBody(prof){
   else { h=svcBlock(prof)+'<div class="state-note"><i class="ti ti-info-circle"></i>This case needs your expert review. The full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div><button class="tool" style="margin-top:14px" onclick="openCase(\'EPS-00088552\')">Open EPS-00088552</button>'; }
   document.getElementById('stateBody').innerHTML=h;
 }
-function railActivity(prof){ if(!prof.activity||!prof.activity.length) return ''; return '<div class="side-card"><div class="card-head"><span class="card-title-sm">Activity</span></div><div class="tl">'+prof.activity.map(function(a){return '<div class="tl-item '+(a.cur?'current':'done')+'"><div class="tl-title">'+a.t+'</div><div class="tl-meta">'+a.m+'</div></div>';}).join('')+'</div></div>'; }
 function renderStateRail(prof){
   var info='';
   if(prof.patient){ var p=prof.patient; info+=infoItem('Member ID',p.memberId)+infoItem('Member name',p.name)+infoItem('Member date of birth',p.dob)+infoItem('Requesting provider',p.provider)+infoItem('Requesting provider NPI',p.providerNpi)+infoItem('Facility',p.facility)+infoItem('Facility NPI',p.facilityNpi); if(prof.cpts&&prof.cpts.length) info+='<div class="info-item"><div class="info-label">CPT / HCPCS</div><div class="info-codes">'+prof.cpts.map(function(c){return '<span class="cc-chip">'+c.code+'</span>';}).join('')+'</div></div>'; if(prof.icds&&prof.icds.length) info+='<div class="info-item"><div class="info-label">ICD-10</div><div class="info-codes">'+prof.icds.map(function(c){return '<span class="cc-chip">'+c+'</span>';}).join('')+'</div></div>'; }
   else { info+=infoItem('Case ID',prof.id)+'<div class="info-item"><div class="info-label">Determination</div>'+detChipHtml(prof)+'</div>'+infoItem('Priority',priLabel[prof.priority]||'Standard')+infoItem('Submitted',prof.date||'-')+infoItem('Reviewer',prof.reviewer||'-'); }
-  document.getElementById('stateRail').innerHTML='<div class="side-card"><div class="card-head"><span class="card-title-sm">Info</span></div><div class="info-stack">'+info+'</div></div>'+railActivity(prof);
+  document.getElementById('stateRail').innerHTML='<div class="side-card"><div class="card-head"><span class="card-title-sm">Info</span></div><div class="info-stack">'+info+'</div></div>';
 }
 function renderActions(state){
   var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy the case</button>';
