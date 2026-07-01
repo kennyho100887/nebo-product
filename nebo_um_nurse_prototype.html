@@ -261,8 +261,6 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .app.collapsed .user-wrap{padding:16px 0;margin-top:6px}
 .app.collapsed .theme-seg{flex-direction:column;align-items:center;gap:3px;width:38px;margin:14px auto 0;padding:3px}
 .app.collapsed .seg-btn{width:100%;justify-content:center;gap:0;font-size:0;padding:8px 0}
-.app.collapsed .fs-seg{flex-direction:column;align-items:center;gap:3px;width:38px;margin:8px auto 0;padding:3px}
-.app.collapsed .fs-seg .seg-btn{font-size:11px}
 .app.collapsed .sidebar [data-tip]{position:relative}
 .app.collapsed .sidebar [data-tip]:hover::after{content:attr(data-tip);position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);background:var(--text);color:var(--bg);font-size:12px;font-weight:500;line-height:1;white-space:nowrap;padding:6px 9px;border-radius:6px;z-index:60;pointer-events:none;box-shadow:0 2px 10px rgba(0,0,0,.2)}
 .screen{display:none}
@@ -920,11 +918,6 @@ textarea{resize:none}
         <button class="seg-btn is-active" onclick="setTheme('auto',this)" data-tip="Auto"><i class="ti ti-device-desktop"></i>Auto</button>
         <button class="seg-btn" onclick="setTheme('light',this)" data-tip="Light"><i class="ti ti-sun"></i>Light</button>
         <button class="seg-btn" onclick="setTheme('dark',this)" data-tip="Dark"><i class="ti ti-moon"></i>Dark</button>
-      </div>
-      <div class="fs-seg" role="group" aria-label="Text size">
-        <button class="seg-btn" onclick="setFontSize('s',this)" data-tip="Small text"><span style="font-size:11px">A</span></button>
-        <button class="seg-btn is-active" onclick="setFontSize('m',this)" data-tip="Default text"><span style="font-size:13px">A</span></button>
-        <button class="seg-btn" onclick="setFontSize('l',this)" data-tip="Large text"><span style="font-size:15px">A</span></button>
       </div>
     </div>
   </aside>
