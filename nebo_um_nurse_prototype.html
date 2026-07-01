@@ -532,12 +532,6 @@ textarea{resize:none}
 .guideline-code{font-size:13px;flex:1}
 .switch{display:flex;align-items:center;gap:5px;border:none;background:none;color:var(--text-2);font-size:12px;font-family:inherit;cursor:pointer}
 .switch:hover{color:var(--text)}
-.gl-switch{position:relative}
-.gl-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:300px;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.16);padding:5px;z-index:40;display:none}
-.gl-menu.open{display:block}
-.gl-item{font-size:13px;color:var(--text-2);padding:9px 11px;border-radius:6px;cursor:pointer;white-space:nowrap}
-.gl-item:hover{background:var(--surface);color:var(--text)}
-.gl-item.active{background:var(--ok-bg);color:var(--ok-fg);font-weight:500}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
 .toast i{font-size:15px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -1166,14 +1160,7 @@ textarea{resize:none}
                 <div class="guideline">
                   <i class="ti ti-bookmark"></i>
                   <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
-                  <div class="gl-switch">
-                    <button class="switch" onclick="toggleGl(this)">Switch to other guidelines <i class="ti ti-chevron-down"></i></button>
-                    <div class="gl-menu">
-                      <div class="gl-item active" onclick="pickGl(this,'NCD - 160.7 - Electrical Nerve Stimulators')">NCD - 160.7 - Electrical Nerve Stimulators</div>
-                      <div class="gl-item" onclick="pickGl(this,'LCD - L34705 - Spinal Cord Stimulation')">LCD - L34705 - Spinal Cord Stimulation</div>
-                      <div class="gl-item" onclick="pickGl(this,'NCD - 160.27 - TENS for Chronic Low Back Pain')">NCD - 160.27 - TENS for Chronic Low Back Pain</div>
-                    </div>
-                  </div>
+                  <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
                 </div>
                 <div class="block">
                   <div class="block-label">Criteria met</div>
@@ -1196,14 +1183,7 @@ textarea{resize:none}
         <div class="guideline">
           <i class="ti ti-bookmark"></i>
           <span class="guideline-code">LCD - L34220 - Lumbar MRI</span>
-          <div class="gl-switch">
-            <button class="switch" onclick="toggleGl(this)">Switch to other guidelines <i class="ti ti-chevron-down"></i></button>
-            <div class="gl-menu">
-              <div class="gl-item active" onclick="pickGl(this,'LCD - L34220 - Lumbar MRI')">LCD - L34220 - Lumbar MRI</div>
-              <div class="gl-item" onclick="pickGl(this,'NCD - 220.2 - Magnetic Resonance Imaging')">NCD - 220.2 - Magnetic Resonance Imaging</div>
-              <div class="gl-item" onclick="pickGl(this,'LCD - L34219 - Thoracic MRI')">LCD - L34219 - Thoracic MRI</div>
-            </div>
-          </div>
+          <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
         </div>
         <div class="block">
           <div class="block-label">Request reason</div>
@@ -1996,21 +1976,19 @@ function openCase(id){
   if(!isDeep){ renderStateBody(prof); renderStateRail(prof); }
   go('details');
 }
-function toggleGl(btn){
-  var m=btn.nextElementSibling, open=m.classList.contains('open');
-  document.querySelectorAll('.gl-menu.open').forEach(function(x){x.classList.remove('open');});
-  if(!open) m.classList.add('open');
+function reassessGl(btn){
+  if(btn.dataset.busy) return;
+  btn.dataset.busy='1';
+  var orig=btn.innerHTML;
+  btn.innerHTML='<i class="ti ti-rotate-clockwise"></i>Reassessing…';
+  btn.style.opacity='.6';
+  setTimeout(function(){
+    btn.innerHTML=orig;
+    btn.style.opacity='';
+    delete btn.dataset.busy;
+    showToast('Nebo reassessed this case');
+  },1600);
 }
-function pickGl(item, value){
-  var gl=item.closest('.guideline');
-  gl.querySelector('.guideline-code').textContent=value;
-  item.parentNode.querySelectorAll('.gl-item').forEach(function(x){x.classList.remove('active');});
-  item.classList.add('active');
-  item.closest('.gl-menu').classList.remove('open');
-  var code=value.split(' - ').slice(0,2).join(' - ');
-  showToast('Guideline switched to '+code);
-}
-document.addEventListener('click',function(e){ if(!e.target.closest('.gl-switch')) document.querySelectorAll('.gl-menu.open').forEach(function(x){x.classList.remove('open');}); });
 var toastTimer;
 function showToast(msg){
   var t=document.getElementById('toast');
