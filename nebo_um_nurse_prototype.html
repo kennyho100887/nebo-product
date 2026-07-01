@@ -555,6 +555,27 @@ textarea{resize:none}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
 .toast i{font-size:15px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.upl{position:fixed;right:24px;bottom:24px;width:326px;max-width:calc(100vw - 32px);background:var(--bg);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 14px 38px rgba(0,0,0,0.20);z-index:120;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .26s,transform .26s}
+.upl.show{opacity:1;transform:none;pointer-events:auto}
+.upl-head{display:flex;align-items:center;gap:11px;padding:13px 14px}
+.upl-htext{min-width:0}
+.upl-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.25}
+.upl-sub{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upl-spin{width:18px;height:18px;flex-shrink:0;border-radius:50%;border:2px solid color-mix(in srgb,var(--primary) 25%,transparent);border-top-color:var(--primary);animation:uplspin .8s linear infinite}
+@keyframes uplspin{to{transform:rotate(360deg)}}
+.upl-check{width:20px;height:20px;flex-shrink:0;border-radius:50%;background:var(--ok-fg);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.upl-min{margin-left:auto;flex-shrink:0;width:24px;height:24px;border:none;background:transparent;color:var(--text-3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.upl-min:hover{background:color-mix(in srgb,var(--border) 50%,var(--bg));color:var(--text)}
+.upl-body{padding:0 14px 14px}
+.upl-row{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--text-2);margin-bottom:8px}
+.upl-pct{font-family:var(--mono);color:var(--text-3)}
+.upl-bar{height:6px;border-radius:99px;background:color-mix(in srgb,var(--border) 55%,var(--bg));overflow:hidden}
+.upl-fill{display:block;height:100%;width:0;background:var(--primary);border-radius:99px;transition:width .28s linear}
+.upl-eta{font-size:10.5px;color:var(--text-3);margin-top:7px}
+.upl-donerow{font-size:12px;color:var(--text-2);margin-bottom:12px;line-height:1.4}
+.upl-cta{width:100%;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:9px 12px;font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer}
+.upl-cta:hover{filter:brightness(1.05)}
+.upl.collapsed .upl-body{display:none}
 .pv-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:0.5px solid var(--border)}
 .crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3);min-width:0;flex-wrap:wrap}
 .crumb .sep{font-size:13px;color:var(--text-3)}
@@ -1523,6 +1544,7 @@ textarea{resize:none}
 </div>
 
 <div id="toast" class="toast"></div>
+<div id="uplBanner" class="upl"></div>
 
 <script>
 var origin='queue';
@@ -1570,21 +1592,61 @@ function submitNewCase(){
   if(/^\d+$/.test(num)) num='EPS-'+num;
   closeModal();
   if(inp) inp.value='';
-  if(newCaseTimer){ clearTimeout(newCaseTimer); newCaseTimer=null; }
-  origin='queue';
   var prof={id:num,priority:'standard',date:fmtToday(),reviewer:'Unassigned',state:'processing',patient:null,nonAnchor:true};
+  startUpload(prof);
+}
+var UPL_TOTAL=16000, uplTimer=null, uplStart=0, uplProf=null;
+function uplStageLabel(f){ if(f<0.25)return'Uploading documents'; if(f<0.55)return'Scanning &amp; extracting text'; if(f<0.85)return'Assessing against guidelines'; return'Finalizing assessment'; }
+function uplProgressHtml(id){
+  return '<div class="upl-head"><span class="upl-spin"></span>'
+    +'<div class="upl-htext"><div class="upl-title">Processing new case</div><div class="upl-sub">'+id+'</div></div>'
+    +'<button class="upl-min" onclick="uplToggle()" aria-label="Minimize"><i class="ti ti-chevron-down"></i></button></div>'
+    +'<div class="upl-body">'
+    +'<div class="upl-row"><span id="uplStatus">Uploading documents</span><span id="uplPct" class="upl-pct">0%</span></div>'
+    +'<div class="upl-bar"><span id="uplFill" class="upl-fill"></span></div>'
+    +'<div class="upl-eta" id="uplEta">~16s left</div></div>';
+}
+function startUpload(prof){
+  uplProf=prof;
+  if(uplTimer){ clearInterval(uplTimer); uplTimer=null; }
+  var b=document.getElementById('uplBanner');
+  b.className='upl';
+  b.innerHTML=uplProgressHtml(prof.id);
+  void b.offsetHeight; b.classList.add('show');
+  uplStart=Date.now();
+  uplTimer=setInterval(function(){
+    var f=Math.min((Date.now()-uplStart)/UPL_TOTAL,1), pct=Math.round(f*100);
+    var fill=document.getElementById('uplFill'); if(fill) fill.style.width=pct+'%';
+    var st=document.getElementById('uplStatus'); if(st) st.innerHTML=uplStageLabel(f);
+    var pc=document.getElementById('uplPct'); if(pc) pc.textContent=pct+'%';
+    var rem=Math.max(0,Math.ceil((1-f)*UPL_TOTAL/1000));
+    var eta=document.getElementById('uplEta'); if(eta) eta.textContent=rem>0?('~'+rem+'s left'):'Almost done';
+    if(f>=1){ clearInterval(uplTimer); uplTimer=null; uplDone(prof); }
+  },200);
+}
+function uplDone(prof){
+  var b=document.getElementById('uplBanner');
+  b.className='upl show done';
+  b.innerHTML='<div class="upl-head"><span class="upl-check"><i class="ti ti-check"></i></span>'
+    +'<div class="upl-htext"><div class="upl-title">Case ready for review</div><div class="upl-sub">'+prof.id+'</div></div>'
+    +'<button class="upl-min" onclick="uplClose()" aria-label="Dismiss"><i class="ti ti-x"></i></button></div>'
+    +'<div class="upl-body"><div class="upl-donerow">Nebo finished scanning &amp; assessing this case.</div>'
+    +'<button class="upl-cta" onclick="uplOpen()">See case details</button></div>';
+}
+function uplToggle(){ var b=document.getElementById('uplBanner'); b.classList.toggle('collapsed'); var ic=b.querySelector('.upl-min i'); if(ic) ic.className=b.classList.contains('collapsed')?'ti ti-chevron-up':'ti ti-chevron-down'; }
+function uplClose(){ var b=document.getElementById('uplBanner'); b.classList.remove('show'); if(uplTimer){ clearInterval(uplTimer); uplTimer=null; } }
+function uplOpen(){
+  var prof=uplProf; uplClose(); if(!prof) return;
+  origin='queue'; prof.state='review'; prof.reviewer='Alex R.';
   document.getElementById('caseIdLg').innerHTML=prof.id+' <span class="type-tag">Standard</span>';
-  document.getElementById('detailMeta').innerHTML=metaHtml(prof,'processing');
-  renderActions('processing');
-  document.getElementById('deepContent').style.display='none';
-  document.getElementById('deepRail').style.display='none';
-  document.getElementById('stateBody').style.display='';
-  document.getElementById('stateRail').style.display='';
-  renderStateRail(prof);
-  document.getElementById('stateBody').innerHTML='<div class="state-panel"><div class="state-title">Nebo is processing this case</div><div class="state-sub">Documents are being retrieved and assessed against the applicable guidelines. This usually takes 60-90 seconds.</div><div class="state-bar det"><span id="procFill"></span></div></div>';
+  document.getElementById('detailMeta').innerHTML=metaHtml(prof,'review');
+  renderActions('review');
+  document.getElementById('stateBody').style.display='none';
+  document.getElementById('stateRail').style.display='none';
+  document.getElementById('deepContent').style.display='';
+  document.getElementById('deepRail').style.display='';
   go('details');
-  setTimeout(function(){ var f=document.getElementById('procFill'); if(f) f.style.width='100%'; },80);
-  newCaseTimer=setTimeout(function(){ finishNewCase(prof); },3300);
+  document.querySelector('.main').scrollTop=0;
 }
 function finishNewCase(prof){
   newCaseTimer=null;
