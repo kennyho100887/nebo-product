@@ -285,6 +285,17 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .q-group .list{border-top:0.5px solid var(--border)}
 .q-group .row{padding:12px 2px}
 .q-group .row:last-child{border-bottom:none}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start;margin-top:2px}
+.kan-col{background:color-mix(in srgb, var(--border) 24%, var(--bg));border-radius:12px;padding:12px 12px 14px;min-width:0}
+.kan-col .q-group-head{padding:2px 4px 12px}
+.kan-cards{display:flex;flex-direction:column;gap:10px}
+.kan-empty{font-size:12px;color:var(--text-3);padding:8px 4px}
+.kan-card{text-align:left;border:0.5px solid var(--border);border-radius:10px;background:var(--bg);padding:12px 13px;cursor:pointer;display:flex;flex-direction:column;gap:9px;font-family:inherit;color:var(--text);width:100%}
+.kan-card:hover{border-color:var(--border-2)}
+.kan-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kan-tags{display:flex;flex-wrap:wrap;gap:6px}
+.kan-foot{font-size:11px;color:var(--text-3)}
+@media(max-width:760px){.kanban{grid-template-columns:1fr}}
 .chip{font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
 .chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
 .chip-ok{background:var(--ok-bg);color:var(--ok-fg)}
@@ -987,30 +998,43 @@ textarea{resize:none}
 
     <section class="screen active" id="queue">
       <div class="page-head"><span class="page-title">Recent queue</span><span class="muted">Tuesday, 18 Mar</span></div>
-      <div class="q-group">
-        <div class="q-group-head"><span class="q-dot" style="background:var(--danger-fg)"></span><span class="q-group-title">Needs attention</span><span class="q-count">2</span></div>
-        <div class="list">
-          <div class="row" onclick="openCase('EPS-00088552')">
-            <div class="row-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn right">Further review</span></div>
-            <div class="row-line"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span><span class="right">awaiting you · 2h</span></div>
-          </div>
-          <div class="row" onclick="openCase('EPS-00086956')">
-            <div class="row-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider right">Consider to approve</span></div>
-            <div class="row-line"><span class="chip chip-neutral">Out of network</span><span class="right">awaiting you · 4h</span></div>
+      <div class="kanban">
+        <div class="kan-col">
+          <div class="q-group-head"><span class="q-dot" style="background:var(--danger-fg)"></span><span class="q-group-title">Needs attention</span><span class="q-count">2</span></div>
+          <div class="kan-cards">
+            <button class="kan-card" onclick="openCase('EPS-00088552')">
+              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
+              <div class="kan-foot">awaiting you · 2h</div>
+            </button>
+            <button class="kan-card" onclick="openCase('EPS-00086956')">
+              <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
+              <div class="kan-tags"><span class="chip chip-neutral">Out of network</span></div>
+              <div class="kan-foot">awaiting you · 4h</div>
+            </button>
           </div>
         </div>
-      </div>
-      <div class="q-group">
-        <div class="q-group-head"><span class="q-dot" style="background:var(--accent-fg)"></span><span class="q-group-title">In progress</span><span class="q-count">1</span></div>
-        <div class="list">
-          <div class="row" onclick="openCase('EPS-20260605')"><div class="row-line"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span><span class="right">1h</span></div></div>
+        <div class="kan-col">
+          <div class="q-group-head"><span class="q-dot" style="background:var(--accent-fg)"></span><span class="q-group-title">In progress</span><span class="q-count">1</span></div>
+          <div class="kan-cards">
+            <button class="kan-card" onclick="openCase('EPS-20260605')">
+              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-foot">1h</div>
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="q-group">
-        <div class="q-group-head"><span class="q-dot" style="background:var(--ok-fg)"></span><span class="q-group-title">Recently completed</span><span class="q-count">2</span></div>
-        <div class="list">
-          <div class="row" onclick="openCase('EPS-00084201')"><div class="row-line"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span><span class="right">done · 25m</span></div></div>
-          <div class="row" onclick="openCase('EPS-00083998')"><div class="row-line"><span class="cid-dim">EPS-00083998</span><span class="chip chip-neutral">No PA needed</span><span class="right">done · 40m</span></div></div>
+        <div class="kan-col">
+          <div class="q-group-head"><span class="q-dot" style="background:var(--ok-fg)"></span><span class="q-group-title">Recently completed</span><span class="q-count">2</span></div>
+          <div class="kan-cards">
+            <button class="kan-card" onclick="openCase('EPS-00084201')">
+              <div class="kan-top"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span></div>
+              <div class="kan-foot">done · 25m</div>
+            </button>
+            <button class="kan-card" onclick="openCase('EPS-00083998')">
+              <div class="kan-top"><span class="cid-dim">EPS-00083998</span><span class="chip chip-neutral">No PA needed</span></div>
+              <div class="kan-foot">done · 40m</div>
+            </button>
+          </div>
         </div>
       </div>
     </section>
