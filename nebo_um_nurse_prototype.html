@@ -306,6 +306,7 @@ body{margin:0;font-family:var(--sans);background:var(--bg-page);color:var(--text
 .chip-consider{background:color-mix(in srgb, var(--ok-bg) 50%, var(--bg));color:color-mix(in srgb, var(--ok-fg) 78%, var(--text-3))}
 .chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
 #caseTable .chip-warn{background:var(--chip-bg);color:var(--chip-fg)}
+#caseTable th:last-child,#caseTable td:last-child{text-align:right}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
 .mdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:9px;vertical-align:middle;flex-shrink:0}
@@ -1120,12 +1121,12 @@ textarea{resize:none}
       </aside>
       <table id="caseTable">
         <thead><tr>
-          <th class="sortable" data-sort="id" style="width:17%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
+          <th class="sortable" data-sort="id" style="width:16%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
           <th class="sortable" data-sort="day" style="width:9%" onclick="setSort('day')">Submitted <i class="ti ti-chevron-down caret"></i></th>
-          <th style="width:21%">CPT</th>
-          <th style="width:21%">ICD-10</th>
-          <th style="width:14%">Reviewer</th>
-          <th style="width:18%">Recommendation</th>
+          <th style="width:23%">CPT</th>
+          <th style="width:23%">ICD-10</th>
+          <th style="width:13%">Reviewer</th>
+          <th style="width:16%">Recommendation</th>
         </tr></thead>
         <tbody id="caseBody"></tbody>
       </table>
