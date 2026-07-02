@@ -52,6 +52,7 @@
   --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --review-bg:#CDD4CB; --review-fg:#4B564C;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
   --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
   --r:8px; --r-lg:12px;
@@ -68,6 +69,7 @@
     --ok-bg:#27500A; --ok-fg:#C0DD97;
     --danger-bg:#791F1F; --danger-fg:#F7C1C1; --danger-solid:#B5403F; --danger-solid-fg:#ffffff; --danger-solid:#B5403F; --danger-solid-fg:#ffffff;
     --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+    --review-bg:#333B32; --review-fg:#C9D1C4;
     --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
     --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
   }
@@ -81,6 +83,7 @@
   --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --review-bg:#CDD4CB; --review-fg:#4B564C;
   --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
 }
@@ -93,6 +96,7 @@
   --ok-bg:#27500A; --ok-fg:#C0DD97;
   --danger-bg:#791F1F; --danger-fg:#F7C1C1;
   --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+  --review-bg:#333B32; --review-fg:#C9D1C4;
   --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
   --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
 }
@@ -229,7 +233,7 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .support-link{display:flex;align-items:center;gap:9px;width:100%;border:none;background:none;font-family:inherit;font-size:12px;color:var(--text-2);padding:9px 6px;cursor:pointer;margin:6px 0 10px;text-align:left;text-decoration:none;transition:opacity .12s}
 .support-link:hover{opacity:.6}
 .support-link i{font-size:16px;color:var(--text-3)}
-.sb-support{margin:12px 0 0;padding-top:14px;border-top:0.5px solid var(--border)}
+.sb-support{margin:12px 0 0;padding-top:9px;border-top:0.5px solid var(--border)}
 .avatar{width:28px;height:28px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
 .user-name{font-size:12px;font-weight:500;color:var(--text)}
 .user-role{font-size:10px;color:var(--text-3)}
@@ -303,14 +307,14 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .kan-tags{display:flex;flex-wrap:wrap;gap:6px}
 .kan-foot{font-size:11px;color:var(--text-3)}
 @media(max-width:760px){.kanban{grid-template-columns:1fr}}
-.chip{font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;line-height:1;font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
 .chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
+.chip-review{background:var(--review-bg);color:var(--review-fg)}
 .chip-ok{background:var(--ok-bg);color:var(--ok-fg)}
 .chip-info{background:var(--info-bg);color:var(--info-fg)}
 .chip-neutral{background:var(--chip-bg);color:var(--chip-fg)}
 .chip-consider{background:color-mix(in srgb, var(--ok-bg) 50%, var(--bg));color:color-mix(in srgb, var(--ok-fg) 78%, var(--text-3))}
 .chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
-#caseTable .chip-warn{background:var(--chip-bg);color:var(--chip-fg)}
 #caseTable th:last-child,#caseTable td:last-child{text-align:right}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
@@ -449,10 +453,11 @@ textarea{resize:none}
 .svc-summary .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:0}
 .dot-ok{background:var(--ok-fg)}
 .dot-warn{background:var(--warn-fg)}
+.dot-standard{background:var(--text-3)}
 .svc-rows{display:flex;flex-direction:column;gap:14px}
 .svc-row{display:flex;align-items:center;gap:7px 12px;flex-wrap:wrap;width:100%;text-align:left;border:0.5px solid var(--border);border-radius:var(--r);background:none;padding:10px 12px;cursor:pointer;font-family:inherit}
 .svc-row:hover{background:var(--surface)}
-.cpt-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:var(--r);flex-shrink:0}
+.cpt-pill{display:inline-flex;align-items:center;line-height:1;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:var(--r);flex-shrink:0}
 .cpt-pill .pdot{width:6px;height:6px;border-radius:50%}
 .cpt-ok{background:var(--ok-bg);color:var(--ok-fg)} .cpt-ok .pdot{background:var(--ok-fg)}
 .cpt-warn{background:var(--warn-bg);color:var(--warn-fg)} .cpt-warn .pdot{background:var(--warn-fg)}
@@ -1026,13 +1031,12 @@ window.KonpoNotes={
           <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Needs attention</span><span class="q-count">2</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00088552')">
-              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-review">Further review</span></div>
               <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
               <div class="kan-foot">awaiting you · 2h</div>
             </button>
             <button class="kan-card" onclick="openCase('EPS-00086956')">
               <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
-              <div class="kan-tags"><span class="chip chip-neutral">Out of network</span></div>
               <div class="kan-foot">awaiting you · 4h</div>
             </button>
           </div>
@@ -1041,7 +1045,7 @@ window.KonpoNotes={
           <div class="q-group-head"><i class="ti ti-rotate-clockwise" style="color:var(--accent-fg)"></i><span class="q-group-title" style="color:var(--accent-fg)">In progress</span><span class="q-count">1</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-20260605')">
-              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-review">Further review</span></div>
               <div class="kan-foot">1h</div>
             </button>
           </div>
@@ -1184,17 +1188,45 @@ window.KonpoNotes={
             <span class="svc-summary"><span><span class="dot dot-ok"></span>1 approved</span><span><span class="dot dot-warn"></span>1 needs review</span></span>
           </div>
           <div class="svc-rows">
-            <button class="svc-row" onclick="go('details')">
-              <span class="cpt-pill cpt-warn"><span class="pdot"></span>72148</span>
-              <span class="svc-name">MRI lumbar spine, without contrast</span>
-              <span class="svc-det det-warn">Requires review</span>
-              <span class="svc-just">
-                <span class="just-label">Dx</span>
-                <span class="icd-chip">M48.062</span>
-                <span class="icd-chip">M54.16</span>
-                <span class="icd-chip">M51.16</span>
-              </span>
-            </button>
+            <div class="card acard" style="margin-bottom:0">
+              <button class="acard-head" onclick="toggleAcard(this)">
+                <span class="cpt-pill cpt-warn"><span class="pdot"></span>72148</span>
+                <span class="acard-name">MRI lumbar spine, without contrast</span>
+                <span class="svc-det det-warn" style="margin-left:auto">Requires review</span>
+                <i class="ti ti-chevron-down acard-caret"></i>
+                <span class="acard-dx">DX <span class="cc-chip">M48.062</span> <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
+              </button>
+              <div class="acard-body">
+                <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-neutral">Requires your expert review</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
+                <div class="guideline">
+                  <i class="ti ti-bookmark"></i>
+                  <span class="guideline-code">LCD - L34220 - Lumbar MRI</span>
+                  <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
+                </div>
+                <div class="block">
+                  <div class="block-label">Request reason</div>
+                  <p class="clinical">71-year-old female with bilateral lower extremity cramping/pain, sciatica, and constant numbness over right lateral thigh with progression to left lower extremity - requesting lumbar MRI for neurogenic claudication evaluation.</p>
+                </div>
+                <div class="block">
+                  <div class="block-label">Criteria evaluation</div>
+                  <div class="crit-group">
+                    <div class="crit-title">Clinically significant or progressive neurologic deficit in lower extremity</div>
+                    <ul class="crit-list"><li>"Constant numbness over R lateral thigh" with "Sx have slowly been progressing to LLE" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li></ul>
+                  </div>
+                  <div class="crit-group">
+                    <div class="crit-title">Other nerve root compromise</div>
+                    <ul class="crit-list"><li>Constant numbness and progressive symptoms suggest nerve involvement <span class="pageref" onclick="openPageRef(2)">Page 2</span></li></ul>
+                  </div>
+                  <div class="crit-group">
+                    <div class="crit-title">Non-red flag pathway</div>
+                    <ul class="crit-list">
+                      <li>Symptom duration: "2-3 years of BLE cramping/pain" - exceeds 4 weeks <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
+                      <li>Conservative management trial: "Has tried Advil, Tylenol, Diclofenac gel, and CBD oil w/o relief of SX" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="card acard collapsed" style="margin-bottom:0">
               <button class="acard-head" onclick="toggleAcard(this)">
                 <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
@@ -1221,41 +1253,6 @@ window.KonpoNotes={
             </div>
           </div>
         </div>
-
-      <div class="card">
-        <div class="card-head">
-          <span class="cpt-title">CPT 72148 · Magnetic resonance imaging, lumbar; without contrast material</span>
-          <button class="copy" onclick="copyResult(this)"><i class="ti ti-copy"></i>Copy result</button>
-        </div>
-        <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-neutral">Requires your expert review</span></div>
-        <div class="guideline">
-          <i class="ti ti-bookmark"></i>
-          <span class="guideline-code">LCD - L34220 - Lumbar MRI</span>
-          <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
-        </div>
-        <div class="block">
-          <div class="block-label">Request reason</div>
-          <p class="clinical">71-year-old female with bilateral lower extremity cramping/pain, sciatica, and constant numbness over right lateral thigh with progression to left lower extremity - requesting lumbar MRI for neurogenic claudication evaluation.</p>
-        </div>
-        <div class="block">
-          <div class="block-label">Criteria evaluation</div>
-          <div class="crit-group">
-            <div class="crit-title">Clinically significant or progressive neurologic deficit in lower extremity</div>
-            <ul class="crit-list"><li>"Constant numbness over R lateral thigh" with "Sx have slowly been progressing to LLE" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li></ul>
-          </div>
-          <div class="crit-group">
-            <div class="crit-title">Other nerve root compromise</div>
-            <ul class="crit-list"><li>Constant numbness and progressive symptoms suggest nerve involvement <span class="pageref" onclick="openPageRef(2)">Page 2</span></li></ul>
-          </div>
-          <div class="crit-group">
-            <div class="crit-title">Non-red flag pathway</div>
-            <ul class="crit-list">
-              <li>Symptom duration: "2-3 years of BLE cramping/pain" - exceeds 4 weeks <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
-              <li>Conservative management trial: "Has tried Advil, Tylenol, Diclofenac gel, and CBD oil w/o relief of SX" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
 
       </div>
       <div id="stateBody" style="display:none"></div>
@@ -1452,7 +1449,7 @@ window.KonpoNotes={
           <div class="set-card-head"><span class="card-title-sm">Security</span></div>
           <div class="set-row">
             <div><div class="set-row-title">Password</div><div class="set-row-sub">Last changed 3 months ago.</div></div>
-            <button class="act-btn" onclick="changePassword()"><i class="ti ti-key"></i>Change password</button>
+            <button class="act-btn" onclick="changePassword()" style="justify-content:center"><i class="ti ti-key"></i>Change password</button>
           </div>
           <div class="set-row">
             <div><div class="set-row-title">Last sign-in</div><div class="set-row-sub">Today, 08:02 · San Francisco, CA</div></div>
@@ -1844,14 +1841,14 @@ var CASES=[
 var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
-var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
+var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-review'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Further review',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1};
 function caseMatch(c,skipStatus){
   if(state.determination && c.det!==state.determination) return false;
   if(state.priority && c.priority!==state.priority) return false;
   if(state.cpt && (c.cpt||'').split(/,\s*/).indexOf(state.cpt)<0) return false;
-  if(!skipStatus && state.status && c.status!==state.status) return false;
+  if(!skipStatus && state.status){ if(state.status==='ready'){ if(c.status!=='ready'&&c.status!=='escalated') return false; } else if(c.status!==state.status) return false; }
   if(state.reviewer.length && state.reviewer.indexOf(c.reviewer)<0) return false;
   if(state.search && c.id.toLowerCase().indexOf(state.search.toLowerCase())<0) return false;
   if(state.date==='today' && c.day!==18) return false;
@@ -1882,17 +1879,17 @@ function icdFor(cpt){
   return out.join(', ');
 }
 function rowHtml(c){
-  var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
+  var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span class="dot dot-standard"></span>';
   var det;
   if(c.status==='processing') det='<span class="muted">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-review">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td><div class="cpt-cell">'+cptChips(icdFor(c.cpt))+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
 }
 function toggleSidebar(){ document.querySelector('.app').classList.toggle('collapsed'); }
 function applyFilters(){
-  var arr=CASES.filter(caseMatch);
+  var arr=CASES.filter(function(c){return caseMatch(c);});
   var k=state.sortKey, dir=state.sortDir==='asc'?1:-1;
   arr.sort(function(a,b){ if(k==='id'){return a.id<b.id?-dir:(a.id>b.id?dir:0);} return (a[k]-b[k])*dir; });
   var total=arr.length, size=15, pages=Math.max(1,Math.ceil(total/size));
@@ -1923,7 +1920,7 @@ function applyFilters(){
   rb.classList.toggle('has-val',rn>0);
   renderReviewerMenu();
   var base=CASES.filter(function(c){return caseMatch(c,true);});
-  var cReady=0,cSigned=0; base.forEach(function(c){ if(c.status==='ready')cReady++; else if(c.status==='signed')cSigned++; });
+  var cReady=0,cSigned=0; base.forEach(function(c){ if(c.status==='ready'||c.status==='escalated')cReady++; else if(c.status==='signed')cSigned++; });
   var tcs=document.querySelectorAll('#caseTabs .tab-count');
   if(tcs.length>=3){ tcs[0].textContent=base.length; tcs[1].textContent=cReady; tcs[2].textContent=cSigned; }
   var tabs=document.querySelectorAll('#caseTabs .tab');
@@ -1977,7 +1974,7 @@ var priLabel={standard:'Standard','high-cost':'High cost',urgent:'Urgent',oon:'O
 function caseById(id){ for(var i=0;i<CASES.length;i++){ if(CASES[i].id===id) return CASES[i]; } return null; }
 function detChipHtml(c){
   if(c.status==='processing') return '<span class="chip chip-neutral">Processing</span>';
-  if(c.status==='escalated') return '<span class="chip chip-warn">Further review</span>';
+  if(c.status==='escalated') return '<span class="chip chip-review">Further review</span>';
   if(c.status==='signed') return '<span class="chip chip-ok">Signed</span>';
   var d=detMap[c.det]; return d? '<span class="chip '+d[1]+'">'+d[0]+'</span>' : '<span class="muted">-</span>';
 }
