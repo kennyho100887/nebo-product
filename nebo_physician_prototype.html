@@ -551,8 +551,6 @@ textarea{resize:none}
 .guideline-code{font-size:13px;flex:1}
 .switch{display:flex;align-items:center;gap:5px;border:none;background:none;color:var(--text-2);font-size:12px;font-family:inherit;cursor:pointer}
 .switch:hover{color:var(--text)}
-.push-ic{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border:1.4px solid currentColor;border-radius:50%;flex-shrink:0}
-.push-ic i{font-size:10px;line-height:1;transform:rotate(90deg)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
 .toast i{font-size:15px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -923,31 +921,31 @@ textarea{resize:none}
   <main class="main">
 
     <section class="screen" id="dashboard">
-      <div class="page-head"><span class="page-title">Good morning, Alex</span><span class="muted">Data integrity &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
+      <div class="page-head"><span class="page-title">Good morning, Dr. Park</span><span class="muted">Sign-off overview &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
       <div class="dash-greet">
-        <p class="greet-sub">Here is how Nebo is reading your cases today. <b>6 cases</b> need a quick check - everything else has been verified and is clean.</p>
+        <p class="greet-sub">Here are the cases waiting on you today. <b>12 cases</b> are in further review and awaiting your sign-off.</p>
       </div>
 
       <div class="kpi-row">
-        <div class="kpi">
-          <span class="kpi-label">Avg extraction confidence</span>
-          <span class="kpi-val">94.2%</span>
-          <span class="kpi-sub"><span class="pos">+1.3 pts</span> vs last week</span>
-        </div>
         <div class="kpi kpi-warn kpi-action" onclick="go('cases')">
-          <span class="kpi-label">Needs your check</span>
-          <span class="kpi-val">6</span>
-          <span class="kpi-sub">low-confidence cases</span>
+          <span class="kpi-label">Awaiting your sign-off</span>
+          <span class="kpi-val">12</span>
+          <span class="kpi-sub">cases in further review</span>
         </div>
         <div class="kpi kpi-action" onclick="go('cases')">
-          <span class="kpi-label">Field mismatches flagged</span>
-          <span class="kpi-val">11</span>
-          <span class="kpi-sub">across 9 cases</span>
+          <span class="kpi-label">Signed today</span>
+          <span class="kpi-val">18</span>
+          <span class="kpi-sub">determinations issued</span>
         </div>
         <div class="kpi">
-          <span class="kpi-label">Auto-verified clean</span>
-          <span class="kpi-val">87%</span>
-          <span class="kpi-sub">of 142 cases today</span>
+          <span class="kpi-label">Avg turnaround</span>
+          <span class="kpi-val">3.2h</span>
+          <span class="kpi-sub">review → sign-off</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Approval rate</span>
+          <span class="kpi-val">82%</span>
+          <span class="kpi-sub">last 7 days</span>
         </div>
       </div>
 
@@ -986,21 +984,21 @@ textarea{resize:none}
 
       <div class="dash-2col">
         <div class="dwidget">
-          <div class="dwidget-head"><span class="dwidget-title">Recurring extraction issues</span><span class="dwidget-meta">last 7 days</span></div>
+          <div class="dwidget-head"><span class="dwidget-title">Reasons for further review</span><span class="dwidget-meta">last 7 days</span></div>
           <div class="ibars">
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Service date mismatch</div><div class="ibar-field">Date of service</div></div><span class="ibar-track"><span class="ibar-fill" style="width:100%"></span></span><span class="ibar-val">8</span></div>
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Missing CPT modifier</div><div class="ibar-field">Procedure code</div></div><span class="ibar-track"><span class="ibar-fill" style="width:62.5%"></span></span><span class="ibar-val">5</span></div>
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Provider NPI low confidence</div><div class="ibar-field">Provider record</div></div><span class="ibar-track"><span class="ibar-fill" style="width:37.5%"></span></span><span class="ibar-val">3</span></div>
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Diagnosis-procedure mismatch</div><div class="ibar-field">ICD / CPT</div></div><span class="ibar-track"><span class="ibar-fill" style="width:25%"></span></span><span class="ibar-val">2</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Medical necessity unclear</div><div class="ibar-field">Criteria not clearly met</div></div><span class="ibar-track"><span class="ibar-fill" style="width:100%"></span></span><span class="ibar-val">8</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Insufficient documentation</div><div class="ibar-field">Clinical records</div></div><span class="ibar-track"><span class="ibar-fill" style="width:62.5%"></span></span><span class="ibar-val">5</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Possibly investigational</div><div class="ibar-field">Experimental service</div></div><span class="ibar-track"><span class="ibar-fill" style="width:37.5%"></span></span><span class="ibar-val">3</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Out-of-network exception</div><div class="ibar-field">Network status</div></div><span class="ibar-track"><span class="ibar-fill" style="width:25%"></span></span><span class="ibar-val">2</span></div>
           </div>
         </div>
 
         <div class="dwidget">
-          <div class="dwidget-head"><span class="dwidget-title">Cases to verify</span><span class="dwidget-meta">low confidence</span></div>
-          <div class="vrow" onclick="openCase('EPS-00088552')"><span class="vid">EPS-00088552</span><span class="vreason">Service date unclear</span><span class="vconf">82%</span></div>
-          <div class="vrow" onclick="openCase('EPS-00086956')"><span class="vid">EPS-00086956</span><span class="vreason">Provider NPI mismatch</span><span class="vconf">84%</span></div>
-          <div class="vrow" onclick="openCase('EPS-00084437')"><span class="vid">EPS-00084437</span><span class="vreason">CPT modifier missing</span><span class="vconf">85%</span></div>
-          <div class="vrow" onclick="openCase('EPS-00083998')"><span class="vid">EPS-00083998</span><span class="vreason">Diagnosis mismatch</span><span class="vconf">86%</span></div>
+          <div class="dwidget-head"><span class="dwidget-title">Awaiting your sign-off</span><span class="dwidget-meta">further review</span></div>
+          <div class="vrow" onclick="openCase('EPS-00088552')"><span class="vid">EPS-00088552</span><span class="vreason">MRI lumbar — necessity</span><span class="vconf">2h</span></div>
+          <div class="vrow" onclick="openCase('EPS-00086956')"><span class="vid">EPS-00086956</span><span class="vreason">Out-of-network exception</span><span class="vconf">4h</span></div>
+          <div class="vrow" onclick="openCase('EPS-00084437')"><span class="vid">EPS-00084437</span><span class="vreason">Documentation review</span><span class="vconf">6h</span></div>
+          <div class="vrow" onclick="openCase('EPS-00083998')"><span class="vid">EPS-00083998</span><span class="vreason">Criteria borderline</span><span class="vconf">1d</span></div>
         </div>
       </div>
     </section>
@@ -1009,39 +1007,39 @@ textarea{resize:none}
       <div class="page-head"><span class="page-title">Recent queue</span><span class="muted">Tuesday, 18 Mar</span></div>
       <div class="kanban">
         <div class="kan-col">
-          <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Needs attention</span><span class="q-count">2</span></div>
+          <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Awaiting your sign-off</span><span class="q-count">2</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00088552')">
               <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn">Further review</span></div>
               <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
               <div class="kan-foot">awaiting you · 2h</div>
             </button>
-            <button class="kan-card" onclick="openCase('EPS-00086956')">
-              <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
-              <div class="kan-tags"><span class="chip chip-neutral">Out of network</span></div>
-              <div class="kan-foot">awaiting you · 4h</div>
+            <button class="kan-card" onclick="openCase('EPS-20260605')">
+              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-foot">awaiting you · 1h</div>
             </button>
           </div>
         </div>
         <div class="kan-col">
           <div class="q-group-head"><i class="ti ti-rotate-clockwise" style="color:var(--accent-fg)"></i><span class="q-group-title" style="color:var(--accent-fg)">In progress</span><span class="q-count">1</span></div>
           <div class="kan-cards">
-            <button class="kan-card" onclick="openCase('EPS-20260605')">
-              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
-              <div class="kan-foot">1h</div>
+            <button class="kan-card" onclick="openCase('EPS-00086956')">
+              <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
+              <div class="kan-tags"><span class="chip chip-neutral">Out of network</span></div>
+              <div class="kan-foot">in progress · 4h</div>
             </button>
           </div>
         </div>
         <div class="kan-col">
-          <div class="q-group-head"><i class="ti ti-check" style="color:var(--ok-fg)"></i><span class="q-group-title" style="color:var(--ok-fg)">Recently completed</span><span class="q-count">2</span></div>
+          <div class="q-group-head"><i class="ti ti-check" style="color:var(--ok-fg)"></i><span class="q-group-title" style="color:var(--ok-fg)">Recently signed</span><span class="q-count">2</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00084201')">
               <div class="kan-top"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span></div>
-              <div class="kan-foot">done · 25m</div>
+              <div class="kan-foot">signed · 25m</div>
             </button>
             <button class="kan-card" onclick="openCase('EPS-00083998')">
               <div class="kan-top"><span class="cid-dim">EPS-00083998</span><span class="chip chip-neutral">No PA needed</span></div>
-              <div class="kan-foot">done · 40m</div>
+              <div class="kan-foot">signed · 40m</div>
             </button>
           </div>
         </div>
@@ -1573,7 +1571,6 @@ document.querySelectorAll('[data-action="open-new"]').forEach(function(el){
 });
 function openModal(){ document.getElementById('overlay').classList.add('open'); }
 function openDup(){ var id=((document.getElementById('caseIdLg')||{}).textContent||'').trim().split(/\s+/)[0]; var src=document.getElementById('dupSrc'); if(src&&id) src.textContent=id; document.getElementById('dupOverlay').classList.add('open'); }
-function pushToSystem(){ showToast('Case pushed to your system'); }
 function createCopy(){ closeDup(); showToast('Case copied to a new draft'); }
 function openFb(){ document.getElementById('fbOverlay').classList.add('open'); }
 function closeFb(){ document.getElementById('fbOverlay').classList.remove('open'); }
@@ -1984,7 +1981,7 @@ function svcBlock(prof){
 function renderStateBody(prof){
   var s=prof.state, h='';
   if(s==='processing'){ h='<div class="state-panel"><div class="state-title">Nebo is processing this case</div><div class="state-sub">Documents are being retrieved and assessed against the applicable guidelines. This usually takes 60-90 seconds.</div><div class="state-bar"><span></span></div></div>'; }
-  else if(s==='escalated'){ h='<div class="state-panel"><span class="state-badge esc">Further review</span><div class="state-sub">This case is flagged for further review'+(prof.escalatedAt?(' since '+prof.escalatedAt):'')+'. A physician reviews it directly; a determination letter can be issued only after the physician signs off.</div>'+svcBlock(prof)+'</div>'; }
+  else if(s==='escalated'){ h='<div class="state-panel"><span class="state-badge esc">Awaiting your sign-off</span><div class="state-sub">This case is flagged for further review'+(prof.escalatedAt?(' since '+prof.escalatedAt):'')+' and is waiting for your review. Approve or deny to sign off and issue the determination letter.</div>'+svcBlock(prof)+'</div>'; }
   else if(s==='signed'){ h='<div class="state-panel"><span class="state-badge ok">Determination signed</span><div class="state-sub">Signed by '+(prof.signedBy||'the reviewing physician')+(prof.signedAt?(' on '+prof.signedAt):'')+'. The determination letter has been sent to the requesting provider.</div>'+svcBlock(prof)+'</div>'; }
   else if(s==='approvable'){ h=svcBlock(prof)+'<div class="state-note ok"><i class="ti ti-check"></i>All requested services meet medical-necessity criteria. Ready to generate the approval letter.</div>'+(prof.nonAnchor?'<div class="state-note"><i class="ti ti-info-circle"></i>Full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div>':''); }
   else { h=svcBlock(prof)+'<div class="state-note"><i class="ti ti-info-circle"></i>This case needs your expert review. The full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div><button class="tool" style="margin-top:14px" onclick="openCase(\'EPS-00088552\')">Open EPS-00088552</button>'; }
