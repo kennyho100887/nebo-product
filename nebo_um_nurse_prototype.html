@@ -561,6 +561,19 @@ textarea{resize:none}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
 .toast i{font-size:15px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.swu{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:130}
+.swu-btn{display:flex;align-items:center;justify-content:center;background:var(--bg);border:0.5px solid var(--border-2);border-right:none;border-radius:10px 0 0 10px;padding:11px 9px;cursor:pointer;color:var(--text-3);font-family:inherit;box-shadow:0 6px 18px rgba(0,0,0,0.14)}
+.swu-btn i{font-size:16px}
+.swu-btn:hover{color:var(--text)}
+.swu-menu{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r-lg);box-shadow:0 12px 32px rgba(0,0,0,0.22);padding:6px;display:none;min-width:216px}
+.swu.open .swu-menu{display:block}
+.swu-label{font-size:10px;color:var(--text-3);letter-spacing:.04em;text-transform:uppercase;padding:6px 10px 4px}
+.swu-mi{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;font-family:inherit;font-size:12.5px;color:var(--text-2);padding:8px 10px;border-radius:8px;cursor:pointer;text-align:left}
+.swu-mi:hover{background:var(--surface);color:var(--text)}
+.swu-mi.active{background:var(--accent-bg);color:var(--accent-fg)}
+.swu-av{width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.swu-role{font-size:10px;color:var(--text-3);margin-top:1px}
+.swu-mi.active .swu-role{color:var(--accent-fg)}
 .upl{position:fixed;right:24px;bottom:24px;width:326px;max-width:calc(100vw - 32px);background:var(--bg);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 14px 38px rgba(0,0,0,0.20);z-index:120;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .26s,transform .26s}
 .upl.show{opacity:1;transform:none;pointer-events:auto}
 .upl-head{display:flex;align-items:center;gap:11px;padding:13px 14px}
@@ -1553,6 +1566,16 @@ window.KonpoNotes={
 </div>
 
 <div id="toast" class="toast"></div>
+<div class="swu" id="swu">
+  <button class="swu-btn" onclick="toggleSwu(event)" aria-label="Switch demo user"><i class="ti ti-user"></i></button>
+  <div class="swu-menu">
+    <div class="swu-label">Demo users</div>
+    <button class="swu-mi active" onclick="switchUser('nurse')"><span class="swu-av">AR</span><div><div>Alex R.</div><div class="swu-role">UM nurse — admin</div></div></button>
+    <button class="swu-mi" onclick="switchUser('physician')"><span class="swu-av">HP</span><div><div>Dr. Helen Park</div><div class="swu-role">Physician</div></div></button>
+    <button class="swu-mi" onclick="switchUser('leader')"><span class="swu-av">MY</span><div><div>Morgan Yu</div><div class="swu-role">UM Team Lead</div></div></button>
+  </div>
+</div>
+
 <div id="uplBanner" class="upl"></div>
 
 <script>
@@ -2161,6 +2184,10 @@ function signIn(){
   if(role==='nurse'){ enterApp(); }
   else { try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
 }
+var SWU_ROLE='nurse';
+function toggleSwu(e){ e.stopPropagation(); document.getElementById('swu').classList.toggle('open'); }
+function switchUser(role){ document.getElementById('swu').classList.remove('open'); if(role===SWU_ROLE){ enterApp(); return; } try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.swu')){ var w=document.getElementById('swu'); if(w) w.classList.remove('open'); } });
 function logOut(){
   closeUserMenu(); closeMUserMenu();
   document.getElementById('loginPass').value='';

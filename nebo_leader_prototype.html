@@ -316,6 +316,17 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .team-stat{display:flex;flex-direction:column;gap:2px}
 .team-stat-val{font-size:16px;font-weight:600}
 .team-stat-lbl{font-size:10.5px;color:var(--text-3)}
+.team-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.team-list{flex-direction:column;border:0.5px solid var(--border);border-radius:12px;background:var(--bg);padding:2px 14px}
+.team-row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:0.5px solid var(--border);cursor:pointer}
+.team-row:last-child{border-bottom:none}
+.team-row:hover{background:var(--surface)}
+.team-row .team-av{width:30px;height:30px;font-size:11px}
+.team-row-name{font-size:13px;font-weight:600;min-width:120px}
+.team-row-role{font-size:11px;color:var(--text-3);flex:1}
+.team-row-stat{font-size:12px;color:var(--text-2);min-width:96px;text-align:right}
+.team-row-stat b{color:var(--text)}
+.kan-empty{font-size:12px;color:var(--text-3);padding:10px 4px}
 @media(max-width:760px){.kanban{grid-template-columns:1fr}}
 .chip{display:inline-flex;align-items:center;line-height:1;font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
 .chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
@@ -569,6 +580,19 @@ textarea{resize:none}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
 .toast i{font-size:15px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.swu{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:130}
+.swu-btn{display:flex;align-items:center;justify-content:center;background:var(--bg);border:0.5px solid var(--border-2);border-right:none;border-radius:10px 0 0 10px;padding:11px 9px;cursor:pointer;color:var(--text-3);font-family:inherit;box-shadow:0 6px 18px rgba(0,0,0,0.14)}
+.swu-btn i{font-size:16px}
+.swu-btn:hover{color:var(--text)}
+.swu-menu{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r-lg);box-shadow:0 12px 32px rgba(0,0,0,0.22);padding:6px;display:none;min-width:216px}
+.swu.open .swu-menu{display:block}
+.swu-label{font-size:10px;color:var(--text-3);letter-spacing:.04em;text-transform:uppercase;padding:6px 10px 4px}
+.swu-mi{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;font-family:inherit;font-size:12.5px;color:var(--text-2);padding:8px 10px;border-radius:8px;cursor:pointer;text-align:left}
+.swu-mi:hover{background:var(--surface);color:var(--text)}
+.swu-mi.active{background:var(--accent-bg);color:var(--accent-fg)}
+.swu-av{width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.swu-role{font-size:10px;color:var(--text-3);margin-top:1px}
+.swu-mi.active .swu-role{color:var(--accent-fg)}
 .upl{position:fixed;right:24px;bottom:24px;width:326px;max-width:calc(100vw - 32px);background:var(--bg);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 14px 38px rgba(0,0,0,0.20);z-index:120;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .26s,transform .26s}
 .upl.show{opacity:1;transform:none;pointer-events:auto}
 .upl-head{display:flex;align-items:center;gap:11px;padding:13px 14px}
@@ -984,19 +1008,19 @@ window.KonpoNotes={
             <svg class="donut-svg" viewBox="0 0 130 130" role="img" aria-label="Determination outcomes distribution">
               <circle class="donut-track" cx="65" cy="65" r="54" stroke-width="13"></circle>
               <g transform="rotate(-90 65 65)">
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--ok-fg)" stroke-dasharray="52 48" stroke-dashoffset="0"></circle>
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="color-mix(in srgb, var(--ok-fg) 50%, var(--bg))" stroke-dasharray="21 79" stroke-dashoffset="-53"></circle>
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--review-fg)" stroke-dasharray="18 82" stroke-dashoffset="-75"></circle>
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--chip-fg)" stroke-dasharray="8 92" stroke-dashoffset="-94"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-1)" stroke-dasharray="52 48" stroke-dashoffset="0"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-2)" stroke-dasharray="21 79" stroke-dashoffset="-53"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-3)" stroke-dasharray="18 82" stroke-dashoffset="-75"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-5)" stroke-dasharray="8 92" stroke-dashoffset="-94"></circle>
               </g>
               <text class="donut-center-val" x="65" y="62" text-anchor="middle">142</text>
               <text class="donut-center-lbl" x="65" y="76" text-anchor="middle">determinations</text>
             </svg>
             <div class="donut-legend">
-              <div class="dleg"><span class="dleg-dot" style="background:var(--ok-fg)"></span><span class="dleg-name">Approved</span><span class="dleg-meta"><b>74</b> &nbsp;52%</span></div>
-              <div class="dleg"><span class="dleg-dot" style="background:color-mix(in srgb, var(--ok-fg) 50%, var(--bg))"></span><span class="dleg-name">Consider to approve</span><span class="dleg-meta"><b>30</b> &nbsp;21%</span></div>
-              <div class="dleg"><span class="dleg-dot" style="background:var(--review-fg)"></span><span class="dleg-name">Further review</span><span class="dleg-meta"><b>25</b> &nbsp;18%</span></div>
-              <div class="dleg"><span class="dleg-dot" style="background:var(--chip-fg)"></span><span class="dleg-name">No PA needed</span><span class="dleg-meta"><b>13</b> &nbsp;9%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-1)"></span><span class="dleg-name">Approved</span><span class="dleg-meta"><b>74</b> &nbsp;52%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-2)"></span><span class="dleg-name">Consider to approve</span><span class="dleg-meta"><b>30</b> &nbsp;21%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-3)"></span><span class="dleg-name">Further review</span><span class="dleg-meta"><b>25</b> &nbsp;18%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-5)"></span><span class="dleg-name">No PA needed</span><span class="dleg-meta"><b>13</b> &nbsp;9%</span></div>
             </div>
           </div>
         </div>
@@ -1038,40 +1062,15 @@ window.KonpoNotes={
 
     <section class="screen" id="queue" data-konpo-screen="queue">
       <div class="page-head"><span class="page-title">Team</span><span class="muted">Prior Authorization · Team A &amp; B &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
-      <div class="team-grid">
-        <button class="kan-card team-card" onclick="teamOpen('Alex R.')">
-          <div class="team-head"><span class="team-av">AR</span><div><div class="team-name">Alex R.</div><div class="team-role">UM nurse</div></div></div>
-          <div class="team-stats">
-            <div class="team-stat"><span class="team-stat-val">9</span><span class="team-stat-lbl">open cases</span></div>
-            <div class="team-stat"><span class="team-stat-val">6</span><span class="team-stat-lbl">done today</span></div>
-            <div class="team-stat"><span class="team-stat-val">3.1h</span><span class="team-stat-lbl">avg turnaround</span></div>
-          </div>
-        </button>
-        <button class="kan-card team-card" onclick="teamOpen('Maya O.')">
-          <div class="team-head"><span class="team-av">MO</span><div><div class="team-name">Maya O.</div><div class="team-role">UM nurse</div></div></div>
-          <div class="team-stats">
-            <div class="team-stat"><span class="team-stat-val">8</span><span class="team-stat-lbl">open cases</span></div>
-            <div class="team-stat"><span class="team-stat-val">5</span><span class="team-stat-lbl">done today</span></div>
-            <div class="team-stat"><span class="team-stat-val">3.6h</span><span class="team-stat-lbl">avg turnaround</span></div>
-          </div>
-        </button>
-        <button class="kan-card team-card" onclick="teamOpen('Jordan C.')">
-          <div class="team-head"><span class="team-av">JC</span><div><div class="team-name">Jordan C.</div><div class="team-role">UM nurse</div></div></div>
-          <div class="team-stats">
-            <div class="team-stat"><span class="team-stat-val">7</span><span class="team-stat-lbl">open cases</span></div>
-            <div class="team-stat"><span class="team-stat-val">4</span><span class="team-stat-lbl">done today</span></div>
-            <div class="team-stat"><span class="team-stat-val">2.8h</span><span class="team-stat-lbl">avg turnaround</span></div>
-          </div>
-        </button>
-        <button class="kan-card team-card" onclick="teamOpen('Sara P.')">
-          <div class="team-head"><span class="team-av">SP</span><div><div class="team-name">Sara P.</div><div class="team-role">UM nurse</div></div></div>
-          <div class="team-stats">
-            <div class="team-stat"><span class="team-stat-val">6</span><span class="team-stat-lbl">open cases</span></div>
-            <div class="team-stat"><span class="team-stat-val">3</span><span class="team-stat-lbl">done today</span></div>
-            <div class="team-stat"><span class="team-stat-val">2.4h</span><span class="team-stat-lbl">avg turnaround</span></div>
-          </div>
-        </button>
+      <div class="team-bar">
+        <div class="search-box" style="flex:0 1 280px"><i class="ti ti-search"></i><input id="teamSearch" class="search-input" placeholder="Search team member" oninput="filterTeam(this.value)"></div>
+        <div class="theme-seg" style="margin:0 0 0 auto;min-width:132px">
+          <button class="seg-btn is-active" onclick="setTeamView('card',this)">Cards</button>
+          <button class="seg-btn" onclick="setTeamView('list',this)">List</button>
+        </div>
       </div>
+      <div class="team-grid" id="teamGrid"></div>
+      <div class="team-list" id="teamList" style="display:none"></div>
     </section>
 
     <section class="screen" id="cases" data-konpo-screen="cases">
@@ -1542,6 +1541,16 @@ window.KonpoNotes={
   </div>
 </div>
 
+<div class="overlay" id="memberOverlay" onclick="if(event.target===this)closeMember()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="memberTitle">Member</div>
+      <button class="modal-close" onclick="closeMember()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <p class="dup-desc" id="memberSub">Cases currently in their queue.</p>
+    <div id="memberCases" style="display:flex;flex-direction:column"></div>
+  </div>
+</div>
 <div class="overlay" id="reassignOverlay" onclick="if(event.target===this)closeReassign()">
   <div class="modal">
     <div class="modal-head">
@@ -1574,6 +1583,16 @@ window.KonpoNotes={
 </div>
 
 <div id="toast" class="toast"></div>
+<div class="swu" id="swu">
+  <button class="swu-btn" onclick="toggleSwu(event)" aria-label="Switch demo user"><i class="ti ti-user"></i></button>
+  <div class="swu-menu">
+    <div class="swu-label">Demo users</div>
+    <button class="swu-mi" onclick="switchUser('nurse')"><span class="swu-av">AR</span><div><div>Alex R.</div><div class="swu-role">UM nurse — admin</div></div></button>
+    <button class="swu-mi" onclick="switchUser('physician')"><span class="swu-av">HP</span><div><div>Dr. Helen Park</div><div class="swu-role">Physician</div></div></button>
+    <button class="swu-mi active" onclick="switchUser('leader')"><span class="swu-av">MY</span><div><div>Morgan Yu</div><div class="swu-role">UM Team Lead</div></div></button>
+  </div>
+</div>
+
 <div id="uplBanner" class="upl"></div>
 
 <script>
@@ -1965,7 +1984,6 @@ function pickStatusTab(v,el){ state.status=v; state.page=1; applyFilters(); }
 function setSearch(v){ state.search=v.trim(); state.page=1; applyFilters(); }
 function clearSearch(){ state.search=''; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
 function removeFilter(k){ if(k==='reviewer') state.reviewer=[]; else state[k]=''; state.page=1; applyFilters(); }
-function teamOpen(name){ state.reviewer=[name]; state.page=1; applyFilters(); renderReviewerMenu(); go('cases'); }
 function toggleReviewer(name){ if(name===''){ state.reviewer=[]; } else { var i=state.reviewer.indexOf(name); if(i>-1) state.reviewer.splice(i,1); else state.reviewer.push(name); } state.page=1; applyFilters(); }
 function renderReviewerMenu(){ document.querySelectorAll('#btn-reviewer ~ .menu .rev-item, .rev-item').forEach(function(it){ var v=it.getAttribute('data-rev'); var on = v==='' ? state.reviewer.length===0 : state.reviewer.indexOf(v)>-1; it.classList.toggle('active', on); }); }
 function clearAll(){ state.determination=state.priority=state.cpt=state.status=state.date=state.search=''; state.reviewer=[]; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
@@ -2183,6 +2201,43 @@ function signIn(){
   if(role==='leader'){ enterApp(); }
   else { try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
 }
+var TEAM=[
+ {ini:'AR',name:'Alex R.',role:'UM nurse',open:9,done:6,tat:'3.1h'},
+ {ini:'MO',name:'Maya O.',role:'UM nurse',open:8,done:5,tat:'3.6h'},
+ {ini:'JC',name:'Jordan C.',role:'UM nurse',open:7,done:4,tat:'2.8h'},
+ {ini:'SP',name:'Sara P.',role:'UM nurse',open:6,done:3,tat:'2.4h'}
+];
+var teamView='card', teamQuery='';
+function teamCardHtml(m){ return '<button class="kan-card team-card" onclick="openMember(\''+m.name+'\')"><div class="team-head"><span class="team-av">'+m.ini+'</span><div><div class="team-name">'+m.name+'</div><div class="team-role">'+m.role+'</div></div></div><div class="team-stats"><div class="team-stat"><span class="team-stat-val">'+m.open+'</span><span class="team-stat-lbl">open cases</span></div><div class="team-stat"><span class="team-stat-val">'+m.done+'</span><span class="team-stat-lbl">done today</span></div><div class="team-stat"><span class="team-stat-val">'+m.tat+'</span><span class="team-stat-lbl">avg turnaround</span></div></div></button>'; }
+function teamRowHtml(m){ return '<div class="team-row" onclick="openMember(\''+m.name+'\')"><span class="team-av">'+m.ini+'</span><span class="team-row-name">'+m.name+'</span><span class="team-row-role">'+m.role+'</span><span class="team-row-stat"><b>'+m.open+'</b> open</span><span class="team-row-stat"><b>'+m.done+'</b> done today</span><span class="team-row-stat"><b>'+m.tat+'</b> avg</span></div>'; }
+function renderTeam(){
+  var q=teamQuery.toLowerCase();
+  TEAM.forEach(function(m){ m.open=CASES.filter(function(c){ return c.reviewer===m.name && (c.status==='ready'||c.status==='escalated'); }).length; });
+  var arr=TEAM.filter(function(m){ return m.name.toLowerCase().indexOf(q)>-1; });
+  var grid=document.getElementById('teamGrid'), list=document.getElementById('teamList');
+  grid.style.display=teamView==='card'?'grid':'none';
+  list.style.display=teamView==='list'?'flex':'none';
+  var empty='<div class="kan-empty">No team members match</div>';
+  grid.innerHTML=arr.length?arr.map(teamCardHtml).join(''):empty;
+  list.innerHTML=arr.length?arr.map(teamRowHtml).join(''):empty;
+}
+function setTeamView(v,btn){ teamView=v; btn.parentNode.querySelectorAll('.seg-btn').forEach(function(b){b.classList.toggle('is-active',b===btn);}); renderTeam(); }
+function filterTeam(q){ teamQuery=q||''; renderTeam(); }
+function openMember(name){
+  var open=CASES.filter(function(c){ return c.reviewer===name && (c.status==='ready'||c.status==='escalated'); });
+  document.getElementById('memberTitle').textContent=name;
+  document.getElementById('memberSub').textContent=open.length+' open case'+(open.length===1?'':'s')+' currently in their queue.';
+  document.getElementById('memberCases').innerHTML=open.map(function(c){
+    var d = c.status==='escalated' ? ['Further review','chip-review'] : detMap[c.det];
+    return '<div class="vrow" onclick="closeMember();openCase(\''+c.id+'\')"><span class="vid">'+c.id+'</span><span class="vreason">'+c.date+'</span><span class="chip '+d[1]+'">'+d[0]+'</span></div>';
+  }).join('')||'<div class="kan-empty">No open cases</div>';
+  document.getElementById('memberOverlay').classList.add('open');
+}
+function closeMember(){ document.getElementById('memberOverlay').classList.remove('open'); }
+var SWU_ROLE='leader';
+function toggleSwu(e){ e.stopPropagation(); document.getElementById('swu').classList.toggle('open'); }
+function switchUser(role){ document.getElementById('swu').classList.remove('open'); if(role===SWU_ROLE){ enterApp(); return; } try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.swu')){ var w=document.getElementById('swu'); if(w) w.classList.remove('open'); } });
 function logOut(){
   closeUserMenu(); closeMUserMenu();
   document.getElementById('loginPass').value='';
@@ -2190,6 +2245,7 @@ function logOut(){
   document.getElementById('loginScreen').style.display='flex';
 }
 applyFilters();
+renderTeam();
 try{ if(sessionStorage.getItem('neboAuth')==='leader'){ sessionStorage.removeItem('neboAuth'); enterApp(); } }catch(e){}
 
 </script>
