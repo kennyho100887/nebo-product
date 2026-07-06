@@ -2124,16 +2124,17 @@ function sbSearchInput(v){
   document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-screen')==='cases'); });
   applyFilters();
 }
+function enterApp(){ document.getElementById('loginError').classList.remove('show'); document.getElementById('loginScreen').style.display='none'; go('queue'); }
+function isPreviewHost(){ return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname); }
+function roleUrl(role){ return role==='physician' ? (isPreviewHost()?'/physician.html':'/physician') : '/'; }
 function signIn(){
   var email=(document.getElementById('loginEmail').value||'').trim().toLowerCase();
   var pass=document.getElementById('loginPass').value||'';
-  if(email==='physician' && pass==='konpo@studio'){
-    document.getElementById('loginError').classList.remove('show');
-    document.getElementById('loginScreen').style.display='none';
-    go('queue');
-  } else {
-    document.getElementById('loginError').classList.add('show');
-  }
+  var role = pass==='konpo@studio' ? (email==='admin'?'nurse':(email==='physician'?'physician':'')) : '';
+  if(!role){ document.getElementById('loginError').classList.add('show'); return; }
+  document.getElementById('loginError').classList.remove('show');
+  if(role==='physician'){ enterApp(); }
+  else { try{ sessionStorage.setItem('neboAuth','nurse'); }catch(e){} location.href=roleUrl('nurse'); }
 }
 function logOut(){
   closeUserMenu(); closeMUserMenu();
@@ -2142,6 +2143,7 @@ function logOut(){
   document.getElementById('loginScreen').style.display='flex';
 }
 applyFilters();
+try{ if(sessionStorage.getItem('neboAuth')==='physician'){ sessionStorage.removeItem('neboAuth'); enterApp(); } }catch(e){}
 
 </script>
 </body>
