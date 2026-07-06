@@ -173,9 +173,11 @@
 .ibar{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-top:0.5px solid var(--border);transition:opacity .15s}
 .ibar:first-child{border-top:none;padding-top:2px}
 .ibar:hover{opacity:.7}
-.ibar-main{width:152px;flex-shrink:0}
+.ibar-main{width:168px;flex-shrink:0}
 .ibar-name{font-size:12.5px;color:var(--text);font-weight:500}
-.ibar-field{font-size:11px;color:var(--text-3);margin-top:1px}
+.ibar-field{font-size:11px;color:var(--text-3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ibar-name.ibar-id{font-family:var(--mono);font-weight:400;font-size:12px}
+.ibar-val.ibar-time{width:auto;color:var(--warn-fg);white-space:nowrap;font-weight:500}
 .ibar-track{flex:1;height:8px;background:var(--chip-bg);border-radius:99px;overflow:hidden}
 .ibar-fill{display:block;height:100%;border-radius:99px;background:var(--data-2)}
 .ibar-val{font-size:12.5px;font-weight:500;color:var(--text);width:22px;text-align:right;flex-shrink:0}
@@ -1040,10 +1042,12 @@ window.KonpoNotes={
       <div class="dash-2col">
         <div class="dwidget">
           <div class="dwidget-head"><span class="dwidget-title">Cases at SLA risk</span><span class="dwidget-meta">review deadline</span></div>
-          <div class="vrow" onclick="openCase('EPS-00088552')"><span class="vid">EPS-00088552</span><span class="vreason">Alex R. · further review</span><span class="vconf">4h left</span></div>
-          <div class="vrow" onclick="openCase('EPS-00076675')"><span class="vid">EPS-00076675</span><span class="vreason">Jordan C. · further review</span><span class="vconf">6h left</span></div>
-          <div class="vrow" onclick="openCase('EPS-00072502')"><span class="vid">EPS-00072502</span><span class="vreason">Alex R. · further review</span><span class="vconf">9h left</span></div>
-          <div class="vrow" onclick="openCase('EPS-00084855')"><span class="vid">EPS-00084855</span><span class="vreason">Maya O. · further review</span><span class="vconf">overdue</span></div>
+          <div class="ibars">
+          <div class="ibar" onclick="openCase('EPS-00088552')"><div class="ibar-main"><div class="ibar-name ibar-id">EPS-00088552</div><div class="ibar-field">Alex R. · further review</div></div><span class="ibar-track"><span class="ibar-fill" style="width:82%"></span></span><span class="ibar-val ibar-time">4h left</span></div>
+          <div class="ibar" onclick="openCase('EPS-00076675')"><div class="ibar-main"><div class="ibar-name ibar-id">EPS-00076675</div><div class="ibar-field">Jordan C. · further review</div></div><span class="ibar-track"><span class="ibar-fill" style="width:68%"></span></span><span class="ibar-val ibar-time">6h left</span></div>
+          <div class="ibar" onclick="openCase('EPS-00072502')"><div class="ibar-main"><div class="ibar-name ibar-id">EPS-00072502</div><div class="ibar-field">Alex R. · further review</div></div><span class="ibar-track"><span class="ibar-fill" style="width:54%"></span></span><span class="ibar-val ibar-time">9h left</span></div>
+          <div class="ibar" onclick="openCase('EPS-00084855')"><div class="ibar-main"><div class="ibar-name ibar-id">EPS-00084855</div><div class="ibar-field">Maya O. · further review</div></div><span class="ibar-track"><span class="ibar-fill" style="width:100%"></span></span><span class="ibar-val ibar-time">overdue</span></div>
+          </div>
         </div>
 
         <div class="dwidget">
