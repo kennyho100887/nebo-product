@@ -2071,10 +2071,15 @@ function reassessGl(btn){
   btn.innerHTML='<i class="ti ti-rotate-clockwise"></i>Reassessing…';
   btn.style.opacity='.6';
   setTimeout(function(){
-    btn.innerHTML=orig;
+    btn.innerHTML='<i class="ti ti-check"></i>Reassessed';
     btn.style.opacity='';
-    delete btn.dataset.busy;
+    btn.style.color='var(--ok-fg)';
     showToast('Nebo reassessed this case');
+    setTimeout(function(){
+      btn.innerHTML=orig;
+      btn.style.color='';
+      delete btn.dataset.busy;
+    },2500);
   },1600);
 }
 var toastTimer;
