@@ -336,7 +336,7 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .chip-neutral{background:var(--chip-bg);color:var(--chip-fg)}
 .chip-consider{background:color-mix(in srgb, var(--ok-bg) 50%, var(--bg));color:color-mix(in srgb, var(--ok-fg) 78%, var(--text-3))}
 .chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
-#caseTable th:last-child,#caseTable td:last-child{text-align:right}
+#caseTable th:last-child,#caseTable td:last-child,#memberTable th:last-child,#memberTable td:last-child{text-align:right}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
 .mdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:9px;vertical-align:middle;flex-shrink:0}
@@ -939,7 +939,7 @@ window.KonpoNotes={
       <div class="search" data-tip="Search case"><i class="ti ti-search"></i><input id="sbSearch" placeholder="Search by case number" oninput="sbSearchInput(this.value)"></div>
       <div class="sb-divider"></div>
       <button class="nav-item active" data-screen="dashboard" data-tip="Dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
-      <button class="nav-item" data-screen="queue" data-tip="Team"><i class="ti ti-user"></i><span>Team</span><span class="count">4</span></button>
+      <button class="nav-item" data-screen="queue" data-tip="Team"><i class="ti ti-user"></i><span>Team</span><span class="count">9</span></button>
       <button class="nav-item" data-screen="cases" data-tip="All cases"><i class="ti ti-folder"></i><span>All cases</span><span class="count">1,284</span></button>
     </div>
     <div class="sb-mid">
@@ -1065,12 +1065,30 @@ window.KonpoNotes={
       <div class="team-bar">
         <div class="search-box" style="flex:0 1 280px"><i class="ti ti-search"></i><input id="teamSearch" class="search-input" placeholder="Search team member" oninput="filterTeam(this.value)"></div>
         <div class="theme-seg" style="margin:0 0 0 auto;min-width:132px">
-          <button class="seg-btn is-active" onclick="setTeamView('card',this)">Cards</button>
-          <button class="seg-btn" onclick="setTeamView('list',this)">List</button>
+          <button class="seg-btn is-active" onclick="setTeamView('list',this)">List</button>
+          <button class="seg-btn" onclick="setTeamView('card',this)">Cards</button>
         </div>
       </div>
-      <div class="team-grid" id="teamGrid"></div>
-      <div class="team-list" id="teamList" style="display:none"></div>
+      <div class="team-list" id="teamList"></div>
+      <div class="team-grid" id="teamGrid" style="display:none"></div>
+    </section>
+
+    <section class="screen" id="member" data-konpo-screen="member">
+      <div class="detail-topbar">
+        <button class="btn-back" onclick="go('queue')"><i class="ti ti-arrow-left"></i>Back</button>
+      </div>
+      <div class="page-head"><span class="page-title" id="memberPageTitle">Member</span><span class="muted" id="memberPageMeta"></span></div>
+      <table id="memberTable">
+        <thead><tr>
+          <th style="width:16%">Case</th>
+          <th style="width:9%">Submitted</th>
+          <th style="width:23%">CPT</th>
+          <th style="width:23%">ICD-10</th>
+          <th style="width:13%">Reviewer</th>
+          <th style="width:16%">Recommendation</th>
+        </tr></thead>
+        <tbody id="memberBody"></tbody>
+      </table>
     </section>
 
     <section class="screen" id="cases" data-konpo-screen="cases">
@@ -1125,10 +1143,15 @@ window.KonpoNotes={
           <button class="tool" id="btn-reviewer" onclick="toggleMenu(this)">Reviewer <i class="ti ti-chevron-down"></i></button>
           <div class="menu">
             <div class="menu-item rev-item" data-rev="" onclick="toggleReviewer('')">Anyone<i class="ti ti-check rev-check"></i></div>
-            <div class="menu-item rev-item" data-rev="Alex R." onclick="toggleReviewer('Alex R.')">Alex R. (me)<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Alex R." onclick="toggleReviewer('Alex R.')">Alex R.<i class="ti ti-check rev-check"></i></div>
             <div class="menu-item rev-item" data-rev="Jordan C." onclick="toggleReviewer('Jordan C.')">Jordan C.<i class="ti ti-check rev-check"></i></div>
             <div class="menu-item rev-item" data-rev="Maya O." onclick="toggleReviewer('Maya O.')">Maya O.<i class="ti ti-check rev-check"></i></div>
             <div class="menu-item rev-item" data-rev="Sara P." onclick="toggleReviewer('Sara P.')">Sara P.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Dana K." onclick="toggleReviewer('Dana K.')">Dana K.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Priya T." onclick="toggleReviewer('Priya T.')">Priya T.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Liam N." onclick="toggleReviewer('Liam N.')">Liam N.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Rosa S." onclick="toggleReviewer('Rosa S.')">Rosa S.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Tom B." onclick="toggleReviewer('Tom B.')">Tom B.<i class="ti ti-check rev-check"></i></div>
             <div class="menu-item rev-item" data-rev="Unassigned" onclick="toggleReviewer('Unassigned')">Unassigned<i class="ti ti-check rev-check"></i></div>
           </div>
         </div>
@@ -1541,16 +1564,6 @@ window.KonpoNotes={
   </div>
 </div>
 
-<div class="overlay" id="memberOverlay" onclick="if(event.target===this)closeMember()">
-  <div class="modal">
-    <div class="modal-head">
-      <div class="modal-title" id="memberTitle">Member</div>
-      <button class="modal-close" onclick="closeMember()" aria-label="Close"><i class="ti ti-x"></i></button>
-    </div>
-    <p class="dup-desc" id="memberSub">Cases currently in their queue.</p>
-    <div id="memberCases" style="display:flex;flex-direction:column"></div>
-  </div>
-</div>
 <div class="overlay" id="reassignOverlay" onclick="if(event.target===this)closeReassign()">
   <div class="modal">
     <div class="modal-head">
@@ -1880,11 +1893,11 @@ var CASES=[
   {id:'EPS-00069545',day:18,date:'18 Mar',cpt:'70553',det:'consider',status:'signed',priority:'standard'},
   {id:'EPS-00068789',day:17,date:'17 Mar',cpt:'73721',det:'approved',status:'ready',priority:'standard'}
 ];
-var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
-CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
+var REVIEWERS=['Alex R.','Jordan C.','Maya O.','Sara P.','Dana K.','Alex R.','Priya T.','Liam N.','Rosa S.','Tom B.'];
+CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%REVIEWERS.length]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
 var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-review'],nopa:['No PA needed','chip-neutral']};
-var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Further review',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
+var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Further review',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Dana K.':'Dana K.','Priya T.':'Priya T.','Liam N.':'Liam N.','Rosa S.':'Rosa S.','Tom B.':'Tom B.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1};
 function caseMatch(c,skipStatus){
   if(state.determination && c.det!==state.determination) return false;
@@ -1993,7 +2006,7 @@ var FILTER_DEFS=[
   {key:'determination',label:'Recommendation',opts:[['','Any'],['approved','Approved'],['consider','Consider to approve'],['further','Further review'],['nopa','No PA needed']]},
   {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['urgent','Urgent']]},
   {key:'cpt',label:'CPT',opts:[['','Any'],['27447','27447'],['29881','29881'],['44388','44388'],['45378','45378'],['62323','62323'],['63650','63650'],['64483','64483'],['70553','70553'],['72148','72148'],['99213','99213']]},
-  {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R. (me)'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
+  {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R.'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Dana K.','Dana K.'],['Priya T.','Priya T.'],['Liam N.','Liam N.'],['Rosa S.','Rosa S.'],['Tom B.','Tom B.'],['Unassigned','Unassigned']]},
   {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
 ];
 function activeFilterCount(){ return ['determination','priority','cpt','date'].filter(function(k){return state[k];}).length + (state.reviewer.length?1:0); }
@@ -2202,12 +2215,17 @@ function signIn(){
   else { try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
 }
 var TEAM=[
- {ini:'AR',name:'Alex R.',role:'UM nurse',open:9,done:6,tat:'3.1h'},
- {ini:'MO',name:'Maya O.',role:'UM nurse',open:8,done:5,tat:'3.6h'},
- {ini:'JC',name:'Jordan C.',role:'UM nurse',open:7,done:4,tat:'2.8h'},
- {ini:'SP',name:'Sara P.',role:'UM nurse',open:6,done:3,tat:'2.4h'}
+ {ini:'AR',name:'Alex R.',role:'UM nurse',open:0,done:6,tat:'3.1h'},
+ {ini:'MO',name:'Maya O.',role:'UM nurse',open:0,done:5,tat:'3.6h'},
+ {ini:'JC',name:'Jordan C.',role:'UM nurse',open:0,done:4,tat:'2.8h'},
+ {ini:'SP',name:'Sara P.',role:'UM nurse',open:0,done:3,tat:'2.4h'},
+ {ini:'DK',name:'Dana K.',role:'UM nurse',open:0,done:4,tat:'2.9h'},
+ {ini:'PT',name:'Priya T.',role:'UM nurse',open:0,done:5,tat:'3.3h'},
+ {ini:'LN',name:'Liam N.',role:'UM nurse',open:0,done:2,tat:'2.6h'},
+ {ini:'RS',name:'Rosa S.',role:'UM nurse',open:0,done:3,tat:'3.0h'},
+ {ini:'TB',name:'Tom B.',role:'UM nurse',open:0,done:4,tat:'3.4h'}
 ];
-var teamView='card', teamQuery='';
+var teamView='list', teamQuery='';
 function teamCardHtml(m){ return '<button class="kan-card team-card" onclick="openMember(\''+m.name+'\')"><div class="team-head"><span class="team-av">'+m.ini+'</span><div><div class="team-name">'+m.name+'</div><div class="team-role">'+m.role+'</div></div></div><div class="team-stats"><div class="team-stat"><span class="team-stat-val">'+m.open+'</span><span class="team-stat-lbl">open cases</span></div><div class="team-stat"><span class="team-stat-val">'+m.done+'</span><span class="team-stat-lbl">done today</span></div><div class="team-stat"><span class="team-stat-val">'+m.tat+'</span><span class="team-stat-lbl">avg turnaround</span></div></div></button>'; }
 function teamRowHtml(m){ return '<div class="team-row" onclick="openMember(\''+m.name+'\')"><span class="team-av">'+m.ini+'</span><span class="team-row-name">'+m.name+'</span><span class="team-row-role">'+m.role+'</span><span class="team-row-stat"><b>'+m.open+'</b> open</span><span class="team-row-stat"><b>'+m.done+'</b> done today</span><span class="team-row-stat"><b>'+m.tat+'</b> avg</span></div>'; }
 function renderTeam(){
@@ -2224,16 +2242,15 @@ function renderTeam(){
 function setTeamView(v,btn){ teamView=v; btn.parentNode.querySelectorAll('.seg-btn').forEach(function(b){b.classList.toggle('is-active',b===btn);}); renderTeam(); }
 function filterTeam(q){ teamQuery=q||''; renderTeam(); }
 function openMember(name){
-  var open=CASES.filter(function(c){ return c.reviewer===name && (c.status==='ready'||c.status==='escalated'); });
-  document.getElementById('memberTitle').textContent=name;
-  document.getElementById('memberSub').textContent=open.length+' open case'+(open.length===1?'':'s')+' currently in their queue.';
-  document.getElementById('memberCases').innerHTML=open.map(function(c){
-    var d = c.status==='escalated' ? ['Further review','chip-review'] : detMap[c.det];
-    return '<div class="vrow" onclick="closeMember();openCase(\''+c.id+'\')"><span class="vid">'+c.id+'</span><span class="vreason">'+c.date+'</span><span class="chip '+d[1]+'">'+d[0]+'</span></div>';
-  }).join('')||'<div class="kan-empty">No open cases</div>';
-  document.getElementById('memberOverlay').classList.add('open');
+  var m=TEAM.filter(function(x){ return x.name===name; })[0]||{};
+  var arr=CASES.filter(function(c){ return c.reviewer===name; });
+  arr.sort(function(a,b){ return b.day-a.day; });
+  var open=arr.filter(function(c){ return c.status==='ready'||c.status==='escalated'; }).length;
+  document.getElementById('memberPageTitle').textContent=name;
+  document.getElementById('memberPageMeta').textContent=(m.role||'UM nurse')+' \u00b7 '+arr.length+' cases \u00b7 '+open+' open';
+  document.getElementById('memberBody').innerHTML=arr.map(rowHtml).join('')||'<tr class="empty-row"><td colspan="6">No cases assigned</td></tr>';
+  go('member');
 }
-function closeMember(){ document.getElementById('memberOverlay').classList.remove('open'); }
 var SWU_ROLE='leader';
 function toggleSwu(e){ e.stopPropagation(); document.getElementById('swu').classList.toggle('open'); }
 function switchUser(role){ document.getElementById('swu').classList.remove('open'); if(role===SWU_ROLE){ enterApp(); return; } try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
