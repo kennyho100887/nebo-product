@@ -874,7 +874,7 @@ window.KonpoNotes={
     <h1 class="login-title">Welcome back</h1>
     <p class="login-sub">Please enter your details to sign in</p>
     <label class="login-field" for="loginEmail">Username</label>
-    <input id="loginEmail" type="text" class="login-input" placeholder="admin" autocomplete="username" onkeydown="if(event.key==='Enter')signIn()">
+    <input id="loginEmail" type="text" class="login-input" placeholder="nurse" autocomplete="username" onkeydown="if(event.key==='Enter')signIn()">
     <label class="login-field" for="loginPass" style="margin-top:14px">Password</label>
     <input id="loginPass" type="password" class="login-input" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')signIn()">
     <div id="loginError" class="login-error">Incorrect email or password.</div>
@@ -1570,7 +1570,7 @@ window.KonpoNotes={
   <button class="swu-btn" onclick="toggleSwu(event)" aria-label="Switch demo user"><i class="ti ti-user"></i></button>
   <div class="swu-menu">
     <div class="swu-label">Demo users</div>
-    <button class="swu-mi active" onclick="switchUser('nurse')"><span class="swu-av">AR</span><div><div>Alex R.</div><div class="swu-role">UM nurse — admin</div></div></button>
+    <button class="swu-mi active" onclick="switchUser('nurse')"><span class="swu-av">AR</span><div><div>Alex R.</div><div class="swu-role">UM nurse</div></div></button>
     <button class="swu-mi" onclick="switchUser('physician')"><span class="swu-av">HP</span><div><div>Dr. Helen Park</div><div class="swu-role">Physician</div></div></button>
     <button class="swu-mi" onclick="switchUser('leader')"><span class="swu-av">MY</span><div><div>Morgan Yu</div><div class="swu-role">UM Team Lead</div></div></button>
   </div>
@@ -2178,7 +2178,7 @@ function roleUrl(role){ var p=isPreviewHost(); if(role==='physician') return p?'
 function signIn(){
   var email=(document.getElementById('loginEmail').value||'').trim().toLowerCase();
   var pass=document.getElementById('loginPass').value||'';
-  var role = pass==='konpo@studio' ? (email==='admin'?'nurse':(email==='physician'?'physician':(email==='leader'?'leader':''))) : '';
+  var role = pass==='konpo@studio' ? (email==='nurse'?'nurse':(email==='physician'?'physician':(email==='leader'?'leader':''))) : '';
   if(!role){ document.getElementById('loginError').classList.add('show'); return; }
   document.getElementById('loginError').classList.remove('show');
   if(role==='nurse'){ enterApp(); }
