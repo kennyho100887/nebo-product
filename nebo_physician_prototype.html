@@ -52,6 +52,7 @@
   --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --review-bg:#CDD4CB; --review-fg:#4B564C;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
   --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
   --r:8px; --r-lg:12px;
@@ -68,6 +69,7 @@
     --ok-bg:#27500A; --ok-fg:#C0DD97;
     --danger-bg:#791F1F; --danger-fg:#F7C1C1; --danger-solid:#B5403F; --danger-solid-fg:#ffffff; --danger-solid:#B5403F; --danger-solid-fg:#ffffff;
     --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+    --review-bg:#333B32; --review-fg:#C9D1C4;
     --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
     --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
   }
@@ -81,6 +83,7 @@
   --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --review-bg:#CDD4CB; --review-fg:#4B564C;
   --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
 }
@@ -93,6 +96,7 @@
   --ok-bg:#27500A; --ok-fg:#C0DD97;
   --danger-bg:#791F1F; --danger-fg:#F7C1C1;
   --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+  --review-bg:#333B32; --review-fg:#C9D1C4;
   --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
   --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
 }
@@ -310,7 +314,7 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .chip-neutral{background:var(--chip-bg);color:var(--chip-fg)}
 .chip-consider{background:color-mix(in srgb, var(--ok-bg) 50%, var(--bg));color:color-mix(in srgb, var(--ok-fg) 78%, var(--text-3))}
 .chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
-#caseTable .chip-warn{background:var(--chip-bg);color:var(--chip-fg)}
+.chip-review{background:var(--review-bg);color:var(--review-fg)}
 #caseTable th:last-child,#caseTable td:last-child{text-align:right}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
@@ -1019,12 +1023,12 @@ textarea{resize:none}
           <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Awaiting your sign-off</span><span class="q-count">2</span></div>
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00088552')">
-              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-review">Further review</span></div>
               <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
               <div class="kan-foot">awaiting you · 2h</div>
             </button>
             <button class="kan-card" onclick="openCase('EPS-20260605')">
-              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-review">Further review</span></div>
               <div class="kan-foot">awaiting you · 1h</div>
             </button>
           </div>
@@ -1823,7 +1827,7 @@ var CASES=[
 var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
 CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
 function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
-var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
+var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-review'],nopa:['No PA needed','chip-neutral']};
 var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Further review',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
 var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1};
 function caseMatch(c,skipStatus){
@@ -1864,7 +1868,7 @@ function rowHtml(c){
   var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
   var det;
   if(c.status==='processing') det='<span class="muted">processing...</span>';
-  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-review">Further review</span>';
   else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
   var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
   return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td><div class="cpt-cell">'+cptChips(icdFor(c.cpt))+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
@@ -1962,7 +1966,7 @@ var priLabel={standard:'Standard','high-cost':'High cost',urgent:'Urgent',oon:'O
 function caseById(id){ for(var i=0;i<CASES.length;i++){ if(CASES[i].id===id) return CASES[i]; } return null; }
 function detChipHtml(c){
   if(c.status==='processing') return '<span class="chip chip-neutral">Processing</span>';
-  if(c.status==='escalated') return '<span class="chip chip-warn">Further review</span>';
+  if(c.status==='escalated') return '<span class="chip chip-review">Further review</span>';
   if(c.status==='signed') return '<span class="chip chip-ok">Signed</span>';
   var d=detMap[c.det]; return d? '<span class="chip '+d[1]+'">'+d[0]+'</span>' : '<span class="muted">-</span>';
 }
