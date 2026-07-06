@@ -442,6 +442,15 @@ textarea{resize:none}
 .patient-line{font-size:12px;color:var(--text-2);margin-top:8px}
 .patient-line .pt-name{color:var(--text);font-weight:500}
 .patient-line .pt-sep{color:var(--text-3);margin:0 7px}
+.ph-why{border:0.5px solid color-mix(in srgb, var(--warn-fg) 28%, var(--border));background:color-mix(in srgb, var(--warn-bg) 38%, var(--bg));border-radius:var(--r-lg);padding:14px 16px;margin-bottom:16px}
+.ph-why-head{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--warn-fg)}
+.ph-why-head i{font-size:15px}
+.ph-why-sub{font-size:12.5px;color:var(--text-2);margin-top:6px;line-height:1.55}
+.ph-why-sub b{color:var(--text);font-weight:500}
+.ph-note{display:flex;gap:10px;margin-top:12px;padding-top:12px;border-top:0.5px solid color-mix(in srgb, var(--warn-fg) 16%, var(--border))}
+.ph-note-av{width:24px;height:24px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0}
+.ph-note-txt{font-size:12.5px;color:var(--text-2);line-height:1.5;font-style:italic}
+.ph-note-meta{font-size:11px;color:var(--text-3);margin-top:3px;font-style:normal}
 .svc-block{margin-top:16px;border-top:0.5px solid var(--border);padding-top:14px;margin-bottom:14px}
 .svc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .svc-label{font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3)}
@@ -1161,46 +1170,14 @@ textarea{resize:none}
         </div>
       </div>
       <div id="deepContent">
-        <div class="svc-block">
-          <div class="svc-head">
-            <span class="svc-label">Requested services</span>
-            <span class="svc-summary"><span><span class="dot dot-ok"></span>1 approved</span><span><span class="dot dot-warn"></span>1 needs review</span></span>
-          </div>
-          <div class="svc-rows">
-            <button class="svc-row" onclick="go('details')">
-              <span class="cpt-pill cpt-warn"><span class="pdot"></span>72148</span>
-              <span class="svc-name">MRI lumbar spine, without contrast</span>
-              <span class="svc-det det-warn">Requires review</span>
-              <span class="svc-just">
-                <span class="just-label">Dx</span>
-                <span class="icd-chip">M48.062</span>
-                <span class="icd-chip">M54.16</span>
-                <span class="icd-chip">M51.16</span>
-              </span>
-            </button>
-            <div class="card acard collapsed" style="margin-bottom:0">
-              <button class="acard-head" onclick="toggleAcard(this)">
-                <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
-                <span class="acard-name">Neurostimulator electrode, percutaneous</span>
-                <span class="acard-approved">Approved</span>
-                <i class="ti ti-chevron-down acard-caret"></i>
-                <span class="acard-dx">DX <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
-              </button>
-              <div class="acard-body">
-                <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
-                <div class="guideline">
-                  <i class="ti ti-bookmark"></i>
-                  <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
-                  <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
-                </div>
-                <div class="block">
-                  <div class="block-label">Criteria met</div>
-                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Documented trial with &#8805; 50% pain relief</div><div class="crit-met-quote">"Temporary trial showed 60% VAS reduction over 7 days" <span class="pageref" onclick="openPageRef(4)">Page 4</span></div></div></div>
-                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Conservative therapy failed &#8805; 6 months</div><div class="crit-met-quote">"PT, NSAIDs, and epidural injections over 14 months without relief" <span class="pageref" onclick="openPageRef(5)">Page 5</span></div></div></div>
-                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Psychological evaluation completed</div><div class="crit-met-quote">"Behavioral health clearance on file 02/2026" <span class="pageref" onclick="openPageRef(7)">Page 7</span></div></div></div>
-                </div>
-                <div class="assessed-with">Assessed together with 63655</div>
-              </div>
+        <div class="ph-why">
+          <div class="ph-why-head"><i class="ti ti-info-circle"></i>Why this case needs you</div>
+          <div class="ph-why-sub">Flagged for further review — <b>medical necessity unclear</b> on <b>MRI lumbar spine (72148)</b>. Nebo could not fully verify the criteria. Approve or deny below to sign off and issue the determination letter.</div>
+          <div class="ph-note">
+            <span class="ph-note-av">AR</span>
+            <div>
+              <div class="ph-note-txt">"Criteria mostly supported, but conservative-therapy documentation is thin — OTC meds only, no PT records on file. Recommend physician review before sign-off."</div>
+              <div class="ph-note-meta">Alex R. · UM nurse · 18 Mar 2026, 10:40 UTC</div>
             </div>
           </div>
         </div>
@@ -1239,6 +1216,39 @@ textarea{resize:none}
           </div>
         </div>
       </div>
+
+        <div class="svc-block">
+          <div class="svc-head">
+            <span class="svc-label">Other requested services</span>
+            <span class="svc-summary"><span><span class="dot dot-ok"></span>1 approved</span></span>
+          </div>
+          <div class="svc-rows">
+            <div class="card acard collapsed" style="margin-bottom:0">
+              <button class="acard-head" onclick="toggleAcard(this)">
+                <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
+                <span class="acard-name">Neurostimulator electrode, percutaneous</span>
+                <span class="acard-approved">Approved</span>
+                <i class="ti ti-chevron-down acard-caret"></i>
+                <span class="acard-dx">DX <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
+              </button>
+              <div class="acard-body">
+                <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
+                <div class="guideline">
+                  <i class="ti ti-bookmark"></i>
+                  <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
+                  <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
+                </div>
+                <div class="block">
+                  <div class="block-label">Criteria met</div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Documented trial with &#8805; 50% pain relief</div><div class="crit-met-quote">"Temporary trial showed 60% VAS reduction over 7 days" <span class="pageref" onclick="openPageRef(4)">Page 4</span></div></div></div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Conservative therapy failed &#8805; 6 months</div><div class="crit-met-quote">"PT, NSAIDs, and epidural injections over 14 months without relief" <span class="pageref" onclick="openPageRef(5)">Page 5</span></div></div></div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Psychological evaluation completed</div><div class="crit-met-quote">"Behavioral health clearance on file 02/2026" <span class="pageref" onclick="openPageRef(7)">Page 7</span></div></div></div>
+                </div>
+                <div class="assessed-with">Assessed together with 63655</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
       <div id="stateBody" style="display:none"></div>
