@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nebo - UM nurse prototype</title>
+<title>Nebo - Leader prototype</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2724%27%20fill%3D%27%235B6E2C%27/%3E%3Ctext%20x%3D%2750%27%20y%3D%2752%27%20font-family%3D%27Georgia%2Cserif%27%20font-size%3D%2768%27%20font-weight%3D%27600%27%20fill%3D%27%23ffffff%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27central%27%3EN%3C/text%3E%3C/svg%3E">
 <style>
 @font-face{font-family:"tabler-icons";font-style:normal;font-weight:400;src:url("data:font/woff2;base64,d09GMgABAAAAABnQAAsAAAAALAwAABmDAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHCoGYACCJArPYLwfATYCJANMC0oABCAFgQoHIBs8IVGUsVomwFcH8ZiXUX20zc6FUli8UB8HiBXjapOWEZLM/sDP6f+5EiUhcVxLEiB4ISEGhRBHNGiVIlpHrNSgQsWgSqkKVOyX17K/svUxq7OtfaHUqIwZvYCe+bMGFIfe7fWu89zmJ5FHXiUJ8KAOFVOk+xKz2vG2r7B5BK2ioSYCyex/Fq5Zay+2CJaANjsFV5buX4vApS6TEpYeCKf/jqqf/viJuswXFau129Wu4cKyfcchgL+fK+1my+yAjQaU5uVlMuHZ/H8UKEGOcymnACDLuu4q1AGDK5IClkC+4zu+3gEaUeF0a3OJgQKE2FmceHTP2Riab+Z0nopI2g8HCABQwRt8AZUrk41gvSi/ejHYAg4AMDMDl9Vw7CPSBQRwcyc6VFPXPo+HPAcRggIfm4DB8NK1JYoiuGGxex+Itczsgkw3N5gLAIhFDb0zmMR1BRn74QhTlGQM+xxb7CxRlnxLhWWpZYVltaXHss2yw7LPctxy1/Kz5YnFYpm0fLT8MWE1wZtwnHCdEE6oJtQTpon+N9zJK+8D48P5MrHcKXDn0zsv3jDvIK+Ht563ltfIq+FV86p4i3gFvGReBC+M58/z5XnyXHh0Hs79l/sX9w13jDvKvc+t59LZ8xhfAYGL4qmYhMD8rnSnngx6L8Q1FgEUkCu+MZiEmYRnhajH4AwxhNpGGxp1x0Yk5z+0MH9776DAoOJAsbdzYixOCIjwpkeRvNzYVD9P3JrF9HWxt3O24dA97OkMGxaLyea6+bm6e7k7it1Ssr0dltZy6Rwmk8PmcFhsRlwolxkpUQn87F1sXNxw3M8dJzjb4bgt7kLYpC05ATBEkt1/wmyio/l0qk00kbpTpphJozwjlxHkOYoORUFkA79b8tbbaFnkdZvIxWZPQhtsB4PYOWbglLEp6VTXUzsh4yPv2dYgkIfu9Vn/5Vce/yFb1+nUY3TLnQmOIax5vywM035kPIpUYA0DABaG4OoFTUb/hxUnWK9ACxw/GEzSoRNLZDuM4jiVGjgKvFfaNzFKpoUBM8vxxkFH5khxIN2HPvCdd3KEYv1U6M63tf9EdZAdHh7t7zhjIH0kQopK96iK7zeuZSwRMCypCQYPxHPdkbsn67uNKoeMNZPaMb5/ZXFiFCaX+bHpqdvIM0n6oD44eXRk7zBGnl1lwOOlSc0lPfE2tDAAMOA1BKslMdsmsZ63HiSbCIP73olVizzJDnZnrKefj8HFkTg34xocoZhcxgkLA3a/mAQnmuj6eG1hxxwoqKhyxdofpnPoWKTJ4ejkMA2G8Aq+kL2XwHBJEEw65Ku01mftsXlZwyDWuMRt61qXmaZCSgaWqOcZmSe/AjS9QdI5fXK+RjJlJZ9Itkgui8OJbHleIMczjdkyMZAXqJja+mjoyZcQoqW6et4rCvqsOJGe+Xo4qqUaB+c0AYIRBJAniWjgC5ARnoFezhxykYQF0fDUREgL8vshzz3yLoi0P3AZIbtNNADZWeQ88Be6uGagX2I2QP02eZGCuTfByu2ycdJ6XieaBOhkPkzscnS2n+AMlKeJQWR9Fna0U6GM9JZJSoK1PgoTWtTR6hg+bSKV3GVhAdAg5uUYJ017aibon02HGCIXYqyN2fNhMRyhIW3eoD+wHlOEwQqE+TOLmkzlOkEQOIx71YnkEvATHRpVUPEH1v5aEgiQ+QDBw8nFZU+eHsldojGIB4cuddlnzx9VUqpz99t3rTQXjUwbieciDpfy0fLkycmr8wAB3L25C9Rn58o6T20LJp5MDkbzkit2TBrxs7VdVT3oKH5BVo6TJ62LenXKtgmzQYomRMvyOkJDY2w4qvXtzI9V04QVgx0ABnuLnKSEpZDnadgJuctNqL3GjHrVzZOgWtHg0LNla5qQdGPxFtYM7JlnWlX9Ddg1PudRNF+JmuEIpez69BjKk8H7IRsMwYVIKQGJUyAcWJtj3cYKrdFD919ZXrXoUJE2HXoJ18SF9XQ9/DVS10eVH2k65tQR08coPrYmJoEwvGvPNpnkmXz2fBMOrUtBL+XTQ2wGCqtOFR3JfAyHptXgqYM81DEzR/MMAqtESyIUlIDZY1k17F0y+yh1DksXtQ14q+YNNSIAwEnSv0iupyEjRlAZKIgygbHm4WJ0N19IrMhyHSz/M1kvWC/XoCy8461HepSU7xi1sfDk9G1xtWnnZ776ck7pIemewKUVf7xrvMZnIc4tja6O6B5+xNOmzdLWA3cmHJk0Ei/1ou1kcDPWefU5GU0eIgCbMSVcOJY4YMdab6MIva4XC5owvI0N0scCLM9RXLms/e5rrstsZJOAsGxtAwt+aNBL3HMo3vKeIEIZGb3rN+sSK9pE/yqdlEG1pQnLoaFRUNGB/BPLElkhnMwSwlTaurTZ8MMSKQpSxu+mduA0PEVlM3tkTz1CcA4QpIBHU5fuUaGgzivZYrn0EE6ZUwKR10eTi/MAd63b5z0DU0uO7rW82ZUUe5lO3Nb65YNtHJ0Y1UujCNoOE0M7hh0OexquS3RbBLE0bWbTpUszf+cz3CP3Dc8GnhLqcTy5KvJLj8EMy1hq3Tl5o47Yh5LDLawRGboq8GVwRIEqEklAs3WeDZEcvSIwnDnC4Vt4MJXLeLC5NTg1JgsAt4l7mEWK398/cz9FkECdSnxm0dX0dydmSJtFW/cYKCTzxhBZugOEcMrhnBCvBNrQnHz2HVP7TFO2IlxdjmLFliE4ogCk+MC99nlIW1GJSFWEz+7t9dY3xxfTO/0Zd9g5klUpmp4RGgXZ6/eV4kQ92IP7Ff9kONK1HsQxWIbRFZEVzYdSQ7Sv7ixyS61xKOqDm0J5JJcwgEsucfdFSoLFlzk+qQ9MmRRLnV8z2BhDF77IaYCFaUBWcV6jJjoOpYZgSSyb1BovJThYBaL1QB8NaQA4prjxAG+zqIlg+MwAEf0s3YSK+ijNDvVKUCnVhZFCBVEMLyJjFa2emzfXSgeCmWfR4OTRXl8lnps0khjImlPbJPf41bM79xjhev/ocUlzzAE7poyUY+5VCYLabWaRh2A5Z5yPLA8q96ybJ73Xyzplpf7PmlF8pXfGH7Fz5jyu6mGBlV5vWZdrEnANMOezykeoBM6rcwzlU++jWLGX3sBJqBA6jSDXlBGBE/fwUYVy1DuxHoLSV7deVMWJRKlgh/KQd5w1kxwprK3zwwS0G3CHUSwT/CrWM7lSOakHxSsCe2Rbqh90BUvvysvN28X9XS3hwIK13pk32h74lUPdED+vH544fPfguv2K3QgEYAG8C6BSfKJSqcJQQmbBk7rclh+ngamMcIRQsOZ9Fu72nBEHty5I2llXr+bM++1lRDpNEkh3/2OnEhFRFBCXyAP17wmFKnmiJIbENa8IhhZGLSiWSuo9dOgJI/60WkTb0afCwqZSnXEy0rIwINDwjCtmYlLLzrZJVWaGmJ37ctFB6cB4WhzxwMBi7sH71QVhxVcKbCOS8arNTT+TwejoMAjh+AULjmkXTlWljnrpnipP+W6H9YzxFR1lbnDfKxn403pVQ44uHjcq/e9r75zSQBBXUg7MlGP0moLdCwml6iQvpXgBs0ILwrrj0PCMHEn46wBEq/rpdwFyN6nNDnEBBy3EOSZyugxZaVgOd4l/8g31AaEHp0kHKeA80JKm5SaQFmSumH/2VQamV1X41vCTxaTNsbNLI0dDE0NC5bRV+gbJs0boIjuXNW84kYSdwZMMklIg6A8N2RbQgooH+q9+2GHUd+FIiXoPw36UJoT/RCbpgzOAaIvaH+TmrlhxzhHlK5Ycq1Mo8nIHtxZp0Re961aJMzIysz5OCbv+SeCQaCROwj9dwqmPmVkZGeINJ06BXbMQIZUHSLTWjajtWkkQMxXsfK2+EWEh8bZM77Sr5XOqkiuSdDw0GBOCwGF5SLImSJDSOpCOA466tWfeJllFT0sDcmNp0Y0uEUIwBpoh5GWHsP3KkZSUvXtlRQYtOro2m0OikhQJ9TCTmwPSZkmLaH+fcldcMYMC08kpBwHKV84bGhx80FaUj5rNqFZmYB3ZscOkEvNQx3vLb6L5hrb2mzdv3WyvNeRjfVBxBpB8Y8/g4ODQPCUfJRL9WDP+sRfKF8+rv5lesH6emI86Da+BujNTAQIjzvPNQkOv/rrliVWmu3cHe4w6vBu+2qwOHiM8DxvZtf6VVnvKK0m1LKxneUaGaD7xEe/p+o7ZXgmvG7V0Zp/lw7d0ozj91ZZ+r1WnrTPw+LSDh3FbyvAs7//2NaGrN1B+7lZghHJUko/9byjixNUpX3rXxpKO2qPi4Hp5xBcF43uMvY9tj67tHCkJpHFXuqKEBW/ZEskWW9stEgn73QIC6rqOQwssGelcizpW06lAOyssP1mu/+NkKAel2lJ/mrfYa7X+YWrQjYZg5kUz/HCVhvsoQqxD06j0tb1B9UdqcBh6Qkz6ZqIP8CIw34Hu8PPfHcXo1DwsANnSn+F6xrx1iC58HR97IqCWRszPNsQnGa/NO7yQTIjv99R2Hb4Oh0aXSuH6YQohvtNT0nDkJkwfOIM44Cg1fd6ar9qDvWnpAxlExGn4rohEJcUXutSlpn4I8ySRSZ5hHzpMJpfCeBKVJLo77IQQMwbS0vftGg2ZrgQfkp1zQQsmHIec6wDy3fbE08YM8CXtTr2iuE64h+jozOgMvR2nYnzpieppEEkaHC98132b4PDrHVEvw06fEc2k6xDFm+BS/bHeHb17Hf0O6Q/Bo19t07/l06sdsfvDOt3k5AESzh3osKY1jo1V29pWj4010qw7Brg46cDkpE43fF/wx8anfjhZIHSofPGHa8UNiFgeCaeaXP+8XuEgFJBxv5IBjzZjdxiFiBWmklMLMSIlbINpG4MGswz2KSFnbEEel5N3WQXPWltLF70/XKxDJc2S0+4OeDOO8lKXMhaVruncxsyO5I61wMzMzEi+FOkqr/vKdeU3fkC8t5v++9DhbHg4sYboFDxaXmnG3gSSyPQyOpPLdLGzc4tbsuToXPOW8nunlsVTOyip25OWL5fGL1u+fLlEAq/OOMEN4uBilW+sKqod/ghHRft8DUoo0qnNDmm2Jlols1D3p7FEvHnTgrsOJ8IWe8emCPGGBrsXS2x/Iz6yX/Ix6sb7ltOJiNRV5RmTdHWCYHhWVN3AKpeovN9F+fgr4xpG/DPDShcouxbNySEE98XzPhcgZ5meI8AaFyIkPSiaeX0icJX3bHs6H0fxtzBht+1QlfnJEFNysGx5I5FGoxEX2VjCUj6vQDg0iHvkYRe4VX7u3DljvxP2/Wi8QlgYV+zDpIXMfis0RUql7z2TpMFS2adPMolIIh+fYvW5trddcHMfdFO9MH8xSz3u2u11FzTZGpgGX5yvsOk99dIp15g8qHR5cmV9x4fi2lrMqtiulH/2D/MN6g1zy6qd+zDrH+jYWbPn3fRQ36dJ8iW3upXdt5bIkwpKS/4YUwLvtAiYg9v3AkNGBLQJOqjQfc+JOmZDtlGEJ56217PYajtbu5ZWPw2/Cpqac84Ljg40DQy6nM9phibf0HmPMHgpdP5/SAcNh9Yka1PLVypDOiB/vDX+rPaw1lVXcGTRQilEvuiqDDeH5eSEmcMrSzOFxlnhOrHa+bp9llP+5s35jpkO111SxNrwWUZhprGHmu9j9NJuLE4j5ZAGTELdrGT00iy1wJA1S+NtwFLQjpT0pvmT4sebDwKHQGQVv+z6hbORQyIyVOs3SQQ0VpqYIrFTzGPZ2h8kYxIp5uB+WiuK5zC8BVqOlhiu6Bzz9qeBKSTTopLWe4HSVH7KzePYMYgUpw/bA3csIv8Anu6ra7FvsSn6n/zBiFtc7z8GdHDkF2WHfYdDR/v85OQOT3gLKz+AZ0dy8g8P4tgjQyOwqOvZEH2OKP7BCNtoyD+5lBOK6LkIVb3z6uHzv6at5vSOVC+/JuEnYFmkpNCekUHETVGbTJP7w31geBARwnO+JPHt20RV1ymDaAfHm0EMWRQ6dx8lLMXZOqpv0QViybnnVHevhwUuiHJ1lLWTOssjteqLZZU4gWIl5hwRFbw3h6zVBeaETyOb3z45qDJJdcENuo/a6fn+MMdX55rPhn/BsKnkVIKdP+nwCElabTEeEV5qGmAQ80Eeh/y+xcUKljIxG6VdSnb1NQVVbptkr9kTJ89wLfSspdVaZ8QbYtWDTDNrrlqnTHDTeKZhZjzX69zGynSyIkDql7BKCYkblvtSKC5mpNEeJdaPEgdfa60kfq9VyxSQ6Buv/+un83Mc4NuLY26sTpOeKboBcf1xcEPE1Js6WZzB2n1aDdhMFEmZb16cKtw+yCLjXlMhtq+mO6mSmnDlYVGq06Mb+VN0if/Ect5vp+b4ZZGbl6itv2iEYiMYr5UkEpN5ao4yrf6Bdb59XEKUzO2co9E5fU6Uv8vf6ogCo1OUMuS517mE1w/tF/k4S3EZISsgtRGpgHc/5w+KEU8C2fHxY8cGrRT0pk73TpMepNoG7cefTOCCl6nfvd/kBVybXzJu8RVrGjhN4Q2nPlQkWd+Xl9DZf7sSCBinIepPqn/KaF29KYWj4yTbqPjzylkJ7GR+8uXh+g0JPtmEJOJ/vqHHxAqNv2Iy4eJSOGfYGoiheVDWSntrBi6J4hZcL03IdNE4GCha8npjkFyYYJVBVfhvpgVLlB5JPhl0JmzaEaLWeas9T1JVQWqRr8lHxzwfmphx526HWGF5PY4XV76fHXfvtD7bleGUwdWxpBGvHBIdk1l7AptD6s+Zsidi6WSbRL/PpbNX4EuvLgiLCwyu+OwroZhvwPnL7BifrFKK3QWPON2Rb3RzxtWZfcXbGERzPzNwcnjvZpnsjA2RyJgbelK18sGkikf/aOwRtjTYp65mkEgRo4WHU2WXyjrWlf6JZuYkz4kpW7bZnlTe7BSGcz4Es29Xnh/jVB8S5Nx7revLu7Ii/Lp8ntM/heih6G+pqoVsyv9FFnR9vJ336IJsYI9rPWcqhPN95Vp29QU2ZdEmby991RK43ab3jTXhjj6tfDrVZrZNeqgPiXXqfGYby//1hcaAtEIpR1QVxvXXL/v++jhrx+8EllXWwXks+/4kp1p36qpq0RmvwzH/5pisWbN9skpn52fW6GxKm8Zk7+erfNUOzodno9yKM9bTLZyuniN/1dTVrFq4C5wMDHGcRI4LcCCnnQo8lUYGXEApY6fxrKZnttLYdWzaNKx3i3z5SKwLued4+TGHth6mo7flxuD6QIl1Tp3Jee7Zi6s/SKgDFUFucmMqT6n9pwKhwAwNNVaBVjUNIBFI5FPjlzz4f7WWS0RC4/iUvIxW6CynkNzrZ1g5XvlF89kLr28qGJ3X+bRWA6yHk/Zr2DsaoEzFhQRFbBzw68zNE5ybkfM0SuGWDveVK6E+QUHCWZ11Z7vL0fyemeVLswNoZA/Eu6jfub/IG/Eg0wKyly+dcfLR8u6zdZ0snChWhZhSS0ulNk1PfQWV5Od/uTAtZFwb7neXq/V20/pcMlo4d/jsJEGQak101eKbSirJp3VRgt3SK09l1IuCgoQTcVVFwQqmfYwgnui54l9BSZhjyu+O36cEiZNWgh2F5haOieM0ciw40C3p03erC7XDWpWhBUdswjk1UWx3LMybI7zyYvCJ3ApttNZKAsph+sCUg5zt0umL3O//p3qM9jaDhL51Gf9GP72mpCTqXGpoJkZhKpEF9+8SWzFva5+XLNMwsol82qOm50NJTS3G+JuB1daUNEZ2BWf1P42x88Uu4o/G7nQxqeiigU3R4vbonCkHAfl43dDwfaF8atwovD88VHecjGzNQ28XzD+aTkSIS5L0o/Pn/9vz85vVjZeoRhN1DOFRrLx8mQ4bt2hfFzRgP3VJvPsn5yNMIdmusW4oSM2vWrC6UDhzNOx5bzCzR+nBXyALrI4k9X7pUuxbXtlQ+TyB16+3Fhb32Xa3ahKP2pGFNjH7TnhrjPW/K3acKWx64ouRZiF1Nbq/gDZOBPx9QNqowbnYF2UmJDKwedAq8dh1YqNTJuStFP5dJQH4Mfp0lhlMFskqyFPTE5GKI9wmzvuExPfCNkjHPWKTtYeS9GecQ00yQmL6xMPDTa6PBtRoJA3iEpiob7GzYTQzDy49ZiyEvDkEEsEXWpIuI4CDf7QrXYfUImEhlmnPPw/680D9cDPy2xHmql0e+MLmFb6b03qD33ZAO0tECK5+6ac791A+UfkVka7V2nLtEccrk+ugfQ3mnX4J684xw8bSMb9K/yW5l5R5kK81CIpjS2KLnevV04em/9Qf0p+b1ppzIGeMby2N6n9leuonSmCCfx9uMgREi5wc8+jzKenX9OE+NKRlaO4J+yWiv75qJvV8D+liSehFgBkLD0ykZ9ejnc/9PdFIgvZjUPU9hJ6fYOamJ+jL2e/sdTMgCb1k7sFIbL7Hahj17IOYUNn70LNuBiRjwdpeO3YtRlZQm3g0U4NqwDGM1S8JGbQntfqFYXd42m8lRox9Yx8W9tyvFwuNnbAfEyvEhHq2OxapbC/0wrPWG8aeapVU3WMhAPc05dUjo3mMmM9kK+y1+Wnjk7Pb2vFmtpMfubktADKgO7rCf86zRXmsAwTum184u6ce+wiKCyHOE1EDT2dr7XAipABGcAoiYMu/j0HBGmx3xcx2xdUYAvDBWyGq2lZDPhTAIiiGSpgF86EQymAxVIEeimEu1DiTT1PBDlOFQwauIIIgEAIGl5lTAQA=") format("woff2")}
@@ -306,6 +306,16 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .kan-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .kan-tags{display:flex;flex-wrap:wrap;gap:6px}
 .kan-foot{font-size:11px;color:var(--text-3)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:2px}
+.team-card{gap:14px}
+.team-head{display:flex;align-items:center;gap:11px}
+.team-av{width:38px;height:38px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.team-name{font-size:14px;font-weight:600}
+.team-role{font-size:11px;color:var(--text-3);margin-top:1px}
+.team-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-top:0.5px solid var(--border);padding-top:12px}
+.team-stat{display:flex;flex-direction:column;gap:2px}
+.team-stat-val{font-size:16px;font-weight:600}
+.team-stat-lbl{font-size:10.5px;color:var(--text-3)}
 @media(max-width:760px){.kanban{grid-template-columns:1fr}}
 .chip{display:inline-flex;align-items:center;line-height:1;font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
 .chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
@@ -556,8 +566,6 @@ textarea{resize:none}
 .guideline-code{font-size:13px;flex:1}
 .switch{display:flex;align-items:center;gap:5px;border:none;background:none;color:var(--text-2);font-size:12px;font-family:inherit;cursor:pointer}
 .switch:hover{color:var(--text)}
-.push-ic{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border:1.4px solid currentColor;border-radius:50%;flex-shrink:0}
-.push-ic i{font-size:10px;line-height:1;transform:rotate(90deg)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
 .toast i{font-size:15px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -861,7 +869,7 @@ window.KonpoNotes={
     <h1 class="login-title">Welcome back</h1>
     <p class="login-sub">Please enter your details to sign in</p>
     <label class="login-field" for="loginEmail">Username</label>
-    <input id="loginEmail" type="text" class="login-input" placeholder="admin" autocomplete="username" onkeydown="if(event.key==='Enter')signIn()">
+    <input id="loginEmail" type="text" class="login-input" placeholder="leader" autocomplete="username" onkeydown="if(event.key==='Enter')signIn()">
     <label class="login-field" for="loginPass" style="margin-top:14px">Password</label>
     <input id="loginPass" type="password" class="login-input" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')signIn()">
     <div id="loginError" class="login-error">Incorrect email or password.</div>
@@ -883,8 +891,8 @@ window.KonpoNotes={
       <button class="mtb-btn mtb-account" onclick="toggleMUserMenu(event)" aria-label="Account"><i class="ti ti-user"></i></button>
       <div class="mtb-menu" id="mUserMenu">
         <div class="mtb-menu-head">
-          <div class="mtb-menu-avatar">AR</div>
-          <div><div class="mtb-menu-name">Alex Rivera</div><div class="mtb-menu-role">UM nurse</div></div>
+          <div class="mtb-menu-avatar">MY</div>
+          <div><div class="mtb-menu-name">Morgan Yu</div><div class="mtb-menu-role">UM Team Lead</div></div>
         </div>
         <div class="mtb-menu-items mtb-menu-items-top">
           <button class="user-mi" onclick="openSettings()"><i class="ti ti-settings"></i>Settings</button>
@@ -906,9 +914,9 @@ window.KonpoNotes={
       <div class="brand"><svg class="brand-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg><button class="sb-toggle" onclick="toggleSidebar()" aria-label="Collapse sidebar"><i class="ti ti-layout-sidebar"></i></button><button class="sb-close" onclick="closeNav()" aria-label="Close menu"><i class="ti ti-x"></i></button></div>
       <div class="search" data-tip="Search case"><i class="ti ti-search"></i><input id="sbSearch" placeholder="Search by case number" oninput="sbSearchInput(this.value)"></div>
       <div class="sb-divider"></div>
-      <button class="nav-item active" data-screen="queue" data-tip="Recent queue"><i class="ti ti-inbox"></i><span>Recent queue</span><span class="count">7</span></button>
+      <button class="nav-item active" data-screen="dashboard" data-tip="Dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
+      <button class="nav-item" data-screen="queue" data-tip="Team"><i class="ti ti-user"></i><span>Team</span><span class="count">4</span></button>
       <button class="nav-item" data-screen="cases" data-tip="All cases"><i class="ti ti-folder"></i><span>All cases</span><span class="count">1,284</span></button>
-      <button class="nav-item" data-screen="dashboard" data-tip="Dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
     </div>
     <div class="sb-mid">
       <div class="sb-label">Recent</div>
@@ -919,11 +927,10 @@ window.KonpoNotes={
       <button class="support-link sb-support" data-tip="Support center"><i class="ti ti-lifebuoy"></i>Support center</button>
     </div>
     <div class="sb-bottom">
-      <button class="btn-primary" data-action="open-new" data-tip="New case"><i class="ti ti-plus"></i>New case</button>
       <div class="user-wrap">
         <button class="user" onclick="toggleUserMenu(event)">
-          <div class="avatar">AR</div>
-          <div class="user-info"><div class="user-name">Alex R.</div><div class="user-role">UM nurse</div></div>
+          <div class="avatar">MY</div>
+          <div class="user-info"><div class="user-name">Morgan Yu</div><div class="user-role">UM Team Lead</div></div>
           <i class="ti ti-settings user-gear"></i>
         </button>
         <div class="user-menu" id="userMenu">
@@ -941,128 +948,129 @@ window.KonpoNotes={
 
   <main class="main">
 
-    <section class="screen" id="dashboard" data-konpo-screen="dashboard">
-      <div class="page-head"><span class="page-title">Good morning, Alex</span><span class="muted">Data integrity &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
+    <section class="screen active" id="dashboard" data-konpo-screen="dashboard">
+      <div class="page-head"><span class="page-title">Good morning, Morgan</span><span class="muted">Team overview &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
       <div class="dash-greet">
-        <p class="greet-sub">Here is how Nebo is reading your cases today. <b>6 cases</b> need a quick check - everything else has been verified and is clean.</p>
+        <p class="greet-sub">Here is how your team is doing today. <b>23 determinations</b> issued so far — <b>4 cases</b> are at SLA risk.</p>
       </div>
 
       <div class="kpi-row">
         <div class="kpi">
-          <span class="kpi-label">Avg extraction confidence</span>
-          <span class="kpi-val">94.2%</span>
-          <span class="kpi-sub"><span class="pos">+1.3 pts</span> vs last week</span>
+          <span class="kpi-label">Throughput today</span>
+          <span class="kpi-val">23</span>
+          <span class="kpi-sub"><span class="pos">+4</span> vs yesterday</span>
         </div>
         <div class="kpi kpi-warn kpi-action" onclick="go('cases')">
-          <span class="kpi-label">Needs your check</span>
-          <span class="kpi-val">6</span>
-          <span class="kpi-sub">low-confidence cases</span>
-        </div>
-        <div class="kpi kpi-action" onclick="go('cases')">
-          <span class="kpi-label">Field mismatches flagged</span>
-          <span class="kpi-val">11</span>
-          <span class="kpi-sub">across 9 cases</span>
+          <span class="kpi-label">SLA compliance</span>
+          <span class="kpi-val">94%</span>
+          <span class="kpi-sub">4 cases at risk</span>
         </div>
         <div class="kpi">
-          <span class="kpi-label">Auto-verified clean</span>
-          <span class="kpi-val">87%</span>
-          <span class="kpi-sub">of 142 cases today</span>
+          <span class="kpi-label">Avg turnaround</span>
+          <span class="kpi-val">3.2h</span>
+          <span class="kpi-sub"><span class="pos">-0.4h</span> vs last week</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Nebo auto-approved</span>
+          <span class="kpi-val">61%</span>
+          <span class="kpi-sub">of 142 cases this week</span>
         </div>
       </div>
 
       <div class="dash-2col">
         <div class="dwidget">
-          <div class="dwidget-head"><span class="dwidget-title">Extraction confidence</span><span class="dwidget-meta">142 cases today</span></div>
+          <div class="dwidget-head"><span class="dwidget-title">Determination outcomes</span><span class="dwidget-meta">142 cases · 7 days</span></div>
           <div class="donut-block">
-            <svg class="donut-svg" viewBox="0 0 130 130" role="img" aria-label="Extraction confidence distribution">
+            <svg class="donut-svg" viewBox="0 0 130 130" role="img" aria-label="Determination outcomes distribution">
               <circle class="donut-track" cx="65" cy="65" r="54" stroke-width="13"></circle>
               <g transform="rotate(-90 65 65)">
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-1)" stroke-dasharray="78 22" stroke-dashoffset="0"></circle>
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-2)" stroke-dasharray="16 84" stroke-dashoffset="-79"></circle>
-                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--danger-solid)" stroke-dasharray="3 97" stroke-dashoffset="-96"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--ok-fg)" stroke-dasharray="52 48" stroke-dashoffset="0"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="color-mix(in srgb, var(--ok-fg) 50%, var(--bg))" stroke-dasharray="21 79" stroke-dashoffset="-53"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--review-fg)" stroke-dasharray="18 82" stroke-dashoffset="-75"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--chip-fg)" stroke-dasharray="8 92" stroke-dashoffset="-94"></circle>
               </g>
-              <text class="donut-center-val" x="65" y="62" text-anchor="middle">94.2%</text>
-              <text class="donut-center-lbl" x="65" y="76" text-anchor="middle">avg confidence</text>
+              <text class="donut-center-val" x="65" y="62" text-anchor="middle">142</text>
+              <text class="donut-center-lbl" x="65" y="76" text-anchor="middle">determinations</text>
             </svg>
             <div class="donut-legend">
-              <div class="dleg"><span class="dleg-dot" style="background:var(--data-1)"></span><span class="dleg-name">High&nbsp;&nbsp;≥ 95%</span><span class="dleg-meta"><b>112</b> &nbsp;79%</span></div>
-              <div class="dleg"><span class="dleg-dot" style="background:var(--data-2)"></span><span class="dleg-name">Medium&nbsp;&nbsp;85-94%</span><span class="dleg-meta"><b>24</b> &nbsp;17%</span></div>
-              <div class="dleg"><span class="dleg-dot" style="background:var(--danger-solid)"></span><span class="dleg-name">Low&nbsp;&nbsp;&lt; 85%</span><span class="dleg-meta"><b>6</b> &nbsp;4%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--ok-fg)"></span><span class="dleg-name">Approved</span><span class="dleg-meta"><b>74</b> &nbsp;52%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:color-mix(in srgb, var(--ok-fg) 50%, var(--bg))"></span><span class="dleg-name">Consider to approve</span><span class="dleg-meta"><b>30</b> &nbsp;21%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--review-fg)"></span><span class="dleg-name">Further review</span><span class="dleg-meta"><b>25</b> &nbsp;18%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--chip-fg)"></span><span class="dleg-name">No PA needed</span><span class="dleg-meta"><b>13</b> &nbsp;9%</span></div>
             </div>
           </div>
         </div>
 
         <div class="dwidget">
-          <div class="dwidget-head"><span class="dwidget-title">Processing pipeline</span><span class="dwidget-meta">142 cases</span></div>
+          <div class="dwidget-head"><span class="dwidget-title">Team workload</span><span class="dwidget-meta">open cases</span></div>
           <div class="hbars">
-            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--chip-fg)"></span>Processing</span><span class="hbar-track"><span class="hbar-fill" style="width:7.2%;background:var(--chip-fg)"></span></span><span class="hbar-val">8</span></div>
-            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:color-mix(in srgb, var(--ok-fg) 55%, var(--bg))"></span>Ready for review</span><span class="hbar-track"><span class="hbar-fill" style="width:17.1%;background:color-mix(in srgb, var(--ok-fg) 55%, var(--bg))"></span></span><span class="hbar-val">19</span></div>
-            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--warn-fg)"></span>Further review</span><span class="hbar-track"><span class="hbar-fill" style="width:3.6%;background:var(--warn-fg)"></span></span><span class="hbar-val">4</span></div>
-            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--ok-fg)"></span>Signed</span><span class="hbar-track"><span class="hbar-fill" style="width:100%;background:var(--ok-fg)"></span></span><span class="hbar-val">111</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--accent-fg)"></span>Alex R.</span><span class="hbar-track"><span class="hbar-fill" style="width:100%;background:var(--accent-fg)"></span></span><span class="hbar-val">9</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--accent-fg)"></span>Maya O.</span><span class="hbar-track"><span class="hbar-fill" style="width:88.9%;background:var(--accent-fg)"></span></span><span class="hbar-val">8</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--accent-fg)"></span>Jordan C.</span><span class="hbar-track"><span class="hbar-fill" style="width:77.8%;background:var(--accent-fg)"></span></span><span class="hbar-val">7</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--accent-fg)"></span>Sara P.</span><span class="hbar-track"><span class="hbar-fill" style="width:66.7%;background:var(--accent-fg)"></span></span><span class="hbar-val">6</span></div>
           </div>
         </div>
       </div>
 
       <div class="dash-2col">
         <div class="dwidget">
-          <div class="dwidget-head"><span class="dwidget-title">Recurring extraction issues</span><span class="dwidget-meta">last 7 days</span></div>
-          <div class="ibars">
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Service date mismatch</div><div class="ibar-field">Date of service</div></div><span class="ibar-track"><span class="ibar-fill" style="width:100%"></span></span><span class="ibar-val">8</span></div>
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Missing CPT modifier</div><div class="ibar-field">Procedure code</div></div><span class="ibar-track"><span class="ibar-fill" style="width:62.5%"></span></span><span class="ibar-val">5</span></div>
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Provider NPI low confidence</div><div class="ibar-field">Provider record</div></div><span class="ibar-track"><span class="ibar-fill" style="width:37.5%"></span></span><span class="ibar-val">3</span></div>
-            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Diagnosis-procedure mismatch</div><div class="ibar-field">ICD / CPT</div></div><span class="ibar-track"><span class="ibar-fill" style="width:25%"></span></span><span class="ibar-val">2</span></div>
-          </div>
+          <div class="dwidget-head"><span class="dwidget-title">Cases at SLA risk</span><span class="dwidget-meta">review deadline</span></div>
+          <div class="vrow" onclick="openCase('EPS-00088552')"><span class="vid">EPS-00088552</span><span class="vreason">Alex R. · further review</span><span class="vconf">4h left</span></div>
+          <div class="vrow" onclick="openCase('EPS-00076675')"><span class="vid">EPS-00076675</span><span class="vreason">Jordan C. · further review</span><span class="vconf">6h left</span></div>
+          <div class="vrow" onclick="openCase('EPS-00072502')"><span class="vid">EPS-00072502</span><span class="vreason">Alex R. · further review</span><span class="vconf">9h left</span></div>
+          <div class="vrow" onclick="openCase('EPS-00084855')"><span class="vid">EPS-00084855</span><span class="vreason">Maya O. · further review</span><span class="vconf">overdue</span></div>
         </div>
 
         <div class="dwidget">
-          <div class="dwidget-head"><span class="dwidget-title">Cases to verify</span><span class="dwidget-meta">low confidence</span></div>
-          <div class="vrow" onclick="openCase('EPS-00088552')"><span class="vid">EPS-00088552</span><span class="vreason">Service date unclear</span><span class="vconf">82%</span></div>
-          <div class="vrow" onclick="openCase('EPS-00086956')"><span class="vid">EPS-00086956</span><span class="vreason">Provider NPI mismatch</span><span class="vconf">84%</span></div>
-          <div class="vrow" onclick="openCase('EPS-00084437')"><span class="vid">EPS-00084437</span><span class="vreason">CPT modifier missing</span><span class="vconf">85%</span></div>
-          <div class="vrow" onclick="openCase('EPS-00083998')"><span class="vid">EPS-00083998</span><span class="vreason">Diagnosis mismatch</span><span class="vconf">86%</span></div>
+          <div class="dwidget-head"><span class="dwidget-title">Daily volume</span><span class="dwidget-meta">last 7 days</span></div>
+          <div class="hbars">
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>12 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:73.8%;background:var(--data-3)"></span></span><span class="hbar-val">31</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>13 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:61.9%;background:var(--data-3)"></span></span><span class="hbar-val">26</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>14 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:69%;background:var(--data-3)"></span></span><span class="hbar-val">29</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>15 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:78.6%;background:var(--data-3)"></span></span><span class="hbar-val">33</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>16 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:57.1%;background:var(--data-3)"></span></span><span class="hbar-val">24</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>17 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:90.5%;background:var(--data-3)"></span></span><span class="hbar-val">38</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--data-3)"></span>18 Mar</span><span class="hbar-track"><span class="hbar-fill" style="width:100%;background:var(--data-3)"></span></span><span class="hbar-val">42</span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="screen active" id="queue" data-konpo-screen="queue">
-      <div class="page-head"><span class="page-title">Recent queue</span><span class="muted">Tuesday, 18 Mar</span></div>
-      <div class="kanban">
-        <div class="kan-col">
-          <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Needs attention</span><span class="q-count">2</span></div>
-          <div class="kan-cards">
-            <button class="kan-card" onclick="openCase('EPS-00088552')">
-              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-review">Further review</span></div>
-              <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
-              <div class="kan-foot">awaiting you · 2h</div>
-            </button>
-            <button class="kan-card" onclick="openCase('EPS-00086956')">
-              <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
-              <div class="kan-foot">awaiting you · 4h</div>
-            </button>
+    <section class="screen" id="queue" data-konpo-screen="queue">
+      <div class="page-head"><span class="page-title">Team</span><span class="muted">Prior Authorization · Team A &amp; B &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
+      <div class="team-grid">
+        <button class="kan-card team-card" onclick="teamOpen('Alex R.')">
+          <div class="team-head"><span class="team-av">AR</span><div><div class="team-name">Alex R.</div><div class="team-role">UM nurse</div></div></div>
+          <div class="team-stats">
+            <div class="team-stat"><span class="team-stat-val">9</span><span class="team-stat-lbl">open cases</span></div>
+            <div class="team-stat"><span class="team-stat-val">6</span><span class="team-stat-lbl">done today</span></div>
+            <div class="team-stat"><span class="team-stat-val">3.1h</span><span class="team-stat-lbl">avg turnaround</span></div>
           </div>
-        </div>
-        <div class="kan-col">
-          <div class="q-group-head"><i class="ti ti-rotate-clockwise" style="color:var(--accent-fg)"></i><span class="q-group-title" style="color:var(--accent-fg)">In progress</span><span class="q-count">1</span></div>
-          <div class="kan-cards">
-            <button class="kan-card" onclick="openCase('EPS-20260605')">
-              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-review">Further review</span></div>
-              <div class="kan-foot">1h</div>
-            </button>
+        </button>
+        <button class="kan-card team-card" onclick="teamOpen('Maya O.')">
+          <div class="team-head"><span class="team-av">MO</span><div><div class="team-name">Maya O.</div><div class="team-role">UM nurse</div></div></div>
+          <div class="team-stats">
+            <div class="team-stat"><span class="team-stat-val">8</span><span class="team-stat-lbl">open cases</span></div>
+            <div class="team-stat"><span class="team-stat-val">5</span><span class="team-stat-lbl">done today</span></div>
+            <div class="team-stat"><span class="team-stat-val">3.6h</span><span class="team-stat-lbl">avg turnaround</span></div>
           </div>
-        </div>
-        <div class="kan-col">
-          <div class="q-group-head"><i class="ti ti-check" style="color:var(--ok-fg)"></i><span class="q-group-title" style="color:var(--ok-fg)">Recently completed</span><span class="q-count">2</span></div>
-          <div class="kan-cards">
-            <button class="kan-card" onclick="openCase('EPS-00084201')">
-              <div class="kan-top"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span></div>
-              <div class="kan-foot">done · 25m</div>
-            </button>
-            <button class="kan-card" onclick="openCase('EPS-00083998')">
-              <div class="kan-top"><span class="cid-dim">EPS-00083998</span><span class="chip chip-neutral">No PA needed</span></div>
-              <div class="kan-foot">done · 40m</div>
-            </button>
+        </button>
+        <button class="kan-card team-card" onclick="teamOpen('Jordan C.')">
+          <div class="team-head"><span class="team-av">JC</span><div><div class="team-name">Jordan C.</div><div class="team-role">UM nurse</div></div></div>
+          <div class="team-stats">
+            <div class="team-stat"><span class="team-stat-val">7</span><span class="team-stat-lbl">open cases</span></div>
+            <div class="team-stat"><span class="team-stat-val">4</span><span class="team-stat-lbl">done today</span></div>
+            <div class="team-stat"><span class="team-stat-val">2.8h</span><span class="team-stat-lbl">avg turnaround</span></div>
           </div>
-        </div>
+        </button>
+        <button class="kan-card team-card" onclick="teamOpen('Sara P.')">
+          <div class="team-head"><span class="team-av">SP</span><div><div class="team-name">Sara P.</div><div class="team-role">UM nurse</div></div></div>
+          <div class="team-stats">
+            <div class="team-stat"><span class="team-stat-val">6</span><span class="team-stat-lbl">open cases</span></div>
+            <div class="team-stat"><span class="team-stat-val">3</span><span class="team-stat-lbl">done today</span></div>
+            <div class="team-stat"><span class="team-stat-val">2.4h</span><span class="team-stat-lbl">avg turnaround</span></div>
+          </div>
+        </button>
       </div>
     </section>
 
@@ -1070,7 +1078,6 @@ window.KonpoNotes={
       <div class="page-head">
         <div class="page-title">All cases<span class="title-count" id="caseTotal">45</span></div>
         <div class="head-actions">
-          <button class="tool btn-ghost" data-action="open-new"><i class="ti ti-plus"></i>New case</button>
         </div>
       </div>
       <div class="tabs" id="caseTabs">
@@ -1165,9 +1172,8 @@ window.KonpoNotes={
         <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
         <div class="detail-actions" id="detailActions">
           <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy case</button>
-          <button class="act-btn" onclick="pushToSystem()"><span class="push-ic"><i class="ti ti-arrow-left"></i></span>Push to system</button>
           <button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>
-          <button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>Generate letter</button>
+          <button class="act-btn act-primary" onclick="openReassign()"><i class="ti ti-user"></i>Reassign</button>
         </div>
       </div>
 
@@ -1375,22 +1381,22 @@ window.KonpoNotes={
           <div class="set-card-head"><span class="card-title-sm">Profile</span></div>
           <div class="set-profile">
             <button type="button" class="set-avatar" id="setAvatar" onclick="document.getElementById('avatarInput').click()" aria-label="Change profile photo">
-              <span class="set-avatar-initials">AR</span>
+              <span class="set-avatar-initials">MY</span>
               <span class="set-avatar-edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><circle cx="12" cy="13" r="3"/></svg></span>
             </button>
             <input type="file" id="avatarInput" accept="image/*" hidden onchange="onAvatarPick(event)">
             <div>
-              <div class="set-name">Alex Rivera</div>
-              <div class="set-role">UM nurse &middot; Konpo Health</div>
+              <div class="set-name">Morgan Yu</div>
+              <div class="set-role">UM Team Lead &middot; Konpo Health</div>
             </div>
           </div>
           <div class="set-grid">
-            <div><label class="label">Full name</label><input type="text" value="Alex Rivera"></div>
-            <div><label class="label">Email</label><input type="text" value="admin@konpo.studio"></div>
-            <div><label class="label">RN license number</label><input type="text" value="RN-4471892"></div>
-            <div><label class="label">NPI</label><input type="text" value="1639274015"></div>
-            <div><label class="label">Phone</label><input type="text" value="+1 (415) 555-0182"></div>
-            <div><label class="label">Reviewer group</label><input type="text" value="Prior Authorization · Team A" disabled></div>
+            <div><label class="label">Full name</label><input type="text" value="Morgan Yu"></div>
+            <div><label class="label">Email</label><input type="text" value="morgan.yu@konpo.studio"></div>
+            <div><label class="label">Employee ID</label><input type="text" value="KH-00412"></div>
+            <div><label class="label">Phone</label><input type="text" value="+1 (415) 555-0147"></div>
+            
+            <div><label class="label">Team scope</label><input type="text" value="Prior Authorization · Team A &amp; B" disabled></div>
           </div>
           <div class="set-actions"><button class="act-btn act-primary" onclick="saveSettings(this)"><i class="ti ti-check"></i>Save changes</button></div>
         </div>
@@ -1536,6 +1542,21 @@ window.KonpoNotes={
   </div>
 </div>
 
+<div class="overlay" id="reassignOverlay" onclick="if(event.target===this)closeReassign()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Reassign case</div>
+      <button class="modal-close" onclick="closeReassign()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <p class="dup-desc">Move this case to another reviewer's queue. They will be notified.</p>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <button class="user-mi" onclick="confirmReassign('Alex R.')"><span class="rv-av">AR</span>Alex R.</button>
+      <button class="user-mi" onclick="confirmReassign('Maya O.')"><span class="rv-av">MO</span>Maya O.</button>
+      <button class="user-mi" onclick="confirmReassign('Jordan C.')"><span class="rv-av">JC</span>Jordan C.</button>
+      <button class="user-mi" onclick="confirmReassign('Sara P.')"><span class="rv-av">SP</span>Sara P.</button>
+    </div>
+  </div>
+</div>
 <div class="overlay" id="dupOverlay" onclick="if(event.target===this)closeDup()" data-konpo-screen="duplicate">
   <div class="modal">
     <div class="modal-head">
@@ -1597,8 +1618,10 @@ document.querySelectorAll('[data-action="open-new"]').forEach(function(el){
   el.addEventListener('click', openModal);
 });
 function openModal(){ document.getElementById('overlay').classList.add('open'); }
+function openReassign(){ document.getElementById('reassignOverlay').classList.add('open'); }
+function closeReassign(){ document.getElementById('reassignOverlay').classList.remove('open'); }
+function confirmReassign(name){ closeReassign(); showToast('Case reassigned to '+name); }
 function openDup(){ var id=((document.getElementById('caseIdLg')||{}).textContent||'').trim().split(/\s+/)[0]; var src=document.getElementById('dupSrc'); if(src&&id) src.textContent=id; document.getElementById('dupOverlay').classList.add('open'); }
-function pushToSystem(){ showToast('Case pushed to your system'); }
 function createCopy(){ closeDup(); showToast('Case copied to a new draft'); }
 function openFb(){ document.getElementById('fbOverlay').classList.add('open'); }
 function closeFb(){ document.getElementById('fbOverlay').classList.remove('open'); }
@@ -1942,6 +1965,7 @@ function pickStatusTab(v,el){ state.status=v; state.page=1; applyFilters(); }
 function setSearch(v){ state.search=v.trim(); state.page=1; applyFilters(); }
 function clearSearch(){ state.search=''; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
 function removeFilter(k){ if(k==='reviewer') state.reviewer=[]; else state[k]=''; state.page=1; applyFilters(); }
+function teamOpen(name){ state.reviewer=[name]; state.page=1; applyFilters(); renderReviewerMenu(); go('cases'); }
 function toggleReviewer(name){ if(name===''){ state.reviewer=[]; } else { var i=state.reviewer.indexOf(name); if(i>-1) state.reviewer.splice(i,1); else state.reviewer.push(name); } state.page=1; applyFilters(); }
 function renderReviewerMenu(){ document.querySelectorAll('#btn-reviewer ~ .menu .rev-item, .rev-item').forEach(function(it){ var v=it.getAttribute('data-rev'); var on = v==='' ? state.reviewer.length===0 : state.reviewer.indexOf(v)>-1; it.classList.toggle('active', on); }); }
 function clearAll(){ state.determination=state.priority=state.cpt=state.status=state.date=state.search=''; state.reviewer=[]; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
@@ -2021,12 +2045,10 @@ function renderActions(state){
   var acts=[];
   if(state!=='processing'){
     acts.push({l:'Copy case',i:'ti-copy',fn:'openDup()'});
-    acts.push({l:'Push to system',ihtml:'<span class="push-ic"><i class="ti ti-arrow-left"></i></span>',fn:'pushToSystem()'});
-    if(state==='escalated'){ acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'}); }
-    else if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
+    if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
     else {
       acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'});
-      acts.push({l:'Approve',i:'ti-check',fn:"openLetter('approval')",cls:'act-approve act-decision',mcls:'da-approve'});
+      acts.push({l:'Reassign',i:'ti-user',fn:'openReassign()',cls:'act-primary'});
     }
   }
   var box=document.getElementById('detailActions');
@@ -2149,7 +2171,7 @@ function sbSearchInput(v){
   document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-screen')==='cases'); });
   applyFilters();
 }
-function enterApp(){ document.getElementById('loginError').classList.remove('show'); document.getElementById('loginScreen').style.display='none'; go('queue'); }
+function enterApp(){ document.getElementById('loginError').classList.remove('show'); document.getElementById('loginScreen').style.display='none'; go('dashboard'); }
 function isPreviewHost(){ return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname); }
 function roleUrl(role){ var p=isPreviewHost(); if(role==='physician') return p?'/physician.html':'/physician'; if(role==='leader') return p?'/leader.html':'/leader'; return '/'; }
 function signIn(){
@@ -2158,7 +2180,7 @@ function signIn(){
   var role = pass==='konpo@studio' ? (email==='admin'?'nurse':(email==='physician'?'physician':(email==='leader'?'leader':''))) : '';
   if(!role){ document.getElementById('loginError').classList.add('show'); return; }
   document.getElementById('loginError').classList.remove('show');
-  if(role==='nurse'){ enterApp(); }
+  if(role==='leader'){ enterApp(); }
   else { try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
 }
 function logOut(){
@@ -2168,7 +2190,7 @@ function logOut(){
   document.getElementById('loginScreen').style.display='flex';
 }
 applyFilters();
-try{ if(sessionStorage.getItem('neboAuth')==='nurse'){ sessionStorage.removeItem('neboAuth'); enterApp(); } }catch(e){}
+try{ if(sessionStorage.getItem('neboAuth')==='leader'){ sessionStorage.removeItem('neboAuth'); enterApp(); } }catch(e){}
 
 </script>
 </body>

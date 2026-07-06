@@ -2142,15 +2142,15 @@ function sbSearchInput(v){
 }
 function enterApp(){ document.getElementById('loginError').classList.remove('show'); document.getElementById('loginScreen').style.display='none'; go('queue'); }
 function isPreviewHost(){ return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname); }
-function roleUrl(role){ return role==='physician' ? (isPreviewHost()?'/physician.html':'/physician') : '/'; }
+function roleUrl(role){ var p=isPreviewHost(); if(role==='physician') return p?'/physician.html':'/physician'; if(role==='leader') return p?'/leader.html':'/leader'; return '/'; }
 function signIn(){
   var email=(document.getElementById('loginEmail').value||'').trim().toLowerCase();
   var pass=document.getElementById('loginPass').value||'';
-  var role = pass==='konpo@studio' ? (email==='admin'?'nurse':(email==='physician'?'physician':'')) : '';
+  var role = pass==='konpo@studio' ? (email==='admin'?'nurse':(email==='physician'?'physician':(email==='leader'?'leader':''))) : '';
   if(!role){ document.getElementById('loginError').classList.add('show'); return; }
   document.getElementById('loginError').classList.remove('show');
   if(role==='physician'){ enterApp(); }
-  else { try{ sessionStorage.setItem('neboAuth','nurse'); }catch(e){} location.href=roleUrl('nurse'); }
+  else { try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
 }
 function logOut(){
   closeUserMenu(); closeMUserMenu();
