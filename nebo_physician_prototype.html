@@ -233,7 +233,7 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .support-link{display:flex;align-items:center;gap:9px;width:100%;border:none;background:none;font-family:inherit;font-size:12px;color:var(--text-2);padding:9px 6px;cursor:pointer;margin:6px 0 10px;text-align:left;text-decoration:none;transition:opacity .12s}
 .support-link:hover{opacity:.6}
 .support-link i{font-size:16px;color:var(--text-3)}
-.sb-support{margin:12px 0 0;padding-top:14px;border-top:0.5px solid var(--border)}
+.sb-support{margin:12px 0 0;padding-top:9px;border-top:0.5px solid var(--border)}
 .avatar{width:28px;height:28px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
 .user-name{font-size:12px;font-weight:500;color:var(--text)}
 .user-role{font-size:10px;color:var(--text-3)}
@@ -307,7 +307,7 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .kan-tags{display:flex;flex-wrap:wrap;gap:6px}
 .kan-foot{font-size:11px;color:var(--text-3)}
 @media(max-width:760px){.kanban{grid-template-columns:1fr}}
-.chip{font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;line-height:1;font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
 .chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
 .chip-ok{background:var(--ok-bg);color:var(--ok-fg)}
 .chip-info{background:var(--info-bg);color:var(--info-fg)}
@@ -318,6 +318,7 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 #caseTable th:last-child,#caseTable td:last-child{text-align:right}
 .right{margin-left:auto;font-size:11px;color:var(--text-3)}
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
+.dot-standard{background:var(--text-3)}
 .mdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:9px;vertical-align:middle;flex-shrink:0}
 .tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:0.5px solid var(--border)}
 .tab{font-size:12px;color:var(--text-2);padding:7px 10px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px}
@@ -465,7 +466,7 @@ textarea{resize:none}
 .svc-rows{display:flex;flex-direction:column;gap:14px}
 .svc-row{display:flex;align-items:center;gap:7px 12px;flex-wrap:wrap;width:100%;text-align:left;border:0.5px solid var(--border);border-radius:var(--r);background:none;padding:10px 12px;cursor:pointer;font-family:inherit}
 .svc-row:hover{background:var(--surface)}
-.cpt-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:var(--r);flex-shrink:0}
+.cpt-pill{display:inline-flex;align-items:center;line-height:1;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:var(--r);flex-shrink:0}
 .cpt-pill .pdot{width:6px;height:6px;border-radius:50%}
 .cpt-ok{background:var(--ok-bg);color:var(--ok-fg)} .cpt-ok .pdot{background:var(--ok-fg)}
 .cpt-warn{background:var(--warn-bg);color:var(--warn-fg)} .cpt-warn .pdot{background:var(--warn-fg)}
@@ -844,10 +845,24 @@ textarea{resize:none}
 @media (max-width:460px){.kpi-row{grid-template-columns:1fr}}
 </style>
 <!-- Konpo comments embed: kp-comments -->
-<script src="https://kp-comments.vercel.app/embed.js" defer></script>
+<script>
+window.KonpoNotes={
+  captureState:function(el){
+    var d=document.getElementById('details');
+    if(d&&el&&d.contains(el)){
+      var idEl=document.getElementById('caseIdLg');
+      var id=idEl?(idEl.textContent||'').trim().split(/\s+/)[0]:'';
+      if(id) return {caseId:id};
+    }
+    return null;
+  },
+  restoreState:function(ui){ if(ui&&ui.caseId) openCase(ui.caseId); }
+};
+</script>
+<script src="https://kp-comments.vercel.app/embed.js" data-project="nebo-health-prototype.vercel.app" defer></script>
 </head>
 <body>
-<div id="loginScreen" class="login-screen">
+<div id="loginScreen" class="login-screen" data-konpo-screen="login">
   <div class="login-card">
     <div class="login-brand"><svg class="brand-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg></div>
     <h1 class="login-title">Welcome back</h1>
@@ -933,7 +948,7 @@ textarea{resize:none}
 
   <main class="main">
 
-    <section class="screen" id="dashboard">
+    <section class="screen" id="dashboard" data-konpo-screen="dashboard">
       <div class="page-head"><span class="page-title">Good morning, Dr. Park</span><span class="muted">Sign-off overview &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
       <div class="dash-greet">
         <p class="greet-sub">Here are the cases waiting on you today. <b>12 cases</b> are in further review and awaiting your sign-off.</p>
@@ -1016,7 +1031,7 @@ textarea{resize:none}
       </div>
     </section>
 
-    <section class="screen active" id="queue">
+    <section class="screen active" id="queue" data-konpo-screen="queue">
       <div class="page-head"><span class="page-title">Recent queue</span><span class="muted">Tuesday, 18 Mar</span></div>
       <div class="kanban">
         <div class="kan-col">
@@ -1038,7 +1053,6 @@ textarea{resize:none}
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00086956')">
               <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
-              <div class="kan-tags"><span class="chip chip-neutral">Out of network</span></div>
               <div class="kan-foot">in progress · 4h</div>
             </button>
           </div>
@@ -1059,7 +1073,7 @@ textarea{resize:none}
       </div>
     </section>
 
-    <section class="screen" id="cases">
+    <section class="screen" id="cases" data-konpo-screen="cases">
       <div class="page-head">
         <div class="page-title">All cases<span class="title-count" id="caseTotal">45</span></div>
         <div class="head-actions">
@@ -1131,7 +1145,7 @@ textarea{resize:none}
       </div>
       <div class="active-filters" id="caseChips"></div>
       <div class="filter-panel-backdrop" id="filterBackdrop" onclick="closeFilterPanel()"></div>
-      <aside class="filter-panel" id="filterPanel" aria-label="Filters">
+      <aside class="filter-panel" id="filterPanel" aria-label="Filters" data-konpo-screen="filters">
         <div class="fp-head"><span class="fp-title">Filters</span><button class="fp-close" onclick="closeFilterPanel()" aria-label="Close"><i class="ti ti-x"></i></button></div>
         <div class="fp-body" id="filterPanelBody"></div>
         <div class="fp-foot"><button class="act-btn" onclick="clearAll();renderFilterPanel()">Clear all</button><button class="act-btn act-primary" onclick="closeFilterPanel()">Show results</button></div>
@@ -1153,7 +1167,7 @@ textarea{resize:none}
       </div>
     </section>
 
-    <section class="screen" id="details">
+    <section class="screen" id="details" data-konpo-screen="details">
       <div class="detail-topbar">
         <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
         <div class="detail-actions" id="detailActions">
@@ -1186,12 +1200,16 @@ textarea{resize:none}
           </div>
         </div>
 
-      <div class="card">
-        <div class="card-head">
-          <span class="cpt-title">CPT 72148 · Magnetic resonance imaging, lumbar; without contrast material</span>
-          <button class="copy" onclick="copyResult(this)"><i class="ti ti-copy"></i>Copy result</button>
-        </div>
-        <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-neutral">Requires your expert review</span></div>
+      <div class="card acard" style="margin-bottom:0">
+        <button class="acard-head" onclick="toggleAcard(this)">
+          <span class="cpt-pill cpt-warn"><span class="pdot"></span>72148</span>
+          <span class="acard-name">MRI lumbar spine, without contrast</span>
+          <span class="svc-det det-warn" style="margin-left:auto">Requires review</span>
+          <i class="ti ti-chevron-down acard-caret"></i>
+          <span class="acard-dx">DX <span class="cc-chip">M48.062</span> <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
+        </button>
+        <div class="acard-body">
+        <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-neutral">Requires your expert review</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
         <div class="guideline">
           <i class="ti ti-bookmark"></i>
           <span class="guideline-code">LCD - L34220 - Lumbar MRI</span>
@@ -1218,6 +1236,7 @@ textarea{resize:none}
               <li>Conservative management trial: "Has tried Advil, Tylenol, Diclofenac gel, and CBD oil w/o relief of SX" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
             </ul>
           </div>
+        </div>
         </div>
       </div>
 
@@ -1289,7 +1308,7 @@ textarea{resize:none}
       </div>
     </section>
 
-    <div class="pv-panel" id="pvPanel">
+    <div class="pv-panel" id="pvPanel" data-konpo-screen="preview">
       <div class="pv-resize" id="pvResize"></div>
       <div class="pv-phead">
         <span class="pv-ptitle"><i class="ti ti-file-text"></i><span id="pvName">66716 demo clean 30.Sep.24.pdf</span></span>
@@ -1323,7 +1342,7 @@ textarea{resize:none}
         </div>
     </div>
 
-    <div class="letter-float" id="letterFloat">
+    <div class="letter-float" id="letterFloat" data-konpo-screen="letter">
       <div class="lf-resize"></div>
       <div class="lf-head">
         <span class="lf-title" id="ltCrumb"><i class="ti ti-file-text"></i>Determination letter &middot; Approval</span>
@@ -1363,7 +1382,7 @@ textarea{resize:none}
       </div>
     </div>
 
-    <section class="screen" id="settings">
+    <section class="screen" id="settings" data-konpo-screen="settings">
       <div class="detail-topbar">
         <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
       </div>
@@ -1449,7 +1468,7 @@ textarea{resize:none}
           <div class="set-card-head"><span class="card-title-sm">Security</span></div>
           <div class="set-row">
             <div><div class="set-row-title">Password</div><div class="set-row-sub">Last changed 3 months ago.</div></div>
-            <button class="act-btn" onclick="changePassword()"><i class="ti ti-key"></i>Change password</button>
+            <button class="act-btn" onclick="changePassword()" style="justify-content:center"><i class="ti ti-key"></i>Change password</button>
           </div>
           <div class="set-row">
             <div><div class="set-row-title">Last sign-in</div><div class="set-row-sub">Today, 08:02 · San Francisco, CA</div></div>
@@ -1465,7 +1484,7 @@ textarea{resize:none}
   </main>
 </div>
 
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()" data-konpo-screen="new-case">
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title">New case</div>
@@ -1490,7 +1509,7 @@ textarea{resize:none}
   </div>
 </div>
 
-<div class="overlay" id="fbOverlay" onclick="if(event.target===this)closeFb()">
+<div class="overlay" id="fbOverlay" onclick="if(event.target===this)closeFb()" data-konpo-screen="feedback">
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title">Submit feedback</div>
@@ -1522,7 +1541,7 @@ textarea{resize:none}
   </div>
 </div>
 
-<div class="overlay" id="sendOverlay" onclick="if(event.target===this)closeSend()">
+<div class="overlay" id="sendOverlay" onclick="if(event.target===this)closeSend()" data-konpo-screen="send-letter">
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title">Send letter to provider?</div>
@@ -1536,7 +1555,7 @@ textarea{resize:none}
   </div>
 </div>
 
-<div class="overlay" id="dupOverlay" onclick="if(event.target===this)closeDup()">
+<div class="overlay" id="dupOverlay" onclick="if(event.target===this)closeDup()" data-konpo-screen="duplicate">
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title">Copy case</div>
@@ -1834,7 +1853,7 @@ function caseMatch(c,skipStatus){
   if(state.determination && c.det!==state.determination) return false;
   if(state.priority && c.priority!==state.priority) return false;
   if(state.cpt && (c.cpt||'').split(/,\s*/).indexOf(state.cpt)<0) return false;
-  if(!skipStatus && state.status && c.status!==state.status) return false;
+  if(!skipStatus && state.status){ if(state.status==='ready'){ if(c.status!=='ready'&&c.status!=='escalated') return false; } else if(c.status!==state.status) return false; }
   if(state.reviewer.length && state.reviewer.indexOf(c.reviewer)<0) return false;
   if(state.search && c.id.toLowerCase().indexOf(state.search.toLowerCase())<0) return false;
   if(state.date==='today' && c.day!==18) return false;
@@ -1865,7 +1884,7 @@ function icdFor(cpt){
   return out.join(', ');
 }
 function rowHtml(c){
-  var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
+  var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span class="dot dot-standard"></span>';
   var det;
   if(c.status==='processing') det='<span class="muted">processing...</span>';
   else if(c.status==='escalated') det='<span class="chip chip-review">Further review</span>';
@@ -1876,7 +1895,7 @@ function rowHtml(c){
 function toggleSidebar(){ document.querySelector('.app').classList.toggle('collapsed'); }
 function isFurther(c){ return c.det==='further' || c.status==='escalated'; }
 function applyFilters(){
-  var arr=CASES.filter(caseMatch);
+  var arr=CASES.filter(function(c){return caseMatch(c);});
   var k=state.sortKey, dir=state.sortDir==='asc'?1:-1;
   arr.sort(function(a,b){
     var fa=isFurther(a)?0:1, fb=isFurther(b)?0:1;
@@ -1912,7 +1931,7 @@ function applyFilters(){
   rb.classList.toggle('has-val',rn>0);
   renderReviewerMenu();
   var base=CASES.filter(function(c){return caseMatch(c,true);});
-  var cReady=0,cSigned=0; base.forEach(function(c){ if(c.status==='ready')cReady++; else if(c.status==='signed')cSigned++; });
+  var cReady=0,cSigned=0; base.forEach(function(c){ if(c.status==='ready'||c.status==='escalated')cReady++; else if(c.status==='signed')cSigned++; });
   var tcs=document.querySelectorAll('#caseTabs .tab-count');
   if(tcs.length>=3){ tcs[0].textContent=base.length; tcs[1].textContent=cReady; tcs[2].textContent=cSigned; }
   var tabs=document.querySelectorAll('#caseTabs .tab');
