@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en" data-fs="m">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebo - Physician prototype</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2724%27%20fill%3D%27%235B6E2C%27/%3E%3Ctext%20x%3D%2750%27%20y%3D%2752%27%20font-family%3D%27Georgia%2Cserif%27%20font-size%3D%2768%27%20font-weight%3D%27600%27%20fill%3D%27%23ffffff%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27central%27%3EN%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"tabler-icons";font-style:normal;font-weight:400;src:url("data:font/woff2;base64,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") format("woff2")}
+.ti{font-family:"tabler-icons"!important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;display:inline-block;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.ti-arrow-left:before{content:"\ea19"}
+.ti-bookmark:before{content:"\ea3a"}
+.ti-check:before{content:"\ea5e"}
+.ti-chevron-down:before{content:"\ea5f"}
+.ti-chevron-left:before{content:"\ea60"}
+.ti-chevron-right:before{content:"\ea61"}
+.ti-cloud-download:before{content:"\ea71"}
+.ti-copy:before{content:"\ea7a"}
+.ti-corner-down-right:before{content:"\ea7d"}
+.ti-download:before{content:"\ea96"}
+.ti-file-text:before{content:"\eaa2"}
+.ti-folder:before{content:"\eaad"}
+.ti-inbox:before{content:"\eac4"}
+.ti-info-circle:before{content:"\eac5"}
+.ti-plus:before{content:"\eb0b"}
+.ti-search:before{content:"\eb1c"}
+.ti-upload:before{content:"\eb47"}
+.ti-x:before{content:"\eb55"}
+.ti-sun:before{content:"\eb30"}
+.ti-moon:before{content:"\eaf8"}
+.ti-device-desktop:before{content:"\ea89"}
+.ti-minus:before{content:"\eaf2"}
+.ti-rotate-clockwise:before{content:"\eb15"}
+.ti-maximize:before{content:"\eaea"}
+.ti-layout-sidebar:before{content:"\eada"}
+.ti-settings:before{content:"\eb20"}
+.ti-user:before{content:"\eb4d"}
+.ti-logout:before{content:"\eba8"}
+.ti-lifebuoy:before{content:"\eadd"}
+.ti-message-circle:before{content:"\eaed"}
+.ti-layout-dashboard:before{content:"\f02c"}
+.ti-edit:before{content:"\ea98"}
+.ti-eye:before{content:"\ea9a"}
+</style>
+<style>
+:root{
+  --bg:#ffffff; --bg-page:#ECEAE3; --surface:#F4F3EF;
+  --border:rgba(28,28,26,0.10); --border-2:rgba(28,28,26,0.18);
+  --text:#1C1C1A; --text-2:#5F5E5A; --text-3:#908E86;
+  --info-bg:#E6F1FB; --info-fg:#185FA5;
+  --warn-bg:#FAEEDA; --warn-fg:#854F0B;
+  --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
+  --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
+  --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
+  --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
+  --r:8px; --r-lg:12px;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E120D; --bg-page:#0F140D; --surface:#1F261B;
+    --border:rgba(205,212,203,0.12); --border-2:rgba(205,212,203,0.20);
+    --text:#ECEAE0; --text-2:#B4B2A9; --text-3:#86847C;
+    --info-bg:#0C447C; --info-fg:#B5D4F4;
+    --warn-bg:#633806; --warn-fg:#FAC775;
+    --ok-bg:#27500A; --ok-fg:#C0DD97;
+    --danger-bg:#791F1F; --danger-fg:#F7C1C1; --danger-solid:#B5403F; --danger-solid-fg:#ffffff; --danger-solid:#B5403F; --danger-solid-fg:#ffffff;
+    --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+    --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
+    --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#ffffff; --bg-page:#ECEAE3; --surface:#F4F3EF;
+  --border:rgba(28,28,26,0.10); --border-2:rgba(28,28,26,0.18);
+  --text:#1C1C1A; --text-2:#5F5E5A; --text-3:#908E86;
+  --info-bg:#E6F1FB; --info-fg:#185FA5;
+  --warn-bg:#FAEEDA; --warn-fg:#854F0B;
+  --ok-bg:#EAF3DE; --ok-fg:#3B6D11;
+  --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
+  --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
+  --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
+  --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
+}
+:root[data-theme="dark"]{
+  --bg:#0E120D; --bg-page:#0F140D; --surface:#1F261B;
+  --border:rgba(205,212,203,0.12); --border-2:rgba(205,212,203,0.20);
+  --text:#ECEAE0; --text-2:#B4B2A9; --text-3:#86847C;
+  --info-bg:#0C447C; --info-fg:#B5D4F4;
+  --warn-bg:#633806; --warn-fg:#FAC775;
+  --ok-bg:#27500A; --ok-fg:#C0DD97;
+  --danger-bg:#791F1F; --danger-fg:#F7C1C1;
+  --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
+  --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
+  --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
+}
+
+/* ===== Dashboard ===== */
+.dash-intro{font-size:13px;color:var(--text-2);margin:2px 0 20px;max-width:600px;line-height:1.5}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.kpi{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:15px 16px;background:var(--surface);display:flex;flex-direction:column;gap:7px}
+.kpi-action{cursor:pointer;transition:border-color .15s}
+.kpi-action:hover{border-color:var(--border-2)}
+.kpi-label{font-size:11px;color:var(--text-3);letter-spacing:.01em}
+.kpi-val{font-size:25px;font-weight:500;line-height:1;letter-spacing:-.01em}
+.kpi-sub{font-size:11px;color:var(--text-3)}
+.kpi-sub .pos{color:var(--ok-fg)}
+.kpi-warn .kpi-val{color:var(--warn-fg)}
+.dash-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.dwidget{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:16px 17px;background:var(--surface)}
+.dwidget-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:17px;gap:10px}
+.dwidget-title{font-size:13px;font-weight:500}
+.dwidget-meta{font-size:11px;color:var(--text-3)}
+.cbar{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cbar:last-child{margin-bottom:0}
+.cbar-label{font-size:12px;color:var(--text-2);width:138px;flex-shrink:0;display:flex;align-items:center;gap:8px}
+.cbar-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cbar-track{flex:1;height:7px;background:var(--chip-bg);border-radius:99px;overflow:hidden}
+.cbar-fill{display:block;height:100%;border-radius:99px}
+.cbar-val{font-size:12px;color:var(--text-3);width:84px;text-align:right;flex-shrink:0}
+.cbar-val b{color:var(--text);font-weight:500}
+.pipe{display:flex;height:10px;border-radius:99px;overflow:hidden;margin-bottom:18px;gap:2px}
+.pipe-seg{height:100%;border-radius:2px;flex-shrink:0}
+.pipe-legend{display:flex;flex-direction:column;gap:11px}
+.pleg{display:flex;align-items:center;gap:9px;font-size:12.5px}
+.pleg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pleg-name{color:var(--text-2)}
+.pleg-val{margin-left:auto;color:var(--text);font-weight:500}
+.dtable{width:100%;border-collapse:collapse}
+.dtable th{text-align:left;font-size:11px;color:var(--text-3);font-weight:400;padding:0 0 10px}
+.dtable th.dt-r{text-align:right}
+.dtable td{padding:10px 0;border-top:0.5px solid var(--border);vertical-align:middle}
+.dtable tr.dt-row{cursor:pointer}
+.dt-issue{font-size:12.5px;color:var(--text);font-weight:500}
+.dt-field{font-size:11px;color:var(--text-3);margin-top:2px}
+.dt-count{text-align:right;font-size:12.5px;color:var(--text);font-weight:500;width:60px}
+.vrow{display:flex;align-items:center;gap:11px;padding:11px 0;border-top:0.5px solid var(--border);cursor:pointer}
+.vrow:first-of-type{border-top:none}
+.vrow .vid{font-family:var(--mono);font-size:12px;color:var(--text)}
+.vrow .vreason{font-size:11px;color:var(--text-3)}
+.vrow .vconf{margin-left:auto;font-size:12.5px;font-weight:500;color:var(--warn-fg)}
+.dash-greet{margin:2px 0 22px}
+.greet-title{font-size:22px;font-weight:500;letter-spacing:-.01em;margin:0 0 5px}
+.greet-sub{font-size:13px;color:var(--text-2);line-height:1.5;max-width:560px;margin:0}
+.greet-sub b{color:var(--text);font-weight:500}
+.donut-block{display:flex;align-items:center;gap:24px}
+.donut-svg{width:130px;height:130px;flex-shrink:0}
+.donut-track{fill:none;stroke:var(--chip-bg)}
+.donut-seg{fill:none;stroke-linecap:round}
+.donut-center-val{font-size:20px;font-weight:600;fill:var(--text)}
+.donut-center-lbl{font-size:8px;fill:var(--text-3);letter-spacing:.02em}
+.donut-legend{display:flex;flex-direction:column;gap:14px;flex:1;min-width:0}
+.dleg{display:flex;align-items:center;gap:9px;font-size:12px}
+.dleg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.dleg-name{color:var(--text-2)}
+.dleg-meta{margin-left:auto;color:var(--text-3);white-space:nowrap}
+.dleg-meta b{color:var(--text);font-weight:500}
+.hbars{display:flex;flex-direction:column;gap:15px}
+.hbar{display:flex;align-items:center;gap:12px}
+.hbar-label{font-size:12px;color:var(--text-2);width:128px;flex-shrink:0;display:flex;align-items:center;gap:8px}
+.hbar-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.hbar-track{flex:1;height:8px;background:var(--chip-bg);border-radius:99px;overflow:hidden}
+.hbar-fill{display:block;height:100%;border-radius:99px}
+.hbar-val{font-size:12.5px;font-weight:500;color:var(--text);width:32px;text-align:right;flex-shrink:0}
+.ibars{display:flex;flex-direction:column}
+.ibar{display:flex;align-items:center;gap:14px;padding:10px 0;cursor:pointer;border-top:0.5px solid var(--border);transition:opacity .15s}
+.ibar:first-child{border-top:none;padding-top:2px}
+.ibar:hover{opacity:.7}
+.ibar-main{width:152px;flex-shrink:0}
+.ibar-name{font-size:12.5px;color:var(--text);font-weight:500}
+.ibar-field{font-size:11px;color:var(--text-3);margin-top:1px}
+.ibar-track{flex:1;height:8px;background:var(--chip-bg);border-radius:99px;overflow:hidden}
+.ibar-fill{display:block;height:100%;border-radius:99px;background:var(--data-2)}
+.ibar-val{font-size:12.5px;font-weight:500;color:var(--text);width:22px;text-align:right;flex-shrink:0}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);font-size:14px;background:var(--bg-page);color:var(--text);-webkit-font-smoothing:antialiased}
+html[data-fs="s"] .main,html[data-fs="s"] .overlay{zoom:1}
+html[data-fs="m"] .main,html[data-fs="m"] .overlay{zoom:1.06}
+html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
+.app{display:flex;min-height:100vh;gap:10px;padding:10px}
+.sidebar{width:212px;flex-shrink:0;height:calc(100vh - 20px);position:sticky;top:10px;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column}
+.sb-top{flex-shrink:0}
+.sb-mid{flex:1;min-height:0;overflow-y:auto;margin:6px -4px;padding:0 4px}
+.sb-bottom{flex-shrink:0;padding-top:10px}
+.brand{display:flex;align-items:center;gap:9px;padding:2px 6px 14px}
+.brand-mark{width:22px;height:22px;border-radius:6px;background:var(--text)}
+.brand-name{font-size:16px;font-weight:500}
+.brand-logo{height:19px;width:auto;color:#5B6E2C}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .brand-logo{color:#A6C162} }
+:root[data-theme="dark"] .brand-logo{color:#A6C162}
+:root[data-theme="light"] .brand-logo{color:#5B6E2C}
+.search{display:flex;align-items:center;gap:7px;background:var(--surface);border-radius:var(--r);padding:8px 10px;margin-bottom:10px;color:var(--text-3);font-size:13px}
+.search input{flex:1;min-width:0;border:none;background:none;outline:none;font-family:inherit;font-size:13px;color:var(--text)}
+.search input::placeholder{color:var(--text-3)}
+.sb-divider{display:none}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r);color:var(--text-2);font-size:13px;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:inherit;margin-bottom:2px}
+.nav-item:hover{background:var(--surface)}
+.nav-item.active{background:var(--accent-bg);color:var(--accent-fg);font-weight:500}
+.nav-item i{font-size:17px}
+.nav-item .count{margin-left:auto;font-size:11px}
+.sb-label{font-size:10px;letter-spacing:.04em;color:var(--text-3);text-transform:uppercase;margin:14px 6px 6px}
+.sb-case{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:var(--r);cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:inherit}
+.sb-case:hover{background:var(--surface)}
+.sb-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.sb-cid{font-family:var(--mono);font-size:11px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:9px 12px;font-size:13px;font-weight:500;font-family:inherit;width:100%;cursor:pointer;margin-bottom:8px}
+.btn-primary:hover{filter:brightness(1.05)}
+.theme-seg{display:flex;gap:2px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:2px;margin-bottom:2px}
+.fs-seg{display:flex;gap:2px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:2px;margin-top:6px}
+.fs-seg .seg-btn{font-weight:500}
+.seg-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;border:none;background:none;font-family:inherit;font-size:11px;color:var(--text-3);padding:5px 0;border-radius:6px;cursor:pointer;transition:color .12s}
+.seg-btn i{font-size:13px}
+.seg-btn:hover{color:var(--text-2)}
+.seg-btn.is-active{background:var(--bg);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.user-wrap{position:relative;border-top:0.5px solid var(--border);padding:8px 0;margin-top:2px}
+.user{display:flex;align-items:center;gap:9px;width:100%;border:none;background:none;font-family:inherit;cursor:pointer;padding:6px;border-radius:var(--r);text-align:left}
+.user:hover{background:var(--surface)}
+.user-info{flex:1;min-width:0}
+.user-gear{color:var(--text-3);font-size:16px;flex-shrink:0}
+.user:hover .user-gear{color:var(--text-2)}
+.user-menu{position:absolute;bottom:calc(100% + 6px);left:0;right:0;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,0.18);padding:4px;display:none;z-index:50}
+.user-menu.open{display:block}
+.user-mi{display:flex;align-items:center;gap:9px;width:100%;border:none;background:none;font-family:inherit;font-size:12px;color:var(--text-2);padding:8px 9px;border-radius:6px;cursor:pointer;text-align:left}
+.user-mi:hover{background:var(--surface);color:var(--text)}
+.user-mi i{font-size:15px;color:var(--text-3)}
+.support-link{display:flex;align-items:center;gap:9px;width:100%;border:none;background:none;font-family:inherit;font-size:12px;color:var(--text-2);padding:9px 6px;cursor:pointer;margin:6px 0 10px;text-align:left;text-decoration:none;transition:opacity .12s}
+.support-link:hover{opacity:.6}
+.support-link i{font-size:16px;color:var(--text-3)}
+.sb-support{margin:12px 0 0;padding-top:14px;border-top:0.5px solid var(--border)}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
+.user-name{font-size:12px;font-weight:500;color:var(--text)}
+.user-role{font-size:10px;color:var(--text-3)}
+.main{flex:1;min-width:0;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:20px 24px}
+.sb-toggle{margin-left:auto;border:none;background:none;color:var(--text-3);cursor:pointer;width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.sb-close{display:none;margin-left:auto;border:none;background:var(--surface);color:var(--text-2);cursor:pointer;width:32px;height:32px;border-radius:var(--r);align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sb-close:hover{color:var(--text)}
+.sb-toggle:hover{background:var(--surface);color:var(--text)}
+.sidebar{transition:width .16s ease}
+.app.collapsed .sidebar{width:60px;padding:14px 8px}
+.app.collapsed .brand{padding:2px 0 14px}
+.app.collapsed .brand-logo{display:none}
+.app.collapsed .sb-toggle{margin:0 auto}
+.app.collapsed .search{width:38px;height:38px;justify-content:center;padding:0;margin:0 auto 10px}
+.app.collapsed .search span,.app.collapsed .search input{display:none}
+.app.collapsed .nav-item{width:38px;height:38px;justify-content:center;gap:0;padding:0;margin:0 auto 4px}
+.app.collapsed .nav-item span{display:none}
+.app.collapsed .sb-label,
+.app.collapsed .sb-case{display:none}
+.app.collapsed .support-link{width:38px;height:38px;justify-content:center;gap:0;padding:0;font-size:0;margin:6px auto 4px}
+.app.collapsed .btn-primary{width:38px;height:38px;justify-content:center;gap:0;padding:0;font-size:0;margin:0 auto 18px}
+.app.collapsed .btn-primary i{font-size:18px}
+.app.collapsed .user{width:38px;height:38px;justify-content:center;gap:0;padding:0;margin:0 auto}
+.app.collapsed .user-info,
+.app.collapsed .user-gear{display:none}
+.app.collapsed .avatar{width:38px;height:38px;border-radius:var(--r);font-size:13px}
+.app.collapsed .user-menu{left:calc(100% + 8px);right:auto;bottom:0;min-width:158px}
+.app.collapsed .user-wrap{padding:16px 0;margin-top:6px}
+.app.collapsed .theme-seg{flex-direction:column;align-items:center;gap:3px;width:38px;margin:14px auto 0;padding:3px}
+.app.collapsed .seg-btn{width:100%;justify-content:center;gap:0;font-size:0;padding:8px 0}
+.app.collapsed .sidebar [data-tip]{position:relative}
+.app.collapsed .sidebar [data-tip]:hover::after{content:attr(data-tip);position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);background:var(--text);color:var(--bg);font-size:12px;font-weight:500;line-height:1;white-space:nowrap;padding:6px 9px;border-radius:6px;z-index:60;pointer-events:none;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.screen{display:none}
+.screen.active{display:block;max-width:1180px;margin:0 auto}
+.page-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;gap:12px}
+#queue .page-head{margin-bottom:22px}
+.page-title{font-size:19px;font-weight:500}
+.title-count{font-size:14px;font-weight:400;color:var(--text-3);margin-left:8px}
+.muted{color:var(--text-3);font-size:12px}
+.head-actions{display:flex;align-items:center;gap:8px}
+.stats{display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+.stat{font-size:12px;color:var(--text-2)}
+.stat b{font-weight:500;color:var(--text)}
+.section-label{font-size:11px;color:var(--text-3);margin:18px 0 8px}
+.section-label:first-of-type{margin-top:0}
+.list{border-top:0.5px solid var(--border)}
+.row{padding:11px 4px;border-bottom:0.5px solid var(--border);cursor:pointer}
+.row:hover{background:var(--surface)}
+.row-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.row-line{display:flex;align-items:center;gap:6px}
+.cid{font-family:var(--mono);font-size:13px;font-weight:500}
+.cid-dim{font-family:var(--mono);font-size:13px;color:var(--text-2)}
+.q-group{border:0.5px solid var(--border);border-radius:12px;background:var(--bg);padding:2px 14px;margin-bottom:14px}
+.q-group-head{display:flex;align-items:center;gap:8px;padding:13px 2px 11px}
+.q-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.q-group-title{font-size:12px;font-weight:600;color:var(--text-2)}
+.q-count{font-size:11px;color:var(--text-3);font-family:var(--mono)}
+.q-group .list{border-top:0.5px solid var(--border)}
+.q-group .row{padding:12px 2px}
+.q-group .row:last-child{border-bottom:none}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start;margin-top:2px}
+.kan-col{background:color-mix(in srgb, var(--border) 24%, var(--bg));border-radius:12px;padding:12px 12px 14px;min-width:0}
+.kan-col .q-group-head{padding:2px 4px 12px}
+.kan-col .q-group-head .ti{font-size:16px;flex-shrink:0}
+.kan-col .q-group-title{font-size:13px;font-weight:600}
+.kan-cards{display:flex;flex-direction:column;gap:10px}
+.kan-empty{font-size:12px;color:var(--text-3);padding:8px 4px}
+.kan-card{text-align:left;border:0.5px solid var(--border);border-radius:10px;background:var(--bg);padding:12px 13px;cursor:pointer;display:flex;flex-direction:column;gap:9px;font-family:inherit;color:var(--text);width:100%}
+.kan-card:hover{border-color:var(--border-2)}
+.kan-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kan-tags{display:flex;flex-wrap:wrap;gap:6px}
+.kan-foot{font-size:11px;color:var(--text-3)}
+@media(max-width:760px){.kanban{grid-template-columns:1fr}}
+.chip{font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
+.chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
+.chip-ok{background:var(--ok-bg);color:var(--ok-fg)}
+.chip-info{background:var(--info-bg);color:var(--info-fg)}
+.chip-neutral{background:var(--chip-bg);color:var(--chip-fg)}
+.chip-consider{background:color-mix(in srgb, var(--ok-bg) 50%, var(--bg));color:color-mix(in srgb, var(--ok-fg) 78%, var(--text-3))}
+.chip-danger{background:var(--danger-bg);color:var(--danger-fg)}
+#caseTable .chip-warn{background:var(--chip-bg);color:var(--chip-fg)}
+#caseTable th:last-child,#caseTable td:last-child{text-align:right}
+.right{margin-left:auto;font-size:11px;color:var(--text-3)}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--danger-fg);margin-right:7px;vertical-align:middle}
+.mdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:9px;vertical-align:middle;flex-shrink:0}
+.tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:0.5px solid var(--border)}
+.tab{font-size:12px;color:var(--text-2);padding:7px 10px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent-fg);border-bottom-color:var(--accent-fg);font-weight:500}
+.tab-count{font-size:10px;color:var(--text-3);margin-left:5px;background:var(--surface);padding:1px 6px;border-radius:8px;font-weight:500}
+.tab.active .tab-count{background:var(--accent-bg);color:var(--accent-fg)}
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.tool{display:flex;align-items:center;gap:6px;border:0.5px solid var(--border);border-radius:var(--r);height:32px;box-sizing:border-box;padding:0 11px;font-size:12px;color:var(--text-2);cursor:pointer;background:none;font-family:inherit}
+.tool:hover{background:var(--surface)}
+.tool i{font-size:14px}
+.btn-ghost{color:var(--text);border-color:var(--border-2)}
+.search-wide{display:flex;align-items:center;gap:6px;flex:1;min-width:160px;background:var(--surface);border-radius:var(--r);padding:8px 10px;color:var(--text-3);font-size:12px}
+.active-filters{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.fchip{display:flex;align-items:center;gap:5px;font-size:11px;background:var(--accent-bg);color:var(--accent-fg);padding:3px 8px;border-radius:var(--r);cursor:pointer}
+.fchip i{font-size:12px}
+.clear{font-size:11px;color:var(--text-3);cursor:pointer;text-decoration:underline}
+table{width:100%;table-layout:fixed;border-collapse:collapse}
+th{text-align:left;font-size:11px;font-weight:500;color:var(--text-3);padding:0 0 9px;border-bottom:0.5px solid var(--border-2)}
+td{padding:11px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--surface)}
+.mono{font-family:var(--mono)}
+.pager{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.pages{display:flex;align-items:center;gap:4px}
+.pg{font-size:12px;color:var(--text-2);padding:4px 9px;border-radius:var(--r);cursor:pointer;display:flex;align-items:center}
+.pg.active{background:var(--accent-bg);color:var(--accent-fg)}
+.filter{position:relative}
+.menu{position:absolute;top:calc(100% + 4px);left:0;min-width:172px;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,0.14);padding:4px;z-index:30;display:none}
+.menu.open{display:block}
+.menu-item{font-size:12px;color:var(--text-2);padding:7px 9px;border-radius:6px;cursor:pointer}
+.menu-item:hover{background:var(--surface);color:var(--text)}
+.tool.has-val{border-color:var(--accent-fg);color:var(--accent-fg)}
+.search-box{position:relative;flex:1;min-width:170px;display:flex;align-items:center}
+.search-box i{position:absolute;left:10px;color:var(--text-3);font-size:14px;pointer-events:none}
+.search-input{flex:1;min-width:0;background:var(--surface);border:0.5px solid transparent;border-radius:var(--r);padding:8px 10px 8px 30px;color:var(--text);font-size:12px;font-family:inherit;outline:none}
+.search-input:focus{border-color:var(--accent-fg)}
+.search-input::placeholder{color:var(--text-3)}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--text-2)}
+th .caret{font-size:11px;opacity:.4;display:inline-block;transition:transform .12s}
+th.sorted .caret{opacity:1;color:var(--text-2)}
+th.sorted.asc .caret{transform:rotate(180deg)}
+.empty-row td{text-align:center;color:var(--text-3);padding:28px 0}
+.empty-detail{text-align:center;padding:52px 24px;max-width:430px;margin:0 auto}
+.state-panel{padding:6px 0}
+.state-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px}
+.state-sub{font-size:13px;color:var(--text-2);line-height:1.55;max-width:580px}
+.state-bar{margin-top:18px;height:4px;background:var(--surface);border-radius:3px;overflow:hidden;max-width:280px}
+.state-bar span{display:block;height:100%;width:40%;background:var(--primary);border-radius:3px;animation:stateload 1.4s ease-in-out infinite}
+@keyframes stateload{0%{margin-left:-40%}100%{margin-left:100%}}
+.state-bar.det span{width:8%;animation:none;transition:width 3.1s cubic-bezier(.35,.12,.2,1)}
+.state-badge{display:inline-block;font-size:12px;font-weight:500;padding:5px 11px;border-radius:var(--r);margin-bottom:12px}
+.state-badge.esc{background:var(--info-bg);color:var(--info-fg)}
+.state-badge.ok{background:var(--ok-bg);color:var(--ok-fg)}
+.state-note{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--text-2);margin-top:14px;line-height:1.5}
+.state-note i{font-size:15px;color:var(--text-3);flex-shrink:0;margin-top:1px}
+.state-note.ok i{color:var(--ok-fg)}
+.state-panel .svc-block{margin-top:18px}
+.empty-detail-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px}
+.empty-detail-sub{font-size:13px;color:var(--text-2);line-height:1.55}
+.rv{display:inline-flex;align-items:center;gap:7px;color:var(--text-2)}
+.rv-av{width:20px;height:20px;border-radius:50%;background:var(--chip-bg);color:var(--text-2);font-size:9px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--sans)}
+.field{max-width:440px}
+.label{font-size:12px;color:var(--text-2);display:block;margin-bottom:6px}
+input[type=text],textarea{width:100%;font-family:inherit;font-size:13px;color:var(--text);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);padding:9px 11px}
+input[type=text]:focus,textarea:focus{outline:none;border-color:var(--accent-fg);box-shadow:0 0 0 3px var(--accent-bg)}
+textarea{resize:none}
+.hint{font-size:11px;color:var(--text-3);margin-top:6px;display:flex;align-items:center;gap:5px}
+.toggle-wrap{display:flex;align-items:flex-start;gap:12px;margin:18px 0;padding:12px 14px;background:var(--surface);border-radius:var(--r)}
+.tgl{position:relative;width:34px;height:20px;background:var(--border-2);border-radius:10px;flex-shrink:0;cursor:pointer;transition:background .2s}
+.tgl.on{background:var(--accent-fg)}
+.knob{position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s}
+.tgl.on .knob{transform:translateX(14px)}
+.dropzone{border:1px dashed var(--border-2);border-radius:var(--r);padding:24px;text-align:center;margin-bottom:18px}
+.dropzone i{font-size:20px;color:var(--text-3)}
+.dz-text{font-size:12px;color:var(--text-2);margin-top:6px}
+.autoinfo{display:none;align-items:center;gap:9px;padding:14px;background:var(--accent-bg);border-radius:var(--r);margin-bottom:18px;color:var(--accent-fg);font-size:12px}
+.submit-row{display:flex;align-items:center;gap:10px}
+.btn-submit{background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:9px 20px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer}
+.modal-text{font-size:13px;color:var(--text-2);line-height:1.55;margin:6px 0 0}
+.confirm-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+.btn-submit:hover{filter:brightness(1.05)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r-lg);width:480px;max-width:100%;max-height:90vh;overflow-y:auto;padding:20px 22px}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.modal-title{font-size:17px;font-weight:500}
+.modal-close{border:none;background:none;color:var(--text-3);cursor:pointer;font-size:20px;line-height:1;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:var(--r);flex-shrink:0}
+.modal-close:hover{color:var(--text);background:var(--surface)}
+.modal-foot{font-size:11px;color:var(--text-3);margin-top:2px;display:flex;align-items:center;gap:5px}
+.dup-desc{font-size:13px;color:var(--text-2);margin:0 0 16px;line-height:1.5}
+.dup-card{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:var(--r);padding:14px 16px;margin-bottom:16px}
+.dup-icon{width:40px;height:40px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--text-2);flex-shrink:0}
+.dup-by{flex:1;min-width:0}
+.dup-label{font-size:12px;color:var(--text-3);margin-bottom:2px}
+.dup-name{font-size:14px;font-weight:500}
+.dup-when{text-align:right}
+.dup-when .d{font-size:13px;color:var(--text-2)}
+.dup-when .t{color:var(--text-3);font-size:12px;margin-top:2px}
+.dup-btn{width:100%;text-align:center;margin-top:2px;padding:11px}
+.fb-ctx{font-size:13px;color:var(--text-2);margin-bottom:4px}
+.fb-seg,.fb-chips{display:flex;gap:6px;flex-wrap:wrap}
+.fb-seg-btn,.fb-chip{border:0.5px solid var(--border-2);background:none;color:var(--text-2);font-family:inherit;font-size:12px;padding:7px 12px;border-radius:var(--r);cursor:pointer}
+.fb-seg-btn:hover,.fb-chip:hover{background:var(--surface);color:var(--text)}
+.fb-seg-btn.active,.fb-chip.active{background:var(--accent-bg);color:var(--accent-fg);border-color:var(--accent-fg)}
+.fb-submit{width:100%;text-align:center;margin-top:18px;padding:11px}
+.btn-submit:disabled{background:var(--chip-bg);color:var(--text-3);cursor:not-allowed}
+.detail-head{margin-bottom:20px}
+.head-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.case-codes{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.cc-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.cc-label{font-size:11px;letter-spacing:.02em;color:var(--text-3);min-width:78px}
+.cc-chip{font-family:var(--mono);font-size:11px;background:var(--chip-bg);color:var(--chip-fg);padding:3px 9px;border-radius:var(--r)}
+.cpt-cell{display:flex;flex-wrap:nowrap;gap:5px;align-items:center}
+.cpt-cell .cc-chip{flex-shrink:0}
+.cpt-cell .cpt-more{color:var(--text-3);font-family:var(--mono);font-size:11px;flex-shrink:0}
+.rev-item{display:flex;align-items:center}
+.rev-check{margin-left:auto;color:var(--accent-fg);font-size:14px;display:none;flex-shrink:0}
+.rev-item.active .rev-check{display:block}
+.info-codes{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.case-id-lg{font-size:22px;font-weight:500;font-family:var(--mono);display:flex;align-items:center;gap:10px}
+.type-tag{font-size:11px;color:var(--text-2);background:var(--chip-bg);padding:2px 8px;border-radius:var(--r);font-family:var(--sans)}
+.meta{font-size:11px;color:var(--text-3);margin-top:6px}
+.meta b{color:var(--text-2);font-weight:500}
+.patient-line{font-size:12px;color:var(--text-2);margin-top:8px}
+.patient-line .pt-name{color:var(--text);font-weight:500}
+.patient-line .pt-sep{color:var(--text-3);margin:0 7px}
+.svc-block{margin-top:16px;border-top:0.5px solid var(--border);padding-top:14px;margin-bottom:14px}
+.svc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.svc-label{font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3)}
+.svc-summary{font-size:11px;color:var(--text-2);display:flex;align-items:center;gap:10px}
+.svc-summary .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:0}
+.dot-ok{background:var(--ok-fg)}
+.dot-warn{background:var(--warn-fg)}
+.svc-rows{display:flex;flex-direction:column;gap:14px}
+.svc-row{display:flex;align-items:center;gap:7px 12px;flex-wrap:wrap;width:100%;text-align:left;border:0.5px solid var(--border);border-radius:var(--r);background:none;padding:10px 12px;cursor:pointer;font-family:inherit}
+.svc-row:hover{background:var(--surface)}
+.cpt-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:var(--r);flex-shrink:0}
+.cpt-pill .pdot{width:6px;height:6px;border-radius:50%}
+.cpt-ok{background:var(--ok-bg);color:var(--ok-fg)} .cpt-ok .pdot{background:var(--ok-fg)}
+.cpt-warn{background:var(--warn-bg);color:var(--warn-fg)} .cpt-warn .pdot{background:var(--warn-fg)}
+.svc-name{flex:1;min-width:120px;font-size:13px;color:var(--text)}
+.svc-det{font-size:11px;font-weight:500;flex-shrink:0}
+.svc-det.det-ok{color:var(--ok-fg)} .svc-det.det-warn{color:var(--warn-fg)}
+.svc-just{display:flex;align-items:center;gap:5px;flex-wrap:wrap;width:100%;padding-left:0;margin-top:0}
+.just-label{font-size:10px;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3);margin-right:2px}
+.icd-chip{font-family:var(--mono);font-size:11px;color:var(--text-2);border:0.5px solid var(--border-2);padding:1px 7px;border-radius:var(--r)}
+.detail-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.icon-btn{width:34px;height:34px;border:0.5px solid var(--border-2);border-radius:var(--r);background:none;color:var(--text-2);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{background:var(--surface)}
+.btn-feedback{border:0.5px solid var(--border-2);border-radius:var(--r);background:none;color:var(--text);font-family:inherit;font-size:12px;padding:8px 14px;cursor:pointer}
+.btn-feedback:hover{background:var(--surface)}
+.act-btn{display:flex;align-items:center;gap:7px;border:0.5px solid var(--border-2);border-radius:var(--r);background:none;color:var(--text);font-family:inherit;font-size:12px;height:36px;box-sizing:border-box;padding:0 13px;cursor:pointer}
+.act-btn:hover{background:var(--surface)}
+.act-btn i{font-size:15px;color:var(--text-2)}
+.act-btn.active{background:var(--accent-bg);color:var(--accent-fg);border-color:transparent}
+.act-btn.active i{color:var(--accent-fg)}
+.act-primary{background:var(--primary);color:var(--primary-fg);border-color:transparent}
+.act-primary:hover{background:var(--primary);filter:brightness(1.05)}
+.act-primary i{color:var(--primary-fg)}
+.act-decision{min-width:122px;justify-content:center}
+.act-approve{background:var(--primary);border-color:transparent;color:var(--primary-fg)}
+.act-approve i{color:var(--primary-fg)}
+.act-approve:hover{background:var(--primary);filter:brightness(1.05)}
+.act-deny{background:var(--danger-solid);border-color:transparent;color:var(--danger-solid-fg)}
+.act-deny i{color:var(--danger-solid-fg)}
+.act-deny:hover{background:var(--danger-solid);filter:brightness(1.05)}
+.da-inline{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.da-mobile{display:none;position:relative}
+.da-ticon{width:16px;height:16px;flex-shrink:0}
+.da-menu{position:absolute;top:calc(100% + 6px);right:0;left:auto;min-width:212px;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);box-shadow:0 10px 28px rgba(0,0,0,.18);padding:6px;z-index:60;display:none}
+.da-menu.open{display:block}
+.da-mi{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;font-family:inherit;font-size:13px;color:var(--text);padding:11px 10px;border-radius:var(--r);cursor:pointer;text-align:left}
+.da-mi:hover{background:var(--surface)}
+.da-mi i{font-size:16px;color:var(--text-2)}
+.da-mi.da-approve,.da-mi.da-approve i{color:var(--accent-fg)}
+.da-mi.da-deny,.da-mi.da-deny i{color:var(--danger-fg)}
+.letter-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-start;justify-content:center;z-index:120;padding:36px 20px;overflow:auto}
+.letter-overlay.open{display:flex}
+.letter-modal{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r-lg);width:100%;max-width:760px;display:flex;flex-direction:column;max-height:calc(100vh - 72px);overflow:hidden}
+.letter-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:0.5px solid var(--border);flex-shrink:0}
+.letter-title{font-size:17px;font-weight:500}
+.letter-toolbar{display:flex;align-items:center;justify-content:space-between;padding:11px 20px;border-bottom:0.5px solid var(--border);background:var(--surface);flex-shrink:0;gap:12px}
+.lt-seg{display:flex;gap:2px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r);padding:3px;height:36px;box-sizing:border-box;align-items:stretch}
+.lt-seg-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;background:none;color:var(--text-3);font-family:inherit;font-size:13px;padding:0 12px;border-radius:6px;cursor:pointer;transition:color .12s}
+.lt-seg-btn i{font-size:14px}
+.lt-topright{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.lt-topright .btn-primary{height:36px;box-sizing:border-box}
+.lt-seg-btn:hover{color:var(--text-2)}
+.lt-seg-btn.active{background:var(--bg);color:var(--text);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.lt-actions{display:flex;align-items:center;gap:8px}
+.letter-stage{margin-top:14px;height:calc(100vh - 230px);overflow-y:auto;background:var(--surface);border-radius:var(--r-lg);padding:28px;display:flex;justify-content:center}
+.letter-sheet{background:#fff;color:#1b1b1b;max-width:580px;margin:0 auto;padding:46px 50px;border-radius:4px;font-size:12.5px;line-height:1.62;box-shadow:0 1px 8px rgba(0,0,0,.18)}
+.letter-sheet[contenteditable=true]{outline:2px solid var(--primary);outline-offset:5px}
+.letter-float{position:fixed;right:20px;bottom:20px;width:430px;max-width:calc(100vw - 32px);height:600px;max-height:calc(100vh - 40px);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r-lg);box-shadow:0 14px 50px rgba(0,0,0,.3);z-index:45;display:none;flex-direction:column;overflow:hidden}
+.lf-resize{position:absolute;left:1px;bottom:1px;width:16px;height:16px;cursor:nesw-resize;z-index:5}
+.lf-resize::after{content:"";position:absolute;left:4px;bottom:4px;width:7px;height:7px;border-left:2px solid var(--text-3);border-bottom:2px solid var(--text-3);opacity:.6}
+.letter-float.open{display:flex}
+.lf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:var(--bg);color:var(--text);border-bottom:0.5px solid var(--border);flex-shrink:0;cursor:move;user-select:none}
+.lf-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lf-title i{font-size:14px;flex-shrink:0}
+.lf-iconbtn{border:none;background:none;color:var(--text-2);cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.lf-iconbtn:hover{background:var(--surface);color:var(--text)}
+.lf-head .lf-iconbtn{margin-left:auto}
+.lf-dl{display:inline-flex;align-items:center;gap:5px;border:none;background:none;color:var(--accent-fg);font-family:inherit;font-size:12px;cursor:pointer;padding:4px 7px;border-radius:6px;flex-shrink:0}
+.lf-dl:hover{background:var(--surface)}
+.lf-dl i{font-size:14px}
+.lf-toolbar{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:0.5px solid var(--border);background:var(--surface);flex-shrink:0}
+.lf-body{flex:1;min-height:0;overflow-y:auto;background:var(--surface);padding:16px}
+.lf-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-top:0.5px solid var(--border);flex-shrink:0}
+.letter-float .letter-sheet{max-width:100%;padding:30px 28px;font-size:12px;margin:0}
+.letter-float .ls-logo{height:24px}
+@media (max-width:768px){.letter-float{right:0;left:0;width:auto;max-width:100%;height:88vh;max-height:88vh;border-radius:var(--r-lg) var(--r-lg) 0 0}}
+.ls-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:30px;gap:16px}
+.ls-brand{font-size:18px;font-weight:600;color:#1b1b1b;letter-spacing:-.01em}
+.ls-logo{height:30px;width:auto;display:block}
+.ls-sub{font-size:10px;letter-spacing:.12em;color:#7a7a7a;text-transform:uppercase;margin-top:2px}
+.ls-date{font-size:12.5px;color:#1b1b1b;white-space:nowrap}
+.ls-re{margin-bottom:18px}
+.letter-sheet p{margin:0 0 14px}
+.card{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:14px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.card-title-sm{font-size:14px;font-weight:500}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.info-item .info-label{font-size:11px;color:var(--text-3)}
+.info-item .info-val{font-size:13px;margin-top:1px}
+.cpt-title{font-size:14px;font-weight:500;line-height:1.4;max-width:80%}
+.copy{display:flex;align-items:center;gap:5px;border:none;background:none;color:var(--text-3);font-size:12px;font-family:inherit;cursor:pointer;flex-shrink:0}
+.copy:hover{color:var(--text)}
+.assess-line{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.assess-label{font-size:13px;color:var(--text-2)}
+.guideline{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:var(--r);padding:11px 14px;margin-bottom:16px}
+.guideline i{font-size:16px;color:var(--text-3)}
+.guideline-code{font-size:13px;flex:1}
+.switch{display:flex;align-items:center;gap:5px;border:none;background:none;color:var(--text-2);font-size:12px;font-family:inherit;cursor:pointer}
+.switch:hover{color:var(--text)}
+.push-ic{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border:1.4px solid currentColor;border-radius:50%;flex-shrink:0}
+.push-ic i{font-size:10px;line-height:1;transform:rotate(90deg)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);font-size:13px;padding:11px 18px;border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,0.25);opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:100;display:flex;align-items:center;gap:8px}
+.toast i{font-size:15px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.upl{position:fixed;right:24px;bottom:24px;width:326px;max-width:calc(100vw - 32px);background:var(--bg);border:0.5px solid var(--border);border-radius:12px;box-shadow:0 14px 38px rgba(0,0,0,0.20);z-index:120;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .26s,transform .26s}
+.upl.show{opacity:1;transform:none;pointer-events:auto}
+.upl-head{display:flex;align-items:center;gap:11px;padding:13px 14px}
+.upl-htext{min-width:0}
+.upl-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.25}
+.upl-sub{font-size:11px;color:var(--text-3);font-family:var(--mono);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upl-spin{width:18px;height:18px;flex-shrink:0;border-radius:50%;border:2px solid color-mix(in srgb,var(--primary) 25%,transparent);border-top-color:var(--primary);animation:uplspin .8s linear infinite}
+@keyframes uplspin{to{transform:rotate(360deg)}}
+.upl-check{width:20px;height:20px;flex-shrink:0;border-radius:50%;background:var(--ok-fg);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.upl-min{margin-left:auto;flex-shrink:0;width:24px;height:24px;border:none;background:transparent;color:var(--text-3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.upl-min:hover{background:color-mix(in srgb,var(--border) 50%,var(--bg));color:var(--text)}
+.upl-body{padding:0 14px 14px}
+.upl-row{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--text-2);margin-bottom:8px}
+.upl-pct{font-family:var(--mono);color:var(--text-3)}
+.upl-bar{height:6px;border-radius:99px;background:color-mix(in srgb,var(--border) 55%,var(--bg));overflow:hidden}
+.upl-fill{display:block;height:100%;width:0;background:var(--primary);border-radius:99px;transition:width .28s linear}
+.upl-eta{font-size:10.5px;color:var(--text-3);margin-top:7px}
+.upl-donerow{font-size:12px;color:var(--text-2);margin-bottom:12px;line-height:1.4}
+.upl-cta{width:100%;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:9px 12px;font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer}
+.upl-cta:hover{filter:brightness(1.05)}
+.upl-min i{transition:transform .2s}
+.upl.collapsed .upl-min i{transform:rotate(180deg)}
+.upl.collapsed .upl-body{display:none}
+.pv-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:0.5px solid var(--border)}
+.crumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3);min-width:0;flex-wrap:wrap}
+.crumb .sep{font-size:13px;color:var(--text-3)}
+.crumb-link{cursor:pointer;color:var(--text-3)}
+.crumb-link:hover{color:var(--text-2);text-decoration:underline}
+.crumb-current{color:var(--text);font-weight:500;display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crumb-current i{font-size:14px;color:var(--text-3);flex-shrink:0}
+.pv-tb-left{display:flex;align-items:center;gap:10px;min-width:0}
+.pv-x{border:none;background:none;color:var(--text-2);cursor:pointer;font-size:18px;display:flex;padding:4px;border-radius:var(--r)}
+.pv-x:hover{background:var(--surface)}
+.pv-fileicon{color:var(--text-3);font-size:17px}
+.pv-title{font-size:14px;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-tb-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pv-dl{width:auto;margin-bottom:0;padding:8px 14px}
+.pv-toolbar2{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border);flex-wrap:wrap}
+.pv-tgrp{display:flex;align-items:center;gap:6px}
+.pv-lbl{font-size:12px;color:var(--text-3)}
+.pv-pagei{font-size:12px;color:var(--text-2);min-width:54px;text-align:center}
+.pv-zoom{font-size:12px;color:var(--text-2);min-width:42px;text-align:center}
+.pv-tbtn{border:0.5px solid var(--border);background:none;color:var(--text-2);cursor:pointer;width:30px;height:30px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:15px}
+.pv-tbtn:hover{background:var(--surface);color:var(--text)}
+.pv-tdiv{width:0.5px;height:20px;background:var(--border-2)}
+.pv-search{display:none;align-items:center;gap:6px;background:var(--surface);border-radius:var(--r);padding:5px 9px;margin-left:auto}
+.pv-search.open{display:flex}
+.pv-search input{border:none;background:none;outline:none;font-family:inherit;font-size:12px;color:var(--text);width:150px}
+.pv-search input::placeholder{color:var(--text-3)}
+.pv-sclose{cursor:pointer;color:var(--text-3);display:flex;font-size:13px}
+.pv-stage{display:flex;gap:14px;align-items:flex-start;margin-top:14px;height:calc(100vh - 230px)}
+.pv-thumbs{width:128px;flex-shrink:0;overflow-y:auto;height:100%;display:flex;flex-direction:column;gap:14px;padding:4px}
+.pv-thumbs.hidden{display:none}
+.pv-thumb{cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px}
+.pv-thumb-sheet{width:100%;aspect-ratio:8.5/11;background:#fff;border:0.5px solid var(--border-2);border-radius:3px;padding:10px 9px;display:flex;flex-direction:column;gap:5px;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.pv-thumb.active .pv-thumb-sheet{border:2px solid var(--ok-fg)}
+.pv-thumb span{font-size:11px;color:var(--text-3)}
+.pv-thumb.active span{color:var(--text);font-weight:500}
+.pv-tline{height:3px;background:#e3e3e3;border-radius:2px}
+.pv-tline.s{width:55%}
+.pv-tline.m{width:78%}
+.pv-main{flex:1;min-width:0;overflow-y:auto;height:100%;background:var(--surface);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.pv-sheet{background:#fff;color:#222;width:100%;max-width:660px;padding:46px 52px;box-shadow:0 4px 18px rgba(0,0,0,0.14);border-radius:2px;font-size:13px;line-height:1.7;transition:max-width .15s,transform .15s;transform-origin:top center}
+.pv-sheet h3{margin:0 0 4px;font-size:16px;color:#111}
+.pv-sheet .doc-meta{font-size:11px;color:#777;margin-bottom:20px;border-bottom:1px solid #e8e8e8;padding-bottom:14px}
+.pv-sheet .doc-h{font-weight:600;margin:18px 0 6px;color:#111;font-size:13px}
+.pv-sheet p{margin:0 0 10px}
+.pv-pagenum{font-size:10px;color:#bbb;text-align:center;margin-top:26px;letter-spacing:.05em}
+.pv-panel{position:fixed;top:10.5px;right:10.5px;height:calc(100vh - 21px);width:var(--pv-w,460px);background:var(--surface);border-left:1px solid var(--border);border-radius:0 7px 7px 0;z-index:44;display:none;flex-direction:column;overflow:hidden}
+.pv-panel.open{display:flex}
+.pv-resize{position:absolute;left:0;top:0;bottom:0;width:8px;cursor:col-resize;z-index:6}
+.pv-resize:hover{box-shadow:inset 3px 0 0 var(--text-3)}
+.pv-phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px 12px 16px;border-bottom:0.5px solid var(--border);flex-shrink:0}
+.pv-ptitle{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;min-width:0}
+.pv-ptitle span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-ptitle i{color:var(--text-3);font-size:14px;flex-shrink:0}
+.pv-pclose{border:none;background:none;color:var(--text-2);cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.pv-pclose:hover{background:var(--surface)}
+.pv-pbar{display:flex;align-items:center;gap:6px;padding:7px 14px 7px 16px;border-bottom:0.5px solid var(--border);background:var(--surface);flex-shrink:0;font-size:12px;color:var(--text-2)}
+.pv-pbar .pv-sp{margin-left:auto}
+.pv-pbody{flex:1;min-height:0;overflow-y:auto;background:var(--surface);padding:16px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.pv-panel .pv-sheet{max-width:100%;padding:22px 24px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.app.pv-open .main{padding-right:calc(var(--pv-w,460px) + 18px)}
+@media (max-width:768px){.pv-panel{top:0;right:0;width:100%;max-width:100%;height:100vh;border:none;border-radius:0}.pv-resize{display:none}.app.pv-open .main{padding-right:0}}
+@media (max-width:760px){.pv-thumbs{display:none}.pv-stage{height:auto;flex-direction:column}.pv-main{height:auto}}
+.block{margin-bottom:16px}
+.block:last-child{margin-bottom:0}
+.block-label{font-size:13px;font-weight:500;margin-bottom:6px}
+.clinical{font-size:13px;color:var(--text-2);line-height:1.6;margin:0}
+.crit-group{margin-bottom:12px}
+.crit-title{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px}
+.crit-list{margin:0;padding-left:18px}
+.crit-list li{font-size:12px;color:var(--text-2);line-height:1.6;margin-bottom:3px}
+.pageref{color:var(--accent-fg);text-decoration:underline;cursor:pointer;font-size:11px;white-space:nowrap}
+.assessed-with{font-size:12px;color:var(--text-3)}
+.acard{padding:0;overflow:hidden}
+.acard-head{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;width:100%;text-align:left;border:none;background:none;font-family:inherit;cursor:pointer;padding:16px 20px}
+.acard-name{font-size:14px;color:var(--text)}
+.acard-approved{margin-left:auto;color:var(--ok-fg);font-size:13px;font-weight:500}
+.acard-caret{color:var(--text-3);font-size:16px;flex-shrink:0;transition:transform .15s}
+.acard:not(.collapsed) .acard-caret{transform:rotate(180deg)}
+.acard-dx{flex-basis:100%;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-3)}
+.acard-body{padding:14px 20px 18px;border-top:0.5px solid var(--border)}
+.acard.collapsed .acard-body{display:none}
+.crit-met-item{display:flex;gap:9px;margin-bottom:13px}
+.crit-met-item:last-child{margin-bottom:0}
+.crit-met-item > .ti-check{color:var(--ok-fg);font-size:15px;flex-shrink:0;margin-top:1px}
+.crit-met-title{font-size:13px;font-weight:500;color:var(--text)}
+.crit-met-quote{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.5}
+.copy.copied{color:var(--ok-fg)}
+.docs{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.doc-chip{display:flex;align-items:center;gap:8px;border:0.5px solid var(--border);border-radius:var(--r);padding:9px 12px;font-size:12px;color:var(--text-2);cursor:pointer}
+.doc-chip:hover{background:var(--surface)}
+.doc-chip .dl{margin-left:4px;color:var(--text-3)}
+.btn-back{display:inline-flex;align-items:center;gap:7px;border:0.5px solid var(--border-2);border-radius:var(--r);height:36px;box-sizing:border-box;padding:0 13px;font-size:12px;color:var(--text-2);background:none;font-family:inherit;cursor:pointer;margin-bottom:16px}
+.btn-back i{font-size:15px}
+.detail-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.detail-topbar .btn-back{margin-bottom:0}
+.detail-body{display:flex;gap:16px;align-items:flex-start}
+.detail-main{flex:1;min-width:0}
+.detail-side{width:288px;flex-shrink:0;position:sticky;top:10px}
+.side-card{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:12px}
+.info-stack .info-item{margin-bottom:11px}
+.info-stack .info-item:last-child{margin-bottom:0}
+.doc-list{display:flex;flex-direction:column;gap:2px}
+.doc-row{display:flex;align-items:center;gap:8px;padding:7px 6px;border-radius:var(--r);font-size:12px;color:var(--text-2);cursor:pointer}
+.doc-row:hover{background:var(--surface)}
+.doc-row .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-row .dl{color:var(--text-3);font-size:15px}
+.add-btn{display:flex;align-items:center;gap:4px;border:none;background:none;color:var(--accent-fg);font-size:12px;font-family:inherit;cursor:pointer}
+@media (max-width:760px){.detail-body{flex-direction:column}.detail-side{width:100%;position:static}}
+.login-screen{position:fixed;inset:0;z-index:1000;background:var(--surface);display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{width:100%;max-width:360px;box-sizing:border-box;background:var(--bg);border:0.5px solid var(--border);border-radius:16px;padding:32px 28px;box-shadow:0 10px 44px rgba(0,0,0,.07)}
+.login-brand{margin-bottom:22px;line-height:0}
+.login-brand .brand-logo{height:22px;width:auto;color:var(--text)}
+.login-title{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0 0 4px}
+.login-sub{font-size:13px;color:var(--text-2);margin:0 0 22px;line-height:1.5}
+.login-field{font-size:12px;color:var(--text-2);font-weight:500;display:block;margin-bottom:6px}
+.login-input{width:100%;box-sizing:border-box;border:0.5px solid var(--border);border-radius:var(--r);padding:10px 12px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--text)}
+.login-input:focus{outline:none;border-color:var(--accent-fg)}
+.login-error{display:none;color:var(--danger-fg);font-size:12px;margin-top:10px}
+.login-error.show{display:block}
+.login-btn{width:100%;margin-top:20px;background:var(--primary);color:var(--primary-fg);border:none;border-radius:var(--r);padding:11px;font-size:13px;font-weight:500;font-family:inherit;cursor:pointer}
+.login-btn:hover{filter:brightness(1.05)}
+.login-hint{margin-top:14px;text-align:center;font-size:11px;color:var(--text-3)}
+.settings-wrap{max-width:680px;margin:0 auto;padding-bottom:48px}
+.settings-intro{font-size:13px;color:var(--text-2);margin:2px 0 20px}
+.set-card{border:0.5px solid var(--border);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:16px}
+.set-card-head{margin-bottom:14px}
+.set-profile{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.set-avatar{position:relative;width:52px;height:52px;border-radius:50%;background:var(--accent-bg);background-size:cover;background-position:center;color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex-shrink:0;border:none;padding:0;font-family:inherit;cursor:pointer}
+.set-avatar.has-img .set-avatar-initials{display:none}
+.set-avatar-edit{position:absolute;right:-1px;bottom:-1px;width:20px;height:20px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.set-avatar-edit svg{width:11px;height:11px}
+.login-divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--text-3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.login-divider::before,.login-divider::after{content:"";flex:1;height:0.5px;background:var(--border)}
+.login-social{display:flex;flex-direction:column;gap:8px}
+.social-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;box-sizing:border-box;border:0.5px solid var(--border-2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:inherit;font-size:13px;font-weight:500;padding:10px;cursor:pointer}
+.social-btn:hover{background:var(--surface)}
+.social-btn svg{width:18px;height:18px;flex-shrink:0}
+.set-name{font-size:15px;font-weight:600}
+.set-role{font-size:12px;color:var(--text-2);margin-top:2px}
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.set-grid input:disabled{opacity:.55;cursor:not-allowed}
+.set-actions{margin-top:16px;display:flex;justify-content:flex-end}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:0.5px solid var(--border)}
+.set-card-head + .set-row,.set-card-head + .set-toggle-row{border-top:none;padding-top:0}
+.set-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:0.5px solid var(--border)}
+.set-row-title{font-size:13px;font-weight:500}
+.set-row-sub{font-size:12px;color:var(--text-2);margin-top:2px;max-width:380px}
+.set-select{font-family:inherit;font-size:13px;color:var(--text);background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r);padding:8px 30px 8px 11px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23908E86' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+.set-select:focus{outline:none;border-color:var(--accent-fg)}
+@media (max-width:600px){.set-grid{grid-template-columns:1fr}}
+/* --- Mobile top bar (hidden on desktop) --- */
+.mtopbar{display:none;position:fixed;top:0;left:0;right:0;height:52px;z-index:140;align-items:center;gap:4px;padding:0 12px;background:var(--bg);border-bottom:0.5px solid var(--border)}
+.mtb-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:none;background:none;color:var(--accent-fg);cursor:pointer;border-radius:var(--r);flex-shrink:0}
+.mtb-btn:hover{background:var(--surface)}
+.mtb-btn svg{width:17px;height:17px}
+.mtb-btn i{font-size:17px;color:var(--accent-fg)}
+.mtb-menubtn{background:var(--surface);border:0.5px solid var(--border-2)}
+.mtb-logo{height:22px;width:auto;margin-right:auto}
+.app.collapsed .mtb-logo{display:block}
+.mtb-user{position:relative}
+.mtb-menu-items-top{border-top:0.5px solid var(--border)}
+.msearch-bar{display:none;position:fixed;top:52px;left:0;right:0;z-index:139;align-items:center;gap:8px;padding:9px 14px;background:var(--bg);border-bottom:0.5px solid var(--border)}
+.msearch-bar i.ti-search{color:var(--text-3);font-size:16px}
+.msearch-bar input{flex:1;min-width:0;border:none;background:none;outline:none;font-family:inherit;font-size:14px;color:var(--text)}
+.msearch-bar input::placeholder{color:var(--text-3)}
+.msearch-close{border:none;background:none;color:var(--text-2);cursor:pointer;font-size:17px;display:flex;padding:4px}
+.mtb-avatar{width:34px;height:34px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);font-size:12px;font-weight:600;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center}
+.mtb-searchwrap{flex:1;min-width:0;display:flex;align-items:center;gap:7px;background:var(--surface);border-radius:var(--r);padding:8px 11px}
+.mtb-searchwrap i{color:var(--text-3);font-size:15px;flex-shrink:0}
+.mtb-searchwrap input{flex:1;min-width:0;border:none;background:none;outline:none;font-family:inherit;font-size:13px;color:var(--text)}
+.mtb-searchwrap input::placeholder{color:var(--text-3)}
+.mtb-menu{position:absolute;top:calc(100% + 8px);right:0;width:248px;background:var(--bg);border:0.5px solid var(--border-2);border-radius:var(--r-lg);box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:220;display:none;overflow:hidden}
+.mtb-menu.open{display:block}
+.mtb-menu-head{display:flex;align-items:center;gap:11px;padding:15px 16px 13px}
+.mtb-menu-avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-bg);color:var(--accent-fg);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mtb-menu-name{font-size:14px;font-weight:600}
+.mtb-menu-role{font-size:12px;color:var(--text-2);margin-top:1px}
+.mtb-menu-info{padding:10px 16px 12px;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.mtb-info-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0;font-size:12px}
+.mtb-info-label{color:var(--text-3);flex-shrink:0}
+.mtb-info-val{color:var(--text);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mtb-menu-items{padding:6px}
+.nav-backdrop{display:none}
+/* --- Mobile filter panel --- */
+.filter-trigger{display:none;position:relative}
+.filter-trigger svg{width:15px;height:15px}
+.filter-badge{display:none;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--primary);color:var(--primary-fg);font-size:10px;font-weight:600;line-height:1}
+.filter-panel-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:205;opacity:0;visibility:hidden;transition:opacity .2s}
+.filter-panel-backdrop.open{opacity:1;visibility:visible}
+.filter-panel{position:fixed;top:0;right:0;height:100vh;width:306px;max-width:88vw;background:var(--bg);z-index:210;transform:translateX(100%);transition:transform .22s ease;display:flex;flex-direction:column;border-left:0.5px solid var(--border);box-shadow:-6px 0 40px rgba(0,0,0,.16)}
+.filter-panel.open{transform:none}
+.fp-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:0.5px solid var(--border);flex-shrink:0}
+.fp-title{font-size:15px;font-weight:600}
+.fp-close{border:none;background:none;color:var(--text-2);cursor:pointer;font-size:18px;display:flex;padding:4px;border-radius:var(--r)}
+.fp-close:hover{background:var(--surface)}
+.fp-body{flex:1;overflow-y:auto;padding:4px 18px 16px}
+.fp-group{padding:13px 0;border-bottom:0.5px solid var(--border)}
+.fp-group:last-child{border-bottom:none}
+.fp-glabel{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:6px}
+.fp-opt{display:flex;align-items:center;gap:9px;width:100%;text-align:left;border:none;background:none;font-family:inherit;font-size:13px;color:var(--text-2);padding:9px 10px;border-radius:var(--r);cursor:pointer}
+.fp-opt:hover{background:var(--surface)}
+.fp-opt.active{color:var(--text);font-weight:500;background:var(--accent-bg)}
+.fp-opt .fp-check{margin-left:auto;color:var(--accent-fg);font-size:15px;display:none}
+.fp-opt.active .fp-check{display:block}
+.fp-foot{display:flex;gap:10px;padding:14px 18px;border-top:0.5px solid var(--border);flex-shrink:0}
+.fp-foot .act-btn{flex:1;justify-content:center}
+/* --- Mobile layout --- */
+@media (max-width:768px){
+  .app{display:block;padding:0;gap:0;min-height:100vh}
+  .mtopbar{display:flex}
+  .main{border:none;border-radius:0;min-height:100vh;padding:64px 16px 28px}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:272px;max-width:84vw;z-index:200;border-radius:0;border:none;border-right:0.5px solid var(--border);transform:translateX(-100%);transition:transform .22s ease;box-shadow:6px 0 40px rgba(0,0,0,.16)}
+  .app.nav-open .sidebar{transform:none}
+  .nav-backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:150;opacity:0;visibility:hidden;transition:opacity .2s}
+  .app.nav-open .nav-backdrop{opacity:1;visibility:visible}
+  .page-head{flex-wrap:wrap;gap:8px}
+  .head-actions{flex-wrap:wrap}
+  .kpi-row{grid-template-columns:1fr 1fr;gap:10px}
+  .tabs{overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .search-box{flex:1 1 auto;min-width:0}
+  .toolbar .filter{display:none}
+  .filter-trigger{display:flex;flex-shrink:0}
+  .sidebar .user-wrap{display:none}
+  .sidebar .brand{display:flex;align-items:center;justify-content:space-between;padding:2px 2px 14px;margin-bottom:12px;border-bottom:0.5px solid var(--border)}
+  .sb-toggle{display:none}
+  .sb-close{display:flex}
+  .sb-divider{display:block;height:0.5px;background:var(--border);margin:4px 0 12px}
+  #cases .toolbar .search-box{display:none}
+  .msearch-bar.open{display:flex}
+  .pager{flex-wrap:wrap;gap:10px;justify-content:center}
+  .pages{flex-wrap:wrap;justify-content:center}
+  .detail-body{flex-direction:column}
+  .detail-side{width:100%;position:static}
+  .detail-topbar{gap:8px;flex-wrap:nowrap}
+  .detail-actions{width:auto;flex-shrink:0}
+  .da-inline{display:none}
+  .da-mobile{display:block}
+  .pv-topbar{flex-wrap:wrap}
+  .lt-topright{width:100%;justify-content:flex-end}
+  .pv-toolbar2{flex-wrap:wrap}
+  .pv-thumbs{display:none}
+  .pv-stage{height:auto;flex-direction:column}
+  .pv-main{height:auto}
+  .letter-stage{padding:14px;height:auto}
+  .letter-sheet{padding:30px 22px;max-width:100%}
+  .set-row,.set-toggle-row{flex-wrap:wrap}
+  .set-row > div:first-child{min-width:60%}
+  .overlay{padding:12px}
+  .modal{padding:18px 16px}
+}
+@media (max-width:460px){.kpi-row{grid-template-columns:1fr}}
+</style>
+<!-- Konpo comments embed: kp-comments -->
+<script src="https://kp-comments.vercel.app/embed.js" defer></script>
+</head>
+<body>
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-brand"><svg class="brand-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg></div>
+    <h1 class="login-title">Welcome back</h1>
+    <p class="login-sub">Please enter your details to sign in</p>
+    <label class="login-field" for="loginEmail">Username</label>
+    <input id="loginEmail" type="text" class="login-input" placeholder="physician" autocomplete="username" onkeydown="if(event.key==='Enter')signIn()">
+    <label class="login-field" for="loginPass" style="margin-top:14px">Password</label>
+    <input id="loginPass" type="password" class="login-input" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')signIn()">
+    <div id="loginError" class="login-error">Incorrect email or password.</div>
+    <button class="login-btn" onclick="signIn()">Sign in</button>
+    <div class="login-divider">or continue with</div>
+    <div class="login-social">
+      <button type="button" class="social-btn"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.52 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.57-5.17 3.57-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.07 7.95-2.91l-3.88-3c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.27v3.09A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.27 14.28a7.2 7.2 0 0 1 0-4.56V6.63H1.27a12 12 0 0 0 0 10.74l4-3.09z"/><path fill="#EA4335" d="M12 4.74c1.76 0 3.34.61 4.59 1.8l3.43-3.43A11.97 11.97 0 0 0 12 0 12 12 0 0 0 1.27 6.63l4 3.09C6.22 6.86 8.87 4.74 12 4.74z"/></svg>Continue with Google</button>
+      <button type="button" class="social-btn"><svg viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.96h-1.52c-1.49 0-1.95.93-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12z"/></svg>Continue with Facebook</button>
+      <button type="button" class="social-btn"><svg viewBox="0 0 24 24"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Continue with LinkedIn</button>
+    </div>
+  </div>
+</div>
+<div class="app">
+
+  <div class="mtopbar">
+    <svg class="brand-logo mtb-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nebo"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg>
+    <button class="mtb-btn mtb-search" onclick="openMSearch()" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+    <div class="mtb-user">
+      <button class="mtb-btn mtb-account" onclick="toggleMUserMenu(event)" aria-label="Account"><i class="ti ti-user"></i></button>
+      <div class="mtb-menu" id="mUserMenu">
+        <div class="mtb-menu-head">
+          <div class="mtb-menu-avatar">HP</div>
+          <div><div class="mtb-menu-name">Dr. Helen Park</div><div class="mtb-menu-role">Physician</div></div>
+        </div>
+        <div class="mtb-menu-items mtb-menu-items-top">
+          <button class="user-mi" onclick="openSettings()"><i class="ti ti-settings"></i>Settings</button>
+          <button class="user-mi" onclick="logOut()"><i class="ti ti-logout"></i>Log out</button>
+        </div>
+      </div>
+    </div>
+    <button class="mtb-btn mtb-menubtn" onclick="toggleNav()" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  </div>
+  <div class="nav-backdrop" onclick="closeNav()"></div>
+  <div class="msearch-bar" id="mSearchBar">
+    <i class="ti ti-search"></i>
+    <input id="mSearchInput" placeholder="Search by case number" oninput="mSearchInput(this.value)" onkeydown="if(event.key==='Enter')closeMSearch()">
+    <button class="msearch-close" onclick="closeMSearch()" aria-label="Close search"><i class="ti ti-x"></i></button>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sb-top">
+      <div class="brand"><svg class="brand-logo" viewBox="0 0 60 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M58.1531 7.60466C56.9403 6.28547 55.325 5.62658 53.3101 5.62658C51.2952 5.62658 49.6334 6.27704 48.3824 7.57657C47.1511 8.85783 46.5341 10.5662 46.5341 12.7016C46.5341 14.837 47.1412 16.6114 48.3541 17.9671C49.5868 19.3228 51.2373 20 53.3101 20C55.3829 20 56.9403 19.3313 58.1531 17.9938C59.3844 16.6578 60 14.8932 60 12.7016C60 10.51 59.3844 8.90419 58.1531 7.60466ZM56.11 17.1031C55.493 18.1807 54.5597 18.7187 53.3101 18.7187C50.753 18.7187 49.4738 16.7126 49.4738 12.7016C49.4738 8.69064 50.753 6.90784 53.3101 6.90784C54.5597 6.90784 55.493 7.41922 56.11 8.44057C56.744 9.46193 57.0603 10.8823 57.0603 12.7016C57.0603 14.5209 56.744 16.0256 56.11 17.1031ZM30.0692 11.4484C30.0692 9.96347 29.5651 8.62602 28.5584 7.43748C27.5502 6.23068 26.0945 5.62658 24.1912 5.62658C22.1933 5.62658 20.5893 6.31357 19.375 7.68755C18.1621 9.04327 17.5564 10.7053 17.5564 12.6735C17.5564 14.9396 18.1621 16.7322 19.375 18.05C20.6076 19.3495 22.1565 20 24.0232 20C25.5537 20 26.785 19.5827 27.7183 18.7468C28.5838 17.9713 29.1669 17.0455 29.4719 15.9666C29.5129 15.8219 29.4437 15.6673 29.3053 15.6055C29.1796 15.5493 29.0328 15.5844 28.9453 15.6912C27.8778 16.9893 26.5986 18.1329 24.8068 18.1329C23.6123 18.1329 22.5942 17.6215 21.7555 16.6002C20.9154 15.5606 20.4947 14.2231 20.4947 12.5892L30.0692 12.5611V11.447V11.4484ZM20.5794 11.3094C20.729 10.0098 21.1117 8.95055 21.7273 8.13431C22.3613 7.31666 23.183 6.90784 24.1912 6.90784C24.9748 6.90784 25.6088 7.15931 26.0945 7.66086C26.5986 8.161 26.9149 8.71874 27.0462 9.33127C27.1958 9.92554 27.2707 10.5844 27.2707 11.3094H20.5794ZM43.2612 7.60466C42.1598 6.28688 40.7041 5.62658 38.894 5.62658C37.9974 5.62658 37.1671 5.83169 36.4018 6.24052C35.6563 6.64793 35.1057 7.18741 34.7513 7.85614V0H30.8556L31.837 1.43158C32.0939 1.80528 32.2309 2.24923 32.2309 2.7016V19.1908C32.2309 19.3608 32.3693 19.4985 32.5401 19.4985C32.6022 19.4985 32.6644 19.4788 32.7152 19.4437L33.8758 18.6443C34.13 18.4673 34.4745 18.4785 34.7117 18.678C35.7665 19.5603 37.0584 20 38.5862 20C40.5276 20 42.0666 19.2947 43.2047 17.8828C44.3441 16.4527 44.9132 14.6614 44.9132 12.5077C44.9132 10.5577 44.3625 8.92386 43.2612 7.60466ZM40.9102 17.0469C40.2 18.1624 39.2201 18.7187 37.9705 18.7187C36.7209 18.7187 35.7029 18.2172 34.7513 17.2141V10.8921C34.7513 9.7401 35.0958 8.7932 35.7862 8.05001C36.4767 7.28856 37.3069 6.90784 38.2783 6.90784C39.5279 6.90784 40.4528 7.41922 41.05 8.44057C41.6656 9.46193 41.9735 10.8176 41.9735 12.5077C41.9735 14.4015 41.619 15.9146 40.9102 17.0469ZM1.38514 2.70582C1.38514 2.25063 1.24676 1.80528 0.986963 1.42877L0 0H4.77244L13.7878 12.7859V2.72408C13.7878 2.25766 13.6424 1.80247 13.3713 1.42175L12.3603 0.00140489H16.7388L15.7533 1.43158C15.4949 1.80669 15.3565 2.25204 15.3565 2.70722V19.1936C15.3565 19.3636 15.2181 19.5013 15.0473 19.5013H14.9047C14.803 19.5013 14.707 19.4507 14.6505 19.3678L2.95383 2.36864L2.94959 16.7744C2.94959 17.2408 3.09503 17.696 3.36612 18.0767L4.37709 19.4971H0L0.985551 18.0669C1.24394 17.6918 1.38231 17.2464 1.38231 16.7912L1.38514 2.70441V2.70582Z"/></svg><button class="sb-toggle" onclick="toggleSidebar()" aria-label="Collapse sidebar"><i class="ti ti-layout-sidebar"></i></button><button class="sb-close" onclick="closeNav()" aria-label="Close menu"><i class="ti ti-x"></i></button></div>
+      <div class="search" data-tip="Search case"><i class="ti ti-search"></i><input id="sbSearch" placeholder="Search by case number" oninput="sbSearchInput(this.value)"></div>
+      <div class="sb-divider"></div>
+      <button class="nav-item active" data-screen="queue" data-tip="Recent queue"><i class="ti ti-inbox"></i><span>Recent queue</span><span class="count">7</span></button>
+      <button class="nav-item" data-screen="cases" data-tip="All cases"><i class="ti ti-folder"></i><span>All cases</span><span class="count">1,284</span></button>
+      <button class="nav-item" data-screen="dashboard" data-tip="Dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
+    </div>
+    <div class="sb-mid">
+      <div class="sb-label">Recent</div>
+      <button class="sb-case" onclick="openCase('EPS-00088552')"><span class="sb-dot" style="background:var(--text-3)"></span><span class="sb-cid">EPS-00088552</span></button>
+      <button class="sb-case" onclick="openCase('EPS-00084201')"><span class="sb-dot" style="background:var(--text-3)"></span><span class="sb-cid">EPS-00084201</span></button>
+      <button class="sb-case" onclick="openCase('EPS-00083998')"><span class="sb-dot" style="background:var(--text-3)"></span><span class="sb-cid">EPS-00083998</span></button>
+      <button class="sb-case" onclick="openCase('EPS-00083540')"><span class="sb-dot" style="background:var(--text-3)"></span><span class="sb-cid">EPS-00083540</span></button>
+      <button class="support-link sb-support" data-tip="Support center"><i class="ti ti-lifebuoy"></i>Support center</button>
+    </div>
+    <div class="sb-bottom">
+      <button class="btn-primary" data-action="open-new" data-tip="New case"><i class="ti ti-plus"></i>New case</button>
+      <div class="user-wrap">
+        <button class="user" onclick="toggleUserMenu(event)">
+          <div class="avatar">HP</div>
+          <div class="user-info"><div class="user-name">Dr. Helen Park</div><div class="user-role">Physician</div></div>
+          <i class="ti ti-settings user-gear"></i>
+        </button>
+        <div class="user-menu" id="userMenu">
+          <button class="user-mi" onclick="openSettings()"><i class="ti ti-settings"></i>Settings</button>
+          <button class="user-mi" onclick="logOut()"><i class="ti ti-logout"></i>Log out</button>
+        </div>
+      </div>
+      <div class="theme-seg" role="group" aria-label="Theme">
+        <button class="seg-btn is-active" onclick="setTheme('auto',this)" data-tip="Auto"><i class="ti ti-device-desktop"></i>Auto</button>
+        <button class="seg-btn" onclick="setTheme('light',this)" data-tip="Light"><i class="ti ti-sun"></i>Light</button>
+        <button class="seg-btn" onclick="setTheme('dark',this)" data-tip="Dark"><i class="ti ti-moon"></i>Dark</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section class="screen" id="dashboard">
+      <div class="page-head"><span class="page-title">Good morning, Alex</span><span class="muted">Data integrity &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
+      <div class="dash-greet">
+        <p class="greet-sub">Here is how Nebo is reading your cases today. <b>6 cases</b> need a quick check - everything else has been verified and is clean.</p>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <span class="kpi-label">Avg extraction confidence</span>
+          <span class="kpi-val">94.2%</span>
+          <span class="kpi-sub"><span class="pos">+1.3 pts</span> vs last week</span>
+        </div>
+        <div class="kpi kpi-warn kpi-action" onclick="go('cases')">
+          <span class="kpi-label">Needs your check</span>
+          <span class="kpi-val">6</span>
+          <span class="kpi-sub">low-confidence cases</span>
+        </div>
+        <div class="kpi kpi-action" onclick="go('cases')">
+          <span class="kpi-label">Field mismatches flagged</span>
+          <span class="kpi-val">11</span>
+          <span class="kpi-sub">across 9 cases</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-label">Auto-verified clean</span>
+          <span class="kpi-val">87%</span>
+          <span class="kpi-sub">of 142 cases today</span>
+        </div>
+      </div>
+
+      <div class="dash-2col">
+        <div class="dwidget">
+          <div class="dwidget-head"><span class="dwidget-title">Extraction confidence</span><span class="dwidget-meta">142 cases today</span></div>
+          <div class="donut-block">
+            <svg class="donut-svg" viewBox="0 0 130 130" role="img" aria-label="Extraction confidence distribution">
+              <circle class="donut-track" cx="65" cy="65" r="54" stroke-width="13"></circle>
+              <g transform="rotate(-90 65 65)">
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-1)" stroke-dasharray="78 22" stroke-dashoffset="0"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--data-2)" stroke-dasharray="16 84" stroke-dashoffset="-79"></circle>
+                <circle class="donut-seg" cx="65" cy="65" r="54" stroke-width="13" pathLength="100" stroke="var(--danger-solid)" stroke-dasharray="3 97" stroke-dashoffset="-96"></circle>
+              </g>
+              <text class="donut-center-val" x="65" y="62" text-anchor="middle">94.2%</text>
+              <text class="donut-center-lbl" x="65" y="76" text-anchor="middle">avg confidence</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-1)"></span><span class="dleg-name">High&nbsp;&nbsp;≥ 95%</span><span class="dleg-meta"><b>112</b> &nbsp;79%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--data-2)"></span><span class="dleg-name">Medium&nbsp;&nbsp;85-94%</span><span class="dleg-meta"><b>24</b> &nbsp;17%</span></div>
+              <div class="dleg"><span class="dleg-dot" style="background:var(--danger-solid)"></span><span class="dleg-name">Low&nbsp;&nbsp;&lt; 85%</span><span class="dleg-meta"><b>6</b> &nbsp;4%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dwidget">
+          <div class="dwidget-head"><span class="dwidget-title">Processing pipeline</span><span class="dwidget-meta">142 cases</span></div>
+          <div class="hbars">
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--chip-fg)"></span>Processing</span><span class="hbar-track"><span class="hbar-fill" style="width:7.2%;background:var(--chip-fg)"></span></span><span class="hbar-val">8</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:color-mix(in srgb, var(--ok-fg) 55%, var(--bg))"></span>Ready for review</span><span class="hbar-track"><span class="hbar-fill" style="width:17.1%;background:color-mix(in srgb, var(--ok-fg) 55%, var(--bg))"></span></span><span class="hbar-val">19</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--warn-fg)"></span>Further review</span><span class="hbar-track"><span class="hbar-fill" style="width:3.6%;background:var(--warn-fg)"></span></span><span class="hbar-val">4</span></div>
+            <div class="hbar"><span class="hbar-label"><span class="hbar-dot" style="background:var(--ok-fg)"></span>Signed</span><span class="hbar-track"><span class="hbar-fill" style="width:100%;background:var(--ok-fg)"></span></span><span class="hbar-val">111</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-2col">
+        <div class="dwidget">
+          <div class="dwidget-head"><span class="dwidget-title">Recurring extraction issues</span><span class="dwidget-meta">last 7 days</span></div>
+          <div class="ibars">
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Service date mismatch</div><div class="ibar-field">Date of service</div></div><span class="ibar-track"><span class="ibar-fill" style="width:100%"></span></span><span class="ibar-val">8</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Missing CPT modifier</div><div class="ibar-field">Procedure code</div></div><span class="ibar-track"><span class="ibar-fill" style="width:62.5%"></span></span><span class="ibar-val">5</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Provider NPI low confidence</div><div class="ibar-field">Provider record</div></div><span class="ibar-track"><span class="ibar-fill" style="width:37.5%"></span></span><span class="ibar-val">3</span></div>
+            <div class="ibar" onclick="go('cases')"><div class="ibar-main"><div class="ibar-name">Diagnosis-procedure mismatch</div><div class="ibar-field">ICD / CPT</div></div><span class="ibar-track"><span class="ibar-fill" style="width:25%"></span></span><span class="ibar-val">2</span></div>
+          </div>
+        </div>
+
+        <div class="dwidget">
+          <div class="dwidget-head"><span class="dwidget-title">Cases to verify</span><span class="dwidget-meta">low confidence</span></div>
+          <div class="vrow" onclick="openCase('EPS-00088552')"><span class="vid">EPS-00088552</span><span class="vreason">Service date unclear</span><span class="vconf">82%</span></div>
+          <div class="vrow" onclick="openCase('EPS-00086956')"><span class="vid">EPS-00086956</span><span class="vreason">Provider NPI mismatch</span><span class="vconf">84%</span></div>
+          <div class="vrow" onclick="openCase('EPS-00084437')"><span class="vid">EPS-00084437</span><span class="vreason">CPT modifier missing</span><span class="vconf">85%</span></div>
+          <div class="vrow" onclick="openCase('EPS-00083998')"><span class="vid">EPS-00083998</span><span class="vreason">Diagnosis mismatch</span><span class="vconf">86%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen active" id="queue">
+      <div class="page-head"><span class="page-title">Recent queue</span><span class="muted">Tuesday, 18 Mar</span></div>
+      <div class="kanban">
+        <div class="kan-col">
+          <div class="q-group-head"><i class="ti ti-info-circle" style="color:var(--danger-fg)"></i><span class="q-group-title" style="color:var(--danger-fg)">Needs attention</span><span class="q-count">2</span></div>
+          <div class="kan-cards">
+            <button class="kan-card" onclick="openCase('EPS-00088552')">
+              <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
+              <div class="kan-foot">awaiting you · 2h</div>
+            </button>
+            <button class="kan-card" onclick="openCase('EPS-00086956')">
+              <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
+              <div class="kan-tags"><span class="chip chip-neutral">Out of network</span></div>
+              <div class="kan-foot">awaiting you · 4h</div>
+            </button>
+          </div>
+        </div>
+        <div class="kan-col">
+          <div class="q-group-head"><i class="ti ti-rotate-clockwise" style="color:var(--accent-fg)"></i><span class="q-group-title" style="color:var(--accent-fg)">In progress</span><span class="q-count">1</span></div>
+          <div class="kan-cards">
+            <button class="kan-card" onclick="openCase('EPS-20260605')">
+              <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-warn">Further review</span></div>
+              <div class="kan-foot">1h</div>
+            </button>
+          </div>
+        </div>
+        <div class="kan-col">
+          <div class="q-group-head"><i class="ti ti-check" style="color:var(--ok-fg)"></i><span class="q-group-title" style="color:var(--ok-fg)">Recently completed</span><span class="q-count">2</span></div>
+          <div class="kan-cards">
+            <button class="kan-card" onclick="openCase('EPS-00084201')">
+              <div class="kan-top"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span></div>
+              <div class="kan-foot">done · 25m</div>
+            </button>
+            <button class="kan-card" onclick="openCase('EPS-00083998')">
+              <div class="kan-top"><span class="cid-dim">EPS-00083998</span><span class="chip chip-neutral">No PA needed</span></div>
+              <div class="kan-foot">done · 40m</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="cases">
+      <div class="page-head">
+        <div class="page-title">All cases<span class="title-count" id="caseTotal">45</span></div>
+        <div class="head-actions">
+          <button class="tool btn-ghost" data-action="open-new"><i class="ti ti-plus"></i>New case</button>
+        </div>
+      </div>
+      <div class="tabs" id="caseTabs">
+        <span class="tab active" onclick="pickStatusTab('',this)">All<span class="tab-count">0</span></span>
+        <span class="tab" onclick="pickStatusTab('ready',this)">Unread<span class="tab-count">0</span></span>
+        <span class="tab" onclick="pickStatusTab('signed',this)">Reviewed<span class="tab-count">0</span></span>
+      </div>
+      <div class="toolbar">
+        <div class="search-box"><i class="ti ti-search"></i><input id="caseSearch" class="search-input" placeholder="Search by case number" oninput="setSearch(this.value)"></div>
+        <button class="tool filter-trigger" onclick="openFilterPanel()" aria-label="Filters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters<span class="filter-badge" id="filterBadge"></span></button>
+        <div class="filter">
+          <button class="tool" id="btn-determination" onclick="toggleMenu(this)">Recommendation <i class="ti ti-chevron-down"></i></button>
+          <div class="menu">
+        <div class="menu-item" onclick="setFilter('determination','')">Any</div>
+        <div class="menu-item" onclick="setFilter('determination','approved')">Approved</div>
+        <div class="menu-item" onclick="setFilter('determination','consider')">Consider to approve</div>
+        <div class="menu-item" onclick="setFilter('determination','further')">Further review</div>
+        <div class="menu-item" onclick="setFilter('determination','nopa')">No PA needed</div>
+          </div>
+        </div>
+        <div class="filter">
+          <button class="tool" id="btn-priority" onclick="toggleMenu(this)">Priority <i class="ti ti-chevron-down"></i></button>
+          <div class="menu">
+        <div class="menu-item" onclick="setFilter('priority','')"><span class="mdot" style="background:transparent"></span>Any</div>
+        <div class="menu-item" onclick="setFilter('priority','standard')"><span class="mdot" style="background:var(--text-3)"></span>Standard</div>
+        <div class="menu-item" onclick="setFilter('priority','urgent')"><span class="mdot" style="background:var(--danger-fg)"></span>Urgent</div>
+          </div>
+        </div>
+        <div class="filter">
+          <button class="tool" id="btn-cpt" onclick="toggleMenu(this)">CPT <i class="ti ti-chevron-down"></i></button>
+          <div class="menu">
+            <div class="menu-item" onclick="setFilter('cpt','')">Any</div>
+            <div class="menu-item" onclick="setFilter('cpt','27447')">27447</div>
+            <div class="menu-item" onclick="setFilter('cpt','29881')">29881</div>
+            <div class="menu-item" onclick="setFilter('cpt','44388')">44388</div>
+            <div class="menu-item" onclick="setFilter('cpt','45378')">45378</div>
+            <div class="menu-item" onclick="setFilter('cpt','62323')">62323</div>
+            <div class="menu-item" onclick="setFilter('cpt','63650')">63650</div>
+            <div class="menu-item" onclick="setFilter('cpt','64483')">64483</div>
+            <div class="menu-item" onclick="setFilter('cpt','70553')">70553</div>
+            <div class="menu-item" onclick="setFilter('cpt','72148')">72148</div>
+            <div class="menu-item" onclick="setFilter('cpt','99213')">99213</div>
+          </div>
+        </div>
+        <div class="filter">
+          <button class="tool" id="btn-reviewer" onclick="toggleMenu(this)">Reviewer <i class="ti ti-chevron-down"></i></button>
+          <div class="menu">
+            <div class="menu-item rev-item" data-rev="" onclick="toggleReviewer('')">Anyone<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Alex R." onclick="toggleReviewer('Alex R.')">Alex R.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Jordan C." onclick="toggleReviewer('Jordan C.')">Jordan C.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Maya O." onclick="toggleReviewer('Maya O.')">Maya O.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Sara P." onclick="toggleReviewer('Sara P.')">Sara P.<i class="ti ti-check rev-check"></i></div>
+            <div class="menu-item rev-item" data-rev="Unassigned" onclick="toggleReviewer('Unassigned')">Unassigned<i class="ti ti-check rev-check"></i></div>
+          </div>
+        </div>
+        <div class="filter">
+          <button class="tool" id="btn-date" onclick="toggleMenu(this)">Date <i class="ti ti-chevron-down"></i></button>
+          <div class="menu">
+        <div class="menu-item" onclick="setFilter('date','')">Any time</div>
+        <div class="menu-item" onclick="setFilter('date','today')">Today</div>
+        <div class="menu-item" onclick="setFilter('date','7d')">Last 7 days</div>
+        <div class="menu-item" onclick="setFilter('date','30d')">Last 30 days</div>
+          </div>
+        </div>
+      </div>
+      <div class="active-filters" id="caseChips"></div>
+      <div class="filter-panel-backdrop" id="filterBackdrop" onclick="closeFilterPanel()"></div>
+      <aside class="filter-panel" id="filterPanel" aria-label="Filters">
+        <div class="fp-head"><span class="fp-title">Filters</span><button class="fp-close" onclick="closeFilterPanel()" aria-label="Close"><i class="ti ti-x"></i></button></div>
+        <div class="fp-body" id="filterPanelBody"></div>
+        <div class="fp-foot"><button class="act-btn" onclick="clearAll();renderFilterPanel()">Clear all</button><button class="act-btn act-primary" onclick="closeFilterPanel()">Show results</button></div>
+      </aside>
+      <table id="caseTable">
+        <thead><tr>
+          <th class="sortable" data-sort="id" style="width:16%" onclick="setSort('id')">Case <i class="ti ti-chevron-down caret"></i></th>
+          <th class="sortable" data-sort="day" style="width:9%" onclick="setSort('day')">Submitted <i class="ti ti-chevron-down caret"></i></th>
+          <th style="width:23%">CPT</th>
+          <th style="width:23%">ICD-10</th>
+          <th style="width:13%">Reviewer</th>
+          <th style="width:16%">Recommendation</th>
+        </tr></thead>
+        <tbody id="caseBody"></tbody>
+      </table>
+      <div class="pager">
+        <span class="muted">15 per page</span>
+        <div class="pages" id="casePages"></div>
+      </div>
+    </section>
+
+    <section class="screen" id="details">
+      <div class="detail-topbar">
+        <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
+        <div class="detail-actions" id="detailActions">
+          <button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy case</button>
+          <button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>
+          <button class="act-btn act-primary" onclick="openLetter()"><i class="ti ti-file-text"></i>Generate letter</button>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-main">
+      <div class="detail-head">
+        <div class="head-top">
+          <div style="flex:1;min-width:0">
+            <div class="case-id-lg" id="caseIdLg">EPS-00088552 <span class="type-tag">Standard</span></div>
+            <div class="meta" id="detailMeta">Submitted <b>18 Mar 2026</b> &nbsp;·&nbsp; Review by <b>20 Mar 2026</b> &nbsp;·&nbsp; Created by <b>Alex R.</b></div>
+          </div>
+        </div>
+      </div>
+      <div id="deepContent">
+        <div class="svc-block">
+          <div class="svc-head">
+            <span class="svc-label">Requested services</span>
+            <span class="svc-summary"><span><span class="dot dot-ok"></span>1 approved</span><span><span class="dot dot-warn"></span>1 needs review</span></span>
+          </div>
+          <div class="svc-rows">
+            <button class="svc-row" onclick="go('details')">
+              <span class="cpt-pill cpt-warn"><span class="pdot"></span>72148</span>
+              <span class="svc-name">MRI lumbar spine, without contrast</span>
+              <span class="svc-det det-warn">Requires review</span>
+              <span class="svc-just">
+                <span class="just-label">Dx</span>
+                <span class="icd-chip">M48.062</span>
+                <span class="icd-chip">M54.16</span>
+                <span class="icd-chip">M51.16</span>
+              </span>
+            </button>
+            <div class="card acard collapsed" style="margin-bottom:0">
+              <button class="acard-head" onclick="toggleAcard(this)">
+                <span class="cpt-pill cpt-ok"><span class="pdot"></span>63650</span>
+                <span class="acard-name">Neurostimulator electrode, percutaneous</span>
+                <span class="acard-approved">Approved</span>
+                <i class="ti ti-chevron-down acard-caret"></i>
+                <span class="acard-dx">DX <span class="cc-chip">M54.16</span> <span class="cc-chip">M51.16</span></span>
+              </button>
+              <div class="acard-body">
+                <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-ok"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Approved</span><button class="copy" onclick="copyResult(this)" style="margin-left:auto"><i class="ti ti-copy"></i>Copy result</button></div>
+                <div class="guideline">
+                  <i class="ti ti-bookmark"></i>
+                  <span class="guideline-code">NCD - 160.7 - Electrical Nerve Stimulators</span>
+                  <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
+                </div>
+                <div class="block">
+                  <div class="block-label">Criteria met</div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Documented trial with &#8805; 50% pain relief</div><div class="crit-met-quote">"Temporary trial showed 60% VAS reduction over 7 days" <span class="pageref" onclick="openPageRef(4)">Page 4</span></div></div></div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Conservative therapy failed &#8805; 6 months</div><div class="crit-met-quote">"PT, NSAIDs, and epidural injections over 14 months without relief" <span class="pageref" onclick="openPageRef(5)">Page 5</span></div></div></div>
+                  <div class="crit-met-item"><i class="ti ti-check"></i><div><div class="crit-met-title">Psychological evaluation completed</div><div class="crit-met-quote">"Behavioral health clearance on file 02/2026" <span class="pageref" onclick="openPageRef(7)">Page 7</span></div></div></div>
+                </div>
+                <div class="assessed-with">Assessed together with 63655</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="card">
+        <div class="card-head">
+          <span class="cpt-title">CPT 72148 · Magnetic resonance imaging, lumbar; without contrast material</span>
+          <button class="copy" onclick="copyResult(this)"><i class="ti ti-copy"></i>Copy result</button>
+        </div>
+        <div class="assess-line"><span class="assess-label">Nebo's assessment</span><span class="chip chip-neutral">Requires your expert review</span></div>
+        <div class="guideline">
+          <i class="ti ti-bookmark"></i>
+          <span class="guideline-code">LCD - L34220 - Lumbar MRI</span>
+          <button class="switch" onclick="reassessGl(this)"><i class="ti ti-rotate-clockwise"></i>Reassess</button>
+        </div>
+        <div class="block">
+          <div class="block-label">Request reason</div>
+          <p class="clinical">71-year-old female with bilateral lower extremity cramping/pain, sciatica, and constant numbness over right lateral thigh with progression to left lower extremity - requesting lumbar MRI for neurogenic claudication evaluation.</p>
+        </div>
+        <div class="block">
+          <div class="block-label">Criteria evaluation</div>
+          <div class="crit-group">
+            <div class="crit-title">Clinically significant or progressive neurologic deficit in lower extremity</div>
+            <ul class="crit-list"><li>"Constant numbness over R lateral thigh" with "Sx have slowly been progressing to LLE" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li></ul>
+          </div>
+          <div class="crit-group">
+            <div class="crit-title">Other nerve root compromise</div>
+            <ul class="crit-list"><li>Constant numbness and progressive symptoms suggest nerve involvement <span class="pageref" onclick="openPageRef(2)">Page 2</span></li></ul>
+          </div>
+          <div class="crit-group">
+            <div class="crit-title">Non-red flag pathway</div>
+            <ul class="crit-list">
+              <li>Symptom duration: "2-3 years of BLE cramping/pain" - exceeds 4 weeks <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
+              <li>Conservative management trial: "Has tried Advil, Tylenol, Diclofenac gel, and CBD oil w/o relief of SX" <span class="pageref" onclick="openPageRef(2)">Page 2</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      </div>
+      <div id="stateBody" style="display:none"></div>
+
+        </div>
+        <aside class="detail-side">
+        <div id="deepRail">
+          <div class="side-card">
+            <div class="card-head"><span class="card-title-sm">Info</span></div>
+            <div class="info-stack">
+              <div class="info-item"><div class="info-label">Member ID</div><div class="info-val">AGL841399564</div></div>
+              <div class="info-item"><div class="info-label">Member name</div><div class="info-val">Jenny Milton</div></div>
+              <div class="info-item"><div class="info-label">Member date of birth</div><div class="info-val">02/06/1971</div></div>
+              <div class="info-item"><div class="info-label">Requesting provider</div><div class="info-val">Dr. Vishal Bansal</div></div>
+              <div class="info-item"><div class="info-label">Requesting provider NPI</div><div class="info-val">1760411052</div></div>
+              <div class="info-item"><div class="info-label">Facility</div><div class="info-val">Baptist Health Deaconess Madisonville</div></div>
+              <div class="info-item"><div class="info-label">Facility NPI</div><div class="info-val">1447231956</div></div>
+              <div class="info-item"><div class="info-label">Servicing provider</div><div class="info-val">Baptist Health Deaconess</div></div>
+              <div class="info-item"><div class="info-label">Servicing provider NPI</div><div class="info-val">1447231956</div></div>
+              <div class="info-item"><div class="info-label">CPT / HCPCS</div><div class="info-codes"><span class="cc-chip">72148</span><span class="cc-chip">63650</span></div></div>
+              <div class="info-item"><div class="info-label">ICD-10</div><div class="info-codes"><span class="cc-chip">M48.062</span><span class="cc-chip">M54.16</span><span class="cc-chip">M51.16</span><span class="cc-chip">G89.29</span></div></div>
+            </div>
+          </div>
+          <div class="side-card">
+            <div class="card-head"><span class="card-title-sm">Attached files</span><button class="add-btn"><i class="ti ti-plus"></i>Add</button></div>
+            <div class="doc-list">
+              <div class="doc-row" onclick="openFile('66716 demo clean 30.Sep.24.pdf')"><i class="ti ti-file-text"></i><span class="name">66716 demo clean 30.Sep.24.pdf</span><i class="ti ti-download dl" onclick="event.stopPropagation()"></i></div>
+              <div class="doc-row" onclick="openFile('Clinical notes - lumbar.pdf')"><i class="ti ti-file-text"></i><span class="name">Clinical notes - lumbar.pdf</span><i class="ti ti-download dl" onclick="event.stopPropagation()"></i></div>
+            </div>
+          </div>
+        </div>
+        <div id="stateRail" style="display:none"></div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="pv-panel" id="pvPanel">
+      <div class="pv-resize" id="pvResize"></div>
+      <div class="pv-phead">
+        <span class="pv-ptitle"><i class="ti ti-file-text"></i><span id="pvName">66716 demo clean 30.Sep.24.pdf</span></span>
+        <button class="pv-pclose" onclick="closePreview()" aria-label="Close"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="pv-pbar">
+        <button class="pv-tbtn" onclick="pvPage(-1)" aria-label="Previous page"><i class="ti ti-chevron-left"></i></button>
+        <span class="pv-pagei"><span id="pvCur">1</span> of 2</span>
+        <button class="pv-tbtn" onclick="pvPage(1)" aria-label="Next page"><i class="ti ti-chevron-right"></i></button>
+        <button class="pv-tbtn pv-sp" onclick="showToast('Downloading document')" aria-label="Download"><i class="ti ti-download"></i></button>
+      </div>
+      <div class="pv-pbody" id="pvMain">
+          <div class="pv-sheet" id="pvSheet1">
+            <h3>Baptist Health Deaconess Madisonville</h3>
+            <div class="doc-meta">Outpatient Clinical Record &nbsp;|&nbsp; MRN AGL841399564 &nbsp;|&nbsp; Milton, Jenny &nbsp;|&nbsp; DOB 02/06/1971</div>
+            <div class="doc-h">Chief complaint</div>
+            <p>71-year-old female presenting with bilateral lower extremity cramping and pain, sciatica, and constant numbness over the right lateral thigh with progression to the left lower extremity.</p>
+            <div class="doc-h">History of present illness</div>
+            <p>Patient reports 2-3 years of BLE cramping/pain that has gradually worsened. Describes constant numbness over R lateral thigh; Sx have slowly been progressing to LLE. Pain is worse with standing and ambulation, partially relieved by sitting and forward flexion.</p>
+            <p>Conservative management to date: has tried Advil, Tylenol, Diclofenac gel, and CBD oil w/o relief of SX. Reports no bowel or bladder dysfunction. No recent trauma.</p>
+            <div class="pv-pagenum">- Page 1 of 2 -</div>
+          </div>
+          <div class="pv-sheet" id="pvSheet2">
+            <div class="doc-h">Physical examination</div>
+            <p>Gait antalgic. Positive straight leg raise on the right at approximately 45 degrees. Decreased sensation L4-L5 dermatome on the right. Motor strength 4/5 in right extensor hallucis longus. Deep tendon reflexes symmetric.</p>
+            <div class="doc-h">Assessment &amp; plan</div>
+            <p>Clinical picture consistent with neurogenic claudication and lumbar radiculopathy. Given progressive neurologic symptoms and failure of conservative management exceeding 6 weeks, requesting lumbar MRI without contrast for further evaluation.</p>
+            <p>Will consider referral for interventional pain management pending imaging results.</p>
+            <div class="pv-pagenum">- Page 2 of 2 -</div>
+          </div>
+        </div>
+    </div>
+
+    <div class="letter-float" id="letterFloat">
+      <div class="lf-resize"></div>
+      <div class="lf-head">
+        <span class="lf-title" id="ltCrumb"><i class="ti ti-file-text"></i>Determination letter &middot; Approval</span>
+        <button class="lf-dl" id="ltDownload" onclick="dlLetter()"><i class="ti ti-download"></i>Download</button>
+        <button class="lf-iconbtn" onclick="cancelLetter()" aria-label="Close"><i class="ti ti-x"></i></button>
+      </div>
+      <div class="lf-body">
+        <div class="letter-sheet" id="letterSheet" contenteditable="false">
+        <div class="ls-head">
+          <div><div style="display:flex;align-items:center;gap:9px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-label="Meridian Health"><path d="M12 2.5l7.5 2.8v5.7c0 4.6-3.2 7.9-7.5 10.2-4.3-2.3-7.5-5.6-7.5-10.2V5.3L12 2.5z" fill="#1F5C8A"/><path d="M12 8v7M8.5 11.5h7" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/></svg><span style="font-size:18px;font-weight:700;color:#1F5C8A;letter-spacing:-.01em">Meridian Health</span></div><div class="ls-sub">Payer letterhead</div></div>
+          <div class="ls-date">June 29, 2026</div>
+        </div>
+        <div class="ls-re">RE: Prior Authorization Determination<br>Cert Number: &lt;to be assigned&gt;<br>Member's Name: Jenny Milton<br>Date of Birth: 02/06/1971<br>Subscriber ID: AGL841399564<br>Plan: &lt;Medicare Advantage&gt;</div>
+        <p>Dear Member,</p>
+        <p>We received your request for healthcare services made by Dr. Vishal Bansal on 18 Mar 2026.</p>
+        <div id="letterApprovalBody">
+          <p>After reviewing the request, we approved the following service(s):<br>- CPT 72148 - MRI lumbar spine, without contrast<br>- CPT 63650 - Neurostimulator electrode, percutaneous</p>
+          <p>We used the following guidelines to make this decision:<br>- Centers for Medicare &amp; Medicaid Services (CMS)<br>- NCD 160.7 - Electrical Nerve Stimulators<br>- LCD L34220 - Lumbar MRI</p>
+        </div>
+        <div id="letterDenialBody" style="display:none">
+          <p>After reviewing the request, we are unable to approve the following service(s) at this time:<br>- CPT 72148 - MRI lumbar spine, without contrast</p>
+          <p>Reason for this decision:<br>&lt;clinical rationale, drawn from the criteria evaluation&gt;</p>
+          <p>We used the following guidelines to make this decision:<br>- LCD L34220 - Lumbar MRI</p>
+          <p>You have the right to appeal this decision. &lt;appeal instructions and filing deadline&gt;</p>
+          <p>This determination was reviewed and signed by &lt;Physician name&gt;, MD.</p>
+        </div>
+        <p>Sincerely,<br>Healthcare Operations</p>
+        <p>CC: Dr. Vishal Bansal</p>
+      </div>
+      </div>
+      <div class="lf-foot">
+        <div class="lt-seg" id="ltModeSeg" style="height:32px">
+          <button class="lt-seg-btn active" onclick="letterMode('preview',this)"><i class="ti ti-eye"></i>Preview</button>
+          <button class="lt-seg-btn" onclick="letterMode('edit',this)"><i class="ti ti-edit"></i>Edit</button>
+        </div>
+        <button class="btn-primary" id="ltSendBtn" style="width:auto;margin:0" onclick="sendLetter()"><i class="ti ti-upload"></i>Send approval letter</button>
+      </div>
+    </div>
+
+    <section class="screen" id="settings">
+      <div class="detail-topbar">
+        <button class="btn-back" data-screen="__back"><i class="ti ti-arrow-left"></i>Back</button>
+      </div>
+      <div class="settings-wrap">
+        <div class="page-head"><div class="page-title">Profile &amp; settings</div></div>
+        <p class="settings-intro">Manage your account, appearance, and review preferences.</p>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Profile</span></div>
+          <div class="set-profile">
+            <button type="button" class="set-avatar" id="setAvatar" onclick="document.getElementById('avatarInput').click()" aria-label="Change profile photo">
+              <span class="set-avatar-initials">HP</span>
+              <span class="set-avatar-edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><circle cx="12" cy="13" r="3"/></svg></span>
+            </button>
+            <input type="file" id="avatarInput" accept="image/*" hidden onchange="onAvatarPick(event)">
+            <div>
+              <div class="set-name">Dr. Helen Park</div>
+              <div class="set-role">Physician &middot; Konpo Health</div>
+            </div>
+          </div>
+          <div class="set-grid">
+            <div><label class="label">Full name</label><input type="text" value="Dr. Helen Park"></div>
+            <div><label class="label">Email</label><input type="text" value="helen.park@konpo.studio"></div>
+            <div><label class="label">Medical license number</label><input type="text" value="MD-2093841"></div>
+            <div><label class="label">NPI</label><input type="text" value="1730294857"></div>
+            <div><label class="label">Phone</label><input type="text" value="+1 (415) 555-0114"></div>
+            <div><label class="label">Physician group</label><input type="text" value="Medical Review · Sign-off" disabled></div>
+          </div>
+          <div class="set-actions"><button class="act-btn act-primary" onclick="saveSettings(this)"><i class="ti ti-check"></i>Save changes</button></div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Appearance</span></div>
+          <div class="set-row">
+            <div><div class="set-row-title">Theme</div><div class="set-row-sub">Auto follows your operating system setting.</div></div>
+            <div class="theme-seg" style="margin:0;min-width:172px">
+              <button class="seg-btn is-active" onclick="setTheme('auto',this)">Auto</button>
+              <button class="seg-btn" onclick="setTheme('light',this)">Light</button>
+              <button class="seg-btn" onclick="setTheme('dark',this)">Dark</button>
+            </div>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Text size</div><div class="set-row-sub">Default font size across the app.</div></div>
+            <div class="fs-seg" style="margin:0;min-width:172px">
+              <button class="seg-btn" onclick="setFontSize('s',this)">Small</button>
+              <button class="seg-btn is-active" onclick="setFontSize('m',this)">Default</button>
+              <button class="seg-btn" onclick="setFontSize('l',this)">Large</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Notifications</span></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Case assigned to me</div><div class="set-row-sub">When a new case lands in your queue.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Nebo finished processing</div><div class="set-row-sub">When extraction and assessment complete on your cases.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Physician signed off</div><div class="set-row-sub">When a case in further review gets a determination signed.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Further review needed</div><div class="set-row-sub">When one of your cases is flagged for physician review.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Daily queue summary</div><div class="set-row-sub">A morning digest of what needs your attention.</div></div><div class="tgl" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Review preferences</span></div>
+          <div class="set-row">
+            <div><div class="set-row-title">Default case view</div><div class="set-row-sub">How All cases opens.</div></div>
+            <div class="lt-seg" style="height:34px">
+              <button class="lt-seg-btn active" onclick="setDefaultView(this)">List</button>
+              <button class="lt-seg-btn" onclick="setDefaultView(this)">Grid</button>
+            </div>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Preferred guideline source</div><div class="set-row-sub">Which criteria set Nebo cites first.</div></div>
+            <select class="set-select">
+              <option>CMS (NCD / LCD)</option>
+              <option>MCG</option>
+              <option>InterQual</option>
+            </select>
+          </div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Auto-advance to next case</div><div class="set-row-sub">Open the next queued case after a decision.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+          <div class="set-toggle-row"><div><div class="set-row-title">Show page references by default</div><div class="set-row-sub">Expand criteria evidence in the assessment view.</div></div><div class="tgl on" onclick="toggleSet(this)"><div class="knob"></div></div></div>
+        </div>
+
+        <div class="set-card">
+          <div class="set-card-head"><span class="card-title-sm">Security</span></div>
+          <div class="set-row">
+            <div><div class="set-row-title">Password</div><div class="set-row-sub">Last changed 3 months ago.</div></div>
+            <button class="act-btn" onclick="changePassword()"><i class="ti ti-key"></i>Change password</button>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Last sign-in</div><div class="set-row-sub">Today, 08:02 · San Francisco, CA</div></div>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Sign out</div><div class="set-row-sub">End your session on this device.</div></div>
+            <button class="act-btn act-deny" onclick="logOut()"><i class="ti ti-logout"></i>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">New case</div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <label class="label">Case number</label>
+    <input type="text" placeholder="Enter case number">
+    <div class="hint"><i class="ti ti-info-circle"></i>Duplicates are flagged automatically</div>
+    <label class="label" style="margin-top:16px">Details or comments <span class="muted">(optional)</span></label>
+    <textarea rows="3" placeholder="Procedures requested, notes for context..."></textarea>
+    <div class="toggle-wrap">
+      <div class="tgl" id="tgl" onclick="toggleAuto()"><div class="knob"></div></div>
+      <div>
+        <div style="font-size:13px;font-weight:500">Automatic document retrieval</div>
+        <div class="muted" id="autohint" style="margin-top:2px">Off - upload the clinical documents manually below</div>
+      </div>
+    </div>
+    <div class="dropzone" id="dropzone"><i class="ti ti-upload"></i><div class="dz-text">Drop files or <span style="color:var(--accent-fg)">browse</span></div></div>
+    <div class="autoinfo" id="autoinfo"><i class="ti ti-cloud-download" style="font-size:18px"></i><span>Nebo will pull the documents from your system on submit</span></div>
+    <div class="submit-row"><button class="btn-submit" onclick="submitNewCase()">Submit</button><span class="muted">processing takes 60-90s</span></div>
+    <div class="modal-foot"><i class="ti ti-corner-down-right" style="font-size:12px"></i>The case appears in Recent queue once processing finishes</div>
+  </div>
+</div>
+
+<div class="overlay" id="fbOverlay" onclick="if(event.target===this)closeFb()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Submit feedback</div>
+      <button class="modal-close" onclick="closeFb()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="fb-ctx">Case <span class="mono">EPS-00088552</span></div>
+
+    <label class="label" style="margin-top:14px">Which assessment?</label>
+    <div class="fb-seg">
+      <button class="fb-seg-btn active" onclick="fbSeg(this)">All / general</button>
+      <button class="fb-seg-btn" onclick="fbSeg(this)">CPT 72148</button>
+      <button class="fb-seg-btn" onclick="fbSeg(this)">CPT 63650</button>
+    </div>
+
+    <label class="label" style="margin-top:16px">What's the issue?</label>
+    <div class="fb-chips">
+      <button class="fb-chip" onclick="fbChip(this)">Incorrect determination</button>
+      <button class="fb-chip" onclick="fbChip(this)">Missed evidence</button>
+      <button class="fb-chip" onclick="fbChip(this)">Wrong guideline</button>
+      <button class="fb-chip" onclick="fbChip(this)">Misread document</button>
+      <button class="fb-chip" onclick="fbChip(this)">Other</button>
+    </div>
+
+    <label class="label" style="margin-top:16px">Details</label>
+    <textarea id="fbDetails" rows="3" placeholder="Describe what Nebo got wrong or missed..." oninput="fbValidate()"></textarea>
+
+    <button class="btn-submit fb-submit" id="fbSubmit" onclick="submitFb()" disabled>Submit feedback</button>
+    <div class="modal-foot"><i class="ti ti-corner-down-right" style="font-size:12px"></i>Sent to Nebo's review team</div>
+  </div>
+</div>
+
+<div class="overlay" id="sendOverlay" onclick="if(event.target===this)closeSend()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Send letter to provider?</div>
+      <button class="modal-close" onclick="closeSend()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <p class="modal-text">This determination letter will be sent to the requesting provider, Dr. Vishal Bansal. The action is recorded on the case activity log.</p>
+    <div class="confirm-actions">
+      <button class="act-btn" onclick="closeSend()">Cancel</button>
+      <button class="btn-submit" style="display:inline-flex;align-items:center;gap:7px" onclick="confirmSend()"><i class="ti ti-upload"></i>Send letter</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="dupOverlay" onclick="if(event.target===this)closeDup()">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Copy case</div>
+      <button class="modal-close" onclick="closeDup()" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <p class="dup-desc">Create a new case with the member, provider, and requested services copied from this one. You can review and edit everything before submitting.</p>
+    <div class="dup-card">
+      <div class="dup-icon"><i class="ti ti-copy"></i></div>
+      <div class="dup-by"><div class="dup-label">Copying from</div><div class="dup-name" id="dupSrc">EPS-00088552</div></div>
+      <div class="dup-when"><div class="d">Member & services</div><div class="t">will be copied</div></div>
+    </div>
+    <button class="btn-submit dup-btn" onclick="createCopy()">Create copy</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<div id="uplBanner" class="upl"></div>
+
+<script>
+var origin='queue';
+function go(target){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.toggle('active', s.id===target); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-screen')===target); });
+  document.querySelector('.main').scrollTop=0;
+  window.scrollTo(0,0);
+  closeNav();
+  closeFilterPanel();
+  closeMUserMenu();
+  closeMSearch();
+  closeActionsMenu();
+  cancelLetter();
+  closePreview();
+}
+function toggleNav(){ document.querySelector('.app').classList.toggle('nav-open'); }
+function closeNav(){ var a=document.querySelector('.app'); if(a) a.classList.remove('nav-open'); }
+document.querySelectorAll('[data-screen]').forEach(function(el){
+  el.addEventListener('click', function(){
+    var target=el.getAttribute('data-screen');
+    if(target==='__back'){ go(origin); return; }
+    if(target==='details'){ origin=document.querySelector('.screen.active').id; }
+    go(target);
+  });
+});
+document.querySelectorAll('[data-action="open-new"]').forEach(function(el){
+  el.addEventListener('click', openModal);
+});
+function openModal(){ document.getElementById('overlay').classList.add('open'); }
+function openDup(){ var id=((document.getElementById('caseIdLg')||{}).textContent||'').trim().split(/\s+/)[0]; var src=document.getElementById('dupSrc'); if(src&&id) src.textContent=id; document.getElementById('dupOverlay').classList.add('open'); }
+function pushToSystem(){ showToast('Case pushed to your system'); }
+function createCopy(){ closeDup(); showToast('Case copied to a new draft'); }
+function openFb(){ document.getElementById('fbOverlay').classList.add('open'); }
+function closeFb(){ document.getElementById('fbOverlay').classList.remove('open'); }
+function fbSeg(btn){ btn.parentNode.querySelectorAll('.fb-seg-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); }
+function fbChip(btn){ var on=btn.classList.contains('active'); btn.parentNode.querySelectorAll('.fb-chip').forEach(function(b){b.classList.remove('active');}); if(!on) btn.classList.add('active'); }
+function fbValidate(){ document.getElementById('fbSubmit').disabled = document.getElementById('fbDetails').value.trim().length===0; }
+function submitFb(){ closeFb(); showToast('Feedback sent to Nebo'); document.getElementById('fbDetails').value=''; document.getElementById('fbSubmit').disabled=true; document.querySelectorAll('.fb-chip').forEach(function(b){b.classList.remove('active');}); }
+function closeDup(){ document.getElementById('dupOverlay').classList.remove('open'); }
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+var newCaseTimer=null;
+function fmtToday(){ var d=new Date(); var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return d.getDate()+' '+mo[d.getMonth()]+' '+d.getFullYear(); }
+function submitNewCase(){
+  var inp=document.querySelector('#overlay input');
+  var num=(inp&&inp.value.trim())||('EPS-'+(10000000+Math.floor(Math.random()*89999999)));
+  if(/^\d+$/.test(num)) num='EPS-'+num;
+  closeModal();
+  if(inp) inp.value='';
+  var prof={id:num,priority:'standard',date:fmtToday(),reviewer:'Unassigned',state:'processing',patient:null,nonAnchor:true};
+  startUpload(prof);
+}
+var UPL_TOTAL=16000, uplTimer=null, uplStart=0, uplProf=null;
+function uplStageLabel(f){ if(f<0.25)return'Uploading documents'; if(f<0.55)return'Scanning &amp; extracting text'; if(f<0.85)return'Assessing against guidelines'; return'Finalizing assessment'; }
+function uplProgressHtml(id){
+  return '<div class="upl-head"><span class="upl-spin"></span>'
+    +'<div class="upl-htext"><div class="upl-title">Processing new case</div><div class="upl-sub">'+id+'</div></div>'
+    +'<button class="upl-min" onclick="uplToggle()" aria-label="Minimize"><i class="ti ti-chevron-down"></i></button></div>'
+    +'<div class="upl-body">'
+    +'<div class="upl-row"><span id="uplStatus">Uploading documents</span><span id="uplPct" class="upl-pct">0%</span></div>'
+    +'<div class="upl-bar"><span id="uplFill" class="upl-fill"></span></div>'
+    +'<div class="upl-eta" id="uplEta">~16s left</div></div>';
+}
+function startUpload(prof){
+  uplProf=prof;
+  if(uplTimer){ clearInterval(uplTimer); uplTimer=null; }
+  var b=document.getElementById('uplBanner');
+  b.className='upl';
+  b.innerHTML=uplProgressHtml(prof.id);
+  void b.offsetHeight; b.classList.add('show');
+  uplStart=Date.now();
+  uplTimer=setInterval(function(){
+    var f=Math.min((Date.now()-uplStart)/UPL_TOTAL,1), pct=Math.round(f*100);
+    var fill=document.getElementById('uplFill'); if(fill) fill.style.width=pct+'%';
+    var st=document.getElementById('uplStatus'); if(st) st.innerHTML=uplStageLabel(f);
+    var pc=document.getElementById('uplPct'); if(pc) pc.textContent=pct+'%';
+    var rem=Math.max(0,Math.ceil((1-f)*UPL_TOTAL/1000));
+    var eta=document.getElementById('uplEta'); if(eta) eta.textContent=rem>0?('~'+rem+'s left'):'Almost done';
+    if(f>=1){ clearInterval(uplTimer); uplTimer=null; uplDone(prof); }
+  },200);
+}
+function uplDone(prof){
+  var b=document.getElementById('uplBanner');
+  b.className='upl show done';
+  b.innerHTML='<div class="upl-head"><span class="upl-check"><i class="ti ti-check"></i></span>'
+    +'<div class="upl-htext"><div class="upl-title">Case ready for review</div><div class="upl-sub">'+prof.id+'</div></div>'
+    +'<button class="upl-min" onclick="uplClose()" aria-label="Dismiss"><i class="ti ti-x"></i></button></div>'
+    +'<div class="upl-body"><div class="upl-donerow">Nebo finished scanning &amp; assessing this case.</div>'
+    +'<button class="upl-cta" onclick="uplOpen()">See case details</button></div>';
+}
+function uplToggle(){ document.getElementById('uplBanner').classList.toggle('collapsed'); }
+function uplClose(){ var b=document.getElementById('uplBanner'); b.classList.remove('show'); if(uplTimer){ clearInterval(uplTimer); uplTimer=null; } }
+function uplOpen(){
+  var prof=uplProf; uplClose(); if(!prof) return;
+  origin='queue'; prof.state='review'; prof.reviewer='Alex R.';
+  document.getElementById('caseIdLg').innerHTML=prof.id+' <span class="type-tag">Standard</span>';
+  document.getElementById('detailMeta').innerHTML=metaHtml(prof,'review');
+  renderActions('review');
+  document.getElementById('stateBody').style.display='none';
+  document.getElementById('stateRail').style.display='none';
+  document.getElementById('deepContent').style.display='';
+  document.getElementById('deepRail').style.display='';
+  go('details');
+  document.querySelector('.main').scrollTop=0;
+}
+function finishNewCase(prof){
+  newCaseTimer=null;
+  if(document.querySelector('.screen.active').id!=='details') return;
+  if(document.getElementById('caseIdLg').textContent.indexOf(prof.id)!==0) return;
+  prof.state='review';
+  prof.reviewer='Alex R.';
+  document.getElementById('detailMeta').innerHTML=metaHtml(prof,'review');
+  renderActions('review');
+  document.getElementById('stateBody').style.display='none';
+  document.getElementById('stateRail').style.display='none';
+  document.getElementById('deepContent').style.display='';
+  document.getElementById('deepRail').style.display='';
+  document.querySelector('.main').scrollTop=0;
+  showToast('Nebo finished processing '+prof.id);
+}
+function setSegActive(id,idx){ var g=document.getElementById(id); if(!g) return; g.querySelectorAll('.lt-seg-btn').forEach(function(b,i){ b.classList.toggle('active', i===idx); }); }
+function letterMode(m,btn){ setSegActive('ltModeSeg', m==='edit'?1:0); var edit=m==='edit'; var s=document.getElementById('letterSheet'); s.setAttribute('contenteditable', edit?'true':'false'); document.getElementById('ltDownload').style.display = edit?'none':''; if(edit) s.focus(); }
+function openLetter(type){
+  var denial=(type==='denial');
+  document.getElementById('letterSheet').setAttribute('contenteditable','false');
+  document.getElementById('ltDownload').style.display='';
+  document.getElementById('letterApprovalBody').style.display=denial?'none':'';
+  document.getElementById('letterDenialBody').style.display=denial?'':'none';
+  var crumb=document.getElementById('ltCrumb');
+  if(crumb) crumb.innerHTML='<i class="ti ti-file-text"></i>Determination letter &middot; '+(denial?'Denial':'Approval');
+  var sb=document.getElementById('ltSendBtn');
+  if(sb) sb.innerHTML='<i class="ti ti-upload"></i>Send '+(denial?'denial':'approval')+' letter';
+  setSegActive('ltModeSeg',0);
+  closeActionsMenu();
+  var f=document.getElementById('letterFloat');
+  ['left','top','right','bottom','width','height'].forEach(function(p){ f.style[p]=''; });
+  f.classList.add('open');
+  if(window.innerWidth>768){
+    var w=430, h=Math.min(600, window.innerHeight-40);
+    f.style.right='auto'; f.style.bottom='auto';
+    f.style.left=Math.round((window.innerWidth-w)/2)+'px';
+    f.style.top=Math.round((window.innerHeight-h)/2)+'px';
+  }
+}
+(function(){
+  var mode=null,sx,sy,sl,st,sw,sh;
+  function lf(){ return document.getElementById('letterFloat'); }
+  document.addEventListener('mousedown',function(e){
+    var b=lf(); if(!b||!b.classList.contains('open')||window.innerWidth<=768) return;
+    if(e.target.closest('.lf-resize')) mode='resize';
+    else if(e.target.closest('.lf-head') && !e.target.closest('button')) mode='drag';
+    else return;
+    var r=b.getBoundingClientRect();
+    sx=e.clientX; sy=e.clientY; sl=r.left; st=r.top; sw=r.width; sh=r.height;
+    b.style.right='auto'; b.style.bottom='auto'; b.style.left=r.left+'px'; b.style.top=r.top+'px'; b.style.width=r.width+'px'; b.style.height=r.height+'px';
+    document.body.style.userSelect='none'; e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!mode) return; var b=lf();
+    if(mode==='drag'){
+      b.style.left=Math.max(4,Math.min(window.innerWidth-sw-4, sl+(e.clientX-sx)))+'px';
+      b.style.top=Math.max(4,Math.min(window.innerHeight-sh-4, st+(e.clientY-sy)))+'px';
+    } else {
+      var rightEdge=sl+sw;
+      var nl=Math.max(4,Math.min(rightEdge-320, sl+(e.clientX-sx)));
+      b.style.left=nl+'px';
+      b.style.width=(rightEdge-nl)+'px';
+      b.style.height=Math.max(360,Math.min(window.innerHeight-st-8, sh+(e.clientY-sy)))+'px';
+    }
+  });
+  document.addEventListener('mouseup',function(){ if(mode){ mode=null; document.body.style.userSelect=''; } });
+})();
+function cancelLetter(){ var f=document.getElementById('letterFloat'); if(f) f.classList.remove('open'); }
+function editLetter(btn){ var s=document.getElementById('letterSheet'); var on=s.getAttribute('contenteditable')==='true'; s.setAttribute('contenteditable',on?'false':'true'); btn.classList.toggle('active',!on); if(!on){ s.focus(); } }
+function sendLetter(){ document.getElementById('sendOverlay').classList.add('open'); }
+function closeSend(){ document.getElementById('sendOverlay').classList.remove('open'); }
+function confirmSend(){ closeSend(); cancelLetter(); showToast('Letter sent to provider'); }
+function dlLetter(){ try{ var html=document.getElementById('letterSheet').innerHTML; var blob=new Blob(['<html><head><meta charset="utf-8"><style>body{font-family:system-ui,sans-serif;font-size:13px;line-height:1.6;max-width:600px;margin:40px auto;padding:0 24px;color:#1b1b1b}</style></head><body>'+html+'</body></html>'],{type:'text/html'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='determination-letter.html'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(url);},800);}catch(e){} showToast('Letter downloaded'); }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal(); closeDup(); closeFb(); closeSend(); } });
+function toggleAuto(){
+  var t=document.getElementById('tgl'), on=t.classList.toggle('on');
+  document.getElementById('dropzone').style.display=on?'none':'block';
+  document.getElementById('autoinfo').style.display=on?'flex':'none';
+  document.getElementById('autohint').textContent=on
+    ?'On - Nebo retrieves documents from the integrated system'
+    :'Off - upload the clinical documents manually below';
+}
+function pickTab(el){
+  el.parentNode.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+}
+function setTheme(mode, btn){
+  var root=document.documentElement;
+  if(mode==='auto'){ root.removeAttribute('data-theme'); }
+  else { root.setAttribute('data-theme', mode); }
+  var order=['auto','light','dark'];
+  document.querySelectorAll('.theme-seg').forEach(function(seg){
+    seg.querySelectorAll('.seg-btn').forEach(function(b,i){ b.classList.toggle('is-active', i===order.indexOf(mode)); });
+  });
+}
+function setFontSize(size, btn){
+  document.documentElement.setAttribute('data-fs', size);
+  var order=['s','m','l'];
+  document.querySelectorAll('.fs-seg').forEach(function(seg){
+    seg.querySelectorAll('.seg-btn').forEach(function(b,i){ b.classList.toggle('is-active', i===order.indexOf(size)); });
+  });
+}
+function openSettings(){ closeUserMenu(); var act=document.querySelector('.screen.active'); origin=act?act.id:'queue'; if(origin==='settings'||origin==='details'||origin==='preview'||origin==='letter') origin='queue'; go('settings'); }
+function toggleSet(el){ el.classList.toggle('on'); }
+function setDefaultView(btn){ btn.parentNode.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active'); }
+function onAvatarPick(e){
+  var f=e.target.files && e.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    var av=document.getElementById('setAvatar');
+    av.style.backgroundImage='url('+r.result+')';
+    av.classList.add('has-img');
+    showToast('Profile photo updated');
+  };
+  r.readAsDataURL(f);
+  e.target.value='';
+}
+function saveSettings(btn){ showToast('Profile updated'); }
+function changePassword(){ showToast('Password reset link sent to your email'); }
+var CASES=[
+  {id:'EPS-00088552',day:18,date:'18 Mar',cpt:'72148, 63650',det:'further',status:'ready',priority:'high-cost'},
+  {id:'EPS-00086956',day:18,date:'18 Mar',cpt:'72148',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00088141',day:17,date:'17 Mar',cpt:'27447',det:'approved',status:'signed',priority:'standard'},
+  {id:'EPS-00087687',day:18,date:'18 Mar',cpt:'45378, 45380, 45385, 43239',det:'approved',status:'ready',priority:'standard'},
+  {id:'EPS-00087519',day:12,date:'12 Mar',cpt:'27447',det:'approved',status:'signed',priority:'high-cost'},
+  {id:'EPS-00087379',day:17,date:'17 Mar',cpt:'70553',det:'further',status:'ready',priority:'oon'},
+  {id:'EPS-00086703',day:18,date:'18 Mar',cpt:'45378',det:'approved',status:'signed',priority:'standard'},
+  {id:'EPS-00086053',day:17,date:'17 Mar',cpt:'72148, 63650',det:'further',status:'ready',priority:'oon'},
+  {id:'EPS-00085658',day:17,date:'17 Mar',cpt:'45378',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00085479',day:18,date:'18 Mar',cpt:'62323, 64483',det:'nopa',status:'signed',priority:'oon'},
+  {id:'EPS-00084855',day:12,date:'12 Mar',cpt:'62323, 64483',det:'further',status:'escalated',priority:'oon'},
+  {id:'EPS-00084311',day:14,date:'14 Mar',cpt:'73721',det:'approved',status:'ready',priority:'standard'},
+  {id:'EPS-00084148',day:15,date:'15 Mar',cpt:'73721',det:'further',status:'signed',priority:'high-cost'},
+  {id:'EPS-00083774',day:18,date:'18 Mar',cpt:'99213',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00083194',day:12,date:'12 Mar',cpt:'27447',det:'consider',status:'ready',priority:'oon'},
+  {id:'EPS-00082306',day:14,date:'14 Mar',cpt:'62323, 64483',det:'approved',status:'signed',priority:'oon'},
+  {id:'EPS-00081410',day:11,date:'11 Mar',cpt:'44388, 44389',det:'further',status:'ready',priority:'high-cost'},
+  {id:'EPS-00080617',day:18,date:'18 Mar',cpt:'70553, 70551, 72141, 72156, 70552',det:'approved',status:'ready',priority:'oon'},
+  {id:'EPS-00079840',day:11,date:'11 Mar',cpt:'70553',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00079737',day:11,date:'11 Mar',cpt:'62323, 64483',det:'nopa',status:'signed',priority:'standard'},
+  {id:'EPS-00079434',day:15,date:'15 Mar',cpt:'64483',det:'further',status:'ready',priority:'high-cost'},
+  {id:'EPS-00079272',day:17,date:'17 Mar',cpt:'63650',det:'nopa',status:'signed',priority:'high-cost'},
+  {id:'EPS-00078629',day:15,date:'15 Mar',cpt:'70553',det:'further',status:'signed',priority:'high-cost'},
+  {id:'EPS-00078313',day:17,date:'17 Mar',cpt:'70553',det:'further',status:'ready',priority:'standard'},
+  {id:'EPS-00078221',day:10,date:'10 Mar',cpt:'63650',det:'further',status:'escalated',priority:'standard'},
+  {id:'EPS-00077853',day:18,date:'18 Mar',cpt:'29881, 29877',det:'consider',status:'ready',priority:'oon'},
+  {id:'EPS-00077447',day:17,date:'17 Mar',cpt:'29881, 29877',det:'nopa',status:'signed',priority:'oon'},
+  {id:'EPS-00076675',day:18,date:'18 Mar',cpt:'70553',det:'further',status:'signed',priority:'urgent'},
+  {id:'EPS-00076194',day:13,date:'13 Mar',cpt:'70553',det:'approved',status:'signed',priority:'high-cost'},
+  {id:'EPS-00076051',day:16,date:'16 Mar',cpt:'63650',det:'further',status:'ready',priority:'standard'},
+  {id:'EPS-00075623',day:18,date:'18 Mar',cpt:'27447',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00075171',day:18,date:'18 Mar',cpt:'64483',det:'further',status:'ready',priority:'standard'},
+  {id:'EPS-00074442',day:15,date:'15 Mar',cpt:'29881, 29877',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00073877',day:17,date:'17 Mar',cpt:'62323, 64483',det:'consider',status:'ready',priority:'high-cost'},
+  {id:'EPS-00073302',day:15,date:'15 Mar',cpt:'99213',det:'further',status:'ready',priority:'standard'},
+  {id:'EPS-00072732',day:17,date:'17 Mar',cpt:'27447',det:'approved',status:'signed',priority:'standard'},
+  {id:'EPS-00072502',day:18,date:'18 Mar',cpt:'44388, 44389',det:'further',status:'escalated',priority:'oon'},
+  {id:'EPS-00072329',day:15,date:'15 Mar',cpt:'99213',det:'further',status:'signed',priority:'standard'},
+  {id:'EPS-00071704',day:14,date:'14 Mar',cpt:'45378',det:'nopa',status:'signed',priority:'standard'},
+  {id:'EPS-00071214',day:16,date:'16 Mar',cpt:'73721',det:'consider',status:'ready',priority:'standard'},
+  {id:'EPS-00071106',day:15,date:'15 Mar',cpt:'29881, 29877',det:'approved',status:'signed',priority:'standard'},
+  {id:'EPS-00070569',day:14,date:'14 Mar',cpt:'99213',det:'nopa',status:'signed',priority:'standard'},
+  {id:'EPS-00070264',day:17,date:'17 Mar',cpt:'45378',det:'further',status:'ready',priority:'high-cost'},
+  {id:'EPS-00069545',day:18,date:'18 Mar',cpt:'70553',det:'consider',status:'signed',priority:'standard'},
+  {id:'EPS-00068789',day:17,date:'17 Mar',cpt:'73721',det:'approved',status:'ready',priority:'standard'}
+];
+var REVIEWERS=['Alex R.','Alex R.','Jordan C.','Maya O.','Sara P.'];
+CASES.forEach(function(c,i){ c.reviewer = c.status==='processing' ? 'Unassigned' : REVIEWERS[i%5]; });
+function initials(n){ return n.split(/\s+/).map(function(w){return w[0];}).join('').replace(/\./g,'').toUpperCase().slice(0,2); }
+var detMap={approved:['Approved','chip-ok'],consider:['Consider to approve','chip-consider'],further:['Further review','chip-warn'],nopa:['No PA needed','chip-neutral']};
+var labels={determination:{approved:'Approved',consider:'Consider to approve',further:'Further review',nopa:'No PA needed'},priority:{'standard':'Standard','high-cost':'High cost','urgent':'Urgent','oon':'Out of network'},status:{processing:'Processing',ready:'Ready for review',escalated:'Further review',signed:'Signed'},date:{today:'Today','7d':'Last 7 days','30d':'Last 30 days'},reviewer:{'Alex R.':'Alex R.','Jordan C.':'Jordan C.','Maya O.':'Maya O.','Sara P.':'Sara P.','Unassigned':'Unassigned'}};
+var state={determination:'',priority:'',cpt:'',status:'',reviewer:[],date:'',search:'',sortKey:'day',sortDir:'desc',page:1};
+function caseMatch(c,skipStatus){
+  if(state.determination && c.det!==state.determination) return false;
+  if(state.priority && c.priority!==state.priority) return false;
+  if(state.cpt && (c.cpt||'').split(/,\s*/).indexOf(state.cpt)<0) return false;
+  if(!skipStatus && state.status && c.status!==state.status) return false;
+  if(state.reviewer.length && state.reviewer.indexOf(c.reviewer)<0) return false;
+  if(state.search && c.id.toLowerCase().indexOf(state.search.toLowerCase())<0) return false;
+  if(state.date==='today' && c.day!==18) return false;
+  if(state.date==='7d' && c.day<12) return false;
+  return true;
+}
+function escHtml(s){return s.replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
+function cptChips(cpt){
+  var arr=(cpt||'').split(',').map(function(s){return s.trim();}).filter(Boolean);
+  var html=arr.slice(0,3).map(function(code){return '<span class="cc-chip">'+code+'</span>';}).join('');
+  if(arr.length>3) html+='<span class="cpt-more">+'+(arr.length-3)+'</span>';
+  return html;
+}
+var ICD_MAP={
+  '72148':['M48.062','M54.16','M51.16'],'63650':['M54.16','M51.16'],
+  '45378':['K63.5','K57.30'],'45380':['K63.5','D12.6'],'45385':['K57.30','D12.6'],'43239':['K21.9','K29.70'],
+  '27447':['M17.11','M25.561'],'73721':['M17.11','M25.561'],
+  '70553':['R51.9','G43.909'],'70551':['R51.9'],'70552':['G43.909'],'72141':['M50.20','M54.2'],'72156':['M54.5'],
+  '62323':['M54.16','M51.16'],'64483':['M54.16','M51.16'],
+  '99213':['R51.9','Z00.00'],'44388':['K63.5','K57.30'],'44389':['K57.30'],
+  '29881':['M17.11','M23.51'],'29877':['M23.51','M17.11']
+};
+function icdFor(cpt){
+  var out=[];
+  (cpt||'').split(',').map(function(s){return s.trim();}).filter(Boolean).forEach(function(code){
+    (ICD_MAP[code]||[]).forEach(function(icd){ if(out.indexOf(icd)<0) out.push(icd); });
+  });
+  return out.join(', ');
+}
+function rowHtml(c){
+  var dot=c.priority==='urgent'?'<span class="dot"></span>':'<span style="display:inline-block;width:13px"></span>';
+  var det;
+  if(c.status==='processing') det='<span class="muted">processing...</span>';
+  else if(c.status==='escalated') det='<span class="chip chip-warn">Further review</span>';
+  else { var d=detMap[c.det]; det='<span class="chip '+d[1]+'">'+d[0]+'</span>'; }
+  var rv = c.reviewer==='Unassigned' ? '<span class="muted">Unassigned</span>' : '<span class="rv"><span class="rv-av">'+initials(c.reviewer)+'</span>'+c.reviewer+'</span>';
+  return '<tr onclick="openCase(\''+c.id+'\')"><td>'+dot+'<span class="mono">'+c.id+'</span></td><td class="muted">'+c.date+'</td><td><div class="cpt-cell">'+cptChips(c.cpt)+'</div></td><td><div class="cpt-cell">'+cptChips(icdFor(c.cpt))+'</div></td><td>'+rv+'</td><td>'+det+'</td></tr>';
+}
+function toggleSidebar(){ document.querySelector('.app').classList.toggle('collapsed'); }
+function isFurther(c){ return c.det==='further' || c.status==='escalated'; }
+function applyFilters(){
+  var arr=CASES.filter(caseMatch);
+  var k=state.sortKey, dir=state.sortDir==='asc'?1:-1;
+  arr.sort(function(a,b){
+    var fa=isFurther(a)?0:1, fb=isFurther(b)?0:1;
+    if(fa!==fb) return fa-fb; // Physician: Further review pinned on top
+    if(k==='id'){return a.id<b.id?-dir:(a.id>b.id?dir:0);}
+    return (a[k]-b[k])*dir;
+  });
+  var total=arr.length, size=15, pages=Math.max(1,Math.ceil(total/size));
+  if(state.page>pages) state.page=pages;
+  var start=(state.page-1)*size, slice=arr.slice(start,start+size);
+  var body=document.getElementById('caseBody');
+  body.innerHTML = slice.length? slice.map(rowHtml).join('') : '<tr class="empty-row"><td colspan="6">No cases match these filters</td></tr>';
+  document.getElementById('caseTotal').textContent = total.toLocaleString();
+  var pg='<span class="pg" onclick="gotoPage('+Math.max(1,state.page-1)+')"><i class="ti ti-chevron-left"></i></span>';
+  for(var p=1;p<=pages;p++) pg+='<span class="pg'+(p===state.page?' active':'')+'" onclick="gotoPage('+p+')">'+p+'</span>';
+  pg+='<span class="pg" onclick="gotoPage('+Math.min(pages,state.page+1)+')"><i class="ti ti-chevron-right"></i></span>';
+  document.getElementById('casePages').innerHTML=pg;
+  var chips=[];
+  ['determination','priority','cpt','status','date'].forEach(function(key){ if(state[key]) chips.push('<span class="fchip" onclick="removeFilter(\''+key+'\')">'+((labels[key]&&labels[key][state[key]])||state[key])+' <i class="ti ti-x"></i></span>'); });
+  state.reviewer.forEach(function(name){ chips.push('<span class="fchip" onclick="toggleReviewer(\''+name+'\')">'+name+' <i class="ti ti-x"></i></span>'); });
+  if(state.search) chips.push('<span class="fchip" onclick="clearSearch()">Search: '+escHtml(state.search)+' <i class="ti ti-x"></i></span>');
+  var box=document.getElementById('caseChips');
+  if(chips.length){ box.innerHTML=chips.join('')+'<span class="clear" onclick="clearAll()">Clear all</span>'; box.style.display='flex'; }
+  else { box.innerHTML=''; box.style.display='none'; }
+  updateFilterBadge();
+  [['determination','btn-determination','Recommendation'],['priority','btn-priority','Priority'],['cpt','btn-cpt','CPT'],['date','btn-date','Date']].forEach(function(t){
+    var btn=document.getElementById(t[1]), val=state[t[0]];
+    btn.innerHTML=(val?((labels[t[0]]&&labels[t[0]][val])||val):t[2])+' <i class="ti ti-chevron-down"></i>';
+    btn.classList.toggle('has-val',!!val);
+  });
+  var rb=document.getElementById('btn-reviewer'), rn=state.reviewer.length;
+  rb.innerHTML=(rn===0?'Reviewer':(rn===1?state.reviewer[0]:'Reviewer ('+rn+')'))+' <i class="ti ti-chevron-down"></i>';
+  rb.classList.toggle('has-val',rn>0);
+  renderReviewerMenu();
+  var base=CASES.filter(function(c){return caseMatch(c,true);});
+  var cReady=0,cSigned=0; base.forEach(function(c){ if(c.status==='ready')cReady++; else if(c.status==='signed')cSigned++; });
+  var tcs=document.querySelectorAll('#caseTabs .tab-count');
+  if(tcs.length>=3){ tcs[0].textContent=base.length; tcs[1].textContent=cReady; tcs[2].textContent=cSigned; }
+  var tabs=document.querySelectorAll('#caseTabs .tab');
+  tabs.forEach(function(t){t.classList.remove('active');});
+  if(state.status==='') tabs[0].classList.add('active');
+  else if(state.status==='ready') tabs[1].classList.add('active');
+  else if(state.status==='signed') tabs[2].classList.add('active');
+  document.querySelectorAll('#cases th.sortable').forEach(function(th){
+    var sk=th.getAttribute('data-sort');
+    th.classList.toggle('sorted',sk===state.sortKey);
+    th.classList.toggle('asc',sk===state.sortKey && state.sortDir==='asc');
+  });
+}
+function toggleMenu(btn){ var m=btn.nextElementSibling, open=m.classList.contains('open'); closeMenus(); if(!open) m.classList.add('open'); }
+function closeMenus(){ document.querySelectorAll('.menu.open').forEach(function(m){m.classList.remove('open');}); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.filter')) closeMenus(); });
+function setFilter(k,v){ state[k]=v; state.page=1; closeMenus(); applyFilters(); }
+function pickStatusTab(v,el){ state.status=v; state.page=1; applyFilters(); }
+function setSearch(v){ state.search=v.trim(); state.page=1; applyFilters(); }
+function clearSearch(){ state.search=''; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
+function removeFilter(k){ if(k==='reviewer') state.reviewer=[]; else state[k]=''; state.page=1; applyFilters(); }
+function toggleReviewer(name){ if(name===''){ state.reviewer=[]; } else { var i=state.reviewer.indexOf(name); if(i>-1) state.reviewer.splice(i,1); else state.reviewer.push(name); } state.page=1; applyFilters(); }
+function renderReviewerMenu(){ document.querySelectorAll('#btn-reviewer ~ .menu .rev-item, .rev-item').forEach(function(it){ var v=it.getAttribute('data-rev'); var on = v==='' ? state.reviewer.length===0 : state.reviewer.indexOf(v)>-1; it.classList.toggle('active', on); }); }
+function clearAll(){ state.determination=state.priority=state.cpt=state.status=state.date=state.search=''; state.reviewer=[]; var si=document.getElementById('caseSearch'); if(si) si.value=''; var ms=document.getElementById('sbSearch'); if(ms) ms.value=''; var mss=document.getElementById('mSearchInput'); if(mss) mss.value=''; state.page=1; applyFilters(); }
+function setSort(k){ if(state.sortKey===k){ state.sortDir=state.sortDir==='asc'?'desc':'asc'; } else { state.sortKey=k; state.sortDir=(k==='day')?'desc':'asc'; } applyFilters(); }
+function gotoPage(p){ state.page=p; applyFilters(); }
+var FILTER_DEFS=[
+  {key:'determination',label:'Recommendation',opts:[['','Any'],['approved','Approved'],['consider','Consider to approve'],['further','Further review'],['nopa','No PA needed']]},
+  {key:'priority',label:'Priority',opts:[['','Any'],['standard','Standard'],['urgent','Urgent']]},
+  {key:'cpt',label:'CPT',opts:[['','Any'],['27447','27447'],['29881','29881'],['44388','44388'],['45378','45378'],['62323','62323'],['63650','63650'],['64483','64483'],['70553','70553'],['72148','72148'],['99213','99213']]},
+  {key:'reviewer',label:'Reviewer',opts:[['','Anyone'],['Alex R.','Alex R.'],['Jordan C.','Jordan C.'],['Maya O.','Maya O.'],['Sara P.','Sara P.'],['Unassigned','Unassigned']]},
+  {key:'date',label:'Date',opts:[['','Any time'],['today','Today'],['7d','Last 7 days'],['30d','Last 30 days']]}
+];
+function activeFilterCount(){ return ['determination','priority','cpt','date'].filter(function(k){return state[k];}).length + (state.reviewer.length?1:0); }
+function updateFilterBadge(){ var b=document.getElementById('filterBadge'); if(!b) return; var n=activeFilterCount(); b.textContent=n; b.style.display=n?'inline-flex':'none'; }
+function renderFilterPanel(){
+  var html=FILTER_DEFS.map(function(g){
+    return '<div class="fp-group"><div class="fp-glabel">'+g.label+'</div>'+g.opts.map(function(o){
+      var active = g.key==='reviewer' ? (o[0]===''? state.reviewer.length===0 : state.reviewer.indexOf(o[0])>-1) : (state[g.key]||'')===o[0];
+      return '<button class="fp-opt'+(active?' active':'')+'" onclick="pickPanelFilter(\''+g.key+'\',\''+o[0]+'\')">'+o[1]+'<i class="ti ti-check fp-check"></i></button>';
+    }).join('')+'</div>';
+  }).join('');
+  document.getElementById('filterPanelBody').innerHTML=html;
+  updateFilterBadge();
+}
+function pickPanelFilter(key,val){ if(key==='reviewer'){ if(val===''){ state.reviewer=[]; } else { var i=state.reviewer.indexOf(val); if(i>-1) state.reviewer.splice(i,1); else state.reviewer.push(val); } } else { state[key]=val; } state.page=1; applyFilters(); renderFilterPanel(); }
+function openFilterPanel(){ renderFilterPanel(); document.getElementById('filterPanel').classList.add('open'); document.getElementById('filterBackdrop').classList.add('open'); }
+function closeFilterPanel(){ var p=document.getElementById('filterPanel'); if(p) p.classList.remove('open'); var b=document.getElementById('filterBackdrop'); if(b) b.classList.remove('open'); }
+var DEEP_ID='EPS-00088552';
+var priLabel={standard:'Standard','high-cost':'High cost',urgent:'Urgent',oon:'Out of network'};
+function caseById(id){ for(var i=0;i<CASES.length;i++){ if(CASES[i].id===id) return CASES[i]; } return null; }
+function detChipHtml(c){
+  if(c.status==='processing') return '<span class="chip chip-neutral">Processing</span>';
+  if(c.status==='escalated') return '<span class="chip chip-warn">Further review</span>';
+  if(c.status==='signed') return '<span class="chip chip-ok">Signed</span>';
+  var d=detMap[c.det]; return d? '<span class="chip '+d[1]+'">'+d[0]+'</span>' : '<span class="muted">-</span>';
+}
+var PROFILES={
+ 'EPS-00086956':{state:'approvable',priority:'oon',date:'17 Mar 2026',reviewBy:'19 Mar 2026',reviewer:'Alex R.',createdBy:'Jordan C.',
+   patient:{name:'Marcus Bell',memberId:'AGL773201845',dob:'09/14/1958',provider:'Dr. Karen Liu',providerNpi:'1487263901',facility:'Mercy Orthopedic Center',facilityNpi:'1356802471'},
+   cpts:[{code:'73721',det:'approved',desc:'MRI knee, without contrast'},{code:'27447',det:'approved',desc:'Total knee arthroplasty'}],icds:['M17.11','M25.561']},
+ 'EPS-00084437':{state:'review',priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',reviewer:'Alex R.',createdBy:'Sara P.',
+   patient:{name:'Elena Vasquez',memberId:'AGL902145673',dob:'03/22/1979',provider:'Dr. Omar Haddad',providerNpi:'1592048372',facility:'Riverside Imaging',facilityNpi:'1238904756'},
+   cpts:[{code:'70553',det:'further',desc:'MRI brain, with and without contrast'}],icds:['R51.9','G43.909']},
+ 'EPS-20260605':{state:'escalated',priority:'high-cost',date:'17 Mar 2026',reviewer:'Maya O.',createdBy:'Maya O.',escalatedAt:'18 Mar 2026, 14:05 UTC',
+   patient:{name:'David Okonkwo',memberId:'AGL651837209',dob:'11/30/1965',provider:'Dr. Priya Nair',providerNpi:'1748293016',facility:'Summit Cardiology',facilityNpi:'1429385017'},
+   cpts:[{code:'75571',det:'further',desc:'CT heart, coronary calcium scoring'}],icds:['I25.10','R07.9']},
+ 'EPS-00084201':{state:'signed',priority:'standard',date:'15 Mar 2026',reviewer:'Alex R.',createdBy:'Alex R.',signedBy:'Dr. Helen Park, MD',signedAt:'17 Mar 2026, 11:20 UTC',outcome:'approved',
+   patient:{name:'Susan Hartley',memberId:'AGL338920164',dob:'06/08/1972',provider:'Dr. Greg Foster',providerNpi:'1903847261',facility:'Lakeside Sleep Institute',facilityNpi:'1562039847'},
+   cpts:[{code:'95810',det:'approved',desc:'Polysomnography, sleep staging'}],icds:['G47.33']}
+};
+function stateFromStatus(c){ if(c.status==='processing')return 'processing'; if(c.status==='escalated')return 'escalated'; if(c.status==='signed')return 'signed'; if(c.det==='approved'||c.det==='nopa')return 'approvable'; return 'review'; }
+function infoItem(l,v){ return '<div class="info-item"><div class="info-label">'+l+'</div><div class="info-val">'+v+'</div></div>'; }
+function svcRowsHtml(cpts){ return cpts.map(function(c){ var cls=c.det==='approved'?'cpt-ok':'cpt-warn'; var dcls=c.det==='approved'?'det-ok':'det-warn'; var label=c.det==='approved'?'Approved':(c.det==='further'?'Requires review':'Consider'); return '<div class="svc-row" style="cursor:default"><span class="cpt-pill '+cls+'"><span class="pdot"></span>'+c.code+'</span><span class="svc-name">'+c.desc+'</span><span class="svc-det '+dcls+'">'+label+'</span></div>'; }).join(''); }
+function svcBlock(prof){
+  if(prof.cpts&&prof.cpts.length){ var ap=prof.cpts.filter(function(c){return c.det==='approved';}).length; var summ=ap?'<span><span class="dot dot-ok"></span>'+ap+' approved</span>':''; var rev=prof.cpts.length-ap; if(rev) summ+='<span><span class="dot dot-warn"></span>'+rev+' needs review</span>'; return '<div class="svc-block"><div class="svc-head"><span class="svc-label">Requested services</span><span class="svc-summary">'+summ+'</span></div><div class="svc-rows">'+svcRowsHtml(prof.cpts)+'</div></div>'; }
+  if(prof.cpt){ return '<div class="svc-block"><div class="svc-head"><span class="svc-label">Requested services</span></div><div class="svc-rows"><div class="svc-row" style="cursor:default"><span class="cpt-pill cpt-warn"><span class="pdot"></span>'+prof.cpt+'</span><span class="svc-name">Requested procedure(s)</span><span>'+detChipHtml(prof)+'</span></div></div></div>'; }
+  return '';
+}
+function renderStateBody(prof){
+  var s=prof.state, h='';
+  if(s==='processing'){ h='<div class="state-panel"><div class="state-title">Nebo is processing this case</div><div class="state-sub">Documents are being retrieved and assessed against the applicable guidelines. This usually takes 60-90 seconds.</div><div class="state-bar"><span></span></div></div>'; }
+  else if(s==='escalated'){ h='<div class="state-panel"><span class="state-badge esc">Further review</span><div class="state-sub">This case is flagged for further review'+(prof.escalatedAt?(' since '+prof.escalatedAt):'')+'. A physician reviews it directly; a determination letter can be issued only after the physician signs off.</div>'+svcBlock(prof)+'</div>'; }
+  else if(s==='signed'){ h='<div class="state-panel"><span class="state-badge ok">Determination signed</span><div class="state-sub">Signed by '+(prof.signedBy||'the reviewing physician')+(prof.signedAt?(' on '+prof.signedAt):'')+'. The determination letter has been sent to the requesting provider.</div>'+svcBlock(prof)+'</div>'; }
+  else if(s==='approvable'){ h=svcBlock(prof)+'<div class="state-note ok"><i class="ti ti-check"></i>All requested services meet medical-necessity criteria. Ready to generate the approval letter.</div>'+(prof.nonAnchor?'<div class="state-note"><i class="ti ti-info-circle"></i>Full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div>':''); }
+  else { h=svcBlock(prof)+'<div class="state-note"><i class="ti ti-info-circle"></i>This case needs your expert review. The full criteria breakdown with page-level references is demonstrated on case EPS-00088552.</div><button class="tool" style="margin-top:14px" onclick="openCase(\'EPS-00088552\')">Open EPS-00088552</button>'; }
+  document.getElementById('stateBody').innerHTML=h;
+}
+function renderStateRail(prof){
+  var info='';
+  if(prof.patient){ var p=prof.patient; info+=infoItem('Member ID',p.memberId)+infoItem('Member name',p.name)+infoItem('Member date of birth',p.dob)+infoItem('Requesting provider',p.provider)+infoItem('Requesting provider NPI',p.providerNpi)+infoItem('Facility',p.facility)+infoItem('Facility NPI',p.facilityNpi); if(prof.cpts&&prof.cpts.length) info+='<div class="info-item"><div class="info-label">CPT / HCPCS</div><div class="info-codes">'+prof.cpts.map(function(c){return '<span class="cc-chip">'+c.code+'</span>';}).join('')+'</div></div>'; if(prof.icds&&prof.icds.length) info+='<div class="info-item"><div class="info-label">ICD-10</div><div class="info-codes">'+prof.icds.map(function(c){return '<span class="cc-chip">'+c+'</span>';}).join('')+'</div></div>'; }
+  else { info+=infoItem('Case ID',prof.id)+'<div class="info-item"><div class="info-label">Determination</div>'+detChipHtml(prof)+'</div>'+infoItem('Priority',priLabel[prof.priority]||'Standard')+infoItem('Submitted',prof.date||'-')+infoItem('Reviewer',prof.reviewer||'-'); }
+  document.getElementById('stateRail').innerHTML='<div class="side-card"><div class="card-head"><span class="card-title-sm">Info</span></div><div class="info-stack">'+info+'</div></div>';
+}
+function renderActions(state){
+  var dup='<button class="act-btn" onclick="openDup()"><i class="ti ti-copy"></i>Copy case</button>';
+  var fb='<button class="act-btn" onclick="openFb()"><i class="ti ti-message-circle"></i>Feedback</button>';
+  var acts=[];
+  if(state!=='processing'){
+    acts.push({l:'Copy case',i:'ti-copy',fn:'openDup()'});
+    if(state==='signed'){ acts.push({l:'View letter',i:'ti-file-text',fn:'openLetter()',cls:'act-primary'}); }
+    else {
+      acts.push({l:'Feedback',i:'ti-message-circle',fn:'openFb()'});
+      acts.push({l:'Approve',i:'ti-check',fn:"openLetter('approval')",cls:'act-approve act-decision',mcls:'da-approve'});
+      acts.push({l:'Deny',i:'ti-x',fn:"openLetter('denial')",cls:'act-deny act-decision',mcls:'da-deny'});
+    }
+  }
+  var box=document.getElementById('detailActions');
+  if(!acts.length){ box.innerHTML=''; return; }
+  var inline=acts.map(function(a){ return '<button class="act-btn '+(a.cls||'')+'" onclick="'+a.fn+'">'+(a.ihtml||'<i class="ti '+a.i+'"></i>')+a.l+'</button>'; }).join('');
+  var menu=acts.map(function(a){ return '<button class="da-mi '+(a.mcls||'')+'" onclick="closeActionsMenu();'+a.fn+'">'+(a.ihtml||'<i class="ti '+a.i+'"></i>')+a.l+'</button>'; }).join('');
+  box.innerHTML='<div class="da-inline">'+inline+'</div>'+
+    '<div class="da-mobile"><button class="act-btn da-trigger" onclick="toggleActionsMenu(event)"><svg class="da-ticon" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>Actions <i class="ti ti-chevron-down"></i></button><div class="da-menu" id="daMenu">'+menu+'</div></div>';
+}
+function toggleActionsMenu(e){ e.stopPropagation(); var m=document.getElementById('daMenu'); if(m) m.classList.toggle('open'); }
+function closeActionsMenu(){ var m=document.getElementById('daMenu'); if(m) m.classList.remove('open'); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.da-mobile')) closeActionsMenu(); });
+function metaHtml(p,state){
+  var parts=['Submitted <b>'+(p.date||'-')+'</b>'];
+  if(state==='signed'&&p.signedAt) parts.push('Signed <b>'+p.signedAt+'</b>');
+  else if(state==='escalated'&&p.escalatedAt) parts.push('In further review <b>'+p.escalatedAt+'</b>');
+  else if(p.reviewBy) parts.push('Review by <b>'+p.reviewBy+'</b>');
+  parts.push((state==='signed'&&p.createdBy)?('Created by <b>'+p.createdBy+'</b>'):('Reviewer <b>'+(p.reviewer||'Unassigned')+'</b>'));
+  return parts.join(' &nbsp;\u00b7&nbsp; ');
+}
+function openCase(id){
+  var act=document.querySelector('.screen.active'); origin=act?act.id:'cases'; if(origin==='details'||origin==='preview'||origin==='letter') origin='cases';
+  var isDeep=(id===DEEP_ID||!id);
+  var prof, state;
+  if(isDeep){ state='review'; prof={id:DEEP_ID,priority:'standard',date:'18 Mar 2026',reviewBy:'20 Mar 2026',createdBy:'Alex R.',reviewer:'Alex R.'}; }
+  else if(PROFILES[id]){ prof=PROFILES[id]; prof.id=id; state=prof.state; }
+  else { var c=caseById(id)||{id:id,priority:'standard',date:'-',reviewer:'Unassigned',det:'',status:''}; state=stateFromStatus(c); prof={id:c.id,priority:c.priority,date:c.date,reviewer:c.reviewer,det:c.det,status:c.status,state:state,cpt:c.cpt,patient:null,nonAnchor:true}; }
+  document.getElementById('caseIdLg').innerHTML=prof.id+' <span class="type-tag">'+(priLabel[prof.priority||'standard']||'Standard')+'</span>';
+  document.getElementById('detailMeta').innerHTML=metaHtml(prof,state);
+  renderActions(state);
+  document.getElementById('deepContent').style.display=isDeep?'':'none';
+  document.getElementById('deepRail').style.display=isDeep?'':'none';
+  document.getElementById('stateBody').style.display=isDeep?'none':'';
+  document.getElementById('stateRail').style.display=isDeep?'none':'';
+  if(!isDeep){ renderStateBody(prof); renderStateRail(prof); }
+  go('details');
+}
+function reassessGl(btn){
+  if(btn.dataset.busy) return;
+  btn.dataset.busy='1';
+  var orig=btn.innerHTML;
+  btn.innerHTML='<i class="ti ti-rotate-clockwise"></i>Reassessing…';
+  btn.style.opacity='.6';
+  setTimeout(function(){
+    btn.innerHTML=orig;
+    btn.style.opacity='';
+    delete btn.dataset.busy;
+    showToast('Nebo reassessed this case');
+  },1600);
+}
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.innerHTML='<i class="ti ti-check"></i>'+msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+var pvState={page:1,zoom:1,rot:0,pages:2};
+function openFile(name){ document.getElementById('pvName').textContent=name; pvState={page:1,zoom:1,rot:0,pages:2}; pvGoto(1,true); document.getElementById('pvPanel').classList.add('open'); document.querySelector('.app').classList.add('pv-open'); }
+function closePreview(){ var p=document.getElementById('pvPanel'); if(p) p.classList.remove('open'); var a=document.querySelector('.app'); if(a) a.classList.remove('pv-open'); }
+(function(){
+  var resizing=false;
+  document.addEventListener('mousedown',function(e){ if(e.target && e.target.id==='pvResize'){ resizing=true; document.body.style.userSelect='none'; e.preventDefault(); } });
+  document.addEventListener('mousemove',function(e){ if(!resizing) return; var w=window.innerWidth-e.clientX; w=Math.max(340,Math.min(880,w)); document.documentElement.style.setProperty('--pv-w', w+'px'); });
+  document.addEventListener('mouseup',function(){ if(resizing){ resizing=false; document.body.style.userSelect=''; } });
+})();
+function openPageRef(p){ openFile('66716 demo clean 30.Sep.24.pdf'); setTimeout(function(){ pvGoto(p); }, 40); }
+function toggleAcard(btn){ var c=btn.closest('.acard'); if(c) c.classList.toggle('collapsed'); }
+function pvGoto(p,noscroll){
+  pvState.page=p;
+  document.querySelectorAll('.pv-thumb').forEach(function(t,i){ t.classList.toggle('active', i===p-1); });
+  document.getElementById('pvCur').textContent=p;
+  if(!noscroll){ var s=document.getElementById('pvSheet'+p); if(s) s.scrollIntoView({behavior:'smooth',block:'start'}); }
+}
+function pvPage(d){ pvGoto(Math.min(pvState.pages,Math.max(1,pvState.page+d))); }
+function pvZoom(d){ pvState.zoom=Math.min(1.6,Math.max(0.6,+(pvState.zoom+d*0.2).toFixed(2))); pvApply(); }
+function pvFit(){ pvState.zoom=1; pvState.rot=0; pvApply(); }
+function pvRotate(){ pvState.rot=(pvState.rot+90)%360; pvApply(); }
+function pvApply(){
+  document.getElementById('pvZoom').textContent=Math.round(pvState.zoom*100)+'%';
+  document.querySelectorAll('#pvMain .pv-sheet').forEach(function(s){
+    s.style.maxWidth=(660*pvState.zoom)+'px';
+    s.style.transform=pvState.rot?('rotate('+pvState.rot+'deg)'):'none';
+  });
+}
+function pvSearch(){ document.getElementById('pvSearchBar').classList.toggle('open'); }
+function pvToggleThumbs(){ document.querySelector('.pv-thumbs').classList.toggle('hidden'); }
+function copyResult(btn){
+  if(btn.dataset.busy) return;
+  btn.dataset.busy='1';
+  btn.classList.add('copied');
+  btn.innerHTML='<i class="ti ti-check"></i>Copied';
+  setTimeout(function(){ btn.classList.remove('copied'); btn.innerHTML='<i class="ti ti-copy"></i>Copy result'; delete btn.dataset.busy; }, 1800);
+}
+function toggleUserMenu(e){ e.stopPropagation(); document.getElementById('userMenu').classList.toggle('open'); }
+function closeUserMenu(){ document.getElementById('userMenu').classList.remove('open'); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.user-wrap')) closeUserMenu(); });
+function toggleMUserMenu(e){ e.stopPropagation(); closeMSearch(); document.getElementById('mUserMenu').classList.toggle('open'); }
+function closeMUserMenu(){ var m=document.getElementById('mUserMenu'); if(m) m.classList.remove('open'); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.mtb-user')) closeMUserMenu(); });
+function openMSearch(){
+  if(document.querySelector('.screen.active').id!=='cases'){ go('cases'); }
+  closeMUserMenu(); closeNav();
+  var bar=document.getElementById('mSearchBar'); if(bar) bar.classList.add('open');
+  setTimeout(function(){ var i=document.getElementById('mSearchInput'); if(i){ i.value=state.search||''; i.focus(); } },60);
+}
+function closeMSearch(){ var b=document.getElementById('mSearchBar'); if(b) b.classList.remove('open'); }
+function mSearchInput(v){ state.search=v.trim(); state.page=1; var cs=document.getElementById('caseSearch'); if(cs) cs.value=v; applyFilters(); }
+function mtbSearchInput(v){ state.search=v.trim(); state.page=1; var cs=document.getElementById('caseSearch'); if(cs) cs.value=v; if(document.querySelector('.screen.active').id!=='cases'){ go('cases'); } applyFilters(); }
+function sbSearchInput(v){
+  state.search=v.trim(); state.page=1;
+  var cs=document.getElementById('caseSearch'); if(cs) cs.value=v;
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.toggle('active', s.id==='cases'); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-screen')==='cases'); });
+  applyFilters();
+}
+function signIn(){
+  var email=(document.getElementById('loginEmail').value||'').trim().toLowerCase();
+  var pass=document.getElementById('loginPass').value||'';
+  if(email==='physician' && pass==='konpo@studio'){
+    document.getElementById('loginError').classList.remove('show');
+    document.getElementById('loginScreen').style.display='none';
+    go('queue');
+  } else {
+    document.getElementById('loginError').classList.add('show');
+  }
+}
+function logOut(){
+  closeUserMenu(); closeMUserMenu();
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginError').classList.remove('show');
+  document.getElementById('loginScreen').style.display='flex';
+}
+applyFilters();
+
+</script>
+</body>
+</html>

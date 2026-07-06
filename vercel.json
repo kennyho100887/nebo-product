@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/nebo_um_nurse_prototype.html" }
+    { "source": "/", "destination": "/nebo_um_nurse_prototype.html" },
+    { "source": "/physician", "destination": "/nebo_physician_prototype.html" }
   ]
 }
