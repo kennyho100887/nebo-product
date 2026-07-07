@@ -941,7 +941,7 @@ window.KonpoNotes={
       <div class="search" data-tip="Search case"><i class="ti ti-search"></i><input id="sbSearch" placeholder="Search by case number" oninput="sbSearchInput(this.value)"></div>
       <div class="sb-divider"></div>
       <button class="nav-item active" data-screen="dashboard" data-tip="Dashboard"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
-      <button class="nav-item" data-screen="queue" data-tip="Team"><i class="ti ti-user"></i><span>Team</span><span class="count">9</span></button>
+      <button class="nav-item" data-screen="queue" data-tip="Team"><i class="ti ti-user"></i><span>Team</span><span class="count">12</span></button>
       <button class="nav-item" data-screen="cases" data-tip="All cases"><i class="ti ti-folder"></i><span>All cases</span><span class="count">1,284</span></button>
     </div>
     <div class="sb-mid">
@@ -2214,32 +2214,50 @@ function signIn(){
   else { try{ sessionStorage.setItem('neboAuth',role); }catch(e){} location.href=roleUrl(role); }
 }
 var TEAM=[
- {ini:'AR',name:'Alex R.',role:'UM nurse',open:0,done:6,tat:'3.1h'},
- {ini:'MO',name:'Maya O.',role:'UM nurse',open:0,done:5,tat:'3.6h'},
- {ini:'JC',name:'Jordan C.',role:'UM nurse',open:0,done:4,tat:'2.8h'},
- {ini:'SP',name:'Sara P.',role:'UM nurse',open:0,done:3,tat:'2.4h'},
- {ini:'DK',name:'Dana K.',role:'UM nurse',open:0,done:4,tat:'2.9h'},
- {ini:'PT',name:'Priya T.',role:'UM nurse',open:0,done:5,tat:'3.3h'},
- {ini:'LN',name:'Liam N.',role:'UM nurse',open:0,done:2,tat:'2.6h'},
- {ini:'RS',name:'Rosa S.',role:'UM nurse',open:0,done:3,tat:'3.0h'},
- {ini:'TB',name:'Tom B.',role:'UM nurse',open:0,done:4,tat:'3.4h'}
+ {ini:'AR',name:'Alex R.',role:'UM nurse',type:'nurse',open:0,done:6,tat:'3.1h'},
+ {ini:'MO',name:'Maya O.',role:'UM nurse',type:'nurse',open:0,done:5,tat:'3.6h'},
+ {ini:'JC',name:'Jordan C.',role:'UM nurse',type:'nurse',open:0,done:4,tat:'2.8h'},
+ {ini:'SP',name:'Sara P.',role:'UM nurse',type:'nurse',open:0,done:3,tat:'2.4h'},
+ {ini:'DK',name:'Dana K.',role:'UM nurse',type:'nurse',open:0,done:4,tat:'2.9h'},
+ {ini:'PT',name:'Priya T.',role:'UM nurse',type:'nurse',open:0,done:5,tat:'3.3h'},
+ {ini:'LN',name:'Liam N.',role:'UM nurse',type:'nurse',open:0,done:2,tat:'2.6h'},
+ {ini:'RS',name:'Rosa S.',role:'UM nurse',type:'nurse',open:0,done:3,tat:'3.0h'},
+ {ini:'TB',name:'Tom B.',role:'UM nurse',type:'nurse',open:0,done:4,tat:'3.4h'},
+ {ini:'HP',name:'Dr. Helen Park',role:'Physician',type:'physician',open:0,done:4,tat:'1.8h'},
+ {ini:'OR',name:'Dr. Omar Reyes',role:'Physician',type:'physician',open:0,done:3,tat:'2.1h'},
+ {ini:'NC',name:'Dr. Nadia Chen',role:'Physician',type:'physician',open:0,done:2,tat:'1.5h'}
 ];
+function memberCases(m){
+  if(m.type==='physician'){
+    var fr=CASES.filter(function(c){ return c.det==='further'||c.status==='escalated'; });
+    var phys=TEAM.filter(function(x){ return x.type==='physician'; });
+    var idx=phys.indexOf(m); var n=phys.length||1;
+    return fr.filter(function(c,i){ return i%n===idx; });
+  }
+  return CASES.filter(function(c){ return c.reviewer===m.name; });
+}
 var teamQuery='';
 function teamRowHtml(m){ return '<div class="team-row" onclick="openMember(\''+m.name+'\')"><span class="team-av">'+m.ini+'</span><span class="team-row-name">'+m.name+'</span><span class="team-row-role">'+m.role+'</span><span class="team-row-stat"><b>'+m.open+'</b> open</span><span class="team-row-stat"><b>'+m.done+'</b> done today</span><span class="team-row-stat"><b>'+m.tat+'</b> avg</span></div>'; }
 function renderTeam(){
   var q=teamQuery.toLowerCase();
-  TEAM.forEach(function(m){ m.open=CASES.filter(function(c){ return c.reviewer===m.name && (c.status==='ready'||c.status==='escalated'); }).length; });
+  TEAM.forEach(function(m){
+    m.open = m.type==='physician'
+      ? memberCases(m).length
+      : CASES.filter(function(c){ return c.reviewer===m.name && (c.status==='ready'||c.status==='escalated'); }).length;
+  });
   var arr=TEAM.filter(function(m){ return m.name.toLowerCase().indexOf(q)>-1; });
   document.getElementById('teamList').innerHTML=arr.length?arr.map(teamRowHtml).join(''):'<div class="kan-empty">No team members match</div>';
 }
 function filterTeam(q){ teamQuery=q||''; renderTeam(); }
 function openMember(name){
   var m=TEAM.filter(function(x){ return x.name===name; })[0]||{};
-  var arr=CASES.filter(function(c){ return c.reviewer===name; });
+  var arr=memberCases(m).slice();
   arr.sort(function(a,b){ return b.day-a.day; });
-  var open=arr.filter(function(c){ return c.status==='ready'||c.status==='escalated'; }).length;
+  var meta = m.type==='physician'
+    ? (m.role+' \u00b7 '+arr.length+' awaiting sign-off')
+    : ((m.role||'UM nurse')+' \u00b7 '+arr.length+' cases \u00b7 '+arr.filter(function(c){ return c.status==='ready'||c.status==='escalated'; }).length+' open');
   document.getElementById('memberPageTitle').textContent=name;
-  document.getElementById('memberPageMeta').textContent=(m.role||'UM nurse')+' \u00b7 '+arr.length+' cases \u00b7 '+open+' open';
+  document.getElementById('memberPageMeta').textContent=meta;
   document.getElementById('memberBody').innerHTML=arr.map(rowHtml).join('')||'<tr class="empty-row"><td colspan="6">No cases assigned</td></tr>';
   go('member');
 }
