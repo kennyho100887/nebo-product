@@ -356,6 +356,10 @@ tbody tr:hover{background:var(--surface)}
 .search-input{flex:1;min-width:0;background:var(--surface);border:0.5px solid transparent;border-radius:var(--r);padding:8px 10px 8px 30px;color:var(--text);font-size:12px;font-family:inherit;outline:none}
 .search-input:focus{border-color:var(--accent-fg)}
 .search-input::placeholder{color:var(--text-3)}
+.search-clear{display:none;align-items:center;justify-content:center;width:18px;height:18px;flex-shrink:0;border:none;background:none;color:var(--text-3);border-radius:50%;cursor:pointer;padding:0;margin-left:2px}
+.search-clear i{font-size:14px;line-height:1}
+.search-clear:hover{color:var(--text)}
+.has-clear .search-clear{display:inline-flex}
 th.sortable{cursor:pointer;user-select:none}
 th.sortable:hover{color:var(--text-2)}
 th .caret{font-size:11px;opacity:.4;display:inline-block;transition:transform .12s}
@@ -2195,6 +2199,22 @@ function logOut(){
   document.getElementById('loginScreen').style.display='flex';
 }
 applyFilters();
+function initSearchClear(){
+  document.querySelectorAll('.search-input, .search>input').forEach(function(inp){
+    var box=inp.parentElement; if(!box||box.querySelector('.search-clear')) return;
+    var btn=document.createElement('button');
+    btn.type='button'; btn.className='search-clear'; btn.tabIndex=-1; btn.setAttribute('aria-label','Clear search');
+    btn.innerHTML='<i class="ti ti-x"></i>';
+    btn.addEventListener('mousedown',function(e){ e.preventDefault(); });
+    btn.addEventListener('click',function(){ inp.value=''; inp.dispatchEvent(new Event('input',{bubbles:true})); inp.focus(); upd(); });
+    box.appendChild(btn);
+    function upd(){ box.classList.toggle('has-clear', document.activeElement===inp && inp.value.length>0); }
+    inp.addEventListener('input',upd);
+    inp.addEventListener('focus',upd);
+    inp.addEventListener('blur',function(){ setTimeout(upd,0); });
+  });
+}
+initSearchClear();
 try{ if(sessionStorage.getItem('neboAuth')==='nurse'){ sessionStorage.removeItem('neboAuth'); enterApp(); } }catch(e){}
 
 </script>
