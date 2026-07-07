@@ -54,7 +54,7 @@
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
   --review-bg:#CDD4CB; --review-fg:#4B564C;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
-  --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
+  --data-1:#5B6E2C; --data-2:#76923A; --data-3:#95B946; --data-4:#AECA73; --data-5:#C8DB9F;
   --r:8px; --r-lg:12px;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -70,7 +70,7 @@
     --danger-bg:#791F1F; --danger-fg:#F7C1C1; --danger-solid:#B5403F; --danger-solid-fg:#ffffff; --danger-solid:#B5403F; --danger-solid-fg:#ffffff;
     --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
     --review-bg:#333B32; --review-fg:#C9D1C4;
-    --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
+    --data-1:#7FA83A; --data-2:#97BD54; --data-3:#AFCF75; --data-4:#C7E09C; --data-5:#DEEDC3;
     --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
   }
 }
@@ -84,7 +84,7 @@
   --danger-bg:#FCEBEB; --danger-fg:#A32D2D; --danger-solid:#A32D2D; --danger-solid-fg:#ffffff;
   --chip-bg:#F1EFE8; --chip-fg:#5F5E5A;
   --review-bg:#CDD4CB; --review-fg:#4B564C;
-  --data-1:#1B8A3A; --data-2:#F5A310; --data-3:#2563E0; --data-4:#E8512B; --data-5:#8A36C9;
+  --data-1:#5B6E2C; --data-2:#76923A; --data-3:#95B946; --data-4:#AECA73; --data-5:#C8DB9F;
   --primary:#5B6E2C; --primary-fg:#ffffff; --accent-bg:#EBF0E0; --accent-fg:#5B6E2C;
 }
 :root[data-theme="dark"]{
@@ -97,7 +97,7 @@
   --danger-bg:#791F1F; --danger-fg:#F7C1C1;
   --chip-bg:#2C2C2A; --chip-fg:#B4B2A9;
   --review-bg:#333B32; --review-fg:#C9D1C4;
-  --data-1:#54C56E; --data-2:#FBC04D; --data-3:#5C9CF2; --data-4:#FA7547; --data-5:#B97CF0;
+  --data-1:#7FA83A; --data-2:#97BD54; --data-3:#AFCF75; --data-4:#C7E09C; --data-5:#DEEDC3;
   --primary:#6E8733; --primary-fg:#151B13; --accent-bg:#36431C; --accent-fg:#D2E798;
 }
 
@@ -182,9 +182,12 @@
 @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.dash-2col{grid-template-columns:1fr}}
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--sans);font-size:14px;background:var(--bg-page);color:var(--text);-webkit-font-smoothing:antialiased}
-html[data-fs="s"] .main,html[data-fs="s"] .overlay{zoom:1}
-html[data-fs="m"] .main,html[data-fs="m"] .overlay{zoom:1.06}
-html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
+html[data-fs="s"] .main,html[data-fs="s"] .overlay{zoom:1.06}
+html[data-fs="m"] .main,html[data-fs="m"] .overlay{zoom:1.13}
+html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.2}
+html[data-fs="s"] .sidebar{zoom:1.06;height:calc((100vh - 20px)/1.06)}
+html[data-fs="m"] .sidebar{zoom:1.13;height:calc((100vh - 20px)/1.13)}
+html[data-fs="l"] .sidebar{zoom:1.2;height:calc((100vh - 20px)/1.2)}
 .app{display:flex;min-height:100vh;gap:10px;padding:10px}
 .sidebar{width:212px;flex-shrink:0;height:calc(100vh - 20px);position:sticky;top:10px;background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:14px 12px;display:flex;flex-direction:column}
 .sb-top{flex-shrink:0}
@@ -306,9 +309,14 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .kan-card:hover{border-color:var(--border-2)}
 .kan-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .kan-tags{display:flex;flex-wrap:wrap;gap:6px}
+.kan-codes{display:flex;flex-direction:column;gap:6px}
+.kan-code-row{display:flex;flex-direction:column;gap:4px}
+.kan-code-lbl{font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3)}
+.kan-code-chips{display:flex;flex-wrap:wrap;gap:5px}
+.kan-codes .cc-chip{padding:2px 6px;font-size:10px}
 .kan-foot{font-size:11px;color:var(--text-3)}
 @media(max-width:760px){.kanban{grid-template-columns:1fr}}
-.chip{display:inline-flex;align-items:center;line-height:1;font-size:11px;padding:1px 8px;border-radius:var(--r);white-space:nowrap}
+.chip{display:inline-flex;align-items:center;line-height:1;font-size:10px;padding:2px 8px;border-radius:var(--r);white-space:nowrap}
 .chip-warn{background:var(--warn-bg);color:var(--warn-fg)}
 .chip-ok{background:var(--ok-bg);color:var(--ok-fg)}
 .chip-info{background:var(--info-bg);color:var(--info-fg)}
@@ -437,7 +445,7 @@ textarea{resize:none}
 .case-codes{margin-top:14px;display:flex;flex-direction:column;gap:8px}
 .cc-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .cc-label{font-size:11px;letter-spacing:.02em;color:var(--text-3);min-width:78px}
-.cc-chip{font-family:var(--mono);font-size:11px;background:var(--chip-bg);color:var(--chip-fg);padding:3px 9px;border-radius:var(--r)}
+.cc-chip{display:inline-flex;align-items:center;line-height:1;font-family:var(--mono);font-size:10px;background:var(--chip-bg);color:var(--chip-fg);padding:2px 8px;border-radius:var(--r)}
 .cpt-cell{display:flex;flex-wrap:nowrap;gap:5px;align-items:center}
 .cpt-cell .cc-chip{flex-shrink:0}
 .cpt-cell .cpt-more{color:var(--text-3);font-family:var(--mono);font-size:11px;flex-shrink:0}
@@ -1058,10 +1066,12 @@ window.KonpoNotes={
             <button class="kan-card" onclick="openCase('EPS-00088552')">
               <div class="kan-top"><span class="cid">EPS-00088552</span><span class="chip chip-review">Further review</span></div>
               <div class="kan-tags"><span class="chip chip-danger">Urgent</span><span class="chip chip-warn">High cost</span></div>
+              <div class="kan-codes"><div class="kan-code-row"><span class="kan-code-lbl">CPT</span><span class="kan-code-chips"><span class="cc-chip">72148</span><span class="cc-chip">63650</span></span></div><div class="kan-code-row"><span class="kan-code-lbl">ICD-10</span><span class="kan-code-chips"><span class="cc-chip">M48.062</span><span class="cc-chip">M54.16</span><span class="cc-chip">M51.16</span></span></div></div>
               <div class="kan-foot">awaiting you · 2h</div>
             </button>
             <button class="kan-card" onclick="openCase('EPS-20260605')">
               <div class="kan-top"><span class="cid">EPS-20260605</span><span class="chip chip-review">Further review</span></div>
+              <div class="kan-codes"><div class="kan-code-row"><span class="kan-code-lbl">CPT</span><span class="kan-code-chips"><span class="cc-chip">63650</span></span></div><div class="kan-code-row"><span class="kan-code-lbl">ICD-10</span><span class="kan-code-chips"><span class="cc-chip">M54.16</span><span class="cc-chip">M51.16</span></span></div></div>
               <div class="kan-foot">awaiting you · 1h</div>
             </button>
           </div>
@@ -1071,6 +1081,7 @@ window.KonpoNotes={
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00086956')">
               <div class="kan-top"><span class="cid">EPS-00086956</span><span class="chip chip-consider">Consider to approve</span></div>
+              <div class="kan-codes"><div class="kan-code-row"><span class="kan-code-lbl">CPT</span><span class="kan-code-chips"><span class="cc-chip">72148</span></span></div><div class="kan-code-row"><span class="kan-code-lbl">ICD-10</span><span class="kan-code-chips"><span class="cc-chip">M48.062</span><span class="cc-chip">M54.16</span><span class="cc-chip">M51.16</span></span></div></div>
               <div class="kan-foot">in progress · 4h</div>
             </button>
           </div>
@@ -1080,10 +1091,12 @@ window.KonpoNotes={
           <div class="kan-cards">
             <button class="kan-card" onclick="openCase('EPS-00084201')">
               <div class="kan-top"><span class="cid-dim">EPS-00084201</span><span class="chip chip-ok">Approved</span></div>
+              <div class="kan-codes"><div class="kan-code-row"><span class="kan-code-lbl">CPT</span><span class="kan-code-chips"><span class="cc-chip">45378</span></span></div><div class="kan-code-row"><span class="kan-code-lbl">ICD-10</span><span class="kan-code-chips"><span class="cc-chip">K63.5</span><span class="cc-chip">K57.30</span></span></div></div>
               <div class="kan-foot">signed · 25m</div>
             </button>
             <button class="kan-card" onclick="openCase('EPS-00083998')">
               <div class="kan-top"><span class="cid-dim">EPS-00083998</span><span class="chip chip-neutral">No PA needed</span></div>
+              <div class="kan-codes"><div class="kan-code-row"><span class="kan-code-lbl">CPT</span><span class="kan-code-chips"><span class="cc-chip">99213</span></span></div><div class="kan-code-row"><span class="kan-code-lbl">ICD-10</span><span class="kan-code-chips"><span class="cc-chip">R51.9</span><span class="cc-chip">Z00.00</span></span></div></div>
               <div class="kan-foot">signed · 40m</div>
             </button>
           </div>
