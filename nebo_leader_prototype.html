@@ -319,6 +319,8 @@ html[data-fs="l"] .main,html[data-fs="l"] .overlay{zoom:1.13}
 .team-stat-val{font-size:16px;font-weight:600}
 .team-stat-lbl{font-size:10.5px;color:var(--text-3)}
 .team-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.team-bar .seg-btn{white-space:nowrap}
+.seg-ct{opacity:.55;font-variant-numeric:tabular-nums}
 .team-list{display:flex;flex-direction:column;border:0.5px solid var(--border);border-radius:12px;background:var(--bg);padding:2px 14px}
 .team-row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:0.5px solid var(--border);cursor:pointer}
 .team-row:last-child{border-bottom:none}
@@ -1067,7 +1069,12 @@ window.KonpoNotes={
     <section class="screen" id="queue" data-konpo-screen="queue">
       <div class="page-head"><span class="page-title">Team</span><span class="muted">Prior Authorization · Team A &amp; B &nbsp;·&nbsp; Tuesday, 18 Mar</span></div>
       <div class="team-bar">
-        <div class="search-box" style="flex:0 1 320px"><i class="ti ti-search"></i><input id="teamSearch" class="search-input" placeholder="Search team member" oninput="filterTeam(this.value)"></div>
+        <div class="search-box" style="flex:0 1 300px"><i class="ti ti-search"></i><input id="teamSearch" class="search-input" placeholder="Search team member" oninput="filterTeam(this.value)"></div>
+        <div class="theme-seg" style="margin:0 0 0 auto;min-width:236px">
+          <button class="seg-btn is-active" onclick="setTeamRole('all',this)">All <span class="seg-ct">12</span></button>
+          <button class="seg-btn" onclick="setTeamRole('nurse',this)">Nurses <span class="seg-ct">9</span></button>
+          <button class="seg-btn" onclick="setTeamRole('physician',this)">Physicians <span class="seg-ct">3</span></button>
+        </div>
       </div>
       <div class="team-list" id="teamList"></div>
     </section>
@@ -2236,8 +2243,9 @@ function memberCases(m){
   }
   return CASES.filter(function(c){ return c.reviewer===m.name; });
 }
-var teamQuery='';
+var teamQuery='', teamRole='all';
 function teamRowHtml(m){ return '<div class="team-row" onclick="openMember(\''+m.name+'\')"><span class="team-av">'+m.ini+'</span><span class="team-row-name">'+m.name+'</span><span class="team-row-role">'+m.role+'</span><span class="team-row-stat"><b>'+m.open+'</b> open</span><span class="team-row-stat"><b>'+m.done+'</b> done today</span><span class="team-row-stat"><b>'+m.tat+'</b> avg</span></div>'; }
+function setTeamRole(r,btn){ teamRole=r; btn.parentNode.querySelectorAll('.seg-btn').forEach(function(b){b.classList.toggle('is-active',b===btn);}); renderTeam(); }
 function renderTeam(){
   var q=teamQuery.toLowerCase();
   TEAM.forEach(function(m){
@@ -2245,7 +2253,7 @@ function renderTeam(){
       ? memberCases(m).length
       : CASES.filter(function(c){ return c.reviewer===m.name && (c.status==='ready'||c.status==='escalated'); }).length;
   });
-  var arr=TEAM.filter(function(m){ return m.name.toLowerCase().indexOf(q)>-1; });
+  var arr=TEAM.filter(function(m){ return (teamRole==="all"||m.type===teamRole) && m.name.toLowerCase().indexOf(q)>-1; });
   document.getElementById('teamList').innerHTML=arr.length?arr.map(teamRowHtml).join(''):'<div class="kan-empty">No team members match</div>';
 }
 function filterTeam(q){ teamQuery=q||''; renderTeam(); }
